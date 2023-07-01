@@ -1,0 +1,6 @@
+Punti progetto:
+    * Motivazione: Perché questa ricerca può essere importante?
+    * Obiettivi: Che cosa vogliamo fare?
+    * Stato dell'arte: Che cosa esiste di già fatto?
+    * Metodologia: Come lo facciamo?
+    * Risultati attesi: Che cosa ci aspettiamo di avere alla fine? Ad esempio: una libreria software, articoli scientifici in conferenze e riviste

@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}
+
+\bibitem{knuth:1984}
+Donald~E. Knuth.
+\newblock Literate programming.
+\newblock {\em The Computer Journal}, 27(2):97--111, 1984.
+
+\bibitem{texbook}
+Donald~E. Knuth.
+\newblock {\em The {\TeX} Book}.
+\newblock Addison-Wesley Professional, 1986.
+
+\bibitem{latex2e}
+Leslie Lamport.
+\newblock {\em {\LaTeX}: a Document Preparation System}.
+\newblock Addison Wesley, Massachusetts, 2 edition, 1994.
+
+\bibitem{lesk:1977}
+Michael Lesk and Brian Kernighan.
+\newblock Computer typesetting of technical journals on {UNIX}.
+\newblock In {\em Proceedings of American Federation of Information Processing
+  Societies: 1977 National Computer Conference}, pages 879--888, Dallas, Texas,
+  1977.
+
+\bibitem{latex:companion}
+Frank Mittelbach, Michel Gossens, Johannes Braams, David Carlisle, and Chris
+  Rowley.
+\newblock {\em The {\LaTeX} Companion}.
+\newblock Addison-Wesley Professional, 2 edition, 2004.
+
+\end{thebibliography}

@@ -1,0 +1,74 @@
+\documentclass{article}
+
+\usepackage{dibrisunige-report}
+
+% Sub-preambles
+% https://github.com/MartinScharrer/standalone
+
+% Encodings
+\usepackage{amsmath,amssymb,gensymb,textcomp}
+
+% Better tables
+% Wide tables go to https://tex.stackexchange.com/q/332902
+\usepackage{array,multicol,multirow,siunitx,tabularx}
+
+% Better enum
+\usepackage{enumitem}
+
+% Graphics
+\usepackage{caption,float}
+
+% Allow setting >max< width of figure
+% 'export' allows adjustbox keys in \includegraphics
+\usepackage[export]{adjustbox}
+
+% For demonstration purposes, remove in production
+\usepackage{mwe}
+
+% Configurations
+\newcounter{memberrowno}
+\setcounter{memberrowno}{0}
+
+\ocoursename{TODO ask for dibrisunige-thesis instead of this report format}
+\oreporttype{Thesis}
+\title{Origin of Movement}
+\multiadvisor{Gualtiero Volpe}
+\multiadvisor{Luca Oneto}
+\reportlayout%
+
+% Custom commands
+\newcommand*\mean[1]{\bar{#1}}
+
+\begin{document}
+
+\coverpage%
+
+\newpage
+\tableofcontents
+\newpage
+
+\newpage
+%To import other files, you can use \mintinline{latex}{\input{}} or \mintinline{latex}{\include{}}.
+%There differences can be found at \url{https://tex.stackexchange.com/a/250}, but in short
+
+%\[\mintinline{latex}{\include{filename}} = \mintinline{latex}{\clearpage \input{filename} \clearpage}\]
+\include{chapters/introduction.tex}
+\include{chapters/motivation.tex}
+\include{chapters/aim.tex}
+\include{chapters/stateofart.tex}
+\include{chapters/methodology.tex}
+\include{chapters/results.tex}
+\include{chapters/conclusions.tex}
+
+% some example of chapters
+%\include{chapters/example/bettertables.tex}
+%\include{chapters/example/betterenum.tex}
+%\include{chapters/example/codespace.tex}
+%\include{chapters/example/figwidth.tex}
+
+
+\bibliographystyle{plain}
+\bibliography{refs}
+\nocite{*}
+
+\end{document}
