@@ -1,5 +1,11 @@
 docs/thesis/chapters/*.aux
 docs/thesis/*.aux
+docs/thesis/*.blg
+docs/thesis/*.dvi
+docs/thesis/*.fls
+docs/thesis/*.fdb_latexmk
+docs/thesis/*.toc
 docs/thesis/*.log
 docs/thesis/*.out
 docs/thesis/*.gz
+docs/thesis/*.fdb_latexmk
