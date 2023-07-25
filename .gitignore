@@ -9,3 +9,4 @@ docs/thesis/*.log
 docs/thesis/*.out
 docs/thesis/*.gz
 docs/thesis/*.fdb_latexmk
+code/src/_*
