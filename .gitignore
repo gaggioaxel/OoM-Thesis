@@ -7,6 +7,7 @@ docs/thesis/*.fdb_latexmk
 docs/thesis/*.toc
 docs/thesis/*.log
 docs/thesis/*.out
+docs/thesis/*.pdf
 docs/thesis/*.gz
 docs/thesis/*.fdb_latexmk
 docs/thesis/*.bbl
