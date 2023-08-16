@@ -1,6 +1,17 @@
 \section{State of Art}
-%This section reviews and summarizes the existing knowledge and research relevant to your topic. 
-%It critically analyzes previous studies and identifies gaps that your research aims to fill\\
-
+Currently the method for automated analysis of body movement consists of an approach involving transferable-utility cooperative games on graph \cite{kolykhalova:2020} that has been summed up below:  
+\begin{enumerate}
+    \item {A Motion Capture dataset is originated by recording with 13 infra-red cameras. two professional dancers that were equipped with 64 infra-red reflective markers, 5 accelerometers and 1 microphone.} 
+    \item{The perceived Origin of Movement are manually annotated by experts in the field.} 
+    \item{With the native software “Qualisys Track Manager” have been computed the trajectories of each point.}  
+    \item{Joints are created according to the human skeletal structure and then clustered into a set of 20 points.} 
+    \item{Then the Shapley value approach is used as solution to the mathematical game built with the weighted vertices.} 
+\end{enumerate}
+Results are validated with an online survey, where have been asked to users at various level of self-assessed proficiency, 
+to select one or two vertices of the skeletal structure as the origin of movement.
+They were given hints in three diverse ways by highlighting the joints, either, 
+with the highest Shapley values, with the maximum speed, or randomly chosen. 
+This study has proven that the most expert users consistently chose as 
+origin of movement the one suggested by Shapley values. 
 
 \subsection{Origin of Movement}
