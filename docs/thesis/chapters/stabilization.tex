@@ -22,7 +22,7 @@ Nel problema del Maximum Perfect Weight Matching i vertici rappresentano gli ele
  I pesi degli archi vengono raccolti in una matrice che prende il nome di matrice di utilità. \\
  La matrice di utilità sarà una matrice quadrata, dato che il numero di nodi facenti parte dei due insiemi distinti è lo stesso.
 Le righe potrebbero rappresentare i nodi facenti parte del primo insieme, mentre le colonne potrebbero rappresentare i nodi facenti parte del secondo insieme, oppure viceversa.
- L'elemento (i, j) della matrice rappresenta il peso dell'arco che collega il vertice "i" al vertice "j".
+ L'elemento (\textit{i}, \textit{j}) della matrice rappresenta il peso dell'arco che collega il vertice \textit{i} al vertice \textit{j}.
  
 
 
@@ -31,7 +31,7 @@ In questo esempio, anzichè avere nodi collegati da archi, avremo una situazione
 Al posto dei nodi introdotti precedentemente, avremo dei clusters, ossia degli insiemi di nodi, che per noi rappresentano le joints dello scheletro, collegati fra loro da archi.
 \\  
 
-Consideriamo i clusters all'istante t e i clusters all'istante t+1 come due insiemi distinti, perciò non esisteranno archi che collegano clusters facenti parte dello stesso insieme. \\
+Consideriamo i clusters all'istante \textit{t} e i clusters all'istante \textit{t+1} come due insiemi distinti, perciò non esisteranno archi che collegano clusters facenti parte dello stesso insieme. \\
 Ogni cluster di un insieme deve essere collegato tramite un arco ad uno ed un solo cluster dell'altro insieme, con l'obbiettivo di massimizzare il peso totale degli archi.
 Il peso di un arco è pari al numero di nodi che hanno in comune i due clusters che l'arco in questione sta collegando. \\
 Come già detto, a questo punto della pipeline, conosciamo già ad ogni istante le joints che fanno parte dei vari clusters e i colori dei vari clusters, ma vogliamo fare un riassegnamento di colori per stabilizzare la visualizzazione nel tempo.
@@ -41,34 +41,167 @@ Ripeteremo questo procedimento iterativamente fino all'ultimo istante.
 
 
 \subsubsection{Maximum Perfect Weight Matching: mock example}
-Consideriamo un caso semplificato per vedere in termini di visualizzazione come funziona il Maximum Perfect Weight Matching e quindi supponiamo di avere all'istante t 9 nodi rappresentati dalle lettere dell'alfabeto dalla A alla I e 3 clusters, mentre all'istante t+1 gli stessi 9 nodi precedenti e 3 clusters differenti da quelli dell'istante precedente. \\
-I colori possibili sono 3, supponiamo che siano per esempio rosso, blu e verde, conosciamo il colore dei clusters all'istante t e vogliamo assegnare i colori ai clusters all'istante t+1.\\
-Ci sono quindi 3! possibili assegnamenti di colore. \\
+Consideriamo un caso semplificato per vedere in termini di visualizzazione come funziona il Maximum Perfect Weight Matching e quindi supponiamo di avere all'istante t 9 nodi rappresentati dalle lettere dell'alfabeto dalla A alla I e 3 clusters, mentre all'istante \textit{t+1} gli stessi 9 nodi precedenti e 3 clusters differenti da quelli dell'istante precedente. \\
+I colori possibili sono 3, supponiamo che siano per esempio rosso, blu e verde, conosciamo il colore dei clusters all'istante t e vogliamo assegnare i colori ai clusters all'istante \textit{t+1}.\\
+Ci sono quindi \textit{3!} possibili assegnamenti di colore. \\
 Come già detto, il peso di un arco è equivalente al numero di nodi che hanno in comune quei due clusters che vengono collegati dall'arco in questione. \\
-Da questo esempio si può notare che l'assegnamento con peso totale massimo per l'istante t+1 è quello visivamente più coerente con quello dell'istante t.
+Da questo esempio si può notare che l'assegnamento con peso totale massimo per l'istante \textit{t+1} è quello visivamente più coerente con quello dell'istante \textit{t}.
 
-<< disegno >>
+\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{graphics/stabilization.jpg}
+
 
 \subsection{Brute Force Algorithm}
-\subsubsection{Brute Force Algorithm summarized}
+L'algoritmo di Brute Force può essere una possibile strada per risolvere il problema del MWPM per grafi bipartiti.
+Il Brute Force ha una complessità esponenziale, in particolare, la complessità temporale dell'algoritmo cresce in modo esponenziale rispetto al numero di vertici nel grafo.
+Questo perché l'algoritmo di Brute Force esamina tutte le possibili combinazioni di abbinamenti perfetti all'interno del grafo bipartito per trovare quello con il peso massimo. \\
+Se il grafo ha \textit{n} vertici sia nella prima partizione che nella seconda partizione, ci sono \textit{n}!\ abbinamenti possibili.
+Ogni abbinamento richiede \textit{O}(\textit{n}) tempo per essere calcolato, poiché si deve verificare che sia perfetto e quindi calcolare il suo peso totale.
+Quindi, la complessità complessiva dell'algoritmo è dell'ordine di \textit{O}(\textit{n}!$\cdot$\textit{n}). \\
+Dato che la complessità cresce rapidamente all'aumentare di \textit{n}, diventa rapidamente inattuabile per grafi di grandi dimensioni, ma per il nostro caso questo non è un problema.
 
-Nel caso del Brute Force, quindi, si costruisce inizialmente la matrice di utilità e si calcola il peso totale per ciascuna permutazione di assegnamento ed infine si sceglie l'assegnamento con peso massimo.
-\\
-
-\subsubsection{Brute Force Algorithm application}
-
-\subsection{Hungarian Algorithm}
-
-The Hungarian matching algorithm, also called the Kuhn-Munkres algorithm, is a O grande V alla 3 algorithm that can be used to find maximum-weight matchings in bipartite graphs, which is sometimes called the assignment problem. A bipartite graph can easily be represented by an utility matrix, where the weights of edges are the entries. 
 A maximum-weight matching problem using an utility matrix can be transformed into a minimum-weight matching problem.
 This can be achieved by introducing an auxiliary matrix, referred to as the "cost matrix."
 The cost matrix is essentially a duplicate of the utility matrix, but with all its elements negated.
+
+\subsubsection{Brute Force Algorithm summarized}
+The operation of the Brute Force algorithm for minimum-weigth matching problems can be summerized in these 3 steps:
+
+\begin{enumerate}
+    \item {Compute the cost matrix for the considered bipartite graph with \textit{n} vertoces in each partition.}
+    \item {Compute the total cost of all the \textit{n}!\ permutations.}
+    \item {Choose the assignment with the lowest total cost.}
+\end{enumerate}
+
+
+\subsubsection{Brute Force Algorithm application}
+
+Let's take for example the following cost matrix and try to apply the Brute Force algorithm for minimum-weigth matching problems:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+      \hline
+      108 & 125 & 150 \\
+      \hline
+      150 & 135 & 175 \\
+      \hline
+      122 & 148 & 250 \\
+      \hline
+    \end{tabular}
+    \end{table}
+
+Now we compute the total cost of all the \textit{n}!\ permutations: 
+
+\begin{figure}[H]
+    \begin{minipage}[b]{0.3\textwidth}
+      \centering
+      \begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+        \hline
+        \cellcolor{yellow!25} 108 & 125 & 150 \\
+        \hline
+        150 & \cellcolor{yellow!25} 135 & 175 \\
+        \hline
+        122 & 148 & \cellcolor{yellow!25} 250 \\
+        \hline
+      \end{tabular}
+      \caption{Total weight: 493}
+      \label{tab:perm1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.3\textwidth}
+      \centering
+      \begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+        \hline
+        108 & \cellcolor{yellow!25} 125 & 150 \\
+        \hline
+        150 & 135 & \cellcolor{yellow!25}175 \\
+        \hline
+        \cellcolor{yellow!25}122 & 148 & 250 \\
+        \hline
+      \end{tabular}
+      \caption{Total weight: 422}
+      \label{tab:perm2}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.3\textwidth}
+      \centering
+      \begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+        \hline
+        108 & 125 & \cellcolor{yellow!25}150 \\
+        \hline
+        \cellcolor{yellow!25} 150 &  135 & 175 \\
+        \hline
+        122 & \cellcolor{yellow!25} 148 & 250 \\
+        \hline
+      \end{tabular}
+      \caption{Total weight: 448}
+      \label{tab:perm3}
+    \end{minipage}
+  \end{figure}
+  
+
+\begin{figure}[H]
+    \begin{minipage}[b]{0.3\textwidth}
+      \centering
+      \begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+        \hline
+        108 & 125 & \cellcolor{yellow!25} 150 \\
+        \hline
+        150 & \cellcolor{yellow!25} 135 & 175 \\
+        \hline
+        \cellcolor{yellow!25} 122 & 148 & 250 \\
+        \hline
+      \end{tabular}
+      \caption{Total weight: 407}
+      \label{tab:perm1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.3\textwidth}
+      \centering
+      \begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+        \hline
+        108 & \cellcolor{yellow!25} 125 & 150 \\
+        \hline
+        \cellcolor{yellow!25} 150 & 135 & 175 \\
+        \hline
+        122 & 148 & \cellcolor{yellow!25} 250 \\
+        \hline
+      \end{tabular}
+      \caption{Total weight: 525}
+      \label{tab:perm2}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.3\textwidth}
+      \centering
+      \begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+        \hline
+        \cellcolor{yellow!25} 108 & 125 & 150 \\
+        \hline
+        150 & 135 & \cellcolor{yellow!25} 175 \\
+        \hline
+         122 & \cellcolor{yellow!25} 148 & 250 \\
+        \hline
+      \end{tabular}
+      \caption{Total weight: 431}
+      \label{tab:perm3}
+    \end{minipage}
+  \end{figure}
+  
+We find that the minimum total cost is given by the assignment in Figure 4.  
+
+\subsection{Hungarian Algorithm}
+
+The Hungarian matching algorithm, also called the Kuhn-Munkres algorithm, is a \textit{O}($\textit{n}^3$) algorithm that can be used to find maximum-weight matchings in bipartite graphs with \textit{n} vertices for each partition, which is sometimes called the assignment problem.
+A bipartite graph can easily be represented by an utility matrix, where the weights of edges are the entries. \\
+Come abbiamo già visto nel Brute Force algorithm, i problemi di maximum-weight perfect matching con la matrice di utilità possono essere trasformati in problemi di minimum-weight perfect matching con la matrice di costo.
+Spiegheremo l'Hungarian algorithm applicato ai problemi di minimum-weight matching.
 \\
 
 \subsubsection{Hungarian Algorithm summarized}
 
-The operation of the Hungarian algorithm for minimum-weigth matching problems can be summerized in these 5 steps:
+The operation of the Hungarian algorithm for minimum-weigth matching problems can be summerized in these 6 steps:
 \begin{enumerate}
+    \item {Compute the cost matrix for the considered bipartite graph with \textit{n} vertices in each partition.}
     \item {Subtract the smallest entry in each row from all the other entries in the row. This will make the smallest entry in the row now equal to 0.}
     \item {Subtract the smallest entry in each column from all the other entries in the column. This will make the smallest entry in the column now equal to 0.}
     \item {Draw lines through the row and columns that have the 0 entries such that the fewest lines possible are drawn.}
@@ -78,7 +211,7 @@ The operation of the Hungarian algorithm for minimum-weigth matching problems ca
 
 \subsubsection{Hungarian Algorithm application}
 
-Let's take for example the following cost matrix and try to apply the Hungarian algorithm for minimum-weigth matching problems:
+Let's take for example the same cost matrix of the Brute Force example and try to apply the Hungarian algorithm for minimum-weigth matching problems:
 
 \begin{table}[H]
 \centering
@@ -214,3 +347,5 @@ Replace the original values:
   \hline
 \end{tabular}
 \end{table}
+
+We find that the minimum total cost is given by this assignment.
