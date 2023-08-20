@@ -3,6 +3,9 @@
 \subsection{Graph theory}
 This section contains definitions, notation and concepts related to Graph Theory according
 to \cite{graph_theory:2010}.
+Graph theory deals with connection amongst vertices by edges. \\
+Graphs are the foundation of many day to day processes and concepts, as they provide a convenient
+and intuitive way of representing objects.
 
 \subsubsection{Simple graphs}
 A \textbf{simple graph} \textit{G} consists of a non-empty finite set \textit{V(G)} of elements called \textbf{vertices}
@@ -225,3 +228,117 @@ If there is the same number of vertices in both \textit{A} and \textit{B}, every
         \label{fig:match_2}
     \end{minipage}
 \end{figure}
+
+
+\subsection{Game theory}
+Game theory is a type of decision theory in which one’s choice of action is determined after taking
+into account all possible alternatives available to an opponent playing the same game, rather than just
+by the possibilities of several outcome results. \\
+Game theory does not insist on how a game should be played but tells the procedure and principles by which action should be selected.
+Thus it is a decision theory useful in competitive situations. \\
+Game is defined as an activity between two or more persons according to a set of rules at the end of
+which each person receives some benefit or suffers loss. The set of rules defines the game.
+Going through the set of rules once by the participants defines a play.
+\\
+
+The following sections contains notations and properties accordind to \cite{game_theory:2020}.
+
+\subsubsection{Properties of a Game}
+\begin{enumerate}
+    \item {There are finite numbers of competitors called \textit{players}.}
+    \item {Each player has a finite number of possible courses of action called \textit{strategies}.}
+    \item {All the strategies and their effects are known to the players but player does not know which
+    strategy is to be chosen.}
+    \item {A game is played when each player chooses one of his strategies. The strategies are assumed
+    to be made simultaneously with an outcome such that no player knows his opponents strategy
+    until he decides his own strategy.}
+    \item {The game is a combination of the strategies and in certain units which determines the gain or
+    loss.}
+    \item {The figures shown as the outcomes of strategies in a matrix form are called \textit{pay-off matrix}.}
+    \item {The player playing the game always tries to choose the best course of action which results in
+    optimal pay off called \textit{optimal strategy}.}
+    \item {The expected pay off when all the players of the game follow their optimal strategies is
+    known as \textit{value of the game}. The main objective of a problem of a game is to find the value
+    of the game.}
+    \item {The game is said to be \textit{fair} game if the value of the game is zero otherwise it's known as \textit{unfair}.}
+    \item {A \textit{coalition} is a subset of the players \textit{n}, whereas a \textit{grand coalition} is the
+        set \textit{n} of all players. The purpose of a coalition is to coordinate strategies and divide the
+        total payoff among all the players.}
+\end{enumerate}
+
+
+\subsubsection{Cooperative Games}
+A cooperative game is a situation in which players interact together to achieve a common goal.
+In the context of a cooperative game, players aim to maximize the overall outcome by collaborating, communicating, and coordinating their actions.
+The primary objective is to achieve a result in which all players benefit, working together to overcome challenges or issues.
+
+
+\subsubsection{Non-cooperative Games}
+A non-cooperative game is a situation in which players act independently and without direct communication or coordination with other players.
+In a non-cooperative game, each player seeks to maximize their individual gain without necessarily considering the effect of their actions on other players.
+The main goal is to achieve the best personal outcome, even at the expense of other participants, without considering direct collaboration.
+
+
+\subsubsection{The Prisoner's Dilemma}
+The Prisoner's Dilemma is a fundamental concept in game theory that illustrates the challenges of \textit{cooperation} and \textit{non-cooperation} between individuals. \\
+It's a model that exemplifies situations where two individuals could benefit from collaboration, but are tempted to act selfishly to maximize their personal gains. \\
+Here's how it works:
+\\
+
+\textbf{Scenario:}
+Imagine two criminals (\textit{A} and \textit{B}) who have been arrested and are held in separate cells. \\
+There is not enough evidence to convict them for the most serious crime, but there is enough evidence to convict them for a lesser crime.
+Both of them are offered the opportunity to \textit{confess} (\textit{betray}) or \textit{remain silent} (\textit{cooperate}).
+\\
+
+\textbf{Options:}
+\begin{enumerate}
+    \item {If \textit{both remain silent}, they each receive a short sentence of 1 year for the lesser crime.}
+    \item {If \textit{one of them betrays} and \textit{the other cooperates}, the betrayer will be released without any sentence, and the other will receive a long sentence of 3 years.}
+    \item {If \textit{both betray}, they both receive a moderate sentence of 2 years for the lesser crime, which is longer than if they both cooperate.}
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \begin{tabular}{|c|c|c|}
+        \hline
+        \backslashbox{A}{B} & Silence & Betray \\
+        \hline
+        Silence & \backslashbox{1}{1} & \backslashbox{3}{0} \\
+        \hline
+        Betray & \backslashbox{0}{3} & \backslashbox{2}{2} \\
+        \hline
+        \end{tabular}
+        \caption{Years for crimanal \textit{A} and \textit{B}}
+        \label{tab:contingency_table_1}
+    \end{minipage}%
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \begin{tabular}{|c|c|c|}
+        \hline
+        \backslashbox{A}{B} & Silence & Betray \\
+        \hline
+        Silence & 2 & 3 \\
+        \hline
+        Betray & 3 & 4 \\
+        \hline
+        \end{tabular}
+        \caption{Total years for the group of criminals}
+        \label{tab:contingency_table_2}
+    \end{minipage}
+    \end{figure}
+    
+
+\textbf{Outcomes:}
+\begin{itemize}[label=\textbullet]
+    \item If both act rationally to maximize their own gain, the most likely outcome is that both will betray, leading to a moderate sentence for both. This is the non-cooperative result.
+    \item However, if both trust each other and cooperate, they would achieve the best possible outcome for both: the shortest sentence.
+\end{itemize}
+
+
+\textbf{Implications:} The Prisoner's Dilemma demonstrates how even though cooperating would be in their collective interest, the two prisoners might be tempted to betray each other to avoid a longer sentence. \\
+This conflict between personal benefit and the common good often leads to suboptimal outcomes. \\
+The Prisoner's Dilemma has been extensively studied in psychology, economics, and social sciences and is a crucial example of the challenges of cooperation in human interactions. \\
+
