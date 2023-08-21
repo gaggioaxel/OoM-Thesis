@@ -2,7 +2,7 @@
 
 \subsection{Graph theory}
 This section contains definitions, notation and concepts related to Graph Theory according
-to \cite{graph_theory:2010}.
+to \cite{graph_theory:2010}. \\
 Graph theory deals with connection amongst vertices by edges. \\
 Graphs are the foundation of many day to day processes and concepts, as they provide a convenient
 and intuitive way of representing objects.
@@ -18,10 +18,10 @@ edge set \textit{E(G)} consists of the edges \textit{uv}, \textit{uw}, \textit{v
     \centering
     \begin{tikzpicture}
       % Disegno dei nodi
-      \node[circle, draw] (v) at (0,0) {v};
-      \node[circle, draw] (u) at (2,0) {u};
-      \node[circle, draw] (w) at (2,-2) {w};
-      \node[circle, draw] (z) at (0,-2) {z};
+      \node[circle, draw, minimum size=0.7cm] (v) at (0,0) {v};
+      \node[circle, draw, minimum size=0.7cm] (u) at (2,0) {u};
+      \node[circle, draw, minimum size=0.7cm] (w) at (2,-2) {w};
+      \node[circle, draw, minimum size=0.7cm] (z) at (0,-2) {z};
       
       % Disegno degli archi
       \draw (u) -- (v);
@@ -34,23 +34,23 @@ edge set \textit{E(G)} consists of the edges \textit{uv}, \textit{uw}, \textit{v
 \end{figure}
 
 \subsubsection{Adjacency}
-We say that two vertices \textit{v} and \textit{w} of a graph \textit{G} are \textbf{adjacent} if there is an edge \textit{vw} joining them, and the vertices \textit{v} and \textit{w} are then \textbf{incident} with such an edge.
+We say that two vertices \textit{v} and \textit{w} of a graph \textit{G} are \textbf{adjacent} if there is an edge \textit{vw} joining them, and the vertices \textit{v} and \textit{w} are then \textbf{incident} with such an edge. \\
 Similarly, two distinct edges \textit{e} and \textit{f} are \textbf{adjacent} if they have a vertex in common (see Figure \ref{fig:adiacency}).
 
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}
       % Primo grafo
-      \node[circle, draw] (v) at (0,0) {v};
-      \node[circle, draw] (w) at (2,0) {w};
+      \node[circle, draw, minimum size=0.7cm] (v) at (0,0) {v};
+      \node[circle, draw, minimum size=0.7cm] (w) at (2,0) {w};
       \draw (v) -- (w);
     \end{tikzpicture}
     \quad % Spazio tra i grafi
     \begin{tikzpicture}
       % Secondo grafo
-      \node[circle, draw] (a) at (0,0) {a};
-      \node[circle, draw] (b) at (2,1) {b};
-      \node[circle, draw] (c) at (2,-1) {c};
+      \node[circle, draw, minimum size=0.7cm] (a) at (0,0) {a};
+      \node[circle, draw, minimum size=0.7cm] (b) at (2,1) {b};
+      \node[circle, draw, minimum size=0.7cm] (c) at (2,-1) {c};
       \draw (a) -- node[above] {e} (b);
       \draw (a) -- node[below] {f} (c);
     \end{tikzpicture}
@@ -73,10 +73,10 @@ An example of this is given in Figure \ref{fig:matrix_representations}.
         \centering
         \begin{tikzpicture}
             % Nodi
-            \node[circle, draw] (a) at (0,0) {a};
-            \node[circle, draw] (b) at (2,2) {b};
-            \node[circle, draw] (c) at (4,0) {c};
-            \node[circle, draw] (d) at (2,-2) {d};
+            \node[circle, draw, minimum size=0.7cm] (a) at (0,0) {a};
+            \node[circle, draw, minimum size=0.7cm] (b) at (2,2) {b};
+            \node[circle, draw, minimum size=0.7cm] (c) at (4,0) {c};
+            \node[circle, draw, minimum size=0.7cm] (d) at (2,-2) {d};
           
             % Archi
             \draw (a) edge node[pos=0.5, below] {4} (d);
@@ -111,43 +111,6 @@ An example of this is given in Figure \ref{fig:matrix_representations}.
 \end{figure}
 
 
-\subsubsection{Complete graphs}
-A simple graph in which each pair of distinct vertices are adjacent is a \textbf{complete
-graph}. \\
-Here in Figure \ref{fig:complete_4} and in Figure \ref{fig:complete_5}, two examples of complete graphs.
-
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \begin{tikzpicture}
-            % Grafo con 4 nodi
-            \foreach \nodename/\nodeposition in {a/0, b/90, c/180, d/270}
-                \node[circle, draw] (\nodename) at (\nodeposition:2) {\nodename};
-            
-            \foreach \startnode/\endnode in {a/b, a/c, a/d, b/c, b/d, c/d}
-                \draw (\startnode) -- (\endnode);
-        \end{tikzpicture}
-        \caption{Complete graph with 4 vertices}
-        \label{fig:complete_4}
-    \end{minipage}%
-    \hfill
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \begin{tikzpicture}
-            % Grafo con 5 nodi
-            \foreach \nodename/\nodeposition in {e/0, f/72, g/144, h/216, i/288}
-                \node[circle, draw] (\nodename) at (\nodeposition:2) {\nodename};
-            
-            \foreach \startnode/\endnode in {e/f, e/g, e/h, e/i, f/g, f/h, f/i, g/h, g/i, h/i}
-                \draw (\startnode) -- (\endnode);
-        \end{tikzpicture}
-        \caption{Complete graph with 5 vertices}
-        \label{fig:complete_5}
-    \end{minipage}
-\end{figure}
-
 \subsubsection{Bipartite graphs}
 If the vertex set of a graph \textit{G} can be split into two disjoint sets \textit{A} and \textit{B} so that each
 edge of \textit{G} joins a vertex of \textit{A} and a vertex of \textit{b}, then \textit{G} is a \textbf{bipartite graph}. \\
@@ -156,7 +119,7 @@ Figure \ref{fig:bipartite} is an example of bipartite graph.
 
 \begin{figure}[H]
     \centering
-    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
+    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.7cm}]
         % Livello superiore
         \node (A) at (3,0) [fill=black!50] {a};
         \node (B) at (3,-3) [fill=black!50] {b};
@@ -188,7 +151,7 @@ If there is the same number of vertices in both \textit{A} and \textit{B}, every
     \centering
     \begin{minipage}{0.45\textwidth}
         \centering
-        \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
+        \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.7cm}]
             % Livello superiore
             \node (A) at (3,0) [fill=black!50] {a};
             \node (B) at (3,-3) [fill=black!50] {b};
@@ -208,7 +171,7 @@ If there is the same number of vertices in both \textit{A} and \textit{B}, every
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
-        \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
+        \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.7cm}]
             % Livello superiore
             \node (A) at (3,0) [fill=black!50] {a};
             \node (B) at (3,-1.5) [fill=black!50] {b};

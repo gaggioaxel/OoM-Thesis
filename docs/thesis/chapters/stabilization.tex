@@ -49,6 +49,168 @@ Da questo esempio si può notare che l'assegnamento con peso totale massimo per 
 
 \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{graphics/stabilization.jpg}
 
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
+    \node (A) at (3,0) [fill=blue!50] {A};
+    \node (B) at (5,-0.5) [fill=blue!50] {B};
+
+    \node (C) at (7,0) [fill=green] {C};
+    \node (D) at (3,-1) [fill=green] {D};
+    \node (E) at (5,-1.5) [fill=green] {E};
+    \node (F) at (7,-1) [fill=green] {F};
+    \node (G) at (3,-2) [fill=green] {G};
+
+    \node (H) at (5,-2.5) [fill=pink] {H};
+    \node (I) at (7,-2) [fill=pink] {I};  
+  \end{tikzpicture}
+\end{figure}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    Assignment & Blue match & Green match & Pink match & Final cost \\
+    \hline
+    Assignment & Blue match & Green match & Pink match & 3 \\
+    \hline
+    Riga 2, Cell 1 & Riga 2, Cell 2 & Riga 2, Cell 3 & Riga 2, Cell 4 & 1 \\
+    \hline
+    Riga 3, Cell 1 & Riga 3, Cell 2 & Riga 3, Cell 3 & Riga 3, Cell 4 & 6 \\
+    \hline
+    Riga 4, Cell 1 & Riga 4, Cell 2 & Riga 4, Cell 3 & Riga 4, Cell 4 & 4 \\
+    \hline
+    Riga 5, Cell 1 & Riga 5, Cell 2 & Riga 5, Cell 3 & Riga 5, Cell 4 & 2 \\
+    \hline
+    Riga 6, Cell 1 & Riga 6, Cell 2 & Riga 6, Cell 3 & Riga 6, Cell 4 & 2 \\
+    \hline
+  \end{tabular}
+  \caption{Esempio di tabella 7x5.}
+  \label{tab:tabella7x5}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.5\textwidth}
+    \centering
+    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
+      \node (A) at (3,0) [fill=blue!50] {A};
+      \node (B) at (5,-0.5) [fill=blue!50] {B};
+  
+      \node (C) at (7,0) [fill=green] {C};
+      \node (D) at (3,-1) [fill=green] {D};
+      \node (E) at (5,-1.5) [fill=green] {E};
+      \node (F) at (7,-1) [fill=green] {F};
+      \node (G) at (3,-2) [fill=green] {G};
+  
+      \node (H) at (5,-2.5) [fill=pink] {H};
+      \node (I) at (7,-2) [fill=pink] {I};  
+    \end{tikzpicture}
+  \end{minipage}%
+  \begin{minipage}{0.5\textwidth}
+    \centering
+    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
+      \node (A) at (3,0) [fill=blue!50] {A};
+      \node (B) at (5,-0.5) [fill=blue!50] {B};
+      \node (C) at (7,0) [fill=green] {C};
+      
+      \node (D) at (3,-1) [fill=green] {D};
+      \node (E) at (5,-1.5) [fill=green] {E};
+
+      \node (F) at (7,-1) [fill=green] {F};
+      \node (G) at (3,-2) [fill=green] {G}; 
+      \node (H) at (5,-2.5) [fill=pink] {H};
+      \node (I) at (7,-2) [fill=pink] {I};  
+    \end{tikzpicture}
+    
+    \vspace{15pt} % Spazio verticale tra i grafici
+
+    \centering
+    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
+      \node (A) at (3,0) [fill=blue!50] {A};
+      \node (B) at (5,-0.5) [fill=blue!50] {B};
+      \node (C) at (7,0) [fill=green] {C};
+      
+      \node (D) at (3,-1) [fill=green] {D};
+      \node (E) at (5,-1.5) [fill=green] {E};
+
+      \node (F) at (7,-1) [fill=green] {F};
+      \node (G) at (3,-2) [fill=green] {G}; 
+      \node (H) at (5,-2.5) [fill=pink] {H};
+      \node (I) at (7,-2) [fill=pink] {I};  
+    \end{tikzpicture}
+
+    \vspace{15pt}
+
+    \centering
+    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
+      \node (A) at (3,0) [fill=blue!50] {A};
+      \node (B) at (5,-0.5) [fill=blue!50] {B};
+      \node (C) at (7,0) [fill=green] {C};
+      
+      \node (D) at (3,-1) [fill=green] {D};
+      \node (E) at (5,-1.5) [fill=green] {E};
+
+      \node (F) at (7,-1) [fill=green] {F};
+      \node (G) at (3,-2) [fill=green] {G}; 
+      \node (H) at (5,-2.5) [fill=pink] {H};
+      \node (I) at (7,-2) [fill=pink] {I};  
+    \end{tikzpicture}
+
+    \vspace{15pt}
+
+    \centering
+    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
+      \node (A) at (3,0) [fill=blue!50] {A};
+      \node (B) at (5,-0.5) [fill=blue!50] {B};
+      \node (C) at (7,0) [fill=green] {C};
+      
+      \node (D) at (3,-1) [fill=green] {D};
+      \node (E) at (5,-1.5) [fill=green] {E};
+
+      \node (F) at (7,-1) [fill=green] {F};
+      \node (G) at (3,-2) [fill=green] {G}; 
+      \node (H) at (5,-2.5) [fill=pink] {H};
+      \node (I) at (7,-2) [fill=pink] {I};  
+    \end{tikzpicture}
+
+    \vspace{15pt}
+
+    \centering
+    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
+      \node (A) at (3,0) [fill=blue!50] {A};
+      \node (B) at (5,-0.5) [fill=blue!50] {B};
+      \node (C) at (7,0) [fill=green] {C};
+      
+      \node (D) at (3,-1) [fill=green] {D};
+      \node (E) at (5,-1.5) [fill=green] {E};
+
+      \node (F) at (7,-1) [fill=green] {F};
+      \node (G) at (3,-2) [fill=green] {G}; 
+      \node (H) at (5,-2.5) [fill=pink] {H};
+      \node (I) at (7,-2) [fill=pink] {I};  
+    \end{tikzpicture}
+
+    \vspace{15pt}
+
+    \centering
+    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
+      \node (A) at (3,0) [fill=blue!50] {A};
+      \node (B) at (5,-0.5) [fill=blue!50] {B};
+      \node (C) at (7,0) [fill=green] {C};
+      
+      \node (D) at (3,-1) [fill=green] {D};
+      \node (E) at (5,-1.5) [fill=green] {E};
+
+      \node (F) at (7,-1) [fill=green] {F};
+      \node (G) at (3,-2) [fill=green] {G}; 
+      \node (H) at (5,-2.5) [fill=pink] {H};
+      \node (I) at (7,-2) [fill=pink] {I};  
+    \end{tikzpicture}
+
+  \end{minipage}
+\end{figure}
+
 
 \subsection{Brute Force Algorithm}
 L'algoritmo di Brute Force può essere una possibile strada per risolvere il problema del MWPM per grafi bipartiti.
