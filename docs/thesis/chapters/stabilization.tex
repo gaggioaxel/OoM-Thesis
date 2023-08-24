@@ -26,8 +26,8 @@ Le righe potrebbero rappresentare i nodi facenti parte del primo insieme, mentre
  
 
 
-\subsubsection{Maximum Perfect Weight Matching: temporal stabilization}
-In questo esempio, anzichè avere nodi collegati da archi, avremo una situazione leggermente diversa. \\   
+\subsubsection{Temporal stabilization}
+Nel nostro caso, anzichè avere nodi collegati da archi, avremo una situazione leggermente diversa. \\   
 Al posto dei nodi introdotti precedentemente, avremo dei clusters, ossia degli insiemi di nodi, che per noi rappresentano le joints dello scheletro, collegati fra loro da archi.
 \\  
 
@@ -40,176 +40,315 @@ Partiremo perciò analizzando i colori dei clusters all'istante iniziale e scegl
 Ripeteremo questo procedimento iterativamente fino all'ultimo istante.
 
 
-\subsubsection{Maximum Perfect Weight Matching: mock example}
-Consideriamo un caso semplificato per vedere in termini di visualizzazione come funziona il Maximum Perfect Weight Matching e quindi supponiamo di avere all'istante t 9 nodi rappresentati dalle lettere dell'alfabeto dalla A alla I e 3 clusters, mentre all'istante \textit{t+1} gli stessi 9 nodi precedenti e 3 clusters differenti da quelli dell'istante precedente. \\
-I colori possibili sono 3, supponiamo che siano per esempio rosso, blu e verde, conosciamo il colore dei clusters all'istante t e vogliamo assegnare i colori ai clusters all'istante \textit{t+1}.\\
-Ci sono quindi \textit{3!} possibili assegnamenti di colore. \\
-Come già detto, il peso di un arco è equivalente al numero di nodi che hanno in comune quei due clusters che vengono collegati dall'arco in questione. \\
-Da questo esempio si può notare che l'assegnamento con peso totale massimo per l'istante \textit{t+1} è quello visivamente più coerente con quello dell'istante \textit{t}.
-
-\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{graphics/stabilization.jpg}
+\subsubsection{A real application}
+Consideriamo un caso reale per vedere in termini di visualizzazione come funziona il Maximum Perfect Weight Matching. \\
+Supponiamo di avere all'istante \textit{t} 20 nodi che rappresentano le joints e 3 clusters labellati di colori diversi, come si può vedere in Figure \ref{fig:clust_t}. \\
+All'istante \textit{t+1} ci sono gli stessi 20 nodi precedenti ma 3 clusters labellati differenti (vedi Figure \ref{fig:clust_tplus1}).  \\
+Ovviamente questo assegnamento, ottenuto dal clustering, non si può considerare l'assegnamento ottimale, in quanto dobbiamo ancora valutare i \textit{3!} possibili assegnamenti di colore. \\
+Conosciamo il colore dei clusters all'istante  \textit{t} e vogliamo assegnare i colori ai clusters all'istante \textit{t+1}.\\
+Nella Figure \ref{fig:clust_ass} si possono vedere visivamente tutte i possibili assegnamenti di colore, mentre nella tabella \ref{tab:table_clust} sono raccolti tutti i valori dei nodi comuni per colore e il peso totale del matching.
 
 \begin{figure}[H]
   \centering
-  \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
-    \node (A) at (3,0) [fill=blue!50] {A};
-    \node (B) at (5,-0.5) [fill=blue!50] {B};
-
-    \node (C) at (7,0) [fill=green] {C};
-    \node (D) at (3,-1) [fill=green] {D};
-    \node (E) at (5,-1.5) [fill=green] {E};
-    \node (F) at (7,-1) [fill=green] {F};
-    \node (G) at (3,-2) [fill=green] {G};
-
-    \node (H) at (5,-2.5) [fill=pink] {H};
-    \node (I) at (7,-2) [fill=pink] {I};  
+  \begin{tikzpicture}
+    \node[circle, draw, minimum size=0.7cm] (1) at (1,-9) [fill=green] {1};
+    \node[circle, draw, minimum size=0.7cm] (2) at (9, -9) [fill=green] {2};
+    \node[circle, draw, minimum size=0.7cm] (3) at (2.5,-8.5) [fill=green] {3};
+    \node[circle, draw, minimum size=0.7cm] (4) at (7.5, -8.5) [fill=green] {4};
+    \node[circle, draw, minimum size=0.7cm] (5) at (3,-6.5) [fill=green] {5};
+    \node[circle, draw, minimum size=0.7cm] (6) at (7,-6.5) [fill=green] {6};
+    \node[circle, draw, minimum size=0.7cm] (7) at (3.5,-4.5) [fill=green] {7};
+    \node[circle, draw, minimum size=0.7cm] (8) at (5, -3.5) [fill=green] {8};
+    \node[circle, draw, minimum size=0.7cm] (9) at (6.5,-4.5) [fill=green] {9};
+    \node[circle, draw, minimum size=0.7cm] (10) at (5,-1.5) [fill=green] {10};
+    \node[circle, draw, minimum size=0.7cm] (11) at (1,-4) [fill=pink] {11};
+    \node[circle, draw, minimum size=0.7cm] (12) at (9,-4) [fill=orange] {12};
+    \node[circle, draw, minimum size=0.7cm] (13) at (2, -3.5) [fill=pink] {13};
+    \node[circle, draw, minimum size=0.7cm] (14) at (8, -3.5) [fill=orange] {14};
+    \node[circle, draw, minimum size=0.7cm] (15) at (2.5,-1) [fill=pink] {15};
+    \node[circle, draw, minimum size=0.7cm] (16) at (7.5,-1) [fill=orange] {16};
+    \node[circle, draw, minimum size=0.7cm] (17) at (3,1) [fill=pink] {17};
+    \node[circle, draw, minimum size=0.7cm] (18) at (5,1.5) [fill=orange] {18};
+    \node[circle, draw, minimum size=0.7cm] (19) at (7,1) [fill=orange] {19};
+    \node[circle, draw, minimum size=0.7cm] (20) at (5,3) [fill=orange] {20};
+    
+    \foreach \source/\dest/\label/\xshiftval in {20/18//0, 18/17//0, 18/19//0, 17/15//0, 15/13/Cluster 1/-30, 13/11//0, 19/16//0, 16/14/Cluster 2/30, 14/12//0, 18/10//0, 10/8//0, 8/7//0, 7/5//0, 5/3//0, 3/1//0, 8/9//0, 9/6//0, 6/4/Cluster 3/38, 4/2//0}
+      \path (\source) edge node[xshift=\xshiftval] {\label} (\dest);
   \end{tikzpicture}
+  \caption{Optimal color assignment to clusters at time \textit{t}}
+  \label{fig:clust_t}
 \end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+      \node[circle, draw, minimum size=0.1cm] (1) at (3.5,-1.25) [fill=green] {};
+      \node[circle, draw, minimum size=0.1cm] (2) at (6.5, -1.25) [fill=pink] {};
+      \node[circle, draw, minimum size=0.1cm] (3) at (4,-1) [fill=green] {};
+      \node[circle, draw, minimum size=0.1cm] (4) at (6, -1) [fill=pink] {};
+      \node[circle, draw, minimum size=0.1cm] (5) at (4.25,-0.5) [fill=green] {};
+      \node[circle, draw, minimum size=0.1cm] (6) at (5.75,-0.5) [fill=pink] {};
+      \node[circle, draw, minimum size=0.1cm] (7) at (4.5,0) [fill=green] {};
+      \node[circle, draw, minimum size=0.1cm] (8) at (5, 0.5) [fill=green] {};
+      \node[circle, draw, minimum size=0.1cm] (9) at (5.5,0) [fill=pink] {};
+      \node[circle, draw, minimum size=0.1cm] (10) at (5,1.25) [fill=green] {};
+      \node[circle, draw, minimum size=0.1cm] (11) at (3.2, 0.25) [fill=green] {};
+      \node[circle, draw, minimum size=0.1cm] (12) at (6.75,0.25) [fill=orange] {};
+      \node[circle, draw, minimum size=0.1cm] (13) at (3.5, 0.75) [fill=green] {};
+      \node[circle, draw, minimum size=0.1cm] (14) at (6.5, 0.75) [fill=orange] {};
+      \node[circle, draw, minimum size=0.1cm] (15) at (3.75,1.5) [fill=green] {};
+      \node[circle, draw, minimum size=0.1cm] (16) at (6.25,1.5) [fill=orange] {};
+      \node[circle, draw, minimum size=0.1cm] (17) at (4.25,2) [fill=green] {};
+      \node[circle, draw, minimum size=0.1cm] (18) at (5,2.25) [fill=green] {};
+      \node[circle, draw, minimum size=0.1cm] (19) at (5.75,2) [fill=orange] {};
+      \node[circle, draw, minimum size=0.1cm] (20) at (5,3) [fill=green] {};  
+      \foreach \source/\dest/\label/\xshiftval in {20/18//0, 18/17//0, 18/19//0, 17/15//0, 15/13/Cluster 4/-30, 13/11//0, 19/16//0, 16/14/Cluster 5/30, 14/12//0, 18/10//0, 10/8//0, 8/7//0, 7/5//0, 5/3//0, 3/1//0, 8/9//0, 9/6//0, 6/4/Cluster 6/38, 4/2//0}
+        \path (\source) edge node[xshift=\xshiftval] {\label} (\dest);
+    \end{tikzpicture}
+      \caption{Color assignment to clusters at time \textit{t+1} obtained from clustering}
+      \label{fig:clust_tplus1}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.1cm}]
+      \node (1) at (3.5,-1.25) [fill=green] {};
+      \node (2) at (6.5, -1.25) [fill=pink] {};
+      \node (3) at (4,-1) [fill=green] {};
+      \node (4) at (6, -1) [fill=pink] {};
+      \node (5) at (4.25,-0.5) [fill=green] {};
+      \node (6) at (5.75,-0.5) [fill=pink] {};
+      \node (7) at (4.5,0) [fill=green] {};
+      \node (8) at (5, 0.5) [fill=green] {};
+      \node (9) at (5.5,0) [fill=pink] {};
+      \node (10) at (5,1.25) [fill=green] {};
+      \node (11) at (3.2, 0.25) [fill=green] {};
+      \node (12) at (6.75,0.25) [fill=orange] {};
+      \node (13) at (3.5, 0.75) [fill=green] {};
+      \node (14) at (6.5, 0.75) [fill=orange] {};
+      \node (15) at (3.75,1.5) [fill=green] {};
+      \node (16) at (6.25,1.5) [fill=orange] {};
+      \node (17) at (4.25,2) [fill=green] {};
+      \node (18) at (5,2.25) [fill=green] {};
+      \node (19) at (5.75,2) [fill=orange] {};
+      \node (20) at (5,3) [fill=green] {};  
+      \foreach \source/\dest in {20/18, 18/17, 18/19, 17/15, 15/13, 13/11, 19/16, 16/14, 14/12, 18/10, 10/8, 8/7, 7/5, 5/3, 3/1, 8/9, 9/6, 6/4, 4/2}
+        \path (\source) edge (\dest);
+    \end{tikzpicture}
+      \caption{}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.1cm}]
+      \node (1) at (3.5,-1.25) [fill=green] {};
+      \node (2) at (6.5, -1.25) [fill=orange] {};
+      \node (3) at (4,-1) [fill=green] {};
+      \node (4) at (6, -1) [fill=orange] {};
+      \node (5) at (4.25,-0.5) [fill=green] {};
+      \node (6) at (5.75,-0.5) [fill=orange] {};
+      \node (7) at (4.5,0) [fill=green] {};
+      \node (8) at (5, 0.5) [fill=green] {};
+      \node (9) at (5.5,0) [fill=orange] {};
+      \node (10) at (5,1.25) [fill=green] {};
+      \node (11) at (3.2, 0.25) [fill=green] {};
+      \node (12) at (6.75,0.25) [fill=pink] {};
+      \node (13) at (3.5, 0.75) [fill=green] {};
+      \node (14) at (6.5, 0.75) [fill=pink] {};
+      \node (15) at (3.75,1.5) [fill=green] {};
+      \node (16) at (6.25,1.5) [fill=pink] {};
+      \node (17) at (4.25,2) [fill=green] {};
+      \node (18) at (5,2.25) [fill=green] {};
+      \node (19) at (5.75,2) [fill=pink] {};
+      \node (20) at (5,3) [fill=green] {};  
+      \foreach \source/\dest in {20/18, 18/17, 18/19, 17/15, 15/13, 13/11, 19/16, 16/14, 14/12, 18/10, 10/8, 8/7, 7/5, 5/3, 3/1, 8/9, 9/6, 6/4, 4/2}
+        \path (\source) edge (\dest);
+    \end{tikzpicture}
+      \caption{}
+  \end{subfigure}
+
+  \vspace{1cm} % Spazio vuoto tra le righe
+
+  \begin{subfigure}{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.1cm}]
+      \node (1) at (3.5,-1.25) [fill=orange] {};
+      \node (2) at (6.5, -1.25) [fill=pink] {};
+      \node (3) at (4,-1) [fill=orange] {};
+      \node (4) at (6, -1) [fill=pink] {};
+      \node (5) at (4.25,-0.5) [fill=orange] {};
+      \node (6) at (5.75,-0.5) [fill=pink] {};
+      \node (7) at (4.5,0) [fill=orange] {};
+      \node (8) at (5, 0.5) [fill=orange] {};
+      \node (9) at (5.5,0) [fill=pink] {};
+      \node (10) at (5,1.25) [fill=orange] {};
+      \node (11) at (3.2, 0.25) [fill=orange] {};
+      \node (12) at (6.75,0.25) [fill=green] {};
+      \node (13) at (3.5, 0.75) [fill=orange] {};
+      \node (14) at (6.5, 0.75) [fill=green] {};
+      \node (15) at (3.75,1.5) [fill=orange] {};
+      \node (16) at (6.25,1.5) [fill=green] {};
+      \node (17) at (4.25,2) [fill=orange] {};
+      \node (18) at (5,2.25) [fill=orange] {};
+      \node (19) at (5.75,2) [fill=green] {};
+      \node (20) at (5,3) [fill=orange] {};  
+      \foreach \source/\dest in {20/18, 18/17, 18/19, 17/15, 15/13, 13/11, 19/16, 16/14, 14/12, 18/10, 10/8, 8/7, 7/5, 5/3, 3/1, 8/9, 9/6, 6/4, 4/2}
+        \path (\source) edge (\dest);
+    \end{tikzpicture}
+      \caption{}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.1cm}]
+      \node (1) at (3.5,-1.25) [fill=orange] {};
+      \node (2) at (6.5, -1.25) [fill=green] {};
+      \node (3) at (4,-1) [fill=orange] {};
+      \node (4) at (6, -1) [fill=green] {};
+      \node (5) at (4.25,-0.5) [fill=orange] {};
+      \node (6) at (5.75,-0.5) [fill=green] {};
+      \node (7) at (4.5,0) [fill=orange] {};
+      \node (8) at (5, 0.5) [fill=orange] {};
+      \node (9) at (5.5,0) [fill=green] {};
+      \node (10) at (5,1.25) [fill=orange] {};
+      \node (11) at (3.2, 0.25) [fill=orange] {};
+      \node (12) at (6.75,0.25) [fill=pink] {};
+      \node (13) at (3.5, 0.75) [fill=orange] {};
+      \node (14) at (6.5, 0.75) [fill=pink] {};
+      \node (15) at (3.75,1.5) [fill=orange] {};
+      \node (16) at (6.25,1.5) [fill=pink] {};
+      \node (17) at (4.25,2) [fill=orange] {};
+      \node (18) at (5,2.25) [fill=orange] {};
+      \node (19) at (5.75,2) [fill=pink] {};
+      \node (20) at (5,3) [fill=orange] {};  
+      \foreach \source/\dest in {20/18, 18/17, 18/19, 17/15, 15/13, 13/11, 19/16, 16/14, 14/12, 18/10, 10/8, 8/7, 7/5, 5/3, 3/1, 8/9, 9/6, 6/4, 4/2}
+        \path (\source) edge (\dest);
+    \end{tikzpicture}
+      \caption{}
+  \end{subfigure}
+  
+  \vspace{1cm} % Spazio vuoto tra le righe
+
+
+  \begin{subfigure}{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.1cm}]
+      \node (1) at (3.5,-1.25) [fill=pink] {};
+      \node (2) at (6.5, -1.25) [fill=green] {};
+      \node (3) at (4,-1) [fill=pink] {};
+      \node (4) at (6, -1) [fill=green] {};
+      \node (5) at (4.25,-0.5) [fill=pink] {};
+      \node (6) at (5.75,-0.5) [fill=green] {};
+      \node (7) at (4.5,0) [fill=pink] {};
+      \node (8) at (5, 0.5) [fill=pink] {};
+      \node (9) at (5.5,0) [fill=green] {};
+      \node (10) at (5,1.25) [fill=pink] {};
+      \node (11) at (3.2, 0.25) [fill=pink] {};
+      \node (12) at (6.75,0.25) [fill=orange] {};
+      \node (13) at (3.5, 0.75) [fill=pink] {};
+      \node (14) at (6.5, 0.75) [fill=orange] {};
+      \node (15) at (3.75,1.5) [fill=pink] {};
+      \node (16) at (6.25,1.5) [fill=orange] {};
+      \node (17) at (4.25,2) [fill=pink] {};
+      \node (18) at (5,2.25) [fill=pink] {};
+      \node (19) at (5.75,2) [fill=orange] {};
+      \node (20) at (5,3) [fill=pink] {};  
+      \foreach \source/\dest in {20/18, 18/17, 18/19, 17/15, 15/13, 13/11, 19/16, 16/14, 14/12, 18/10, 10/8, 8/7, 7/5, 5/3, 3/1, 8/9, 9/6, 6/4, 4/2}
+        \path (\source) edge (\dest);
+    \end{tikzpicture}
+      \caption{}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.1cm}]
+      \node (1) at (3.5,-1.25) [fill=pink] {};
+      \node (2) at (6.5, -1.25) [fill=orange] {};
+      \node (3) at (4,-1) [fill=pink] {};
+      \node (4) at (6, -1) [fill=orange] {};
+      \node (5) at (4.25,-0.5) [fill=pink] {};
+      \node (6) at (5.75,-0.5) [fill=orange] {};
+      \node (7) at (4.5,0) [fill=pink] {};
+      \node (8) at (5, 0.5) [fill=pink] {};
+      \node (9) at (5.5,0) [fill=orange] {};
+      \node (10) at (5,1.25) [fill=pink] {};
+      \node (11) at (3.2, 0.25) [fill=pink] {};
+      \node (12) at (6.75,0.25) [fill=green] {};
+      \node (13) at (3.5, 0.75) [fill=pink] {};
+      \node (14) at (6.5, 0.75) [fill=green] {};
+      \node (15) at (3.75,1.5) [fill=pink] {};
+      \node (16) at (6.25,1.5) [fill=green] {};
+      \node (17) at (4.25,2) [fill=pink] {};
+      \node (18) at (5,2.25) [fill=pink] {};
+      \node (19) at (5.75,2) [fill=green] {};
+      \node (20) at (5,3) [fill=pink] {};  
+      \foreach \source/\dest in {20/18, 18/17, 18/19, 17/15, 15/13, 13/11, 19/16, 16/14, 14/12, 18/10, 10/8, 8/7, 7/5, 5/3, 3/1, 8/9, 9/6, 6/4, 4/2}
+        \path (\source) edge (\dest);
+    \end{tikzpicture}
+      \caption{}
+  \end{subfigure}
+  \caption{Possible color assignments at time \textit{t+1}}
+  \label{fig:clust_ass}
+\end{figure}
+
+
 
 \begin{table}[H]
   \centering
   \begin{tabular}{|c|c|c|c|c|}
     \hline
-    Assignment & Blue match & Green match & Pink match & Final cost \\
+    Assignment & Pink match & Orange match & Green match & Final cost \\
     \hline
-    Assignment & Blue match & Green match & Pink match & 3 \\
+    (a) & 0 & 4 & 6 & 10 \\
     \hline
-    Riga 2, Cell 1 & Riga 2, Cell 2 & Riga 2, Cell 3 & Riga 2, Cell 4 & 1 \\
+    (b) & 0 & 0 & 6 & 6 \\
     \hline
-    Riga 3, Cell 1 & Riga 3, Cell 2 & Riga 3, Cell 3 & Riga 3, Cell 4 & 6 \\
+    (c) & 0 & 2 & 0 & 2 \\
     \hline
-    Riga 4, Cell 1 & Riga 4, Cell 2 & Riga 4, Cell 3 & Riga 4, Cell 4 & 4 \\
+    (d) & 0 & 2 & 0 & 2 \\
     \hline
-    Riga 5, Cell 1 & Riga 5, Cell 2 & Riga 5, Cell 3 & Riga 5, Cell 4 & 2 \\
+    (e) & 4 & 4 & 4 & 12 \\
     \hline
-    Riga 6, Cell 1 & Riga 6, Cell 2 & Riga 6, Cell 3 & Riga 6, Cell 4 & 2 \\
+    (f) & 4 & 0 & 4 & 8 \\
     \hline
   \end{tabular}
-  \caption{Esempio di tabella 7x5.}
-  \label{tab:tabella7x5}
+  \caption{Matching weights for the 6 assignments}
+  \label{tab:table_clust}
 \end{table}
+ 
+Dalla tabella \ref{tab:table_clust} si può notare che l'assegnamento (e) è l'assegnamento con peso più alto.
+Inoltre, anche visivamente, si può notare che è l'assegnamento più coerente rispetto a quello dell'istante \textit{t}.
+\\
+
+Dal punto di vista del Matching Bipartito, possiamo considerare nella prima partizione i cluster di Figure \ref{fig:clust_t}, mentre nella seconda partizione possiamo considerare i clusters della Figure \ref{fig:clust_tplus1}.
+Come già detto, il peso di un arco è equivalente al numero di nodi che hanno in comune quei due clusters che vengono collegati dall'arco in questione. \\
+In rosso sono evidenziati gli archi dell'assegnamento (e).
+
 
 \begin{figure}[H]
   \centering
-  \begin{minipage}{0.5\textwidth}
-    \centering
-    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
-      \node (A) at (3,0) [fill=blue!50] {A};
-      \node (B) at (5,-0.5) [fill=blue!50] {B};
-  
-      \node (C) at (7,0) [fill=green] {C};
-      \node (D) at (3,-1) [fill=green] {D};
-      \node (E) at (5,-1.5) [fill=green] {E};
-      \node (F) at (7,-1) [fill=green] {F};
-      \node (G) at (3,-2) [fill=green] {G};
-  
-      \node (H) at (5,-2.5) [fill=pink] {H};
-      \node (I) at (7,-2) [fill=pink] {I};  
-    \end{tikzpicture}
-  \end{minipage}%
-  \begin{minipage}{0.5\textwidth}
-    \centering
-    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
-      \node (A) at (3,0) [fill=blue!50] {A};
-      \node (B) at (5,-0.5) [fill=blue!50] {B};
-      \node (C) at (7,0) [fill=green] {C};
-      
-      \node (D) at (3,-1) [fill=green] {D};
-      \node (E) at (5,-1.5) [fill=green] {E};
-
-      \node (F) at (7,-1) [fill=green] {F};
-      \node (G) at (3,-2) [fill=green] {G}; 
-      \node (H) at (5,-2.5) [fill=pink] {H};
-      \node (I) at (7,-2) [fill=pink] {I};  
-    \end{tikzpicture}
+  \begin{tikzpicture}
+    \node[circle, draw, minimum size=1cm, fill=pink] (1) at (2,-6.5) {Cluster 1};
+    \node[circle, draw, minimum size=1cm, fill=orange] (2) at (2, -10) {Cluster 2};
+    \node[circle, draw, minimum size=1cm, fill=green] (3) at (2,-13.5) {Cluster 3};
+    \node[circle, draw, minimum size=1cm] (4) at (8, -6.5) {Cluster 4};
+    \node[circle, draw, minimum size=1cm] (5) at (8,-10) {Cluster 5};
+    \node[circle, draw, minimum size=1cm] (6) at (8,-13.5) {Cluster 6};
     
-    \vspace{15pt} % Spazio verticale tra i grafici
-
-    \centering
-    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
-      \node (A) at (3,0) [fill=blue!50] {A};
-      \node (B) at (5,-0.5) [fill=blue!50] {B};
-      \node (C) at (7,0) [fill=green] {C};
-      
-      \node (D) at (3,-1) [fill=green] {D};
-      \node (E) at (5,-1.5) [fill=green] {E};
-
-      \node (F) at (7,-1) [fill=green] {F};
-      \node (G) at (3,-2) [fill=green] {G}; 
-      \node (H) at (5,-2.5) [fill=pink] {H};
-      \node (I) at (7,-2) [fill=pink] {I};  
-    \end{tikzpicture}
-
-    \vspace{15pt}
-
-    \centering
-    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
-      \node (A) at (3,0) [fill=blue!50] {A};
-      \node (B) at (5,-0.5) [fill=blue!50] {B};
-      \node (C) at (7,0) [fill=green] {C};
-      
-      \node (D) at (3,-1) [fill=green] {D};
-      \node (E) at (5,-1.5) [fill=green] {E};
-
-      \node (F) at (7,-1) [fill=green] {F};
-      \node (G) at (3,-2) [fill=green] {G}; 
-      \node (H) at (5,-2.5) [fill=pink] {H};
-      \node (I) at (7,-2) [fill=pink] {I};  
-    \end{tikzpicture}
-
-    \vspace{15pt}
-
-    \centering
-    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
-      \node (A) at (3,0) [fill=blue!50] {A};
-      \node (B) at (5,-0.5) [fill=blue!50] {B};
-      \node (C) at (7,0) [fill=green] {C};
-      
-      \node (D) at (3,-1) [fill=green] {D};
-      \node (E) at (5,-1.5) [fill=green] {E};
-
-      \node (F) at (7,-1) [fill=green] {F};
-      \node (G) at (3,-2) [fill=green] {G}; 
-      \node (H) at (5,-2.5) [fill=pink] {H};
-      \node (I) at (7,-2) [fill=pink] {I};  
-    \end{tikzpicture}
-
-    \vspace{15pt}
-
-    \centering
-    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
-      \node (A) at (3,0) [fill=blue!50] {A};
-      \node (B) at (5,-0.5) [fill=blue!50] {B};
-      \node (C) at (7,0) [fill=green] {C};
-      
-      \node (D) at (3,-1) [fill=green] {D};
-      \node (E) at (5,-1.5) [fill=green] {E};
-
-      \node (F) at (7,-1) [fill=green] {F};
-      \node (G) at (3,-2) [fill=green] {G}; 
-      \node (H) at (5,-2.5) [fill=pink] {H};
-      \node (I) at (7,-2) [fill=pink] {I};  
-    \end{tikzpicture}
-
-    \vspace{15pt}
-
-    \centering
-    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.2cm}]
-      \node (A) at (3,0) [fill=blue!50] {A};
-      \node (B) at (5,-0.5) [fill=blue!50] {B};
-      \node (C) at (7,0) [fill=green] {C};
-      
-      \node (D) at (3,-1) [fill=green] {D};
-      \node (E) at (5,-1.5) [fill=green] {E};
-
-      \node (F) at (7,-1) [fill=green] {F};
-      \node (G) at (3,-2) [fill=green] {G}; 
-      \node (H) at (5,-2.5) [fill=pink] {H};
-      \node (I) at (7,-2) [fill=pink] {I};  
-    \end{tikzpicture}
-
-  \end{minipage}
+    \foreach \source/\dest/\label/\position/\yshiftval/\xshiftval/\edgecolor in {
+      1/4/4/above/0/0/red, 1/5/0/above/25/-40/black, 1/6/0/above/60/-70/black,
+      2/4/2/below/-20/-60/black, 2/5/4/below/0/-40/red, 2/6/0/below/30/-60/black,
+      3/4/6/below/-60/-70/black, 3/5/0/below/-25/-40/black, 3/6/4/below/0/0/red}
+      \path (\source) edge[\edgecolor] node[\position, yshift=\yshiftval, xshift=\xshiftval] {\label} (\dest);
+  \end{tikzpicture}
+  \caption{Matching from instant \textit{t} to instant \textit{t+1}}
+  \label{fig:clust_match}
 \end{figure}
+
 
 
 \subsection{Brute Force Algorithm}
@@ -254,7 +393,7 @@ Let's take for example the following cost matrix and try to apply the Brute Forc
 
 Now we compute the total cost of all the \textit{n}!\ permutations: 
 
-\begin{figure}[H]
+\begin{table}[H]
     \begin{minipage}[b]{0.3\textwidth}
       \centering
       \begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
@@ -299,10 +438,10 @@ Now we compute the total cost of all the \textit{n}!\ permutations:
       \caption{Total weight: 448}
       \label{tab:perm3}
     \end{minipage}
-  \end{figure}
+  \end{table}
   
 
-\begin{figure}[H]
+\begin{table}[H]
     \begin{minipage}[b]{0.3\textwidth}
       \centering
       \begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
@@ -315,7 +454,7 @@ Now we compute the total cost of all the \textit{n}!\ permutations:
         \hline
       \end{tabular}
       \caption{Total weight: 407}
-      \label{tab:perm1}
+      \label{tab:perm4}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.3\textwidth}
@@ -330,7 +469,7 @@ Now we compute the total cost of all the \textit{n}!\ permutations:
         \hline
       \end{tabular}
       \caption{Total weight: 525}
-      \label{tab:perm2}
+      \label{tab:perm5}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.3\textwidth}
@@ -345,11 +484,11 @@ Now we compute the total cost of all the \textit{n}!\ permutations:
         \hline
       \end{tabular}
       \caption{Total weight: 431}
-      \label{tab:perm3}
+      \label{tab:perm6}
     \end{minipage}
-  \end{figure}
-  
-We find that the minimum total cost is given by the assignment in Figure 4.  
+  \end{table}
+   
+We find that the minimum total cost is given by the assignment in table \ref{tab:perm4}.  
 
 \subsection{Hungarian Algorithm}
 
