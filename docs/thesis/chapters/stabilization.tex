@@ -1,14 +1,14 @@
 \section{Temporal stabilization of clusters}
 
-Dopo la clusterizzazione dobbiamo fare un riassegnamento di colori ai clusters per stabilizzarli nel tempo.
-Come si è già detto, l'ordine con cui i clusters vengono decisi ad ogni istante è randomico e l'ordine di scelta dei clusters viene rappresentato da un colore. \\
-Quindi, dall'iniziale assegnazione di colori randomica, vogliamo passare ad un'assegnazione di colori dove, due clusters dello stesso colore, da un istante all'altro, abbiano in comune più nodi, ossia più joints, possibili. \\
-Questo perchè l'assegnazione randomica porta dei problemi a livello di visualizzazione del grafo, in quanto è possibile che da un istante all'altro, due cluster con molte joints in comune abbiano colore diverso e quindi la visualizzazione nel tempo potrebbe risultare come un continuo switch di colori facendo perdere un'idea di continuità.
-\\
+After clustering, we need to reassign colors to the clusters to stabilize them over time. \\
+As mentioned before, the order in which clusters are determined at each moment is random, and the selection order of clusters is represented by a color. Therefore, from the initial random color assignment, we aim to transition to a color assignment where two clusters of the same color share as many nodes (joints) as possible between moments.
 
-Per stabilizzare i cluster nel tempo, e quindi far si che le coppie dei vari clusters colorati da un istante all'altro mantengano il maggior numero di joint in comune, ci riconduciamo al Maximum Perfect Weight Matching. \\     
-Abbiamo implementato due algoritmi: uno di Brute Force, in cui calcoliamo i pesi totali di tutte le permutazioni degli assegnamenti possibili di colori e scegliamo l'assegnamento con il peso totale massimo, e l'Hungarian Algorithm, un metodo di ottimizzazione combinatoria che risolve in tempo polinomiale il problema dell'assegnamento. \\
-Dato che nel nostro caso il numero di cluster è solitamente piccolo, in alcuni casi risulta essere più efficiente l'algoritmo di Brute Force.
+This is because the random assignment of colors poses visualization issues for the graph. It's possible that from one moment to the next, two clusters with many shared joints might have different colors, resulting in a visualization over time that appears as a continuous switching of colors. This could lead to a loss of continuity in the visual representation.
+To stabilize clusters over time, ensuring that pairs of clusters colored from one moment to another share the highest number of common joints, we turn to the Maximum Perfect Weight Matching.
+
+We have implemented two algorithms: a Brute Force approach, where we compute the total weights of all possible permutations of color assignments and select the assignment with the maximum total weight, and the Hungarian Algorithm, a combinatorial optimization method that solves the assignment problem in polynomial time.
+
+Since in our case the number of clusters is usually small, there are instances where the Brute Force algorithm is more efficient.
 
 \subsection{Maximum Perfect Weight Matching for bipartite graphs}
 
