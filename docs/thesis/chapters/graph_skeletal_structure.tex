@@ -128,4 +128,7 @@ Conversely, dissimilar vectors will have a wide angle and a cosine similarity cl
 We iteratively calculate the similarity between all the joints connected by an edge.
 By doing this, it is possible to compare the directions of the two considered nodes, and thus evaluate if two nodes are associated with
 (nearly) the same direction.
+\\
 
+After obtaining the weights for each edge of the graph, we then have, for each instantaneous frame, a graph $G$ := ($V$, $E$, $w$), where 
+$V$ is the set of $vertices$, $E$ is the set of $edges$ and $w$ is the set of $edge weights$.
