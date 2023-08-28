@@ -1,6 +1,6 @@
 \section{Auxiliary Graph}
 
-A weighted auxiliary graph is defined for each frame, denoted as $G_{aux}$ := ($V$, $E_{aux}$, $w_{aux}$). \\
+A weighted auxiliary graph is defined for each frame, denoted as $G^{aux}$ := ($V$, $E^{aux}$, $w^{aux}$). \\
 The vertices of this auxiliary graph are the same as in the original
 graph $G$, but the edge set is comprised of a subset of edges that only connect vertices belonging to different clusters. 
 At least one of these edges in the auxiliary graph will be the edge associated with the origin of motion. \\
@@ -66,6 +66,6 @@ Considering, for example, a graph $G$ with 3 clusters (see Figure \ref{fig:graph
       \foreach \source/\dest/\label/\xshiftval in {18/19//0, 8/9//0}
         \path (\source) edge node[xshift=\xshiftval] {\label} (\dest);
     \end{tikzpicture}
-      \caption{Auxiliary graph $G_{aux}$}
+      \caption{Auxiliary graph $G^{aux}$}
       \label{fig:aux_graph}
 \end{figure}
