@@ -22,7 +22,10 @@
 \usepackage{slashbox} % Importa il pacchetto "slashbox"
 \usepackage{subcaption}
 
-
+% Per inserire pagine bianche
+% \newpage
+% \mbox{}
+% \newpage
 
 % Encodings
 \usepackage{amsmath,amssymb,gensymb,textcomp}
@@ -61,6 +64,13 @@
 \begin{document}
 
 \coverpage
+
+\newpage
+\mbox{}
+\newpage
+
+\include{chapters/acknowledgments.tex}
+\include{chapters/abstract.tex}
 
 \newpage
 \tableofcontents
