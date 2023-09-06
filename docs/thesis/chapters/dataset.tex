@@ -18,12 +18,17 @@ The details of both types of movements are provided below.
 The dataset comprises <NUMERO FINALE FRAMMENTI> segments recorded using the \textit{Qualisys Motion Capture system}.
 These segments represents various subjects performing simple movement sequences, which are captured from different angles using some cameras.
 The videos are synchronized through SMPTE timecode and each video is accompanied by corresponding motion capture data that records the positions of body parts.
-Additionally, there are annotations for each recording, describing which body parts are in motion, the sequence of their movement, and the origin of the movement.
-
 
 
 \subsubsection{Wholodance Dataset}
 \subsubsection{Montpellier - UniGe Dataset}
+
+\subsection{Dataset Validation with Cohen's Kappa}
+Each fragment of the dataset was classified by us, the thesis students, our professors, and the expert dancer Cora Gasparotti, identifying one or more connections between two joints responsible for the origin of the movement in question.
+To measure agreement between validators, we used the Cohen's Kappa $\kappa$, a statistical coefficient commonly used to assess reliability or concordance among human observers or automated systems in the categorization process.
+It is generally thought to be a more robust measure than simple percent agreement calculation, as $\kappa$ takes into account the possibility of the agreement occurring by chance.
+
+
 
 \subsection{Full Marker Set}
 
@@ -77,3 +82,5 @@ This reduction was performed by computing the $barycentre$ of joints in a cluste
     \caption{Mapping of the full marker set to the reduced marker set}
     \label{tab:labels_joints}
 \end{table}
+
+

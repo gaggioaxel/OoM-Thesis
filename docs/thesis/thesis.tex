@@ -47,6 +47,11 @@
 % For demonstration purposes, remove in production
 \usepackage{mwe}
 
+% Cambiare font del corpo del documento
+\usepackage{fontsize}
+\changefontsize{12pt}
+
+
 % Configurations
 \newcounter{memberrowno}
 \setcounter{memberrowno}{0}
@@ -73,6 +78,7 @@
 \include{chapters/abstract.tex}
 
 \newpage
+\renewcommand{\contentsname}{\Huge Table of contents}
 \tableofcontents
 \newpage
 
@@ -90,6 +96,7 @@
 \include{chapters/clusterization.tex}
 \include{chapters/stabilization.tex}
 \include{chapters/auxiliary_graph.tex}
+\include{chapters/tu.tex}
 \include{chapters/conclusions.tex}
 
 

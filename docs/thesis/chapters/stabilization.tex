@@ -380,7 +380,7 @@ Let's take for example the following cost matrix and try to apply the Brute Forc
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
       \hline
       108 & 125 & 150 \\
       \hline
@@ -396,7 +396,7 @@ Now we compute the total cost of all the \textit{n}!\ permutations:
 \begin{table}[H]
     \begin{minipage}[b]{0.3\textwidth}
       \centering
-      \begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+      \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
         \hline
         \cellcolor{yellow!25} 108 & 125 & 150 \\
         \hline
@@ -411,7 +411,7 @@ Now we compute the total cost of all the \textit{n}!\ permutations:
     \hfill
     \begin{minipage}[b]{0.3\textwidth}
       \centering
-      \begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+      \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
         \hline
         108 & \cellcolor{yellow!25} 125 & 150 \\
         \hline
@@ -426,7 +426,7 @@ Now we compute the total cost of all the \textit{n}!\ permutations:
     \hfill
     \begin{minipage}[b]{0.3\textwidth}
       \centering
-      \begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+      \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
         \hline
         108 & 125 & \cellcolor{yellow!25}150 \\
         \hline
@@ -444,7 +444,7 @@ Now we compute the total cost of all the \textit{n}!\ permutations:
 \begin{table}[H]
     \begin{minipage}[b]{0.3\textwidth}
       \centering
-      \begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+      \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
         \hline
         108 & 125 & \cellcolor{yellow!25} 150 \\
         \hline
@@ -459,7 +459,7 @@ Now we compute the total cost of all the \textit{n}!\ permutations:
     \hfill
     \begin{minipage}[b]{0.3\textwidth}
       \centering
-      \begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+      \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
         \hline
         108 & \cellcolor{yellow!25} 125 & 150 \\
         \hline
@@ -474,7 +474,7 @@ Now we compute the total cost of all the \textit{n}!\ permutations:
     \hfill
     \begin{minipage}[b]{0.3\textwidth}
       \centering
-      \begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+      \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
         \hline
         \cellcolor{yellow!25} 108 & 125 & 150 \\
         \hline
@@ -516,7 +516,7 @@ Let's take for example the same cost matrix of the Brute Force example and try t
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
   \hline
   108 & 125 & 150 \\
   \hline
@@ -531,7 +531,7 @@ Subtract the smallest value in each row from the other values in the row:
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
   \hline
   0 & 17 & 42 \\
   \hline
@@ -546,7 +546,7 @@ Now, subtract the smallest value in each column from all other values in the col
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
   \hline
   0 & 17 & 2 \\
   \hline
@@ -561,7 +561,7 @@ There are 2 lines drawn, and 2 is less than 3, so there is not yet the optimal n
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
   \hline
   \cellcolor{gray!25} 0 & 17 & 2 \\
   \hline
@@ -578,7 +578,7 @@ First, subtract from the uncovered rows:
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
   \hline
   \cellcolor{gray!25} -2 & 15 & 0 \\
   \hline
@@ -593,7 +593,7 @@ Now add to the covered columns:
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
   \hline
   \cellcolor{gray!25} 0 & 15 & 0 \\
   \hline
@@ -608,7 +608,7 @@ Now go back to step 3, drawing lines through the rows and columns that have 0 en
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
   \hline
   \cellcolor{gray!25} 0 & \cellcolor{gray!25} 15 & \cellcolor{gray!25} 0 \\
   \hline
@@ -622,23 +622,23 @@ Now go back to step 3, drawing lines through the rows and columns that have 0 en
 There are 3 lines (which is nn), so we are done. The assignment will be where the 0's are in the matrix such that only one 0 per row and column is part of the assignment.
 
 \begin{table}[H]
-\centering
-\begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
-  \hline
-  0 & 15 & \cellcolor{yellow!25} 0 \\
-  \hline
-  17 & \cellcolor{yellow!25} 0 & 0 \\
-  \hline
-  \cellcolor{yellow!25} 0 & 24 & 86 \\
-  \hline
-\end{tabular}
-\end{table}
+  \centering
+  \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+    \hline
+    0 & 15 & \cellcolor{yellow!25} 0 \\
+    \hline
+    17 & \cellcolor{yellow!25} 0 & 0 \\
+    \hline
+    \cellcolor{yellow!25} 0 & 24 & 86 \\
+    \hline
+  \end{tabular}
+  \end{table}
 
 Replace the original values:
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
   \hline
   108 & 125 & \cellcolor{yellow!25} 150 \\
   \hline
