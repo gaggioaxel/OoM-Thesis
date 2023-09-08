@@ -1,6 +1,19 @@
 \section{Transferable utility function (TU)}
+A cooperative TU game on the weighted auxiliary graph is constructed. \\
+The value \textit{c}($V'$) associated with a generic coalition $V'$ is chosen as the summation of all the weights in the weighted auxiliary graph $G^{aux}$ associated with
+the physical edges belonging to the subgraph of the auxiliary graph that is induced by $V'$.\\
+More precisely, the characteristic function is chosen as follows:
 
-$c(V') = \sum\limits_{v, \hat{v} \in V', \hat{v} \in N^{aux}(v)} w^{aux}(e^{aux}_{v, \hat{v}})
-$
 
-$\phi := \sum\limits_{V'\subseteq V\setminus \{i\}} \frac{|V'|! (|V|-|V'|-1)!}{|V|!} (c(V' \cup \{i\}) - c(V'))  $
+\begin{center}
+    \begin{equation}
+    c(V') = \sum_{v, \hat{v} \in V', \hat{v} \in N^{aux}(v)} w^{aux}(e^{aux}_{v, \hat{v}})
+    \end{equation}
+\end{center}
+    
+\begin{center}
+    \begin{equation}
+    \phi(i) := \sum_{V'\subseteq V\setminus \{i\}} \frac{|V'|! (|V|-|V'|-1)!}{|V|!} (c(V' \cup \{i\}) - c(V'))
+    \end{equation}
+\end{center}
+    
