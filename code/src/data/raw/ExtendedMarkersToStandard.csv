@@ -1,36 +1,36 @@
 Old41Markers, NewFullMarkers
-RKneeIn, RKNI
-LKneeIn, LKNI
-HeadFront, ARIEL
-HeadL, LFHD
-HeadR, RFHD
-Chest, STRN
-WaistLFront, LFWT
-WaistRFront, RFWT
-LShoulderTop, LSHO
-RShoulderTop, RSHO
-SpineThoracic2, C7
-SpineThoracic12, T10
-WaistBack, BWT
-WaistL, LBWT
-WaistR, RBWT
-LKneeOut, LKNE
-RKneeOut, RKNE
-LHeelBack, LHEL
-RHeelBack, RHEL
-LAnkleOut, LANK
-RAnkleOut, RANK
-LForefoot2, LTOE
-RForefoot2, RTOE
-LForefoot5, LMT5
-RForefoot5, RMT5
-LHand2, LPLM
-RHand2, RPLM
-LWristIn, LIWR
-RWristIn, RIWR
-LWristOut, LOWR
-RWristOut, ROWR
-LElbowIn, LIEL
-RElbowIn, RIEL
-LElbowOut, LELB
-RElbowOut, RELB
+RKneeIn,RKNI
+LKneeIn,LKNI
+HeadFront,ARIEL
+HeadL,LFHD
+HeadR,RFHD
+Chest,STRN
+WaistLFront,LFWT
+WaistRFront,RFWT
+LShoulderTop,LSHO
+RShoulderTop,RSHO
+SpineThoracic2,C7
+SpineThoracic12,T10
+WaistBack,BWT
+WaistL,LBWT
+WaistR,RBWT
+LKneeOut,LKNE
+RKneeOut,RKNE
+LHeelBack,LHEL
+RHeelBack,RHEL
+LAnkleOut,LANK
+RAnkleOut,RANK
+LForefoot2,LTOE
+RForefoot2,RTOE
+LForefoot5,LMT5
+RForefoot5,RMT5
+LHand2,LPLM
+RHand2,RPLM
+LWristIn,LIWR
+RWristIn,RIWR
+LWristOut,LOWR
+RWristOut,ROWR
+LElbowIn,LIEL
+RElbowIn,RIEL
+LElbowOut,LELB
+RElbowOut,RELB
