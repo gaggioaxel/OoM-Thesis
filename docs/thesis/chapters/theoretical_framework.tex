@@ -473,13 +473,37 @@ as it provides a powerful and efficient way to address complex challenges, make 
 and develop intelligent systems that can learn and adapt autonomously.
 
 
-\subsubsection{K-Neighbors}
-The k-nearest neighbors (KNN) algorithm is a supervised machine learning algorithm used for classification and regression tasks.
+\subsubsection{K-Nearest Neighbors}
+The KNN algorithm is a supervised machine learning algorithm used for classification and regression tasks.
 It is a simple and intuitive algorithm that makes predictions based on the similarity between a data point and its k-nearest neighbors in a training dataset.
+The \textit{k} in \textit{k}-nearest neighbors refers to the number of items that the algorithm uses to make its prediction whether its a classification problem or a regression problem.
+In Figure \ref{fig:knn} we can see a test sample represented by a green dot and we want to classify 
+it either as a blue square or a red triangle based on a KNN algorithm, the decision depends on the value of \textit{k}, which determines how many nearest neighbors we consider.\\
+When \textit{k} = 3 (solid line circle), the green dot is assigned to the category that has the majority among its three nearest neighbors. 
+In this case, if there are 2 red triangles and only 1 blue square inside the inner circle, the green dot is classified as a red triangle. \\
+When \textit{k} = 5 (dashed line circle), the green dot is assigned to the category with the majority among its five nearest neighbors. 
+If there are 3 blue squares and 2 red triangles inside the outer circle, the green dot is classified as a blue square.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{graphics/KNeighbours.png}
+    \caption{KNN algorithm with \textit{k} = 3 and \textit{k} = 5}
+    \label{fig:knn}
+\end{figure}
 
+The choice of distance metric is a critical aspect of the KNN algorithm, and while it's not typically considered a hyperparameter, it significantly influences the model's performance and outcomes. 
+The selection of a specific distance metric can have a substantial impact, especially when dealing with datasets of varying sizes and dimensions. \\
+If we consider for example two data points \textit{p}, \textit{q} in \textit{n}-dimensional space, there are various distance metrics that can be used to find the neighbors.\\
+Among the different  most common is the Euclidean distance: 
+\begin{center}
+    \begin{equation}
+        Euclidean(p,q) = \sqrt{\sum_{i=1}^{n} (p_i - q_i)^2}
+        \end{equation}
+\end{center}
 
-\subsubsection{Borderline SMOTE}
+\subsubsection{Borderline Synthetic Minority Over-sampling Technique}
 
+The B-SMOTE, is an enhancement of the Synthetic Minority Over-sampling Technique (SMOTE) used in the field of imbalanced machine learning. 
+It is a valuable technique for addressing class imbalance problems, where one class (the minority class) has significantly fewer instances than another class (the majority class).
 
 \subsubsection{Random Forest Classifier}
 
