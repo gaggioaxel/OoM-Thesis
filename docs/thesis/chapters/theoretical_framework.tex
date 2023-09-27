@@ -474,7 +474,7 @@ and develop intelligent systems that can learn and adapt autonomously.
 
 
 \subsubsection{K-Nearest Neighbors}
-The KNN algorithm is a supervised machine learning algorithm used for classification and regression tasks.
+The \textbf{KNN} algorithm is a supervised machine learning algorithm used for classification and regression tasks.
 It is a simple and intuitive algorithm that makes predictions based on the similarity between a data point and its k-nearest neighbors in a training dataset.
 The \textit{k} in \textit{k}-nearest neighbors refers to the number of items that the algorithm uses to make its prediction whether its a classification problem or a regression problem.
 In Figure \ref{fig:knn} we can see a test sample represented by a green dot and we want to classify 
@@ -501,8 +501,17 @@ Among the different  most common is the Euclidean distance:
 \end{center}
 
 \subsubsection{Borderline Synthetic Minority Over-sampling Technique}
+\textbf{Oversampling} is a technique used in the field of imbalanced machine learning to address the problem of class imbalance. 
+Class imbalance occurs when one class in a classification problem has significantly fewer instances than another class. 
+This imbalance can lead to biased models that perform poorly on the minority class (the class with fewer instances) because the model tends to be biased towards the majority class.\\
+The concept of oversampling involves increasing the number of instances in the minority class by generating synthetic or duplicate samples. 
+The goal is to balance the class distribution, making the minority class more comparable in size to the majority class. 
+A synthetic sample can be generated randomly within the feature space of the minority class or considering its underlying data distribution (ADASYN).
+This could result in a performance improvement of machine learning models by providing them with more information about the minority class.\\
 
-The B-SMOTE, is an enhancement of the Synthetic Minority Over-sampling Technique (SMOTE) used in the field of imbalanced machine learning. 
+The \textbf{SMOTE}  generates synthetic samples by interpolating between neighboring minority class instances.\\
+
+The \textbf{B-SMOTE}, is an enhancement of the SMOTE used in the field of imbalanced machine learning. 
 It is a valuable technique for addressing class imbalance problems, where one class (the minority class) has significantly fewer instances than another class (the majority class).
 
 \subsubsection{Random Forest Classifier}
