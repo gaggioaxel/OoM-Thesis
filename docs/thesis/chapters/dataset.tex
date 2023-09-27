@@ -13,7 +13,7 @@ Their expertise elevates dataset quality, providing a resource that encapsulates
 \subsection{Dataset}
 The dataset contains two categories of expressive movements, each associated with a different recording session. \\
 The details of both types of movements are provided below.
-The dataset comprises <NUMERO FINALE FRAMMENTI> segments recorded using different versions of the \textit{Qualisys Motion Capture system}.
+The dataset comprises 60 segments recorded using different versions of the \textit{Qualisys Motion Capture system}.
 These segments represents various subjects performing simple movement sequences, which are captured from different angles using some cameras.
 The videos are synchronized through SMPTE timecode and each video is accompanied by corresponding motion capture data that records the positions of body parts.
 
@@ -33,26 +33,77 @@ Importantly, these movements were performed without any accompanying music to en
 the dancers' performances were not influenced by external auditory cues.
 
 \subsubsection{Montpellier - UniGe Dataset}
+This specific subset of the dataset was captured during a collaborative project involving the University of Genova and the University of Montpellier in July 2020. 
+These recording sessions are divided into two segments: individual actions and dual actions. 
+The primary aim of these action categories is to identify the source or initiator of motion in purposeful movements.\\
+\underline{Action: Grasping}\\
+From the trials that entail individual actions we took some that involves an individual grasping a object. 
+In this scenario, participants are positioned in a way that they are facing an object situated at a distance equal to the length 
+of their shoulder and at an angle of 20 degrees in the outward direction from the front of their dominant shoulder. 
+Participants are instructed to reach for the object with their dominant hand in a natural and spontaneous manner and then place it in front of their non-dominant side.\\
+\underline{Action: Throwing}\\
+Participants are instructed to perform a two-handed throw, where in one scenario, 
+the participant throws the ball and retrieves it themselves, while in the other scenario, two participants throw the ball to each other. 
+This was done to introduce greater movement diversity.
+It is worth noting that, for the purpose of motion analysis, the receiver and the thrower are considered separately.
 
-\subsection{Dataset Validation with Cohen's Kappa}
-TODO ask Oneto
-Each fragment of the dataset was classified by us, the thesis students, our professors, and the expert dancer Cora Gasparotti, identifying one or more connections between two joints responsible for the origin of the movement in question.
-To measure agreement between validators, we used the Cohen's Kappa $\kappa$, a statistical coefficient commonly used to assess reliability or concordance among human observers or automated systems in the categorization process.
-It is generally thought to be a more robust measure than simple percent agreement calculation, as $\kappa$ takes into account the possibility of the agreement occurring by chance.
+\subsection{Validation}
 
 
-
-\subsection{Full Marker Set}
+\subsection{Original Marker Set}
+Due to a four-year gap between the recording of the two distinct subsets of the dataset, 
+some differences in marker technology have emerged. 
+In particular, the Wholodance recordings feature a full marker set consisting of 64 reflective markers. 
+In contrast, the Montpellier-Unige recordings utilize the newer Qualisys sport marker set, comprising 41 markers. 
+Nevertheless, the fundamental principles guiding the marker placement and grouping remain consistent for both datasets. 
+The following figures (Figure \ref{fig:64markers}, Figure \ref{fig:41markers}) represent the body mapping of the different markers set. 
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{graphics/full_marker_set.png}
-    \caption{Full Marker Set of 64 markers}
-    \label{fig:full_marker_set}
+    \caption{64 Markers Set Labels}
+    \label{fig:64markers}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{graphics/41Markers.png}
+    \caption{41 Markers Set Labels}
+    \label{fig:41markers}
 \end{figure}
 
 
+
 \subsection{Reduced Marker Set}
+Firstly, we standardized the marker labels following the 64-marker scheme, 
+we renamed some of the 41-marker labels to align with the full version.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+    \textbf{41 Sport Marker Set Labels} & \textbf{Corresponding labels of the 64 Marker Set} \\
+    \hline
+    RKneeIn, LKneeIn & RKNI, LKNI \\
+    HeadFront, HeadL, HeadR & ARIEL, LFHD, RFHD \\
+    Chest & STRN \\
+    WaistLFront, WaistRFront & LFWT, RFWT \\
+    LShoulderTop, RShoulderTop & LSHO, RSHO \\
+    SpineThoracic2, SpineThoracic12 & C7, T10 \\
+    WaistBack, WaistL, WaistR & BWT, LBWT, RBWT \\
+    LKneeOut, RKneeOut & LKNE, RKNE \\
+    LHeelBack, RHeelBack & LHEL, RHEL \\
+    LAnkleOut, RAnkleOut & LANK, RANK \\
+    LForefoot2, LForefoot5, RForefoot2, RForefoot5& LTOE, LMT5, RTOE, RMT5\\
+    LHand2, RHand2 & LPLM, RPLM \\
+    LWristIn, LWristOut, RWristIn, RWristOut & LIWR, LOWR, RIWR, ROWR \\
+    LElbowIn, LElbowOut, RElbowIn, RElbowOut & LIEL, LELB, RIEL, RELB \\
+    \hline
+    \end{tabular}
+    \caption{41 Markers renaming convention}
+    \label{tab:marker_mapping}
+\end{table}
+
 The reduced marker set is achieved by reducing the count of markers employed from the full marker set.
 This because a simplified skeletal framework can adeptly communicate essential insights about expressive movements.
 The reduction of multiple markers into individual joints is implemented to mitigate the possibility of marker omission.
@@ -61,16 +112,18 @@ This reduction was performed by computing the $barycentre$ of joints in a cluste
     \item Extract the $x$, $y$, $z$ $coordinates$ for each marker of the cluster.
     \item Compute for each of $x$, $y$, $z$ their average, by summing all the $x$-markers together
     (and similarly for $y$ and $z$) and then dividing by the number of markers in the cluster.
-\end{enumerate}    
+\end{enumerate} 
+
+
 
 \begin{table}[H]
     \centering
     \begin{tabular}{|c|c|}
         \hline
-        \textbf{Reduced Marker Set Labels} & \textbf{Full Marker Set Labels} \\
+        \textbf{Reduced Marker Set Labels} & \textbf{Partition of the 64 Marker Set Labels} \\
         \hline
-        right\_foot & RHEL, RMT10, RMT5 \\
-        left\_foot & LHEL, LMT10, LMT5 \\
+        right\_foot & RHEL, RMT1, RMT5, RTOE \\
+        left\_foot & LHEL, LMT1, LMT5, LTOE \\
         right\_ankle & RANK \\
         left\_ankle & LANK \\
         right\_knee & RKNE, RKNI \\
@@ -78,13 +131,13 @@ This reduction was performed by computing the $barycentre$ of joints in a cluste
         right\_hip & RFWT, RBWT \\
         hip\_centre & RFWT, LFWT, RBWT, LBWT \\
         left\_hip & LFWT, LBWT \\
-        spine & C6, T5, T10, BWT \\
-        right\_hand & RPLM, RTHMB, RMID, RPNKY\\
-        left\_hand & LPLM, LTHMB, LMID, LPNKY \\
+        spine & C6, C7, T5, T10, BWT, STRN, CLAV, FWT \\
+        right\_hand & RPLM, RTHMB, RINDX, RMID, RPNKY\\
+        left\_hand & LPLM, LTHMB, LINDX, LMID, LPNKY \\
         right\_wrist & ROWR, RIWR \\
         left\_wrist & LOWR, LIWR \\
-        right\_elbow & RELB, RIEL\\
-        left\_elbow & LELB, LIEL \\
+        right\_elbow & RELB, RIEL, RFRM\\
+        left\_elbow & LELB, LIEL, LFRM \\
         right\_shoulder & RSHO \\
         shoulder\_centre & LSHO, RSHO \\
         left\_shoulder & LSHO \\
@@ -94,5 +147,3 @@ This reduction was performed by computing the $barycentre$ of joints in a cluste
     \caption{Mapping of the full marker set to the reduced marker set}
     \label{tab:labels_joints}
 \end{table}
-
-
