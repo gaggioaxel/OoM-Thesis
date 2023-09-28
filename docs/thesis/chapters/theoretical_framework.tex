@@ -521,11 +521,57 @@ The \textbf{B-SMOTE} \cite{Han2005BorderlineSMOTEAN:2005}, is a vairant of the S
 This approach aims to concentrate on the regions of the dataset that are near the decision boundary between classes. \\
 The model internally fits two instances of KNN with different \textit{k} parameters: one instance to defines the neighborhood of samples to generate the synthetic samples.
 The other instead is used to determine if a minority sample is in “danger”. A "sample in danger" is one near to the boundary between two or more classes.
+TODO spiegare sta robba di sto esempio
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.48\linewidth}
+    \includegraphics[width=\linewidth]{graphics/BordSMOTE_no.png}
+    \caption{}
+    \label{fig:bordSMOTEnotApplied}
+  \end{subfigure}
+  \hspace{0.02\linewidth}
+  \begin{subfigure}{0.48\linewidth}
+    \includegraphics[width=\linewidth]{graphics/BordSMOTE_yes.png}
+    \caption{}
+    \label{fig:bordSMOTEnotApplied}
+  \end{subfigure}
+  \caption{Visual representation of BSMOTE algorithm applied on a dataset}
+\end{figure}
 
 \subsubsection{Random Forest Classifier}
-A \textbf{Decision Tree} is a non-parametric supervised learning algorithm, which is utilized for both classification and regression tasks. It has a hierarchical, tree structure, which consists of a internal nodes, leaf nodes and branches.
-From the root node, splitting criterias are applied on the samples creating branches and child nodes that lead to leaf nodes which represent the final classification of the tree
+A \textbf{Decision Tree} is a non-parametric supervised learning algorithm, which is utilized for both classification and regression tasks. 
+It has a hierarchical, tree structure, which consists of a internal nodes, leaf nodes and branches.
+From the root node, splitting criterias are applied on the samples creating branches and child nodes that lead to leaf nodes which represent the final classification of the tree.
+The most common impurity measure used to quantify the impurity of a dataset is the Gini criterion:
+For a set of items with \textit{J} classes and relative frequencies $p_{i}$, $i \in {1,2,...,J}$ 
+the probability of choosing an item with label $i$ is $p_{i}$, and the probability of miscategorizing that item is:
+\begin{equation} 
+  \sum_{k \ne i} p_{k} = 1 - p_{i} 
+\end{equation}
+The Gini impurity is computed by summing pairwise products of these probabilities for each class label:\\
 
+\begin{center}
+  \begin{equation}
+    Gini(p) = 1 - \sum_{i=1}^{J} (p_i^2)
+  \end{equation}
+\end{center}
+For example training a Decision Tree on a simple dataset (Figure \ref{fig:exampleDatasetDT}) results in a structure that TODO
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.52\linewidth}
+    \includegraphics[width=\linewidth]{graphics/DatasetDecTree.png}
+    \caption{}
+    \label{fig:exampleDatasetDT}
+  \end{subfigure}
+  \hspace{0.03\linewidth}
+  \begin{subfigure}{0.43\linewidth}
+    \includegraphics[width=\linewidth]{graphics/DecTree.png}
+    \caption{}
+    \label{fig:knn5}
+  \end{subfigure}
+  \caption{A simple dataset and the Decision Tree trained on it}
+\end{figure}
 
 \subsubsection{Cross Validation}
 Leave 1 out
