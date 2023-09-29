@@ -583,19 +583,31 @@ For example training a Decision Tree on a simple dataset (Figure \ref{fig:exampl
 
 \begin{figure}[H]
   \centering
-  \begin{subfigure}{0.52\linewidth}
-    \includegraphics[width=\linewidth]{graphics/DatasetDecTree.png}
-    \caption{}
-    \label{fig:exampleDatasetDT}
-  \end{subfigure}
-  \hspace{0.03\linewidth}
-  \begin{subfigure}{0.43\linewidth}
-    \includegraphics[width=\linewidth]{graphics/DecTree.png}
-    \caption{}
-    \label{fig:knn5}
-  \end{subfigure}
-  \caption{A simple dataset and the Decision Tree trained on it}
+  \includegraphics[width=0.7\linewidth]{graphics/DecTree.png}
+  \label{fig:knn5}
+  \caption{Decision Tree applied on the dataset of Table \ref{tab:table_random_forest}}
 \end{figure}
+
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|>{\centering\arraybackslash}p{3.2cm}|>{\centering\arraybackslash}p{3.2cm}|>{\centering\arraybackslash}p{3.2cm}|}
+  \hline
+  \textbf{Income} & \textbf{Loan\_Amount} & \textbf{Loan\_Approved} \\
+  \hline
+  2000 & 300000 & No \\
+  3000 & 300000 & Yes \\
+  4000 & 400000 & No \\
+  5000 & 400000 & No \\
+  10000 & 400000 & Yes \\
+  15000 & 400000 & Yes \\
+  \hline
+  \end{tabular}
+  \caption{Dataset of the Decision Tree}
+  \label{tab:table_random_forest}
+\end{table}
+
+
 
 \subsubsection{Cross Validation}
 Leave 1 out
