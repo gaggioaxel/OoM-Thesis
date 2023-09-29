@@ -661,9 +661,29 @@ For example the Figure \ref{fig:rf} is shown a RF classifier made of 3 DTs has b
   \caption{Path taken by the first sample through the three DTs of a RF classifier}
   \label{fig:rf}
 \end{figure}
-\subsubsection{Cross Validation}
 
-Leave 1 out
+
+\subsubsection{Cross Validation}
+\textbf{Cross Validation} is a technique used to estimate the effectiveness of a machine learning model based on a data sample.
+It involves dividing the dataset into multiple training and testing subsets called \textit{folds} and then training and evaluating the model on each fold.
+The process of training and testing is typically repeated multiple times and the results from each iteration are often averaged to provide an overall estimate of the model's performance.
+The most common approach in basic cross-validation is to use a 80-20 or 70-30 split between the training and test sets.
+This helps ensure that the model is not only learning from the data but also being tested on data it has not seen during training.
+\\
+
+\textbf{Leave-One-Out Cross-Validation} (LOOCV) is a specific type of cross validation where the number of folds \textit{k} equals the number of samples in the dataset.\\
+The model is trained \textit{k} times, with \textit{k} equal to the total number of samples. \\
+At each \textit{k}-iteration, a different sample is selected as the test set, while all the other samples are used for training. \\
+LOOCV provides a very accurate estimate of the model's performance because it uses all available data for training and validation.
+However, it can be computationally expensive, especially on large datasets, as it requires a significant number of separate model trainings. \\
+In Figure \ref{fig:LOOCV} we can see how it works.
+
+\begin{figure}[H]
+  \centering  
+    \includegraphics[width=\linewidth]{graphics/LOOCV.png}
+    \caption{LOOCV algorithm example on \textit{k} folds}
+    \label{fig:LOOCV}
+\end{figure}
 
 \subsubsection{Evaluation Metrics}
 Confusion matrix
