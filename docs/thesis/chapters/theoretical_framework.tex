@@ -579,8 +579,19 @@ The Gini impurity is computed by summing pairwise products of these probabilitie
     Gini(p) = 1 - \sum_{i=1}^{J} (p_i^2)
   \end{equation}
 \end{center}
-For example training a Decision Tree on a simple dataset (Figure \ref{fig:exampleDatasetDT}) results in a structure that TODO
 
+In the example shown in Figure \ref{}, the objective is to determine whether to grant a loan based on two pieces of information: 
+the applicant's monthly income and the requested loan amount. The second figure illustrates the decision tree that has been trained on this dataset.
+The underlying principle of the random tree is that at every non-terminal node, if there exist samples that need further separation, the following algorithm is applied: 
+\begin{enumerate}
+  \item It starts by calculating the impurity of the current node before making any splits. This initial impurity serves as a baseline for evaluating feature splits.
+  \item For each feature in the dataset, calculate a measure of impurity or information gain for potential splits. This typically involves examining the feature values and considering different threshold values.
+  \item Calculates the reduction in impurity (or information gain) achieved by the potential split. This is done by comparing the impurity of the current node with the impurity of the child nodes created by the split.
+  \item Choose the feature that results in the highest information gain. This feature becomes the one on which to apply the threshold for the split.
+  \item It applies the threshold that separates the data into two or more subsets.
+  \item Continue the process recursively for each child node created by the split. This means repeating steps 1 to 5 for each child node until a stopping criterion is met (e.g., a maximum tree depth is reached).
+\end{enumerate}
+The goal is to create child nodes that are as homogeneous as possible with respect to the target variable, thereby improving the predictive accuracy of the tree.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.7\linewidth]{graphics/DecTree.png}
