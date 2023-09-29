@@ -470,13 +470,23 @@ The Prisoner's Dilemma has been extensively studied in psychology, economics, an
 Machine Learning deals with the ability of a system to improve its performance through experience, without being explicitly programmed.
 It also serves as the foundation for numerous everyday applications and concepts, 
 as it provides a powerful and efficient way to address complex challenges, make data-driven decisions, 
-and develop intelligent systems that can learn and adapt autonomously.
+and develop intelligent systems that can learn and adapt autonomously.\\
+
+Diving deeper into this concept, one critical aspect is the role of hyperparameters. 
+Hyperparameters are settings or configurations that guide the learning process of machine learning algorithms. 
+They act as the levers that fine-tune the behavior of these algorithms, influencing their performance, accuracy, and generalization capabilities.\\
+Hyperparameters encompass a wide range of choices, such as the learning rate in gradient descent, the depth of a decision tree, the number of hidden layers in a neural network, or the number of clusters in a k-means clustering algorithm. 
+Selecting the right hyperparameters can be a challenging and often iterative task, as they significantly impact the model's ability to capture underlying patterns in data.\\
+The process of hyperparameter tuning involves experimenting with different combinations of values, assessing the model's performance using techniques like cross-validation, and iteratively adjusting the hyperparameters to optimize the model's accuracy and generalization. 
+This fine-tuning is crucial to ensure that the machine learning model not only fits the training data well but also performs effectively on unseen data.
+Moreover, the choice of hyperparameters is problem-dependent, and there's no one-size-fits-all solution. 
+It requires a deep understanding of the algorithm, the dataset, and the specific problem at hand.
 
 \subsubsection{Classifier}
-A mathematical classifier is a model that takes an input dataset and assigns each data point to a class or category. 
+A mathematical \textbf{Classifier} is a model that takes an input dataset and assigns each data point to a class or category. 
 The mathematical formulation of a classifier can vary depending on the algorithm used. 
 Suppose we have a training dataset represented as pairs (\textit{$\overline{x}$}, \textit{y}), where \textit{$\overline{x}$} is a vector of data features, and \textit{y} is the associated class label.
-The \textit{y} is a categorical variable that categorizes between two or more classes ('dog', 'cat', 'bird'), while in a regression problem it is a continuous variable.
+The \textit{y} is a categorical (can take a fixed, number of possible values) variable that categorizes between two or more classes ('dog', 'cat', 'bird'), while in a regression problem it is a continuous variable.
 Our goal is to find a function \textit{f}(\textit{$\overline{x}$}) that maps the feature vectors \textit{$\overline{x}$} to class labels \textit{y}. 
 
 
@@ -564,7 +574,7 @@ However The BSMOTE algorithm, like any other method, has its limitations and dra
 So in general, even if it aims to improve the classification of the minority class, there is no guarantee that it will always lead to better results.
 
 \subsubsection{Random Forest Classifier}
-A \textbf{Decision Tree} is a non-parametric supervised learning algorithm, which is utilized for both classification and regression tasks. 
+A \textbf{Decision Tree} (DT) is a non-parametric supervised learning algorithm, which is utilized for both classification and regression tasks. 
 It has a hierarchical, tree structure, which consists of a internal nodes, leaf nodes and branches.
 From the root node, splitting criterias are applied on the samples creating branches and child nodes that lead to leaf nodes which represent the final classification of the tree.
 The most common impurity measure used to quantify the impurity of a dataset is the Gini criterion:
@@ -580,9 +590,9 @@ The Gini impurity is computed by summing pairwise products of these probabilitie
   \end{equation}
 \end{center}
 
-In the example shown in Figure \ref{}, the objective is to determine whether to grant a loan based on two pieces of information: 
-the applicant's monthly income and the requested loan amount. The second figure illustrates the decision tree that has been trained on this dataset.
-The underlying principle of the random tree is that at every non-terminal node, if there exist samples that need further separation, the following algorithm is applied: 
+In the example shown in Table \ref{tab:tableDecisionTreeDataset}, the objective is to determine whether to grant a loan based on two pieces of information: 
+the applicant's monthly income and the requested loan amount. The second figure illustrates the DT that has been trained on this dataset.
+The underlying principle of the DT is that at every non-terminal node, if there exist samples that need further separation, the following algorithm is applied: 
 \begin{enumerate}
   \item It starts by calculating the impurity of the current node before making any splits. This initial impurity serves as a baseline for evaluating feature splits.
   \item For each feature in the dataset, calculate a measure of impurity or information gain for potential splits. This typically involves examining the feature values and considering different threshold values.
@@ -592,35 +602,67 @@ The underlying principle of the random tree is that at every non-terminal node, 
   \item Continue the process recursively for each child node created by the split. This means repeating steps 1 to 5 for each child node until a stopping criterion is met (e.g., a maximum tree depth is reached).
 \end{enumerate}
 The goal is to create child nodes that are as homogeneous as possible with respect to the target variable, thereby improving the predictive accuracy of the tree.
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.7\linewidth]{graphics/DecTree.png}
-  \label{fig:knn5}
-  \caption{Decision Tree applied on the dataset of Table \ref{tab:table_random_forest}}
-\end{figure}
-
-
 \begin{table}[H]
   \centering
   \begin{tabular}{|>{\centering\arraybackslash}p{3.2cm}|>{\centering\arraybackslash}p{3.2cm}|>{\centering\arraybackslash}p{3.2cm}|}
   \hline
   \textbf{Income} & \textbf{Loan\_Amount} & \textbf{Loan\_Approved} \\
   \hline
-  2000 & 300000 & No \\
-  3000 & 300000 & Yes \\
-  4000 & 400000 & No \\
-  5000 & 400000 & No \\
-  10000 & 400000 & Yes \\
-  15000 & 400000 & Yes \\
+  2000 & 300000 & Not Approved \\
+  3000 & 300000 & Approved \\
+  4000 & 400000 & Not Approved \\
+  5000 & 400000 & Not Approved \\
+  10000 & 400000 & Approved \\
+  15000 & 400000 & Approved \\
   \hline
   \end{tabular}
-  \caption{Dataset of the Decision Tree}
-  \label{tab:table_random_forest}
+  \caption{Dataset of the DT}
+  \label{tab:tableDecisionTreeDataset}
 \end{table}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\linewidth]{graphics/DecTree.png}
+  \label{fig:knn5}
+  \caption{DT applied on the dataset of Table \ref{tab:tableDecisionTreeDataset}}
+\end{figure}
+Note that due to the absence of constraints on hyperparameters like tree depth or the minimum number of features required to split nodes, 
+it becomes evident that each sample in the dataset follows a distinct path within this tree. 
+This situation results in a phenomenon known as overfitting, where the model essentially molds itself too closely to the training data.\\
 
+\textbf{Random Forest} (RF) is an ensemble learning method that builds multiple DTs during training and combines their predictions to make more accurate and robust classifications or regressions.
+A RF is typically constructed in this way:
+\begin{enumerate}
+  \item \textbf{Bootstrapped Data:} A random subset of the training data (with replacement) is used to train each DT. This results in each tree being trained on a slightly different dataset.
+  \item \textbf{Random Feature Selection:} At each node of each DT, only a random subset of the available features is considered for splitting. This helps introduce diversity among the trees and reduces the risk of overfitting.
+  \item \textbf{Independent Training:} Each DT is trained independently. There is no communication or shared information between the trees during training.
+  \item \textbf{Voting or Averaging:} For classification tasks, the RF combines the individual tree predictions by applying a Majority Voting (each tree "votes" for a class and the final prediction reflects the class that receives the most votes overall)
+\end{enumerate}
+The key idea behind the RF method is that by aggregating the predictions of multiple DTs, the ensemble can reduce overfitting, improve generalization, and provide more robust and accurate results.
+For example the Figure \ref{fig:rf} is shown a RF classifier made of 3 DTs has been created applying the bootstrap method on the dataset and correctly classifies the first sample of the dataset in Table \ref{tab:tableDecisionTreeDataset}.
 
-
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.45\linewidth}
+    \includegraphics[width=\linewidth]{graphics/loan_RF_1.png}
+    \caption{}
+    \label{fig:rfTree0}
+  \end{subfigure}
+  \hspace{0.06\linewidth}
+  \begin{subfigure}{0.45\linewidth}
+    \includegraphics[width=\linewidth]{graphics/loan_RF_2.png}
+    \caption{}
+    \label{fig:rfTree1}
+  \end{subfigure}
+  \begin{subfigure}{0.39\linewidth}
+    \includegraphics[width=\linewidth]{graphics/loan_RF_0.png}
+    \caption{}
+    \label{fig:rfTree2}
+  \end{subfigure}
+  \caption{Path taken by the first sample through the three DTs of a RF classifier}
+  \label{fig:rf}
+\end{figure}
 \subsubsection{Cross Validation}
+
 Leave 1 out
 
 \subsubsection{Evaluation Metrics}
