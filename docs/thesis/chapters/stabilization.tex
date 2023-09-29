@@ -4,49 +4,46 @@ After clustering, we need to reassign colors to the clusters to stabilize them o
 As mentioned before, the order in which clusters are determined at each moment is random, and the selection order of clusters is represented by a color. Therefore, from the initial random color assignment, we aim to transition to a color assignment where two clusters of the same color share as many nodes (joints) as possible between moments.
 
 This is because the random assignment of colors poses visualization issues for the graph. It's possible that from one moment to the next, two clusters with many shared joints might have different colors, resulting in a visualization over time that appears as a continuous switching of colors. This could lead to a loss of continuity in the visual representation.
-To stabilize clusters over time, ensuring that pairs of clusters colored from one moment to another share the highest number of common joints, we turn to the Maximum Perfect Weight Matching.
+To stabilize clusters over time, ensuring that pairs of clusters colored from one moment to another share the highest number of common joints, we turn to the MPWM.
 
 We have implemented two algorithms: a Brute Force approach, where we compute the total weights of all possible permutations of color assignments and select the assignment with the maximum total weight, and the Hungarian Algorithm, a combinatorial optimization method that solves the assignment problem in polynomial time.
 
 Since in our case the number of clusters is usually small, there are instances where the Brute Force algorithm is more efficient.
 
 \subsection{Maximum Perfect Weight Matching for bipartite graphs}
-
- Il Maximum Perfect Weight Matching è un problema di ottimizzazione riguardante i grafi. \\
- I grafi in questione sono bipartiti, ossia i vertici possono essere suddivisi in due insiemi distinti in
-modo tale che tutti gli archi del grafo connettano vertici di insiemi diversi, ma non ci siano archi che connettano vertici all’interno dello stesso insieme.
-Inoltre, questi grafi sono non diretti, ossia la relazione tra due nodi è bidirezionale, in altre parole, l'arco che collega il nodo A al nodo B implica automaticamente l'esistenza dell'arco che collega il nodo B al nodo A. \\
-Nel problema del Maximum Perfect Weight Matching i vertici rappresentano gli elementi da accoppiare e gli archi rappresentano le possibili connessioni tra questi elementi. Ogni arco ha associato un peso che rappresenta il valore o l'importanza dell'accoppiamento tra i vertici connessi. \\
- L'obiettivo è trovare un accoppiamento perfetto, ovvero un insieme di archi in cui ogni nodo è connesso esattamente a un altro nodo, senza sovrapposizioni o nodi isolati, massimizzando il peso totale degli archi nell'accoppiamento.
- Il peso totale è la somma dei pesi degli archi inclusi nell'accoppiamento. \\
- I pesi degli archi vengono raccolti in una matrice che prende il nome di matrice di utilità. \\
- La matrice di utilità sarà una matrice quadrata, dato che il numero di nodi facenti parte dei due insiemi distinti è lo stesso.
-Le righe potrebbero rappresentare i nodi facenti parte del primo insieme, mentre le colonne potrebbero rappresentare i nodi facenti parte del secondo insieme, oppure viceversa.
- L'elemento (\textit{i}, \textit{j}) della matrice rappresenta il peso dell'arco che collega il vertice \textit{i} al vertice \textit{j}.
- 
+The Maximum Perfect Weight Matching is an optimization problem concerning graphs. \\
+The graphs in question are bipartite, meaning the vertices can be divided into two distinct sets in such a way that all edges of the graph connect vertices from different sets, with no edges connecting vertices within the same set.
+Additionally, these graphs are undirected, meaning the relationship between two nodes is bidirectional, in other words, the edge connecting node A to node B automatically implies the existence of the edge connecting node B to node A. \\
+In the MPWM problem, the vertices represent elements to be paired, and the edges represent possible connections between these elements. Each edge is associated with a weight that represents the value or importance of the pairing between the connected vertices. \\
+The goal is to find a perfect matching, which is a set of edges in which every node is connected to exactly one other node, with no overlaps or isolated nodes, while maximizing the total weight of the edges in the matching.
+The total weight is the sum of the weights of the edges included in the matching. \\
+The weights of the edges are collected in a matrix called a \textit{utility matrix}.\\
+The utility matrix will be a square matrix because the number of nodes in the two distinct sets is the same.
+The rows could represent the nodes in the first set, while the columns could represent the nodes in the second set, or vice versa.
+The element (\textit{i}, \textit{j}) of the matrix represents the weight of the edge connecting vertex \textit{i} to vertex \textit{j}. 
 
 
 \subsubsection{Temporal stabilization}
-Nel nostro caso, anzichè avere nodi collegati da archi, avremo una situazione leggermente diversa. \\   
-Al posto dei nodi introdotti precedentemente, avremo dei clusters, ossia degli insiemi di nodi, che per noi rappresentano le joints dello scheletro, collegati fra loro da archi.
+In our case, instead of having nodes connected by edges, we will have a slightly different situation. \\   
+Instead of the previously introduced nodes, we will have clusters, which are sets of nodes representing the joints of the skeleton, connected to each other by edges.
 \\  
-
-Consideriamo i clusters all'istante \textit{t} e i clusters all'istante \textit{t+1} come due insiemi distinti, perciò non esisteranno archi che collegano clusters facenti parte dello stesso insieme. \\
-Ogni cluster di un insieme deve essere collegato tramite un arco ad uno ed un solo cluster dell'altro insieme, con l'obbiettivo di massimizzare il peso totale degli archi.
-Il peso di un arco è pari al numero di nodi che hanno in comune i due clusters che l'arco in questione sta collegando. \\
-Come già detto, a questo punto della pipeline, conosciamo già ad ogni istante le joints che fanno parte dei vari clusters e i colori dei vari clusters, ma vogliamo fare un riassegnamento di colori per stabilizzare la visualizzazione nel tempo.
-La clusterizzazione precedente raggruppa le varie joints in clusters e gli assegna un colore random, mentre in questa fase della pipeline ottimizziamo l'assegnazione dei colori. \\
-Partiremo perciò analizzando i colori dei clusters all'istante iniziale e sceglieremo l'assegnamento migliore di colori per l'istante successivo.
-Ripeteremo questo procedimento iterativamente fino all'ultimo istante.
+Consider the clusters at time \textit{t} and the clusters at time \textit{t+1} as two distinct sets, so there will be no edges connecting clusters that belong to the same set.\\
+Each cluster in one set must be connected by an edge to exactly one cluster in the other set, with the goal of maximizing the total weight of the edges.
+The weight of an edge is equal to the number of nodes that the two clusters it is connecting have in common.\\
+As previously mentioned, at this stage of the pipeline, we already have information about the joints belonging to various clusters and the colors of these clusters. However, we want to reassign colors to stabilize the visualization over time.
+The previous clustering groups the joints into clusters and assigns them random colors, while in this phase of the pipeline, we optimize the color assignment.\\
+We will start by analyzing the colors of the clusters at the initial time and choose the best color assignment for the next time frame.
+We will repeat this process iteratively until the final time frame.
 
 
 \subsubsection{A real application}
-Consideriamo un caso reale per vedere in termini di visualizzazione come funziona il Maximum Perfect Weight Matching. \\
-Supponiamo di avere all'istante \textit{t} 20 nodi che rappresentano le joints e 3 clusters labellati di colori diversi, come si può vedere in Figure \ref{fig:clust_t}. \\
-All'istante \textit{t+1} ci sono gli stessi 20 nodi precedenti ma 3 clusters labellati differenti (vedi Figure \ref{fig:clust_tplus1}).  \\
-Ovviamente questo assegnamento, ottenuto dal clustering, non si può considerare l'assegnamento ottimale, in quanto dobbiamo ancora valutare i \textit{3!} possibili assegnamenti di colore. \\
-Conosciamo il colore dei clusters all'istante  \textit{t} e vogliamo assegnare i colori ai clusters all'istante \textit{t+1}.\\
-Nella Figure \ref{fig:clust_ass} si possono vedere visivamente tutte i possibili assegnamenti di colore, mentre nella tabella \ref{tab:table_clust} sono raccolti tutti i valori dei nodi comuni per colore e il peso totale del matching.
+Let's consider a real-world scenario to understand how MPWM works in terms of visualization. \\
+Suppose we have 20 nodes representing joints at time \textit{t} and 3 clusters labeled with different colors, as shown in Figure \ref{fig:clust_t}. \\
+At time \textit{t+1}, there are the same 20 nodes as before but with 3 clusters labeled differently (see Figure \ref{fig:clust_tplus1}).  \\
+Certainly, this clustering-based assignment cannot be regarded as the optimal assignment, as we still need to assess the \textit{3!} possible color assignments. \\
+We know the colors of the clusters at time \textit{t}, and we want to assign colors to the clusters at time \textit{t+1}. \\
+In Figure \ref{fig:clust_ass}, you can visually see all the possible color assignments, while in Table \ref{tab:table_clust}, all the values of common nodes for each color and the total weight of the matching are gathered.
+
 
 \begin{figure}[H]
   \centering
@@ -301,7 +298,7 @@ Nella Figure \ref{fig:clust_ass} si possono vedere visivamente tutte i possibili
   \centering
   \begin{tabular}{|c|c|c|c|c|}
     \hline
-    Assignment & Pink match & Orange match & Green match & Final cost \\
+   \textbf{Assignment} & \textbf{Pink match} & \textbf{Orange match} & \textbf{Green match} & \textbf{Final cost} \\
     \hline
     (a) & 0 & 4 & 6 & 10 \\
     \hline
@@ -320,13 +317,13 @@ Nella Figure \ref{fig:clust_ass} si possono vedere visivamente tutte i possibili
   \label{tab:table_clust}
 \end{table}
  
-Dalla tabella \ref{tab:table_clust} si può notare che l'assegnamento (e) è l'assegnamento con peso più alto.
-Inoltre, anche visivamente, si può notare che è l'assegnamento più coerente rispetto a quello dell'istante \textit{t}.
+From Table \ref{tab:table_clust}, it can be observed that assignment (e) has the highest weight.
+Additionally, even visually, it can be noticed that it is the most consistent assignment compared to the one at time \textit{t}.
 \\
 
-Dal punto di vista del Matching Bipartito, possiamo considerare nella prima partizione i cluster di Figure \ref{fig:clust_t}, mentre nella seconda partizione possiamo considerare i clusters della Figure \ref{fig:clust_tplus1}.
-Come già detto, il peso di un arco è equivalente al numero di nodi che hanno in comune quei due clusters che vengono collegati dall'arco in questione. \\
-In rosso sono evidenziati gli archi dell'assegnamento (e).
+From the perspective of Bipartite Matching, we can consider the clusters from Figure \ref{fig:clust_t} in the first partition, while in the second partition, we can consider the clusters from Figure \ref{fig:clust_tplus1}.
+As mentioned earlier, the weight of an edge is equivalent to the number of nodes that the two clusters being connected by that edge have in common. \\
+The edges of assignment (e) are highlighted in red.
 
 
 \begin{figure}[H]
@@ -341,7 +338,7 @@ In rosso sono evidenziati gli archi dell'assegnamento (e).
     
     \foreach \source/\dest/\label/\position/\yshiftval/\xshiftval/\edgecolor in {
       1/4/4/above/0/0/red, 1/5/0/above/25/-40/black, 1/6/0/above/60/-70/black,
-      2/4/2/below/-20/-60/black, 2/5/4/below/0/-40/red, 2/6/0/below/30/-60/black,
+      2/4/2/below/-15/-60/black, 2/5/4/below/0/-40/red, 2/6/0/below/30/-60/black,
       3/4/6/below/-60/-70/black, 3/5/0/below/-25/-40/black, 3/6/4/below/0/0/red}
       \path (\source) edge[\edgecolor] node[\position, yshift=\yshiftval, xshift=\xshiftval] {\label} (\dest);
   \end{tikzpicture}
@@ -352,16 +349,16 @@ In rosso sono evidenziati gli archi dell'assegnamento (e).
 
 
 \subsection{Brute Force Algorithm}
-L'algoritmo di Brute Force può essere una possibile strada per risolvere il problema del MWPM per grafi bipartiti.
-Il Brute Force ha una complessità esponenziale, in particolare, la complessità temporale dell'algoritmo cresce in modo esponenziale rispetto al numero di vertici nel grafo.
-Questo perché l'algoritmo di Brute Force esamina tutte le possibili combinazioni di abbinamenti perfetti all'interno del grafo bipartito per trovare quello con il peso massimo. \\
-Se il grafo ha \textit{n} vertici sia nella prima partizione che nella seconda partizione, ci sono \textit{n}!\ abbinamenti possibili.
-Ogni abbinamento richiede \textit{O}(\textit{n}) tempo per essere calcolato, poiché si deve verificare che sia perfetto e quindi calcolare il suo peso totale.
-Quindi, la complessità complessiva dell'algoritmo è dell'ordine di \textit{O}(\textit{n}!$\cdot$\textit{n}). \\
-Dato che la complessità cresce rapidamente all'aumentare di \textit{n}, diventa rapidamente inattuabile per grafi di grandi dimensioni, ma per il nostro caso questo non è un problema.
+The Brute Force algorithm can be a possible approach to solve the MPWM problem for bipartite graphs.
+However, it's important to note that the Brute Force algorithm has exponential time complexity, specifically, its time complexity grows exponentially with the number of vertices in the graph.
+This is because the Brute Force algorithm examines all possible combinations of perfect matchings within the bipartite graph to find the one with the maximum weight.\\
+If the graph has \textit{n} vertices in both the first and second partitions, there are \textit{n}!\ possible matchings.
+Each matching requires \textit{O}(\textit{n}) time to be computed because you need to check that it is a perfect matching and calculate its total weight.
+Therefore, the overall complexity of the algorithm is on the order of \textit{O}(\textit{n}!$\cdot$\textit{n}). \\
+Since the complexity grows rapidly as \textit{n} increases, it quickly becomes impractical for large-sized graphs. However, for our case, this is not a problem.
 
-A maximum-weight matching problem using an utility matrix can be transformed into a minimum-weight matching problem.
-This can be achieved by introducing an auxiliary matrix, referred to as the "cost matrix."
+A MPWM problem using an utility matrix can be transformed into a minimum-weight matching problem.
+This can be achieved by introducing an auxiliary matrix, referred to as the \textit{cost matrix}.
 The cost matrix is essentially a duplicate of the utility matrix, but with all its elements negated.
 
 \subsubsection{Brute Force Algorithm summarized}
