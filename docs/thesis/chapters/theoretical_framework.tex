@@ -114,20 +114,20 @@ An example of this is given in Figure \ref{fig:matrix_representations}.
 \subsubsection{Bipartite graphs}
 If the vertex set of a graph \textit{G} can be split into two disjoint sets \textit{A} and \textit{B} so that each
 edge of \textit{G} joins a vertex of \textit{A} and a vertex of \textit{b}, then \textit{G} is a \textbf{bipartite graph}. \\
-Alternatively, a bipartite graph is one whose vertices can be coloured black and white in such a way that each edge joins a black vertex (in \textit{A}) and a white vertex (in \textit{B}). \\
+Alternatively, a bipartite graph is one whose vertices can be coloured red and blue in such a way that each edge joins a red vertex (in \textit{A}) and a blue vertex (in \textit{B}). \\
 Figure \ref{fig:bipartite} is an example of bipartite graph.
 
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.7cm}]
         % Livello superiore
-        \node (A) at (3,0) [fill=black!50] {a};
-        \node (B) at (3,-3) [fill=black!50] {b};
+        \node (A) at (3,0) [fill=red!60] {a};
+        \node (B) at (3,-3) [fill=red!60] {b};
         
         % Livello inferiore
-        \node (C) at (5,0) [fill=white] {c};
-        \node (D) at (5,-1.5) [fill=white] {d};
-        \node (E) at (5,-3) [fill=white] {e};
+        \node (C) at (5,0) [fill=blue!60] {c};
+        \node (D) at (5,-1.5) [fill=blue!60] {d};
+        \node (E) at (5,-3) [fill=blue!60] {e};
         
         % Collegamenti
         \draw (A) -- (C);
@@ -153,13 +153,13 @@ If there is the same number of vertices in both \textit{A} and \textit{B}, every
         \centering
         \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.7cm}]
             % Livello superiore
-            \node (A) at (3,0) [fill=black!50] {a};
-            \node (B) at (3,-3) [fill=black!50] {b};
+            \node (A) at (3,0) [fill=red!60] {a};
+            \node (B) at (3,-3) [fill=red!60] {b};
 
             % Livello inferiore
-            \node (C) at (5,0) [fill=white] {c};
-            \node (D) at (5,-1.5) [fill=white] {d};
-            \node (E) at (5,-3) [fill=white] {e};
+            \node (C) at (5,0) [fill=blue!60] {c};
+            \node (D) at (5,-1.5) [fill=blue!60] {d};
+            \node (E) at (5,-3) [fill=blue!60] {e};
 
             % Collegamenti
             \draw (A) -- (C);
@@ -173,14 +173,14 @@ If there is the same number of vertices in both \textit{A} and \textit{B}, every
         \centering
         \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.7cm}]
             % Livello superiore
-            \node (A) at (3,0) [fill=black!50] {a};
-            \node (B) at (3,-1.5) [fill=black!50] {b};
-            \node (C) at (3,-3) [fill=black!50] {c};
+            \node (A) at (3,0) [fill=red!60] {a};
+            \node (B) at (3,-1.5) [fill=red!60] {b};
+            \node (C) at (3,-3) [fill=red!60] {c};
 
             % Livello inferiore
-            \node (D) at (5,0) [fill=white] {d};
-            \node (E) at (5,-1.5) [fill=white] {e};
-            \node (F) at (5,-3) [fill=white] {f};
+            \node (D) at (5,0) [fill=blue!60] {d};
+            \node (E) at (5,-1.5) [fill=blue!60] {e};
+            \node (F) at (5,-3) [fill=blue!60] {f};
 
             % Collegamenti
             \draw (A) -- (E);
@@ -667,24 +667,32 @@ For example the Figure \ref{fig:rf} is shown a RF classifier made of 3 DTs has b
 \textbf{Cross Validation} is a technique used to estimate the effectiveness of a machine learning model based on a data sample.
 It involves dividing the dataset into multiple training and testing subsets called \textit{folds} and then training and evaluating the model on each fold.
 The process of training and testing is typically repeated multiple times and the results from each iteration are often averaged to provide an overall estimate of the model's performance.
-The most common approach in basic cross-validation is to use a 80-20 or 70-30 split between the training and test sets.
-This helps ensure that the model is not only learning from the data but also being tested on data it has not seen during training.
+The most common approach in basic cross-validation is to use a 80-20 or 70-30 split between the training and test sets.\\
+When we partition our dataset into folds for techniques like cross-validation, it's crucial to ensure that each fold accurately represents the diversity of the entire dataset. 
+This entails maintaining the same proportion of different classes or categories within each fold.\\ 
+While random splitting is often sufficient, there are instances, particularly in intricate datasets, where we must deliberately enforce the correct distribution of classes within each fold to maintain data integrity.
 \\
 
-\textbf{Leave-One-Out Cross-Validation} (LOOCV) is a specific type of cross validation where the number of folds \textit{k} equals the number of samples in the dataset.\\
-The model is trained \textit{k} times, with \textit{k} equal to the total number of samples. \\
-At each \textit{k}-iteration, a different sample is selected as the test set, while all the other samples are used for training. \\
-LOOCV provides a very accurate estimate of the model's performance because it uses all available data for training and validation.
-However, it can be computationally expensive, especially on large datasets, as it requires a significant number of separate model trainings. \\
-In Figure \ref{fig:LOOCV} we can see how it works.
+\textbf{Leave-One-Out Cross-Validation} (LOOCV) is a specific type of cross-validation where the number of folds $k$ is set equal to the number of samples in the dataset $n$. 
+In this approach, the model undergoes training k times, with k being precisely the total number of samples $n$.
+During each of the \textit{k} iterations, a distinct sample is singled out as the test set, while all the remaining samples are utilized for model training. 
+This procedure ensures that every single sample gets its turn as the test set, comprehensively assessing the model's performance across the entire dataset.
+In Figure \ref{fig:LOOCV} is shown how it works, note that training is performed on the same model at each iteration and 
 
 \begin{figure}[H]
   \centering  
-    \includegraphics[width=\linewidth]{graphics/LOOCV.png}
+    \includegraphics[width=0.8\linewidth]{graphics/LOOCV.png}
     \caption{LOOCV algorithm example on \textit{k} folds}
     \label{fig:LOOCV}
 \end{figure}
-
+However, LOOCV has some downsides:
+\begin{itemize}
+  \item \textbf{Computational Cost:} It can be computationally expensive, especially on large datasets, as it requires a significant number of separate model trainings. 
+  Training the model repeatedly for each sample can be time-consuming and resource-intensive.
+  \item \textbf{Variance:} In some cases, LOOCV may have high variance because it relies on the performance of a single sample as the test set in each iteration. 
+  This can lead to variability in the estimated performance.
+\end{itemize}  
+    
 \subsubsection{Evaluation Metrics}
 Evaluation metrics in machine learning are fundamental tools for measuring the effectiveness and accuracy of predictive models.
 These metrics provide a clear overview of the model's performance and assist in making informed decisions during the development and optimization process. \\
@@ -695,14 +703,11 @@ The confusion matrix consists of four main elements:
 
 \begin{enumerate}
 
-\item{\textbf{True Positives (TP)}: The model correctly predicted a positive class. For example, if we are trying to identify spam emails, and the model correctly classified an email as spam, it is a True Positive.} \\
-
-\item{\textbf{True Negatives (TN)}: The model correctly predicted a negative class.} \\
-
-\item{\textbf{False Positives (FP)}: The model incorrectly predicted a positive class when it was actually negative. This is also referred to as \textit{Type I error}.} \\
-
-\item{\textbf{False Negatives (FN)}: The model incorrectly predicted a negative class when it was actually positive. This is also referred to as \textit{Type II error}.} \\
-
+\item{\textbf{True Positives (TP)}: The model correctly predicted a positive class. 
+For example, if we are trying to identify spam emails, and the model correctly classified an email as spam, it is a True Positive.}
+\item{\textbf{True Negatives (TN)}: The model correctly predicted a negative class.}
+\item{\textbf{False Positives (FP)}: The model incorrectly predicted a positive class when it was actually negative. This is also referred to as \textit{Type I error}.} 
+\item{\textbf{False Negatives (FN)}: The model incorrectly predicted a negative class when it was actually positive. This is also referred to as \textit{Type II error}.}
 \end{enumerate}
 
 \begin{figure}[H]
@@ -747,7 +752,7 @@ The confusion matrix is an important resource for calculating various evaluation
   }
   \item{
 
-  \textbf{Recall} measures the percentage of actual positive cases that were correctly predicted by the model.
+  \textbf{Recall} (also known as Sensitivity)  measures the percentage of actual positive cases that were correctly predicted by the model.
 
   \begin{equation}
     \textit{Recall} = \frac{\text{TP}}{\text{TP + FN}}
@@ -766,16 +771,44 @@ The confusion matrix is an important resource for calculating various evaluation
   \end{equation}
   
   }
-\end{itemize}  
+\end{itemize} 
 
 
+The \textbf{Receiver Operating Characteristic} (ROC) curve  is a fundamental tool in machine learning and statistics for evaluating and visualizing the performance of binary classification models. 
+It provides valuable insights into how well a model can distinguish between two classes (binary classification) across different classification thresholds.
+For a more comprehensive evaluation of a model's performance across various thresholds, 
+it's advisable to utilize a model that can provide probability scores for both classes rather than relying solely on categorical classifications.
+Components of the ROC Curve are:
 
+\begin{itemize}
+  \item \textbf{True Positive Rate} (TPR) also known as Sensitivity or Recall (\ref{formula:recall}).
+  \item \textbf{False Positive Rate} (FPR) is the ratio of negative instances misclassified as positive to the total actual negative instances:
+  \begin{equation}
+    \textit{False Positive Rate} = \frac{\text{FP}}{\text{FP + TN}}
+    \label{formula:falsePositiveRate}
+  \end{equation}
 
+  \item \textbf{Classification Thresholds:} ROC curves are created by varying the classification threshold (the point at which the model decides whether a sample belongs to the positive or negative class) and observing how TPR and FPR change at each threshold.
+\end{itemize}
+Plotting the ROC Curve consists of:
+\begin{enumerate}
+  \item Start by sorting the instances by their predicted probabilities or scores.
+  \item Begin with a threshold that classifies all instances as positive, resulting in a point at (0, 0) on the ROC curve.
+  \item Gradually lower the threshold, moving along the sorted instances, and calculate TPR and FPR at each step.
+  \item Plot TPR on the y-axis and FPR on the x-axis, creating the ROC curve.
+\end{enumerate}
+A random classifier would produce a diagonal line from (0,0) to (1,1), so a good model should have an ROC curve that is above this line.
+\begin{figure}[H]
+  \centering  
+    \includegraphics[width=0.75\linewidth]{graphics/ROC curve.png}
+    \caption{ROC Curve}
+    \label{fig:ROC}
+\end{figure}
 
+\textbf{Area Under the ROC Curve} (AUC-ROC):
+The AUC-ROC quantifies the overall performance of a binary classification model. It represents the area under the ROC curve.
+A perfect model has an AUC-ROC of 1, indicating it can perfectly distinguish between positive and negative cases.
+A random or poorly performing model has an AUC-ROC of approximately 0.5, resulting in a diagonal ROC curve.
+Typically, the higher the AUC-ROC, the better the model's ability to discriminate between classes.
 
-
-
-
-
-
-Roc curve e AUC
+ROC curves provide a visual depiction of a model's trade-off between \textit{Sensitivity} and \textit{Specificity} (1 - false positive rate) across different classification thresholds.
