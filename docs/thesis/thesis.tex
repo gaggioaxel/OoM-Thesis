@@ -21,6 +21,8 @@
 \usepackage{diagbox}
 \usepackage{slashbox} % Importa il pacchetto "slashbox"
 \usepackage{subcaption}
+\usepackage{titlesec}
+
 
 % Per inserire pagine bianche
 % \newpage
@@ -67,6 +69,8 @@
 \newcommand*\mean[1]{\bar{#1}}
 
 \begin{document}
+\titleformat{\part}[display]
+  {\centering\Huge\bfseries}{\partname\ \thepart}{20pt}{\Huge}
 
 \coverpage
 
