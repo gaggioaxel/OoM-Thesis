@@ -511,11 +511,10 @@ The choice of distance metric is a critical aspect of the KNN algorithm, and whi
 The selection of a specific distance metric can have a substantial impact, especially when dealing with datasets of varying sizes and dimensions. \\
 If we consider for example two data points \textit{p}, \textit{q} in \textit{n}-dimensional space, there are various distance metrics that can be used to find the neighbors.\\
 Among the different  most common is the Euclidean distance: 
-\begin{center}
-    \begin{equation}
-        Euclidean(p,q) = \sqrt{\sum_{i=1}^{n} (p_i - q_i)^2}
-        \end{equation}
-\end{center}
+\begin{equation}
+    Euclidean(p,q) = \sqrt{\sum_{i=1}^{n} (p_i - q_i)^2}
+    \label{formula:distance}
+\end{equation}
 
 \subsubsection{Borderline Synthetic Minority Over-sampling Technique}
 \textbf{Oversampling} is a technique used in the field of imbalanced machine learning to address the problem of class imbalance. 
