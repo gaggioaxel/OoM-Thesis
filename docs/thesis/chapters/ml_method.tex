@@ -6,7 +6,7 @@ If the results had been satisfactory, we would then have opted to evaluate progr
 \section{Machine Learning Model}
 We started by addressing the issue of imbalanced data in classification. Imbalanced data occurs when one class significantly outnumbers the other(s), leading to challenges in training a classifier that can effectively distinguish between the classes.
 To mitigate this imbalance, a resampling technique known as BorderlineSMOTE is employed. The operational concept is detailed in Section \ref{subsec:borderline}.
-As \textit{k-neighbors} and \textit{m-neighbors} parameters  
+As \textit{k-neighbors} and \textit{m-neighbors} parameters, the best results have been obtained by setting them as the 40\% of the training data with negative class and of the training data with positive class.
 
 After resampling the training data using BorderlineSMOTE, a Random Forest classifier is trained on the resampled data. 
 Random Forest is an ensemble learning technique that combines multiple decision trees to improve classification performance. 
