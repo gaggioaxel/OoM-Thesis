@@ -783,7 +783,7 @@ Components of the ROC Curve are:
   \item \textbf{True Positive Rate} (TPR) also known as Sensitivity or Recall (\ref{formula:recall}).
   \item \textbf{False Positive Rate} (FPR) is the ratio of negative instances misclassified as positive to the total actual negative instances:
   \begin{equation}
-    \textit{False Positive Rate} = \frac{\text{FP}}{\text{FP + TN}}
+    \textit{FPR} = \frac{\text{FP}}{\text{FP + TN}}
     \label{formula:falsePositiveRate}
   \end{equation}
 
@@ -810,4 +810,4 @@ A perfect model has an AUC-ROC of 1, indicating it can perfectly distinguish bet
 A random or poorly performing model has an AUC-ROC of approximately 0.5, resulting in a diagonal ROC curve.
 Typically, the higher the AUC-ROC, the better the model's ability to discriminate between classes.
 
-ROC curves provide a visual depiction of a model's trade-off between \textit{Sensitivity} and \textit{Specificity} (1 - false positive rate) across different classification thresholds.
+ROC curves provide a visual depiction of a model's trade-off between \textit{Sensitivity} and \textit{Specificity} (1 - FPR) across different classification thresholds.
