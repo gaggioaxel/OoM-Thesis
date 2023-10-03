@@ -4,9 +4,8 @@ It helps identify and capture the most relevant information within the data whil
 This process not only contributes to improving model accuracy but also reduces the risk of overfitting and enhances the ability to generalize knowledge gained to new data. \\
 As previously mentioned, our dataset consists of 60 samples, each containing the spatial positions of all 20 skeletal joints at each time step.
 From this data, we want to extract the necessary features for ML.
-Here we will see al the steps involved in order to achieve the desired features.
+Here we will see al the steps involved in order to achieve the desired features. \\
 
-\subsection{Normalize the distance from the barycenter}
 As a first step, we will calculate the $x$, $y$, and $z$ coordinates of the skeleton's barycenter for each time step. \\
 We define the barycenter as the point where all the mass of an object or a system of objects is concentrated. \\
 In this context, each joint is considered to have unit mass, meaning that all joints contribute equally to the barycenter. \\
@@ -33,10 +32,10 @@ In scenarios where dancers or subjects may have different heights or body propor
 However, by computing these distances and further normalizing them within the range of 0 to 1, we effectively eliminate the influence of scale variations.
 
 This normalization process not only standardizes the data but also allows the ML model to focus on the relative spatial distribution of joints rather than their absolute positions.
-Consequently, our model becomes better equipped to recognize patterns and movements across individuals of varying statures, making it more versatile and applicable in real-world scenarios.
+Consequently, our model becomes better equipped to recognize patterns and movements across individuals of varying statures, making it more versatile and applicable in real-world scenarios. \\
 
-\subsection{Feature selection}
-To choose the features to extract, we referred to \cite{oneto:2020}
+Finally, to choose the features to extract, we referred to \cite{oneto:2020} and \cite{sama:2010}.
+In Table \ref{tab:ml_features} we can see all the features and their relative function.
 
 \begin{table}[H]
     \centering
