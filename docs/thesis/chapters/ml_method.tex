@@ -1,17 +1,22 @@
-\section{Method}
+\chapter{Method}
 
 The initial approach to classification involves a straightforward binary classification of the origin of the movement within a specific edge.
 If the results had been satisfactory, we would then have opted to evaluate progressively more complex models, eventually leading to the actual classification of the movement's origin from a video segment.
 
-\subsection{Machine Learning Model}
+\section{Machine Learning Model}
 We started by addressing the issue of imbalanced data in classification. Imbalanced data occurs when one class significantly outnumbers the other(s), leading to challenges in training a classifier that can effectively distinguish between the classes.
-To mitigate this imbalance, a resampling technique known as BorderlineSMOTE is employed.
+To mitigate this imbalance, a resampling technique known as BorderlineSMOTE is employed. The operational concept is detailed in Section \ref{subsec:borderline}.
+As \textit{k-neighbors} and \textit{m-neighbors} parameters  
 
-\subsection{Classify if an edge is or is not the OoM}
+After resampling the training data using BorderlineSMOTE, a Random Forest classifier is trained on the resampled data. 
+Random Forest is an ensemble learning technique that combines multiple decision trees to improve classification performance. 
+In this case, the classifier is trained with 500 decision trees.
 
-\subsection{Classify if a part of the body is or is not the OoM}
+\section{Classify if an edge is or is not the OoM}
 
-\subsection{Classify if the OoM is on the top or on the bottom of the skeletal}
+\section{Classify if a part of the body is or is not the OoM}
+
+\section{Classify if the OoM is on the top or on the bottom of the skeletal}
 
 
 
