@@ -19,15 +19,15 @@
 \usepackage{pgfplots}
 \usetikzlibrary{positioning}
 \usepackage{diagbox}
-\usepackage{slashbox} % Importa il pacchetto "slashbox"
+\usepackage{slashbox}
 \usepackage{subcaption}
 \usepackage{titlesec}
+\usepackage{chngcntr}
+% Reset the figure counter at the beginning of each chapter
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
 
 
-% Per inserire pagine bianche
-% \newpage
-% \mbox{}
-% \newpage
 
 % Encodings
 \usepackage{amsmath,amssymb,gensymb,textcomp}
@@ -84,6 +84,12 @@
 \newpage
 \renewcommand{\contentsname}{\Huge Table of contents}
 \tableofcontents
+\newpage
+\renewcommand{\listfigurename}{\Huge List of Figures}
+\listoffigures
+\newpage
+\renewcommand{\listtablename}{\Huge List of Tables}
+\listoftables
 \newpage
 \include{chapters/acronyms.tex}
 

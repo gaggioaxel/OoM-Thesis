@@ -1,8 +1,11 @@
 \section{Method}
 
-scrivere qui l'idea iniziale
-abbiamo optato per cl. binaria perchè fare di meglio è difficile con questi dati
+The initial approach to classification involves a straightforward binary classification of the origin of the movement within a specific edge.
+If the results had been satisfactory, we would then have opted to evaluate progressively more complex models, eventually leading to the actual classification of the movement's origin from a video segment.
 
+\subsection{Machine Learning Model}
+We started by addressing the issue of imbalanced data in classification. Imbalanced data occurs when one class significantly outnumbers the other(s), leading to challenges in training a classifier that can effectively distinguish between the classes.
+To mitigate this imbalance, a resampling technique known as BorderlineSMOTE is employed.
 
 \subsection{Classify if an edge is or is not the OoM}
 
