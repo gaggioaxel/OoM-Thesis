@@ -1,4 +1,5 @@
 \section{Theoretical framework}
+\label{sec:theoretical_framework}
 
 \subsection{Graph theory}
 This section contains definitions, notation and concepts related to Graph Theory according
@@ -467,6 +468,8 @@ The Prisoner's Dilemma has been extensively studied in psychology, economics, an
 
 
 \subsection{Machine Learning Theory}
+\label{subsec:ML}
+
 Machine Learning deals with the ability of a system to improve its performance through experience, without being explicitly programmed.
 It also serves as the foundation for numerous everyday applications and concepts, 
 as it provides a powerful and efficient way to address complex challenges, make data-driven decisions, 
@@ -483,6 +486,8 @@ Moreover, the choice of hyperparameters is problem-dependent, and there's no one
 It requires a deep understanding of the algorithm, the dataset, and the specific problem at hand.saisi
 
 \subsubsection{Classifier}
+\label{subsec:classifier}
+
 A mathematical \textbf{Classifier} is a model that takes an input dataset and assigns each data point to a class or category. 
 The mathematical formulation of a classifier can vary depending on the algorithm used. 
 Suppose we have a training dataset represented as pairs (\textit{$\overline{x}$}, \textit{y}), where \textit{$\overline{x}$} is a vector of data features, and \textit{y} is the associated class label.
@@ -491,6 +496,8 @@ Our goal is to find a function \textit{f}(\textit{$\overline{x}$}) that maps the
 
 
 \subsubsection{K-Nearest Neighbors}
+\label{subsec:KNN}
+
 The \textbf{KNN} algorithm is a supervised machine learning algorithm used for classification and regression tasks.
 It is a simple and intuitive algorithm that makes predictions based on the similarity between a data point and its k-nearest neighbors in a training dataset.
 The \textit{k} in \textit{k}-nearest neighbors refers to the number of items that the algorithm uses to make its prediction whether its a classification problem or a regression problem.
@@ -517,6 +524,8 @@ Among the different  most common is the Euclidean distance:
 \end{equation}
 
 \subsubsection{Borderline Synthetic Minority Over-sampling Technique}
+\label{subsec:borderline}
+
 \textbf{Oversampling} is a technique used in the field of imbalanced machine learning to address the problem of class imbalance. 
 Class imbalance occurs when one class in a classification problem has significantly fewer instances than another class. 
 This imbalance can lead to biased models that perform poorly on the minority class (the class with fewer instances) because the model tends to be biased towards the majority class.\\
@@ -573,6 +582,8 @@ However The BSMOTE algorithm, like any other method, has its limitations and dra
 So in general, even if it aims to improve the classification of the minority class, there is no guarantee that it will always lead to better results.
 
 \subsubsection{Random Forest Classifier}
+\label{subsec:RF}
+
 A \textbf{Decision Tree} (DT) is a non-parametric supervised learning algorithm, which is utilized for both classification and regression tasks. 
 It has a hierarchical, tree structure, which consists of a internal nodes, leaf nodes and branches.
 From the root node, splitting criterias are applied on the samples creating branches and child nodes that lead to leaf nodes which represent the final classification of the tree.
@@ -663,6 +674,8 @@ For example the Figure \ref{fig:rf} is shown a RF classifier made of 3 DTs has b
 
 
 \subsubsection{Cross Validation}
+\label{subsec:cross_validation}
+
 \textbf{Cross Validation} is a technique used to estimate the effectiveness of a machine learning model based on a data sample.
 It involves dividing the dataset into multiple training and testing subsets called \textit{folds} and then training and evaluating the model on each fold.
 The process of training and testing is typically repeated multiple times and the results from each iteration are often averaged to provide an overall estimate of the model's performance.
@@ -693,6 +706,8 @@ However, LOOCV has some downsides:
 \end{itemize}  
     
 \subsubsection{Evaluation Metrics}
+\label{subsec:evaluation_metrics}
+
 Evaluation metrics in machine learning are fundamental tools for measuring the effectiveness and accuracy of predictive models.
 These metrics provide a clear overview of the model's performance and assist in making informed decisions during the development and optimization process. \\
 
