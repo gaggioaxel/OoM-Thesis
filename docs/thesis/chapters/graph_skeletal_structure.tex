@@ -1,4 +1,4 @@
-\section{Graph Skeletal Structure}
+\chapter{Graph Skeletal Structure}
 
 The Graph Skeletal Structure is obtained considering the \textit{reduced marker set}, obtained after the reduction from the \textit{full marker set} which has been discussed previously. \\
 We model the human skeleton as an undirected graph, where the vertices are the joints and the edges represent connections between consecutive physical body joints.\\
@@ -72,13 +72,13 @@ For simplicity, the links are without weights.
 \end{table}
 
 
-\subsection{Movement features extraction}
+\section{Movement features extraction}
 The low-level features extracted for our purpose are \textit{speed}, \textit{tangential acceleration}, and \textit{angular momentum}. \\
 While speed indicates how quickly an object is moving, acceleration indicates how rapidly its velocity is changing.\\
 Angular momentum provides information about the rotation of an object around a fixed point.\\
 By incorporating all three quantities as features, a more comprehensive and detailed view of the overall motion is obtained.
 
-\subsubsection{Speed}
+\subsection{Speed}
 Speed is calculated by finding the change in positions with respect to time through differentiation and then applying a moving average to obtain a more accurate estimate that is less affected by noise.
 We calculate this speed as the norm of the velocity vector. \\
 The speed of a moving object is a fundamental information in understanding how it moves and how its trajectory might evolve.
@@ -87,7 +87,7 @@ The speed of a moving object is a fundamental information in understanding how i
   \vec{v}(t) = \frac{d\vec{r}}{dt} = \left(\frac{dx}{dt}, \frac{dy}{dt}, \frac{dz}{dt}\right)
 \end{equation}
 
-\subsubsection{Tangential Acceleration}
+\subsection{Tangential Acceleration}
 By calculating the derivative of velocity, we can obtain tangential acceleration.
 Tangential acceleration is calculated as the norm of the tangential acceleration vector. \\
 Tangential acceleration can be used to express specific emotions, styles, and intentions. \\
@@ -97,7 +97,7 @@ For instance, rapid acceleration might be associated with energetic and rhythmic
   \vec{a}(t) = \frac{d\vec{v}}{dt} = \left(\frac{d^2x}{dt^2}, \frac{d^2y}{dt^2}, \frac{d^2z}{dt^2}\right)
 \end{equation}
 
-\subsubsection{Angular Momentum}
+\subsection{Angular Momentum}
 The formula we use to calculate angular momentum is:
 
 \begin{equation}
@@ -120,7 +120,7 @@ where:
 Analyzing angular momentum can reveal specific patterns of rotation or changes in orientation. \\
 These patterns can be used to identify distinctive gestures or movements in activities such as gymnastics or choreography.
 
-\subsection{Cosine similarity}
+\section{Cosine similarity}
 To calculate the weights of the edges connecting the different joints, we use the \textit{Cosine similarity}. \\
 Cosine similarity is a measure of similarity between two vectors, frequently used to gauge how aligned vectors are in space. \\
 It returns a value ranging from -1 to 1.

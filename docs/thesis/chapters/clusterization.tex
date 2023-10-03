@@ -1,4 +1,4 @@
-\section{Spectral Clustering}
+\chapter{Spectral Clustering}
 Clusterization aims to identify groups of nodes that exhibit significant similarity based on the features or data they represent.
 This technique is often employed when data is represented as vectors and you want to uncover similarity relationships among these vectors.\\
 The Shi-Malik algorithm is a clustering technique based on analyzing the eigenvalues and eigenvectors of the Laplacian matrix of a graph constructed from data.\\
@@ -8,7 +8,7 @@ The objective is to unveil hidden structures within data so that similar objects
 The algorithm has some limitations due to the initialization phase, such as sensitivity to the initial choice of centroids and the requirement to specify the number of clusters beforehand.\\
 This is why there will be a subsequent phase of cluster stabilization over time.
 
-\subsection{Shi-Malik Algorithm}
+\section{Shi-Malik Algorithm}
 The operation of the Shi-Malik Algorithm can be summarized in these 8 steps:
 
 \begin{enumerate}
@@ -54,7 +54,7 @@ In essence, the algorithm starts by dividing data into two initial clusters, the
 This method leverages the spectral information of the data graph to obtain a data partition into clusters.
 
 
-\subsection{Further Optimization}
+\section{Further Optimization}
 The order in which the various clusters are created and chosen is random, and therefore, this randomness can lead to complications in terms of visualization. Hence, there is a need for cluster stabilization over time as a subsequent step. This issue is due to various factors, including:
 
 \begin{enumerate}

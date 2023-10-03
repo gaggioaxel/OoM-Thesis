@@ -1,14 +1,14 @@
-\section{Theoretical framework}
+\chapter{Theoretical framework}
 \label{sec:theoretical_framework}
 
-\subsection{Graph theory}
+\section{Graph theory}
 This section contains definitions, notation and concepts related to Graph Theory according
 to \cite{graph_theory:2010}. \\
 Graph theory deals with connection amongst vertices by edges. \\
 Graphs are the foundation of many day to day processes and concepts, as they provide a convenient
 and intuitive way of representing objects.
 
-\subsubsection{Simple graphs}
+\subsection{Simple graphs}
 A \textbf{simple graph} \textit{G} consists of a non-empty finite set \textit{V(G)} of elements called \textbf{vertices}
 (or \textbf{nodes}), and a finite set \textit{E(G)} of distinct unordered pairs of distinct elements of \textit{V(G)}
 called \textbf{edges}. We call \textit{V(G)} the \textbf{vertices set} and \textit{E(G)} the \textbf{edge set} of G.
@@ -34,7 +34,7 @@ edge set \textit{E(G)} consists of the edges \textit{uv}, \textit{uw}, \textit{v
     \label{fig:simple_graph}
 \end{figure}
 
-\subsubsection{Adjacency}
+\subsection{Adjacency}
 We say that two vertices \textit{v} and \textit{w} of a graph \textit{G} are \textbf{adjacent} if there is an edge \textit{vw} joining them, and the vertices \textit{v} and \textit{w} are then \textbf{incident} with such an edge. \\
 Similarly, two distinct edges \textit{e} and \textit{f} are \textbf{adjacent} if they have a vertex in common (see Figure \ref{fig:adiacency}).
 
@@ -59,7 +59,7 @@ Similarly, two distinct edges \textit{e} and \textit{f} are \textbf{adjacent} if
     \label{fig:adiacency}
 \end{figure}
 
-\subsubsection{Matrix representations}
+\subsection{Matrix representations}
 Although it is convenient to represent a graph by a diagram of points joined by lines,
 such a representation may be unsuitable if we wish to store a large graph in a computer.
 One way of storing a simple graph is involve matrices. \\
@@ -112,7 +112,7 @@ An example of this is given in Figure \ref{fig:matrix_representations}.
 \end{figure}
 
 
-\subsubsection{Bipartite graphs}
+\subsection{Bipartite graphs}
 If the vertex set of a graph \textit{G} can be split into two disjoint sets \textit{A} and \textit{B} so that each
 edge of \textit{G} joins a vertex of \textit{A} and a vertex of \textit{b}, then \textit{G} is a \textbf{bipartite graph}. \\
 Alternatively, a bipartite graph is one whose vertices can be coloured red and blue in such a way that each edge joins a red vertex (in \textit{A}) and a blue vertex (in \textit{B}). \\
@@ -142,7 +142,7 @@ Figure \ref{fig:bipartite} is an example of bipartite graph.
 
 
 
-\subsubsection{Bipartite graphs with matching}
+\subsection{Bipartite graphs with matching}
 A \textbf{bipartite graph with matching} is a bipartite graph in which there is a set of edges selected in such a way that no node is shared among the edges of the matching.
 In other words, each node is involved in at most one edge of the matching. \\
 This means that if the number of vertices in \textit{A} and \textit{B} is different, at least one vertex will have no connection to another vertex (see Figure \ref{fig:match_1}). \\
@@ -354,7 +354,7 @@ Replace the original values:
 
 We find that the minimum total cost is given by this assignment.
 
-\subsection{Game theory}
+\section{Game theory}
 Game theory is a type of decision theory in which one’s choice of action is determined after taking
 into account all possible alternatives available to an opponent playing the same game, rather than just
 by the possibilities of several outcome results. \\
@@ -367,7 +367,7 @@ Going through the set of rules once by the participants defines a play.
 
 The following sections contains notations and properties accordind to \cite{game_theory:2020}.
 
-\subsubsection{Properties of a Game}
+\subsection{Properties of a Game}
 \begin{enumerate}
     \item {There are finite numbers of competitors called \textit{players}.}
     \item {Each player has a finite number of possible courses of action called \textit{strategies}.}
@@ -391,19 +391,19 @@ The following sections contains notations and properties accordind to \cite{game
 \end{enumerate}
 
 
-\subsubsection{Cooperative Games}
+\subsection{Cooperative Games}
 A cooperative game is a situation in which players interact together to achieve a common goal.
 In the context of a cooperative game, players aim to maximize the overall outcome by collaborating, communicating, and coordinating their actions.
 The primary objective is to achieve a result in which all players benefit, working together to overcome challenges or issues.
 
 
-\subsubsection{Non-cooperative Games}
+\subsection{Non-cooperative Games}
 A non-cooperative game is a situation in which players act independently and without direct communication or coordination with other players.
 In a non-cooperative game, each player seeks to maximize their individual gain without necessarily considering the effect of their actions on other players.
 The main goal is to achieve the best personal outcome, even at the expense of other participants, without considering direct collaboration.
 
 
-\subsubsection{The Prisoner's Dilemma}
+\subsection{The Prisoner's Dilemma}
 The Prisoner's Dilemma is a fundamental concept in game theory that illustrates the challenges of \textit{cooperation} and \textit{non-cooperation} between individuals. \\
 It's a model that exemplifies situations where two individuals could benefit from collaboration, but are tempted to act selfishly to maximize their personal gains. \\
 Here's how it works:
@@ -467,7 +467,7 @@ This conflict between personal benefit and the common good often leads to subopt
 The Prisoner's Dilemma has been extensively studied in psychology, economics, and social sciences and is a crucial example of the challenges of cooperation in human interactions. \\
 
 
-\subsection{Machine Learning Theory}
+\section{Machine Learning Theory}
 \label{subsec:ML}
 
 Machine Learning deals with the ability of a system to improve its performance through experience, without being explicitly programmed.
@@ -485,7 +485,7 @@ This fine-tuning is crucial to ensure that the machine learning model not only f
 Moreover, the choice of hyperparameters is problem-dependent, and there's no one-size-fits-all solution. 
 It requires a deep understanding of the algorithm, the dataset, and the specific problem at hand.saisi
 
-\subsubsection{Classifier}
+\subsection{Classifier}
 \label{subsec:classifier}
 
 A mathematical \textbf{Classifier} is a model that takes an input dataset and assigns each data point to a class or category. 
@@ -495,7 +495,7 @@ The \textit{y} is a categorical (can take a fixed, number of possible values) va
 Our goal is to find a function \textit{f}(\textit{$\overline{x}$}) that maps the feature vectors \textit{$\overline{x}$} to class labels \textit{y}. 
 
 
-\subsubsection{K-Nearest Neighbors}
+\subsection{K-Nearest Neighbors}
 \label{subsec:KNN}
 
 The \textbf{KNN} algorithm is a supervised machine learning algorithm used for classification and regression tasks.
@@ -523,7 +523,7 @@ Among the different  most common is the Euclidean distance:
     \label{formula:distance}
 \end{equation}
 
-\subsubsection{Borderline Synthetic Minority Over-sampling Technique}
+\subsection{Borderline Synthetic Minority Over-sampling Technique}
 \label{subsec:borderline}
 
 \textbf{Oversampling} is a technique used in the field of imbalanced machine learning to address the problem of class imbalance. 
@@ -581,7 +581,7 @@ However The BSMOTE algorithm, like any other method, has its limitations and dra
 \end{itemize}
 So in general, even if it aims to improve the classification of the minority class, there is no guarantee that it will always lead to better results.
 
-\subsubsection{Random Forest Classifier}
+\subsection{Random Forest Classifier}
 \label{subsec:RF}
 
 A \textbf{Decision Tree} (DT) is a non-parametric supervised learning algorithm, which is utilized for both classification and regression tasks. 
@@ -673,7 +673,7 @@ For example the Figure \ref{fig:rf} is shown a RF classifier made of 3 DTs has b
 \end{figure}
 
 
-\subsubsection{Cross Validation}
+\subsection{Cross Validation}
 \label{subsec:cross_validation}
 
 \textbf{Cross Validation} is a technique used to estimate the effectiveness of a machine learning model based on a data sample.
@@ -705,7 +705,7 @@ However, LOOCV has some downsides:
   This can lead to variability in the estimated performance.
 \end{itemize}  
     
-\subsubsection{Evaluation Metrics}
+\subsection{Evaluation Metrics}
 \label{subsec:evaluation_metrics}
 
 Evaluation metrics in machine learning are fundamental tools for measuring the effectiveness and accuracy of predictive models.

@@ -1,4 +1,4 @@
-\section{Temporal stabilization of clusters}
+\chapter{Temporal stabilization of clusters}
 
 After clustering, we need to reassign colors to the clusters to stabilize them over time. \\
 As mentioned before, the order in which clusters are determined at each moment is random, and the selection order of clusters is represented by a color. Therefore, from the initial random color assignment, we aim to transition to a color assignment where two clusters of the same color share as many nodes (joints) as possible between moments.
@@ -10,7 +10,7 @@ We have implemented two algorithms: a Brute Force approach, where we compute the
 
 Since in our case the number of clusters is usually small, there are instances where the Brute Force algorithm is more efficient.
 
-\subsection{Maximum Perfect Weight Matching for bipartite graphs}
+\section{Maximum Perfect Weight Matching for bipartite graphs}
 The Maximum Perfect Weight Matching is an optimization problem concerning graphs. \\
 The graphs in question are bipartite, meaning the vertices can be divided into two distinct sets in such a way that all edges of the graph connect vertices from different sets, with no edges connecting vertices within the same set.
 Additionally, these graphs are undirected, meaning the relationship between two nodes is bidirectional, in other words, the edge connecting node A to node B automatically implies the existence of the edge connecting node B to node A. \\
@@ -23,7 +23,7 @@ The rows could represent the nodes in the first set, while the columns could rep
 The element (\textit{i}, \textit{j}) of the matrix represents the weight of the edge connecting vertex \textit{i} to vertex \textit{j}. 
 
 
-\subsubsection{Temporal stabilization}
+\subsection{Temporal stabilization}
 In our case, instead of having nodes connected by edges, we will have a slightly different situation. \\   
 Instead of the previously introduced nodes, we will have clusters, which are sets of nodes representing the joints of the skeleton, connected to each other by edges.
 \\  
@@ -36,7 +36,7 @@ We will start by analyzing the colors of the clusters at the initial time and ch
 We will repeat this process iteratively until the final time frame.
 
 
-\subsubsection{A real application}
+\subsection{A real application}
 Let's consider a real-world scenario to understand how MPWM works in terms of visualization. \\
 Suppose we have 20 nodes representing joints at time \textit{t} and 3 clusters labeled with different colors, as shown in Figure \ref{fig:clust_t}. \\
 At time \textit{t+1}, there are the same 20 nodes as before but with 3 clusters labeled differently (see Figure \ref{fig:clust_tplus1}).  \\
@@ -348,7 +348,7 @@ The edges of assignment (e) are highlighted in red.
 
 
 
-\subsection{Brute Force Algorithm}
+\section{Brute Force Algorithm}
 The Brute Force algorithm can be a possible approach to solve the MPWM problem for bipartite graphs.
 However, it's important to note that the Brute Force algorithm has exponential time complexity, specifically, its time complexity grows exponentially with the number of vertices in the graph.
 This is because the Brute Force algorithm examines all possible combinations of perfect matchings within the bipartite graph to find the one with the maximum weight.\\
@@ -361,7 +361,7 @@ A MPWM problem using an utility matrix can be transformed into a minimum-weight 
 This can be achieved by introducing an auxiliary matrix, referred to as the \textit{cost matrix}.
 The cost matrix is essentially a duplicate of the utility matrix, but with all its elements negated.
 
-\subsubsection{Brute Force Algorithm summarized}
+\subsection{Brute Force Algorithm summarized}
 The operation of the Brute Force algorithm for minimum-weigth matching problems can be summerized in these 3 steps:
 
 \begin{enumerate}
@@ -371,7 +371,7 @@ The operation of the Brute Force algorithm for minimum-weigth matching problems 
 \end{enumerate}
 
 
-\subsubsection{Brute Force Algorithm application}
+\subsection{Brute Force Algorithm application}
 
 Let's take for example the following cost matrix and try to apply the Brute Force algorithm for minimum-weigth matching problems:
 

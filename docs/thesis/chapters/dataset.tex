@@ -1,4 +1,4 @@
-\section{Dataset and Marker Set}
+\chapter{Dataset and Marker Set}
 A critical phase in our research is the creation of a relevant and high-quality dataset, 
 as the quality of the dataset can significantly impact the outcomes of our research efforts.
 Here, we detail the technological methodology used to collect the dataset and its constituents.
@@ -10,7 +10,7 @@ This collaboration yields expressive movements with distinct starting points, al
 Their expertise elevates dataset quality, providing a resource that encapsulates human motion intricacies accurately and artistically.
 
 
-\subsection{Dataset}
+\section{Dataset}
 The dataset contains two categories of expressive movements, each associated with a different recording session. \\
 The details of both types of movements are provided below.
 The dataset comprises 60 segments recorded using different versions of the \textit{Qualisys Motion Capture system}.
@@ -18,7 +18,7 @@ These segments represents various subjects performing simple movement sequences,
 The videos are synchronized through SMPTE timecode and each video is accompanied by corresponding motion capture data that records the positions of body parts.
 
 
-\subsubsection{Wholodance Dataset}
+\subsection{Wholodance Dataset}
 This specific portion of the dataset was collected within the framework of the H2020-ICT-2015 EU Project named "WhoLoDance" 
 during the month of March in 2016.
 These recording sessions are primarily characterized by their multimodal nature, 
@@ -32,7 +32,7 @@ The recorded movements primarily revolved around contemporary dance techniques.
 Importantly, these movements were performed without any accompanying music to ensure that 
 the dancers' performances were not influenced by external auditory cues.
 
-\subsubsection{Montpellier - UniGe Dataset}
+\subsection{Montpellier - UniGe Dataset}
 This specific subset of the dataset was captured during a collaborative project involving the University of Genova and the University of Montpellier in July 2020. 
 These recording sessions are divided into two segments: individual actions and dual actions. 
 The primary aim of these action categories is to identify the source or initiator of motion in purposeful movements.\\
@@ -47,7 +47,7 @@ the participant throws the ball and retrieves it themselves, while in the other 
 This was done to introduce greater movement diversity.
 It is worth noting that, for the purpose of motion analysis, the receiver and the thrower are considered separately.
 
-\subsection{Validation}
+\section{Validation}
 Starting from recordings of movements, we selected 60 segments in which we could clearly identify the origin of the movement.\\
 Each video fragment was therefore classified with a connecting arc between two joints.\\
 The classification process was carried out in several steps:
@@ -61,7 +61,7 @@ The classification process was carried out in several steps:
 This process was used to include only the segments where the classification was more certain and evident. \\
 Unfortunately, the dataset is unbalanced, meaning that there are some classifications that are very frequent, some that are infrequent, and some classifications that are completely absent.
 
-\subsection{Original Marker Set}
+\section{Original Marker Set}
 Due to a four-year gap between the recording of the two distinct subsets of the dataset, 
 some differences in marker technology have emerged. 
 In particular, the Wholodance recordings feature a full marker set consisting of 64 reflective markers. 
@@ -85,7 +85,7 @@ The following figures (Figure \ref{fig:64markers}, Figure \ref{fig:41markers}) r
 
 
 
-\subsection{Reduced Marker Set}
+\section{Reduced Marker Set}
 Firstly, we standardized the marker labels following the 64-marker scheme, 
 we renamed some of the 41-marker labels to align with the full version.
 
