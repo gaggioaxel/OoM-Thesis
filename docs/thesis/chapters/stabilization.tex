@@ -6,9 +6,9 @@ As mentioned before, the order in which clusters are determined at each moment i
 This is because the random assignment of colors poses visualization issues for the graph. It's possible that from one moment to the next, two clusters with many shared joints might have different colors, resulting in a visualization over time that appears as a continuous switching of colors. This could lead to a loss of continuity in the visual representation.
 To stabilize clusters over time, ensuring that pairs of clusters colored from one moment to another share the highest number of common joints, we turn to the MPWM.
 
-We have implemented two algorithms: a Brute Force approach, where we compute the total weights of all possible permutations of color assignments and select the assignment with the maximum total weight, and the Hungarian Algorithm, a combinatorial optimization method that solves the assignment problem in polynomial time.
+We have implemented two algorithms: a BF approach, where we compute the total weights of all possible permutations of color assignments and select the assignment with the maximum total weight, and the Hungarian Algorithm, a combinatorial optimization method that solves the assignment problem in polynomial time.
 
-Since in our case the number of clusters is usually small, there are instances where the Brute Force algorithm is more efficient.
+Since in our case the number of clusters is usually small, there are instances where the BF is more efficient.
 
 \section{Maximum Perfect Weight Matching for bipartite graphs}
 The Maximum Perfect Weight Matching is an optimization problem concerning graphs.
@@ -345,9 +345,9 @@ The following figure shows the matching with the utility value for every possibl
 
 
 \section{Brute Force Algorithm}
-The Brute Force algorithm can be a possible approach to solve the MPWM problem for bipartite graphs.
-However, it's important to note that the Brute Force algorithm has exponential time complexity, specifically, its time complexity grows exponentially with the number of vertices in the graph.
-This is because the Brute Force algorithm examines all possible combinations of perfect matchings within the bipartite graph to find the one with the maximum weight.\\
+The BF can be a possible approach to solve the MPWM problem for bipartite graphs.
+However, it's important to note that the BF has exponential time complexity, specifically, its time complexity grows exponentially with the number of vertices in the graph.
+This is because the BF examines all possible combinations of perfect matchings within the bipartite graph to find the one with the maximum weight.\\
 If the graph has \textit{n} vertices in both the first and second partitions, there are \textit{n}!\ possible matchings.
 Each matching requires \textit{O}(\textit{n}) time to be computed because you need to check that it is a perfect matching and calculate its total weight.
 Therefore, the overall complexity of the algorithm is on the order of \textit{O}(\textit{n}!$\cdot$\textit{n}). \\
@@ -358,7 +358,7 @@ This can be achieved by introducing an auxiliary matrix, referred to as the \tex
 The cost matrix is essentially a duplicate of the utility matrix, but with all its elements negated.
 
 \subsection{Brute Force Algorithm summarized}
-The operation of the Brute Force algorithm for minimum-weigth matching problems can be summerized in these 3 steps:
+The operation of the BF for minimum-weight matching problems can be summerized in these 3 steps:
 
 \begin{enumerate}
     \item {Compute the cost matrix for the considered bipartite graph with \textit{n} vertices in each partition.}
@@ -369,7 +369,7 @@ The operation of the Brute Force algorithm for minimum-weigth matching problems 
 
 \subsection{Brute Force Algorithm application}
 
-Let's take for example the following cost matrix and try to apply the Brute Force algorithm for minimum-weigth matching problems:
+Let's take for example the following cost matrix and try to apply the BF for minimum-weight matching problems:
 
 \begin{table}[H]
     \centering
@@ -385,101 +385,130 @@ Let's take for example the following cost matrix and try to apply the Brute Forc
     \end{table}
 
 Now we compute the total cost of all the \textit{n}!\ permutations: 
-
-\begin{table}[H]
-    \begin{minipage}[b]{0.3\textwidth}
-      \centering
-      \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-        \hline
-        \cellcolor{yellow!25} 108 & 125 & 150 \\
-        \hline
-        150 & \cellcolor{yellow!25} 135 & 175 \\
-        \hline
-        122 & 148 & \cellcolor{yellow!25} 250 \\
-        \hline
-      \end{tabular}
-      \caption{Total weight: 493}
-      \label{tab:perm1}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.3\textwidth}
-      \centering
-      \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-        \hline
-        108 & \cellcolor{yellow!25} 125 & 150 \\
-        \hline
-        150 & 135 & \cellcolor{yellow!25}175 \\
-        \hline
-        \cellcolor{yellow!25}122 & 148 & 250 \\
-        \hline
-      \end{tabular}
-      \caption{Total weight: 422}
-      \label{tab:perm2}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.3\textwidth}
-      \centering
-      \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-        \hline
-        108 & 125 & \cellcolor{yellow!25}150 \\
-        \hline
-        \cellcolor{yellow!25} 150 &  135 & 175 \\
-        \hline
-        122 & \cellcolor{yellow!25} 148 & 250 \\
-        \hline
-      \end{tabular}
-      \caption{Total weight: 448}
-      \label{tab:perm3}
-    \end{minipage}
-  \end{table}
   
 
+  \begin{table}[H]
+    \begin{minipage}[b]{0.3\textwidth}
+        \centering
+        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+            \hline
+            \cellcolor{yellow!25} 108 & 125 & 150 \\
+            \hline
+            150 & \cellcolor{yellow!25} 135 & 175 \\
+            \hline
+            \cellcolor{yellow!25} 122 & 148 & 250 \\
+            \hline
+        \end{tabular}
+        \caption*{(a)}
+        \label{tab:perm1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.3\textwidth}
+        \centering
+        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+            \hline
+            108 & \cellcolor{yellow!25} 125 & 150 \\
+            \hline
+            \cellcolor{yellow!25} 150 & 135 & 175 \\
+            \hline
+            122 & 148 & \cellcolor{yellow!25} 250 \\
+            \hline
+        \end{tabular}
+        \caption*{(b)}
+        \label{tab:perm2}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.3\textwidth}
+        \centering
+        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+            \hline
+            108 & 125 & \cellcolor{yellow!25} 150 \\
+            \hline
+            150 & \cellcolor{yellow!25} 135 & 175 \\
+            \hline
+            \cellcolor{yellow!25} 122 & 148 & 250 \\
+            \hline
+        \end{tabular}
+        \caption*{(c)}
+        \label{tab:perm3}
+    \end{minipage}
+\end{table}
+
 \begin{table}[H]
     \begin{minipage}[b]{0.3\textwidth}
-      \centering
-      \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-        \hline
-        108 & 125 & \cellcolor{yellow!25} 150 \\
-        \hline
-        150 & \cellcolor{yellow!25} 135 & 175 \\
-        \hline
-        \cellcolor{yellow!25} 122 & 148 & 250 \\
-        \hline
-      \end{tabular}
-      \caption{Total weight: 407}
-      \label{tab:perm4}
+        \centering
+        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+            \hline
+            \cellcolor{yellow!25} 108 & 125 & 150 \\
+            \hline
+            150 & \cellcolor{yellow!25} 135 & 175 \\
+            \hline
+            \cellcolor{yellow!25} 122 & 148 & 250 \\
+            \hline
+        \end{tabular}
+        \caption*{(d)}
+        \label{tab:perm4}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.3\textwidth}
-      \centering
-      \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-        \hline
-        108 & \cellcolor{yellow!25} 125 & 150 \\
-        \hline
-        \cellcolor{yellow!25} 150 & 135 & 175 \\
-        \hline
-        122 & 148 & \cellcolor{yellow!25} 250 \\
-        \hline
-      \end{tabular}
-      \caption{Total weight: 525}
-      \label{tab:perm5}
+        \centering
+        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+            \hline
+            108 & \cellcolor{yellow!25} 125 & 150 \\
+            \hline
+            \cellcolor{yellow!25} 150 & 135 & 175 \\
+            \hline
+            122 & 148 & \cellcolor{yellow!25} 250 \\
+            \hline
+        \end{tabular}
+        \caption*{(e)}
+        \label{tab:perm5}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.3\textwidth}
-      \centering
-      \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-        \hline
-        \cellcolor{yellow!25} 108 & 125 & 150 \\
-        \hline
-        150 & 135 & \cellcolor{yellow!25} 175 \\
-        \hline
-         122 & \cellcolor{yellow!25} 148 & 250 \\
-        \hline
-      \end{tabular}
-      \caption{Total weight: 431}
-      \label{tab:perm6}
+        \centering
+        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+            \hline
+            108 & 125 & \cellcolor{yellow!25} 150 \\
+            \hline
+            \cellcolor{yellow!25} 150 & 135 & 175 \\
+            \hline
+            122 & \cellcolor{yellow!25} 148 & 250 \\
+            \hline
+        \end{tabular}
+        \caption{(f)}
+        \label{tab:perm6}
     \end{minipage}
-  \end{table}
-   
-We find that the minimum total cost is given by the assignment in table \ref{tab:perm4}.  
+\caption{BF assignements}
+\label{tab:tab_ass}
+\end{table}
+ 
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+   \textbf{Assignment} & \textbf{Total weight} \\
+    \hline
+    (a) & 493 \\
+    \hline
+    (b) & 422 \\
+    \hline
+    (c) & 448 \\
+    \hline
+    (d) & 407 \\
+    \hline
+    (e) & 525 \\
+    \hline
+    (f) & 431 \\
+    \hline
+  \end{tabular}
+  
+  \vspace{0.5cm} % Spazio vuoto tra le righe
+  
+  \caption{Total weights for the 6 assignments}
+  \label{tab:table_costs}
+\end{table}
+
+We find that the minimum total cost is given by the assignment (d) in Table \ref{tab:tab_ass}.  
 
