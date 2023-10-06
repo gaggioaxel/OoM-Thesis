@@ -470,18 +470,18 @@ The Prisoner's Dilemma has been extensively studied in psychology, economics, an
 \section{Machine Learning Theory}
 \label{subsec:ML}
 
-Machine Learning deals with the ability of a system to improve its performance through experience, without being explicitly programmed.
+ML deals with the ability of a system to improve its performance through experience, without being explicitly programmed.
 It also serves as the foundation for numerous everyday applications and concepts, 
 as it provides a powerful and efficient way to address complex challenges, make data-driven decisions, 
 and develop intelligent systems that can learn and adapt autonomously.\\
 
 Diving deeper into this concept, one critical aspect is the role of hyperparameters. 
-Hyperparameters are settings or configurations that guide the learning process of machine learning algorithms. 
+Hyperparameters are settings or configurations that guide the learning process of ML algorithms. 
 They act as the levers that fine-tune the behavior of these algorithms, influencing their performance, accuracy, and generalization capabilities.\\
 Hyperparameters encompass a wide range of choices, such as the learning rate in gradient descent, the depth of a decision tree, the number of hidden layers in a neural network, or the number of clusters in a k-means clustering algorithm. 
 Selecting the right hyperparameters can be a challenging and often iterative task, as they significantly impact the model's ability to capture underlying patterns in data.\\
 The process of hyperparameter tuning involves experimenting with different combinations of values, assessing the model's performance using techniques like cross-validation, and iteratively adjusting the hyperparameters to optimize the model's accuracy and generalization. 
-This fine-tuning is crucial to ensure that the machine learning model not only fits the training data well but also performs effectively on unseen data.
+This fine-tuning is crucial to ensure that the ML model not only fits the training data well but also performs effectively on unseen data.
 Moreover, the choice of hyperparameters is problem-dependent, and there's no one-size-fits-all solution. 
 It requires a deep understanding of the algorithm, the dataset, and the specific problem at hand.saisi
 
@@ -498,7 +498,7 @@ A \textbf{Binary Classification Problem} is a specific type of classification pr
 These two classes are typically referred to as the positive class and the negative class, and the task is to assign each data point to one of these two classes based on its features or attributes.
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\linewidth]{graphics/BinaryClassification.png}
+  \includegraphics[width=0.6\linewidth]{graphics/BinaryClassification.png}
   \caption{Binary Classification example}
   \label{fig:bin_classification}
 \end{figure}
@@ -506,7 +506,7 @@ These two classes are typically referred to as the positive class and the negati
 \subsection{K-Nearest Neighbors}
 \label{subsec:KNN}
 
-The \textbf{KNN} algorithm is a supervised machine learning algorithm used for classification and regression tasks.
+The \textbf{KNN} algorithm is a supervised ML algorithm used for classification and regression tasks.
 It is a simple and intuitive algorithm that makes predictions based on the similarity between a data point and its k-nearest neighbors in a training dataset.
 The \textit{k} in \textit{k}-nearest neighbors refers to the number of items that the algorithm uses to make its prediction whether its a classification problem or a regression problem.
 In Figure \ref{fig:knn} we can see a test sample represented by a green dot and we want to classify 
@@ -517,7 +517,7 @@ When \textit{k} = 5 (dashed line circle), the green dot is assigned to the categ
 If there are 3 blue squares and 2 red triangles inside the outer circle, the green dot is classified as a blue square.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\linewidth]{graphics/KNeighbours.png}
+    \includegraphics[width=0.55\linewidth]{graphics/KNeighbours.png}
     \caption{KNN algorithm with \textit{k} = 3 and \textit{k} = 5}
     \label{fig:knn}
 \end{figure}
@@ -534,13 +534,13 @@ Among the different  most common is the Euclidean distance:
 \subsection{Borderline Synthetic Minority Over-sampling Technique}
 \label{subsec:borderline}
 
-\textbf{Oversampling} is a technique used in the field of imbalanced machine learning to address the problem of class imbalance. 
+\textbf{Oversampling} is a technique used in the field of imbalanced ML to address the problem of class imbalance. 
 Class imbalance occurs when one class in a classification problem has significantly fewer instances than another class. 
 This imbalance can lead to biased models that perform poorly on the minority class (the class with fewer instances) because the model tends to be biased towards the majority class.\\
 The concept of oversampling involves increasing the number of instances in the minority class by generating synthetic or duplicate samples. 
 The goal is to balance the class distribution, making the minority class more comparable in size to the majority class. 
 A synthetic sample can be generated duplicating randomly another sample of the minority class or considering its underlying data distribution (ADASYN \cite{adasyn:2008}).
-This could result in a performance improvement of machine learning models by providing them with more information about the minority class.\\
+This could result in a performance improvement of ML models by providing them with more information about the minority class.\\
 The SMOTE generates synthetic samples by interpolating between neighboring minority class instances using an underlying KNN model.\\
 
 The \textbf{B-SMOTE} \cite{Han2005BorderlineSMOTEAN:2005}, is a vairant of the SMOTE that focuses on generating synthetic samples only for the boundary instances, which are the minority class instances close to the majority class. 
@@ -560,13 +560,13 @@ The retraining process maintained the same parameters but employed a dataset tha
 The synthetic samples generated by BSMOTE are represented as light-red dots.
 \begin{figure}[H]
   \centering
-  \begin{subfigure}{0.48\linewidth}
+  \begin{subfigure}{0.45\linewidth}
     \includegraphics[width=\linewidth]{graphics/BordSMOTE_no.png}
     \caption{}
     \label{fig:bordSMOTEnotApplied}
   \end{subfigure}
-  \hspace{0.02\linewidth}
-  \begin{subfigure}{0.48\linewidth}
+  \hspace{0.01\linewidth}
+  \begin{subfigure}{0.45\linewidth}
     \includegraphics[width=\linewidth]{graphics/BordSMOTE_yes.png}
     \caption{}
     \label{fig:bordSMOTEApplied}
@@ -602,11 +602,9 @@ the probability of choosing an item with label $i$ is $p_{i}$, and the probabili
   \sum_{k \ne i} p_{k} = 1 - p_{i} 
 \end{equation}
 The Gini impurity is computed by summing pairwise products of these probabilities for each class label:
-\begin{center}
-  \begin{equation}
-    Gini(p) = 1 - \sum_{i=1}^{J} (p_i^2)
-  \end{equation}
-\end{center}
+\begin{equation}
+  Gini(p) = 1 - \sum_{i=1}^{J} (p_i^2)
+\end{equation}
 
 In the example shown in Table \ref{tab:tableDecisionTreeDataset}, the objective is to determine whether to grant a loan based on two pieces of information: 
 the applicant's monthly income and the requested loan amount. The second figure illustrates the DT that has been trained on this dataset.
@@ -639,7 +637,7 @@ The goal is to create child nodes that are as homogeneous as possible with respe
 \end{table}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\linewidth]{graphics/DecTree.png}
+  \includegraphics[width=0.6\linewidth]{graphics/DecTree.png}
   \label{fig:knn5}
   \caption{DT applied on the dataset of Table \ref{tab:tableDecisionTreeDataset}}
 \end{figure}
@@ -684,7 +682,7 @@ For example the Figure \ref{fig:rf} is shown a RF classifier made of 3 DTs has b
 \subsection{Cross Validation}
 \label{subsec:cross_validation}
 
-\textbf{Cross Validation} is a technique used to estimate the effectiveness of a machine learning model based on a data sample.
+\textbf{Cross Validation} is a technique used to estimate the effectiveness of a ML model based on a data sample.
 It involves dividing the dataset into multiple training and testing subsets called \textit{folds} and then training and evaluating the model on each fold.
 The process of training and testing is typically repeated multiple times and the results from each iteration are often averaged to provide an overall estimate of the model's performance.
 The most common approach in basic cross-validation is to use a 80-20 or 70-30 split between the training and test sets.\\
@@ -716,10 +714,10 @@ However, LOOCV has some downsides:
 \subsection{Evaluation Metrics}
 \label{subsec:evaluation_metrics}
 
-Evaluation metrics in machine learning are fundamental tools for measuring the effectiveness and accuracy of predictive models.
+Evaluation metrics in ML are fundamental tools for measuring the effectiveness and accuracy of predictive models.
 These metrics provide a clear overview of the model's performance and assist in making informed decisions during the development and optimization process. \\
 
-The \textbf{confusion matrix} is an essential tool used in the evaluation of classification models in machine learning.
+The \textbf{confusion matrix} is an essential tool used in the evaluation of classification models in ML.
 It provides a detailed overview of a model's performance by comparing the model's predictions with the actual class labels of the test data. \\
 The confusion matrix consists of four main elements:
 
@@ -796,7 +794,7 @@ The confusion matrix is an important resource for calculating various evaluation
 \end{itemize} 
 
 
-The \textbf{Receiver Operating Characteristic} (ROC) curve  is a fundamental tool in machine learning and statistics for evaluating and visualizing the performance of binary classification models. 
+The \textbf{Receiver Operating Characteristic} (ROC) curve  is a fundamental tool in ML and statistics for evaluating and visualizing the performance of binary classification models. 
 It provides valuable insights into how well a model can distinguish between two classes (binary classification) across different classification thresholds.
 For a more comprehensive evaluation of a model's performance across various thresholds, 
 it's advisable to utilize a model that can provide probability scores for both classes rather than relying solely on categorical classifications.
