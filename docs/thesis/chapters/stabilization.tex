@@ -4,7 +4,7 @@ After clustering, we need to reassign colors to the clusters to stabilize them o
 As mentioned before, the order in which clusters are determined at each moment is random, and the selection order of clusters is represented by a color. Therefore, from the initial random color assignment, we aim to transition to a color assignment where two clusters of the same color share as many nodes (joints) as possible between moments.
 
 This is because the random assignment of colors poses visualization issues for the graph. It's possible that from one moment to the next, two clusters with many shared joints might have different colors, resulting in a visualization over time that appears as a continuous switching of colors. This could lead to a loss of continuity in the visual representation.
-To stabilize clusters over time, ensuring that pairs of clusters colored from one moment to another share the highest number of common joints, we turn to the MPWM.
+To stabilize clusters over time, ensuring that pairs of clusters colored from one moment to another share the highest number of common joints, we turn to the MaxWPM.
 
 We have implemented two algorithms: a BF approach, where we compute the total weights of all possible permutations of color assignments and select the assignment with the maximum total weight, and the Hungarian Algorithm, a combinatorial optimization method that solves the assignment problem in polynomial time.
 
@@ -14,7 +14,7 @@ Since in our case the number of clusters is usually small, there are instances w
 The Maximum Perfect Weight Matching is an optimization problem concerning graphs.
 The graphs in question are bipartite, meaning the vertices can be divided into two distinct sets in such a way that all edges of the graph connect vertices from different sets, with no edges connecting vertices within the same set.
 Additionally, these graphs are undirected, meaning the relationship between two nodes is bidirectional, in other words, the edge connecting node A to node B automatically implies the existence of the edge connecting node B to node A. \\
-In the MPWM problem, the vertices represent elements to be paired, and the edges represent possible connections between these elements. 
+In the MaxWPM problem, the vertices represent elements to be paired, and the edges represent possible connections between these elements. 
 Each edge is associated with a weight that represents the value or importance of the pairing between the connected vertices.\\
 The goal is to find a perfect matching, which is a set of edges in which every node is connected to exactly one other node, with no overlaps or isolated nodes, while maximizing the total weight of the edges in the matching.
 The total weight is the sum of the weights of the edges included in the matching.
@@ -37,7 +37,7 @@ Then will repeat this process iteratively until the last frame.
 
 
 \subsection{A real application}
-Let's consider a real-world scenario to understand how MPWM works in terms of visualization.
+Let's consider a real-world scenario to understand how MaxWPM works in terms of visualization.
 Suppose we have 20 nodes representing joints at time \textit{t} and 3 clusters labeled with different colors, as shown in Figure \ref{fig:clust_t}.
 At time \textit{t+1}, there are the same 20 nodes as before but with 3 clusters labeled differently (see Figure \ref{fig:clust_tplus1}). \\
 Certainly, this clustering-based assignment cannot be regarded as the optimal assignment, as we still need to assess the \textit{3!} possible color assignments. \\
@@ -345,7 +345,7 @@ The following figure shows the matching with the utility value for every possibl
 
 
 \section{Brute Force Algorithm}
-The BF can be a possible approach to solve the MPWM problem for bipartite graphs.
+The BF can be a possible approach to solve the MaxWPM problem for bipartite graphs.
 However, it's important to note that the BF has exponential time complexity, specifically, its time complexity grows exponentially with the number of vertices in the graph.
 This is because the BF examines all possible combinations of perfect matchings within the bipartite graph to find the one with the maximum weight.\\
 If the graph has \textit{n} vertices in both the first and second partitions, there are \textit{n}!\ possible matchings.
@@ -353,12 +353,12 @@ Each matching requires \textit{O}(\textit{n}) time to be computed because you ne
 Therefore, the overall complexity of the algorithm is on the order of \textit{O}(\textit{n}!$\cdot$\textit{n}). \\
 Since the complexity grows rapidly as \textit{n} increases, it quickly becomes impractical for large-sized graphs. However, for our case, this is not a problem.
 
-A MPWM problem using an utility matrix can be transformed into a minimum-weight matching problem.
+A MaxWPM problem using an utility matrix can be transformed into a Minimum Weight Perfect Matching problem.
 This can be achieved by introducing an auxiliary matrix, referred to as the \textit{cost matrix}.
 The cost matrix is essentially a duplicate of the utility matrix, but with all its elements negated.
 
 \subsection{Brute Force Algorithm summarized}
-The operation of the BF for minimum-weight matching problems can be summerized in these 3 steps:
+The operation of the BF for MinWPM problems can be summerized in these 3 steps:
 
 \begin{enumerate}
     \item {Compute the cost matrix for the considered bipartite graph with \textit{n} vertices in each partition.}
@@ -369,7 +369,7 @@ The operation of the BF for minimum-weight matching problems can be summerized i
 
 \subsection{Brute Force Algorithm application}
 
-Let's take for example the following cost matrix and try to apply the BF for minimum-weight matching problems:
+Let's take for example the following cost matrix and try to apply the BF for MinWPM problems:
 
 \begin{table}[H]
     \centering

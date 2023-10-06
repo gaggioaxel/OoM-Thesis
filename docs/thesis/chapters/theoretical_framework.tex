@@ -12,7 +12,7 @@ and intuitive way of representing objects.
 A \textbf{simple graph} \textit{G} consists of a non-empty finite set \textit{V(G)} of elements called \textbf{vertices}
 (or \textbf{nodes}), and a finite set \textit{E(G)} of distinct unordered pairs of distinct elements of \textit{V(G)}
 called \textbf{edges}. We call \textit{V(G)} the \textbf{vertices set} and \textit{E(G)} the \textbf{edge set} of G.
-An edge $\{\textit{v}, \textit{w}\}$ is said to \textbf{join} the vertices v and w, and is usually abbreviated to vw. For example, Figure~\ref{fig:simple_graph} represents the simple graph G whose vertex set \textit{V(G)} is $\{\textit{u}, \textit{v}, \textit{w}, \textit{z}\}$, and whose
+An edge $\{\textit{v}, \textit{w}\}$ is said to join the vertices v and w, and is usually abbreviated to vw. For example, Figure~\ref{fig:simple_graph} represents the simple graph G whose vertex set \textit{V(G)} is $\{\textit{u}, \textit{v}, \textit{w}, \textit{z}\}$, and whose
 edge set \textit{E(G)} consists of the edges \textit{uv}, \textit{uw}, \textit{vw} and \textit{wz}. 
 
 \begin{figure}[H]
@@ -107,7 +107,7 @@ An example of this is given in Figure \ref{fig:matrix_representations}.
         \end{bmatrix}
         \]
     \end{minipage}
-    \caption{Graph \textit{G} with its adjacency (A) and incidence (I) matrices}
+    \caption{Graph \textit{G} with its adjacency \textit{A} and incidence \textit{I} matrices}
     \label{fig:matrix_representations}
 \end{figure}
 
@@ -193,17 +193,17 @@ If there is the same number of vertices in both \textit{A} and \textit{B}, every
   \caption{Bipartite graph}
 \end{figure}
 
-\subsection{Hungarian Algorithm}
+\subsection{Hungarian Matching Algorithm}
 
-The Hungarian matching algorithm, also called the Kuhn-Munkres algorithm, is a \textit{O}($\textit{n}^3$) algorithm that can be used to find maximum-weight matchings in bipartite graphs with \textit{n} vertices for each partition, which is sometimes called the assignment problem.
+The HM, also called the Kuhn-Munkres algorithm, is a \textit{O}($\textit{n}^3$) algorithm that can be used to find maximum-weight matchings in bipartite graphs with \textit{n} vertices for each partition, which is sometimes called the assignment problem.
 A bipartite graph can easily be represented by an utility matrix, where the weights of edges are the entries. \\
 As previously demonstrated in the Brute Force algorithm, maximum-weight perfect matching problems using the utility matrix can be converted into minimum-weight perfect matching problems using the cost matrix. 
-We will describe the application of the Hungarian algorithm to address minimum-weight matching problems.
+We will describe the application of the HM to address minimum-weight matching problems.
 \\
 
-\subsubsection{Hungarian Algorithm summarized}
+\subsubsection{Hungarian Matching Algorithm summarized}
 
-The operation of the Hungarian algorithm for minimum-weigth matching problems can be summerized in these 6 steps:
+The operation of the HM for minimum-weigth matching problems can be summerized in these 6 steps:
 \begin{enumerate}
     \item {Compute the cost matrix for the considered bipartite graph with \textit{n} vertices in each partition.}
     \item {Subtract the smallest entry in each row from all the other entries in the row. This will make the smallest entry in the row now equal to 0.}
@@ -213,9 +213,9 @@ The operation of the Hungarian algorithm for minimum-weigth matching problems ca
     \item {Find the smallest entry not covered by any line. Subtract this entry from each row that isn’t crossed out, and then add it to each column that is crossed out. Then, go back to Step 3.}
 \end{enumerate}
 
-\subsubsection{Hungarian Algorithm application}
+\subsubsection{Hungarian Matching Algorithm application}
 
-Let's take for example the same cost matrix of the Brute Force example and try to apply the Hungarian algorithm for minimum-weigth matching problems:
+Let's take for example the same cost matrix of the Brute Force example and try to apply the HM for minimum-weigth matching problems:
 
 \begin{table}[H]
 \centering
