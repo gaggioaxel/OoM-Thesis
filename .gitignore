@@ -13,5 +13,6 @@ docs/thesis/*.fdb_latexmk
 docs/thesis/*.bbl
 docs/thesis/*.lof
 docs/thesis/*.lot
+docs/thesis/*.xdv
 docs/paperINTETAIN*
 code/src/_*

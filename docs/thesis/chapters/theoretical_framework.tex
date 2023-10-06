@@ -30,7 +30,7 @@ edge set \textit{E(G)} consists of the edges \textit{uv}, \textit{uw}, \textit{v
       \draw (v) -- (w);
       \draw (w) -- (z);
     \end{tikzpicture}
-    \caption{}
+    \caption{A simple graph}
     \label{fig:simple_graph}
 \end{figure}
 
@@ -107,7 +107,7 @@ An example of this is given in Figure \ref{fig:matrix_representations}.
         \end{bmatrix}
         \]
     \end{minipage}
-    \caption{Graph \textit{G} with its adjacency and incidence matrices}
+    \caption{Graph \textit{G} with its adjacency (A) and incidence (I) matrices}
     \label{fig:matrix_representations}
 \end{figure}
 
@@ -116,19 +116,18 @@ An example of this is given in Figure \ref{fig:matrix_representations}.
 If the vertex set of a graph \textit{G} can be split into two disjoint sets \textit{A} and \textit{B} so that each
 edge of \textit{G} joins a vertex of \textit{A} and a vertex of \textit{b}, then \textit{G} is a \textbf{bipartite graph}. \\
 Alternatively, a bipartite graph is one whose vertices can be coloured red and blue in such a way that each edge joins a red vertex (in \textit{A}) and a blue vertex (in \textit{B}). \\
-Figure \ref{fig:bipartite} is an example of bipartite graph.
 
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.7cm}]
         % Livello superiore
-        \node (A) at (3,0) [fill=red!60] {a};
-        \node (B) at (3,-3) [fill=red!60] {b};
+        \node (A) at (3,0) [fill=red!50] {a};
+        \node (B) at (3,-3) [fill=red!50] {b};
         
         % Livello inferiore
-        \node (C) at (5,0) [fill=blue!60] {c};
-        \node (D) at (5,-1.5) [fill=blue!60] {d};
-        \node (E) at (5,-3) [fill=blue!60] {e};
+        \node (C) at (5,0) [fill=blue!50] {c};
+        \node (D) at (5,-1.5) [fill=blue!50] {d};
+        \node (E) at (5,-3) [fill=blue!50] {e};
         
         % Collegamenti
         \draw (A) -- (C);
@@ -136,7 +135,7 @@ Figure \ref{fig:bipartite} is an example of bipartite graph.
         \draw (B) -- (D);
         \draw (B) -- (E);
     \end{tikzpicture}
-    \caption{}
+    \caption{A simple bipartite graph}
     \label{fig:bipartite}
 \end{figure}
 
@@ -149,56 +148,57 @@ This means that if the number of vertices in \textit{A} and \textit{B} is differ
 If there is the same number of vertices in both \textit{A} and \textit{B}, every vertex is connected to another vertex (see Figure \ref{fig:match_2}). \\
 
 \begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.48\linewidth}
     \centering
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.7cm}]
-            % Livello superiore
-            \node (A) at (3,0) [fill=red!60] {a};
-            \node (B) at (3,-3) [fill=red!60] {b};
+    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.7cm}]
+      % Livello superiore
+      \node (A) at (3,0) [fill=red!50] {a};
+      \node (B) at (3,-3) [fill=red!50] {b};
 
-            % Livello inferiore
-            \node (C) at (5,0) [fill=blue!60] {c};
-            \node (D) at (5,-1.5) [fill=blue!60] {d};
-            \node (E) at (5,-3) [fill=blue!60] {e};
+      % Livello inferiore
+      \node (C) at (5,0) [fill=blue!50] {c};
+      \node (D) at (5,-1.5) [fill=blue!50] {d};
+      \node (E) at (5,-3) [fill=blue!50] {e};
 
-            % Collegamenti
-            \draw (A) -- (C);
-            \draw (B) -- (D);
-        \end{tikzpicture}
-        \caption{}
-        \label{fig:match_1}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.7cm}]
-            % Livello superiore
-            \node (A) at (3,0) [fill=red!60] {a};
-            \node (B) at (3,-1.5) [fill=red!60] {b};
-            \node (C) at (3,-3) [fill=red!60] {c};
+      % Collegamenti
+      \draw (A) -- (C);
+      \draw (B) -- (D);
+    \end{tikzpicture}
+    \caption{}
+    \label{fig:match_1}
+  \end{subfigure}
+  \hspace{0.02\linewidth}
+  \begin{subfigure}{0.48\linewidth}
+    \centering
+    \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.7cm}]
+      % Livello superiore
+      \node (A) at (3,0) [fill=red!50] {a};
+      \node (B) at (3,-1.5) [fill=red!50] {b};
+      \node (C) at (3,-3) [fill=red!50] {c};
 
-            % Livello inferiore
-            \node (D) at (5,0) [fill=blue!60] {d};
-            \node (E) at (5,-1.5) [fill=blue!60] {e};
-            \node (F) at (5,-3) [fill=blue!60] {f};
+      % Livello inferiore
+      \node (D) at (5,0) [fill=blue!50] {d};
+      \node (E) at (5,-1.5) [fill=blue!50] {e};
+      \node (F) at (5,-3) [fill=blue!50] {f};
 
-            % Collegamenti
-            \draw (A) -- (E);
-            \draw (B) -- (F);
-            \draw (C) -- (D);
-        \end{tikzpicture}
-        \caption{}
-        \label{fig:match_2}
-    \end{minipage}
+      % Collegamenti
+      \draw (A) -- (E);
+      \draw (B) -- (F);
+      \draw (C) -- (D);
+    \end{tikzpicture}
+    \caption{}
+    \label{fig:match_2}
+  \end{subfigure}
+  \caption{Bipartite graph}
 \end{figure}
 
 \subsection{Hungarian Algorithm}
 
 The Hungarian matching algorithm, also called the Kuhn-Munkres algorithm, is a \textit{O}($\textit{n}^3$) algorithm that can be used to find maximum-weight matchings in bipartite graphs with \textit{n} vertices for each partition, which is sometimes called the assignment problem.
 A bipartite graph can easily be represented by an utility matrix, where the weights of edges are the entries. \\
-Come abbiamo già visto nel Brute Force algorithm, i problemi di maximum-weight perfect matching con la matrice di utilità possono essere trasformati in problemi di minimum-weight perfect matching con la matrice di costo.
-Spiegheremo l'Hungarian algorithm applicato ai problemi di minimum-weight matching.
+As previously demonstrated in the Brute Force algorithm, maximum-weight perfect matching problems using the utility matrix can be converted into minimum-weight perfect matching problems using the cost matrix. 
+We will describe the application of the Hungarian algorithm to address minimum-weight matching problems.
 \\
 
 \subsubsection{Hungarian Algorithm summarized}
@@ -427,13 +427,13 @@ Both of them are offered the opportunity to \textit{confess} (\textit{betray}) o
     \begin{minipage}{0.5\textwidth}
         \centering
         \begin{tabular}{|c|c|c|}
-        \hline
-        \backslashbox{A}{B} & Silence & Betray \\
-        \hline
-        Silence & \backslashbox{1}{1} & \backslashbox{3}{0} \\
-        \hline
-        Betray & \backslashbox{0}{3} & \backslashbox{2}{2} \\
-        \hline
+          \hline
+          \backslashbox{A}{B} & Silence & Betray \\
+          \hline
+          Silence & \backslashbox{1}{1} & \backslashbox{3}{0} \\
+          \hline
+          Betray & \backslashbox{0}{3} & \backslashbox{2}{2} \\
+          \hline
         \end{tabular}
         \caption{Years for crimanal \textit{A} and \textit{B}}
         \label{tab:contingency_table_1}
@@ -441,13 +441,13 @@ Both of them are offered the opportunity to \textit{confess} (\textit{betray}) o
     \begin{minipage}{0.5\textwidth}
         \centering
         \begin{tabular}{|c|c|c|}
-        \hline
-        \backslashbox{A}{B} & Silence & Betray \\
-        \hline
-        Silence & 2 & 3 \\
-        \hline
-        Betray & 3 & 4 \\
-        \hline
+          \hline
+          \backslashbox{A}{B} & Silence & Betray \\
+          \hline
+          Silence & 2 & 3 \\
+          \hline
+          Betray & 3 & 4 \\
+          \hline
         \end{tabular}
         \caption{Total years for the group of criminals}
         \label{tab:contingency_table_2}
@@ -492,8 +492,16 @@ A mathematical \textbf{Classifier} is a model that takes an input dataset and as
 The mathematical formulation of a classifier can vary depending on the algorithm used. 
 Suppose we have a training dataset represented as pairs (\textit{$\overline{x}$}, \textit{y}), where \textit{$\overline{x}$} is a vector of data features, and \textit{y} is the associated class label.
 The \textit{y} is a categorical (can take a fixed, number of possible values) variable that categorizes between two or more classes ('dog', 'cat', 'bird'), while in a regression problem it is a continuous variable.
-Our goal is to find a function \textit{f}(\textit{$\overline{x}$}) that maps the feature vectors \textit{$\overline{x}$} to class labels \textit{y}. 
+Our goal is to find a function \textit{f}(\textit{$\overline{x}$}) that maps the feature vectors \textit{$\overline{x}$} to class labels \textit{y}. \\
 
+A \textbf{Binary Classification Problem} is a specific type of classification problem where the goal is to categorize input data into one of two distinct classes or categories. 
+These two classes are typically referred to as the positive class and the negative class, and the task is to assign each data point to one of these two classes based on its features or attributes.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{graphics/BinaryClassification.png}
+  \caption{Binary Classification example}
+  \label{fig:bin_classification}
+\end{figure}
 
 \subsection{K-Nearest Neighbors}
 \label{subsec:KNN}
@@ -537,8 +545,8 @@ The SMOTE generates synthetic samples by interpolating between neighboring minor
 
 The \textbf{B-SMOTE} \cite{Han2005BorderlineSMOTEAN:2005}, is a vairant of the SMOTE that focuses on generating synthetic samples only for the boundary instances, which are the minority class instances close to the majority class. 
 This approach aims to concentrate on the regions of the dataset that are near the decision boundary between classes. \\
-The model internally fits two instances of KNN with different \textit{k} parameters: one instance to defines the neighborhood of samples to generate the synthetic samples.
-The other instead is used to determine if a minority sample is in “danger”. A "sample in danger" is one near to the boundary between two or more classes.
+The model internally fits two instances of KNN with different \textit{k} parameters (\textit{k-neighbors}, \textit{m-neighbors}): one instance to defines the neighborhood of samples to generate the synthetic samples.
+The other instead is used to determine if a minority sample is in \textit{danger}. A \textit{sample in danger} is one near to the boundary between two or more classes.
 
 In the illustrated scenario depicted in Figure \ref{fig:bordSMOTEnotApplied}, the task involves categorizing two distinct categories of network traffic: 
 one being malicious (depicted in red), the other representing legitimate traffic (shown in blue), and the decision boundaries are the same color meshes.

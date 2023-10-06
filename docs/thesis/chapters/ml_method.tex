@@ -5,18 +5,150 @@ If the results had been satisfactory, we would then have opted to evaluate progr
 
 \section{Machine Learning Model}
 We started by addressing the issue of imbalanced data in classification. Imbalanced data occurs when one class significantly outnumbers the other(s), leading to challenges in training a classifier that can effectively distinguish between the classes.
-To mitigate this imbalance, a resampling technique known as BorderlineSMOTE is employed. The operational concept is detailed in Section \ref{subsec:borderline}.
-As \textit{k-neighbors} and \textit{m-neighbors} parameters, the best results have been obtained by setting them as the 40\% of the training data with negative class and of the training data with positive class.
+To mitigate this imbalance, a resampling technique known as B-SMOTE is employed (\textit{BS1}). The operational concept is detailed in Section \ref{subsec:borderline}.
 
-After resampling the training data using BorderlineSMOTE, a Random Forest classifier is trained on the resampled data. 
-Random Forest is an ensemble learning technique that combines multiple decision trees to improve classification performance. 
-In this case, the classifier is trained with 500 decision trees.
+Following the resampling of the training data, a RF classifier (\textit{RF1}) is trained on this newly balanced dataset.
+To further optimize the classifier's performance, a feature selection process is employed with the goal of identifying the most influential features that contribute to accurate classification.
+Initially, the most important features are determined through the training of \textit{RF1} on the resampled data. 
+These crucial features are selected based on their significance in the classification task. 
+Subsequently, a new RF classifier (\textit{RF2}) is trained using only the selected important features. 
+To evaluate the performance of the classifier, a test set is chosen using LOOCV, as detailed in Section \ref{subsec:cross_validation}. 
 
-\section{Classify if an edge is or is not the OoM}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Model} & \textbf{Hyperparameter} & \textbf{Value} \\
+    \hline
+    \textit{BS1} & \textit{k}-\textit{neighbors} & 0.4 $\cdot$ count(Less Frequent Class)  \\
+    & \textit{m}-\textit{neighbors} & 0.4 $\cdot$ count(Most Frequent Class)  \\
+    \hline
+    \textit{RF1} & \textit{n}\_\textit{estimators} & 500  \\
+    & \textit{max}\_\textit{features} & Default  \\
+    \hline
+    \textit{RF2} & \textit{n}\_\textit{estimators} & 200  \\
+    & \textit{max}\_\textit{features} & All  \\
+    \hline
+    \end{tabular}
+    \caption{Hyperparameters tuned for our application}
+    \label{tab:ml_param}
+\end{table}
 
-\section{Classify if a part of the body is or is not the OoM}
+\section{Binary questions to the Model}
 
-\section{Classify if the OoM is on the top or on the bottom of the skeletal}
+In our ML model, we posed three different questions regarding the origins of movement. 
+Given the small and imbalanced dataset, some questions proved to be more challenging to classify. 
+Since our dataset is inherently a multi-class dataset, we performed binary classification by reclassifying the dataset in these ways to validate our model against different questions:
 
+\begin{itemize}
 
+    \item \textbf{Edge VS All:} In our dataset, the most frequent classification is the edge that links \textit{left\_hand} and \textit{left\_wrist}. 
+    Therefore, we categorized all samples where the classification was "left hand-left elbow" as 1, while we labeled all other samples as 0 as in Table \ref{tab:to_be_edge_or_not}. 
+    We iteratively asked the model whether the test sample was predicted as that edge or not.  
+    
+    \item \textbf{Lower VS Upper:} We reclassified the dataset by setting all samples classified in the upper part of the body to 0 and all samples classified in the lower part of the body to 1 following the schema in Table \ref{tab:top_bottom}.
+    
+    \item \textbf{Body Part VS All} We regrouped edges based on their respective body part mapped in Table \ref{tab:body_division_5} and took the most frequent to compare against all the others.
+    Therefore, we labeled all samples where the classification was in the \textit{right leg} as 1, while we categorized all other samples as 0.
 
+\end{itemize}
+These reclassification strategies were employed to address the challenges posed by our imbalanced and small dataset, allowing us to perform binary classification for our research purposes.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.4\linewidth}
+        %\centering
+        \resizebox{\linewidth}{!}{%
+            %\centering
+            \begin{tabular}{|c|c|}
+                \hline
+                \textbf{New Label} & \textbf{Edges} \\
+                \hline
+                This Edge & left\_hand - left\_wrist \\
+                \hline
+                Not This Edge & right\_hand - right\_wrist \\
+                & right\_wrist - right\_elbow \\
+                & right\_elbow - right\_shoulder \\
+                & right\_shoulder - shoulder\_center \\
+                & left\_elbow - left\_shoulder \\
+                & left\_shoulder - shoulder\_center \\
+                & shoulder\_center - head \\
+                & right\_foot - right\_ankle \\
+                & right\_ankle - right\_knee \\
+                & right\_knee - right\_hip \\
+                & right\_hip - hip\_center \\
+                & left\_foot - left\_ankle \\
+                & left\_knee - left\_hip \\
+                & left\_hip - hip\_center \\
+                \hline
+            \end{tabular}
+        }
+        \caption{}
+        \label{tab:to_be_edge_or_not}
+    \end{minipage}
+    \hspace{0.1\linewidth}
+    \begin{minipage}{0.43\linewidth}
+        %\centering
+        \resizebox{\linewidth}{!}{%
+            \begin{tabular}{|c|c|}
+                \hline
+                \textbf{Body Division} & \textbf{Edges} \\
+                \hline
+                Upper & right\_hand - right\_wrist \\
+                & right\_wrist - right\_elbow \\
+                & right\_elbow - right\_shoulder \\
+                & right\_shoulder - shoulder\_center \\
+                & left\_hand - left\_wrist \\
+                & left\_elbow - left\_shoulder \\
+                & left\_shoulder - shoulder\_center \\
+                & shoulder\_center - head \\
+                \hline
+                Lower & right\_foot - right\_ankle \\
+                & right\_ankle - right\_knee \\
+                & right\_knee - right\_hip \\
+                & right\_hip - hip\_center \\
+                & left\_foot - left\_ankle \\
+                & left\_knee - left\_hip \\
+                & left\_hip - hip\_center \\
+                \hline
+            \end{tabular}
+        }
+        \caption{}
+        \label{tab:top_bottom}
+    \end{minipage}
+
+    \begin{minipage}{0.43\linewidth}
+        \centering
+        \resizebox{\linewidth}{!}{%
+            \begin{tabular}{|c|c|}
+                \hline
+                \textbf{Body Division} & \textbf{Edges} \\
+                \hline
+                Head & shoulder\_center - head \\
+                \hline
+                Right Arm & right\_hand - right\_wrist \\
+                & right\_wrist - right\_elbow \\
+                & right\_elbow - right\_shoulder \\
+                & right\_shoulder - shoulder\_center \\
+                \hline
+                Left Arm & left\_hand - left\_wrist \\
+                & left\_elbow - left\_shoulder \\
+                & left\_shoulder - shoulder\_center \\
+                \hline
+                Right Leg & right\_foot - right\_ankle \\
+                & right\_ankle - right\_knee \\
+                & right\_knee - right\_hip \\
+                & right\_hip - hip\_center \\
+                \hline
+                Left Leg & left\_foot - left\_ankle \\
+                & left\_knee - left\_hip \\
+                & left\_hip - hip\_center \\
+                \hline
+            \end{tabular}
+        }
+        \caption{}
+        \label{tab:body_division_5}
+    \end{minipage}
+\end{figure}
+
+Note that not every edge of the reduced marker set (\ref{tab:labels_joints}) is included because  

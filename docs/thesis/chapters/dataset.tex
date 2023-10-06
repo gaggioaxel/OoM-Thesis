@@ -52,14 +52,17 @@ Starting from recordings of movements, we selected 60 segments in which we could
 Each video fragment was therefore classified with a connecting arc between two joints.\\
 The classification process was carried out in several steps:
 \begin{itemize}
-    \item{We individually classified the segments as thesis students.} \\
-    \item{We compared our classifications and considered for our dataset only those on which we agreed.} \\
-    \item{We proposed our classification to our professors and considered for our dataset only those on which all of us agreed.} \\
-    \item{The final selection was made merging our classification with the opinion of an expert dancer.} \\
+    \item{We individually classified half of the segments}
+
+    \item{We compared our classifications and considered for our dataset only those on which we agreed without any a-priori knowledge on the other's opinion.}
+
+    \item{We proposed our classification to our professors and considered for our dataset only those on which all of us agreed.}
+
+    \item{The final selection was made merging our classification with the opinion of an expert dancer.}
 \end{itemize}
 
 This process was used to include only the segments where the classification was more certain and evident. \\
-Unfortunately, the dataset is unbalanced, meaning that there are some classifications that are very frequent, some that are infrequent, and some classifications that are completely absent.
+Unfortunately, the dataset obtained ended up being unbalanced, meaning that there are some classifications that are very frequent, some that are infrequent, and some classifications that are completely absent.
 
 \section{Original Marker Set}
 Due to a four-year gap between the recording of the two distinct subsets of the dataset, 
@@ -93,7 +96,7 @@ we renamed some of the 41-marker labels to align with the full version.
     \centering
     \begin{tabular}{|c|c|}
     \hline
-    \textbf{41 Sport Marker Set Labels} & \textbf{Corresponding labels of the 64 Marker Set} \\
+    \textbf{41 Sport Marker Set Labels} & \textbf{64 Marker Set Labels} \\
     \hline
     RKneeIn, LKneeIn & RKNI, LKNI \\
     HeadFront, HeadL, HeadR & ARIEL, LFHD, RFHD \\
@@ -112,7 +115,7 @@ we renamed some of the 41-marker labels to align with the full version.
     \hline
     \end{tabular}
     \caption{41 Markers renaming convention}
-    \label{tab:marker_mapping}
+    \label{tab:marker_mapping_41}
 \end{table}
 
 The reduced marker set is achieved by reducing the count of markers employed from the full marker set.
@@ -124,8 +127,6 @@ This reduction was performed by computing the $barycentre$ of joints in a cluste
     \item Compute for each of $x$, $y$, $z$ their average, by summing all the $x$-markers together
     (and similarly for $y$ and $z$) and then dividing by the number of markers in the cluster.
 \end{enumerate} 
-
-
 
 \begin{table}[H]
     \centering
@@ -156,5 +157,5 @@ This reduction was performed by computing the $barycentre$ of joints in a cluste
         \hline
     \end{tabular}
     \caption{Mapping of the full marker set to the reduced marker set}
-    \label{tab:labels_joints}
+    \label{tab:marker_mapping_64}
 \end{table}
