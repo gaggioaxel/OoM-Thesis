@@ -107,7 +107,7 @@ An example of this is given in Figure \ref{fig:matrix_representations}.
         \end{bmatrix}
         \]
     \end{minipage}
-    \caption{Graph \textit{G} with its adjacency \textit{A} and incidence \textit{I} matrices}
+    \caption{Graph \textit{G} with its adjacency \textit{A} and incidence \textit{M} matrices}
     \label{fig:matrix_representations}
 \end{figure}
 
@@ -197,8 +197,8 @@ If there is the same number of vertices in both \textit{A} and \textit{B}, every
 
 The HM, also called the Kuhn-Munkres algorithm, is a \textit{O}($\textit{n}^3$) algorithm that can be used to find maximum-weight matchings in bipartite graphs with \textit{n} vertices for each partition, which is sometimes called the assignment problem.
 A bipartite graph can easily be represented by an utility matrix, where the weights of edges are the entries. \\
-As previously demonstrated in the Brute Force algorithm, maximum-weight perfect matching problems using the utility matrix can be converted into minimum-weight perfect matching problems using the cost matrix. 
-We will describe the application of the HM to address minimum-weight matching problems.
+As previously demonstrated in the Brute Force algorithm, maximum-weight perfect matching problems using the utility matrix can be converted into MinWPM problems using the cost matrix. 
+We will describe the application of the HM to address Minimum Weight Perfect Matching problems.
 \\
 
 \subsubsection{Hungarian Matching Algorithm summarized}
@@ -215,7 +215,7 @@ The operation of the HM for minimum-weigth matching problems can be summerized i
 
 \subsubsection{Hungarian Matching Algorithm application}
 
-Let's take for example the same cost matrix of the Brute Force example and try to apply the HM for minimum-weigth matching problems:
+Let's take for example the same cost matrix of the Brute Force example and try to apply the HM for MinWPM problems:
 
 \begin{table}[H]
 \centering
