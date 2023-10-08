@@ -59,10 +59,18 @@ Similarly, two distinct edges \textit{e} and \textit{f} are \textbf{adjacent} if
     \label{fig:adiacency}
 \end{figure}
 
+\subsection{Weighted Degree Centrality}
+A graph can have 
+Weighted degree centrality is a measure used in network analysis to quantify the importance or centrality of a node in a network, taking into account the weights of the edges connected to that node. 
+Unlike traditional degree centrality, which only considers the number of connections (edges) a node has, weighted degree centrality considers the strengths or weights associated with those connections.
+For a given node, calculate its weighted degree by summing up the weights of all the edges connected to that node. In mathematical terms, it can be expressed as:
+\begin{equation}
+  WDC(v) = \sum_{i=1}^{N} w_{vi}
+\end{equation}
+Where \textit{v} is a vertex in the graph and \textit{N} is the number of vertices.
+
 \subsection{Matrix representations}
-Although it is convenient to represent a graph by a diagram of points joined by lines,
-such a representation may be unsuitable if we wish to store a large graph in a computer.
-One way of storing a simple graph is involve matrices. \\
+One approach to representing a graph is through the use of matrices, especially when dealing with large graphs that may not be well-suited for diagram-based representations.\\
 Let's consider a graph \textit{G} with \textit{n} vertices and \textit{m} edges. \\
 An \textbf{adjacency matrix A} is the $n \times n$ matrix whose \textit{ij}-th entry is the number of edges joining vertex \textit{i} and vertex \textit{j}. \\
 If, in addition, the edges are labelled $\{1, 2, \dots, m\}$, its \textbf{incidence matrix M} is the $n \times m$ matrix whose \textit{ij}-th entry is 1 if vertex \textit{i} is incident to edge \textit{j}, and 0 otherwise. \\
