@@ -641,11 +641,17 @@ The goal is to create child nodes that are as homogeneous as possible with respe
   \label{fig:knn5}
   \caption{DT applied on the dataset of Table \ref{tab:tableDecisionTreeDataset}}
 \end{figure}
+In the example provided the term “samples" represent the total number of training samples used to create the specific tree node. 
+In other words, it is the number of data examples that were considered in that node during the tree construction process.
+
 Note that due to the absence of constraints on hyperparameters like tree depth or the minimum number of features required to split nodes, 
 it becomes evident that each sample in the dataset follows a distinct path within this tree. 
-This situation results in a phenomenon known as overfitting, where the model essentially molds itself too closely to the training data.\\
+The term “value" represents the distribution of classes or labels of the samples within a node. 
+It is a vector that indicates how many training samples in that node belong to each class or category. 
+For instance, if we see “value = [0, 2]," it means that there are 0 samples belonging to class “Not Approved" and 2 samples belonging to class “Approved" in that node.
+This example is simply used for showing the behaviour of a DT\\
 
-\textbf{Random Forest} (RF) is an ensemble learning method that builds multiple DTs during training and combines their predictions to make more accurate and robust classifications or regressions.
+\textbf{Random Forest} is an ensemble learning method that builds multiple DTs during training and combines their predictions to make more accurate and robust classifications or regressions.
 A RF is typically constructed in this way:
 \begin{enumerate}
   \item \textbf{Bootstrapped Data:} A random subset of the training data (with replacement) is used to train each DT. This results in each tree being trained on a slightly different dataset.
