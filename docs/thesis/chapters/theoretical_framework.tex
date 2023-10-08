@@ -60,6 +60,7 @@ Similarly, two distinct edges \textit{e} and \textit{f} are \textbf{adjacent} if
 \end{figure}
 
 \subsection{Weighted Degree Centrality}
+\label{subsec:weighted_degree}
 A graph can have 
 Weighted degree centrality is a measure used in network analysis to quantify the importance or centrality of a node in a network, taking into account the weights of the edges connected to that node. 
 Unlike traditional degree centrality, which only considers the number of connections (edges) a node has, weighted degree centrality considers the strengths or weights associated with those connections.
@@ -749,11 +750,11 @@ For example, if we are trying to identify spam emails, and the model correctly c
   \renewcommand{\arraystretch}{2} % Aumenta lo spazio tra le righe del doppio
   \begin{tabular}{|>{\rule[-0.5cm]{0pt}{1.5cm}}c|c|c|}
   \hline
-  \backslashbox{Pred}{Real} & Positive & Negative \\
+  \backslashbox{Real}{Pred} & Negative &  Positive\\
   \hline
-  Positive & TP & FP \\
+  Negative & TN & FP \\
   \hline
-  Negative & FN & TN \\
+  Positive & FN & TP \\
   \hline
   \end{tabular}
   \caption{Example of confusion matrix}
@@ -841,7 +842,7 @@ Typically, the higher the AUC-ROC, the better the model's ability to discriminat
 ROC curves provide a visual depiction of a model's trade-off between \textit{Sensitivity} and \textit{Specificity} (1 - FPR) across different classification thresholds.
 In Figure \ref{fig:ROC_AUC}, it is shown an illustration of three distinct curves, each accompanied by its corresponding area value.\\
 
-In binary classification, the class prediction for each instance is often made based on a continuous random variable \textit{X}, which is a "score" computed for the instance (e.g. the estimated probability in logistic regression). 
+In binary classification, the class prediction for each instance is often made based on a continuous random variable \textit{X}, which is a $score$ computed for the instance (e.g. the estimated probability in logistic regression). 
 Given a threshold parameter \textit{T}, the instance is classified as "positive" if $X > T$, and "negative" otherwise. 
 Changing the threshold \textit{x*} along a curve corresponds to shifting the position of the black vertical line in Figure \ref{fig:PNDistribution}. 
 The underlying idea is that a perfect classifier achieves a distinct separation between the two classes (0 for negative and 1 for positive), enabling an ideal thresholding operation.

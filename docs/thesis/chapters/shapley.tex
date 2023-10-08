@@ -1,15 +1,14 @@
-\chapter{Shapley Values}
+\chapter{Clustering}
 
 \section{Auxiliary Graph}
 From the clustered graph a weighted auxiliary graph is defined for each frame, denoted as $G^{aux}$ := ($V$, $E^{aux}$, $w^{aux}$). \\
 The vertices of this auxiliary graph are the same as in the original graph $G$, but the edge set is comprised of a subset of edges that only connect vertices belonging to different clusters.
-The weight of every edge is calculated by applying Euclidean norm (Formula \ref{formula:normalization}) between pairs of vectors
-At least one of these edges in the auxiliary graph will be the edge associated with the origin of motion. \\
-Later on, we will see how to choose the correct edge.
+The weight of every edge is calculated by applying Euclidean norm (Formula \ref{formula:normalization}) between pairs of vectors.
+One of these edges in the auxiliary graph will be the edge associated with the origin of motion.
 \\
 
 Considering, for example, a graph $G$ with 3 clusters (see Figure \ref{fig:graph_g}), we can visualize which edges will be involved in the auxiliary graph (Figure \ref{fig:aux_graph}).
-\begin{figure}
+\begin{figure}[H]
   \begin{subfigure}{0.45\textwidth}
     \centering
     \begin{tikzpicture}
@@ -72,21 +71,30 @@ Considering, for example, a graph $G$ with 3 clusters (see Figure \ref{fig:graph
 \end{figure}
 
 
-A cooperative TU game on the weighted auxiliary graph is constructed. \\
-The value \textit{c}($V'$) associated with a generic coalition $V'$ is chosen as the summation of all the weights in the weighted auxiliary graph $G^{aux}$ associated with
-the physical edges belonging to the subgraph of the auxiliary graph that is induced by $V'$.\\
-More precisely, the characteristic function is chosen as follows:
+\section{Weighted Degree Centrality}
+To identify the edge involved in the OoM, we use the WDG, as explained in Section \ref{subsec:weighted_degree}.
+For each frame, we keep track of the two nodes with the highest WDC.
+At the end of this process, among the selected nodes, we will choose the two nodes that have been chosen as the highest most frequently.
+At this stage, we will examine in the $G^{aux}$ to which edges belonging to $E^{aux}$ these two winning nodes are connected, and these two edges will be considered as the predicted OoM.
+
+\section{Results}
+The OoM was classified using three distinct features: speed, acceleration and angular momentum, as described in Section \ref{sec:features}.
+For each feature, we calculated the accuracy of the method in predicting the correct edge compared to the true label.\\
+In Table \ref{tab:clust_results} we can see the results.
 
 
-\begin{center}
-    \begin{equation}
-    c(V') = \sum_{v, \hat{v} \in V', \hat{v} \in N^{aux}(v)} w^{aux}(e^{aux}_{v, \hat{v}})
-    \end{equation}
-\end{center}
-    
-\begin{center}
-    \begin{equation}
-    \phi(i) := \sum_{V'\subseteq V\setminus \{i\}} \frac{|V'|! (|V|-|V'|-1)!}{|V|!} (c(V' \cup \{i\}) - c(V'))
-    \end{equation}
-\end{center}
-    
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|>{\centering\arraybackslash}p{3.2cm}|>{\centering\arraybackslash}p{3.2cm}|>{\centering\arraybackslash}p{3.2cm}|>{\centering\arraybackslash}p{3.2cm}|}
+  \hline
+  & \textbf{Speed} & \textbf{Acceleration} & \textbf{Angular Momentum} \\
+  \hline
+  \textbf{WDG} & 18.3\%  & 21.7\%  & 36.1\%  \\
+  \hline
+  \end{tabular}
+  \caption{Classification accuracy with WDG on the overall dataset}
+  \label{tab:clust_results}
+\end{table}
+
+Except for speed, even though these results are not impressive, they are still better than a random approach, where two random nodes are selected, and by examining which edges in the auxiliary graph they are connected to, they are compared to the ground truth. \\
+Such an approach, in fact, achieves an accuracy of 19\%.

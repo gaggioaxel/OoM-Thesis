@@ -1,9 +1,80 @@
-\chapter{Method}
+\chapter{Machine Learning}
+
+\section{Features extraction}
+Feature extraction in ML is an essential process that involves transforming raw data into a more suitable format for analysis and model building.
+It helps identify and capture the most relevant information within the data while simplifying excessive complexity that could make model training challenging.
+This process not only contributes to improving model accuracy but also reduces the risk of overfitting and enhances the ability to generalize knowledge gained to new data. \\
+As previously mentioned, our dataset consists of 60 samples, each containing the spatial positions of all 20 skeletal joints at each time step.
+From this data, we want to extract the necessary features for ML.
+Here we will see al the steps involved in order to achieve the desired features. \\
+
+As a first step, we will calculate the $x$, $y$, and $z$ coordinates of the skeleton's barycenter for each time step. \\
+We define the barycenter as the point where all the mass of an object or a system of objects is concentrated. \\
+In this context, each joint is considered to have unit mass, meaning that all joints contribute equally to the barycenter. \\
+If we represent $n$ as the number of 20 joints, the coordinates of the barycenter are obtained by taking the average of the coordinates of these 20 joints, as we can see in the formula:
+
+
+\begin{equation}
+    \textit{Barycenter} (x, y, z) = \left(\frac{1}{n} \sum_{i=1}^{n} x_i, \frac{1}{n} \sum_{i=1}^{n} y_i, \frac{1}{n} \sum_{i=1}^{n} z_i\right)
+    \label{formula:baricentro}
+\end{equation}
+    
+where $x_i$, $y_i$, and $z_i$ represent the $x$, $y$, and $z$ coordinates of the $i$-th joint, respectively.
+
+Subsequently, we calculate the distance between each joint and the barycenter, at each time step, using the Euclidean distance in Formula \ref{formula:distance}. \\
+These distances from the barycenter will be normalized for each joint, in order to obtain normalized time series between 0 and 1.
+
+\begin{equation}
+    x_{norm} = \frac{{x - min(x)}}{{max(x) - min(x)}}
+    \label{formula:normalization}
+\end{equation}
+    
+The choice to calculate the distances between joints and the barycenter for each sample plays a crucial role in ensuring the robustness of our ML approach to variations in scale.
+In scenarios where dancers or subjects may have different heights or body proportions, relying solely on absolute joint coordinates could introduce bias into the model.
+However, by computing these distances and further normalizing them within the range of 0 to 1, we effectively eliminate the influence of scale variations.
+
+This normalization process not only standardizes the data but also allows the ML model to focus on the relative spatial distribution of joints rather than their absolute positions.
+Consequently, our model becomes better equipped to recognize patterns and movements across individuals of varying statures, making it more versatile and applicable in real-world scenarios. \\
+Finally, to choose the features to extract, we referred to \cite{oneto:2020} and \cite{sama:2010}.
+In Table \ref{tab:ml_features} we can see all the features and their relative function.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+    \textbf{Function} & \textbf{Description} \\
+    \hline
+    mean & Mean Value \\
+    var & Variance \\
+    mad & Median Absolute Value \\
+    max & Largest Value in Array \\
+    min & Smallest Value in Array \\
+    sma & Signal Magnitude Area \\
+    energy & Average Sum of Squares \\
+    iqr & Interquantile Range \\
+    entropy & Signal Entropy \\
+    correlation & Correlation Coefficient \\
+    kurtosis & Signal Kurtosis \\
+    skewness & Signal Skewness \\
+    maxFreqInd & Largest Frequency Component \\
+    argMaxFreqInd & Index Largest Frequency Component \\
+    meanFreq & Frequency Signal Weighted Average \\
+    skewnessFreq & Frequency Signal Skewness \\
+    kurtosisFreq & Frequency Signal Kurtosis \\
+    ampSprec & Amplitude Spectrum of the Frequency Signal \\
+    angle & Phase Angle of the Frequency Signal \\
+    \hline
+    \end{tabular}
+    \caption{List of measures for computing feature vectors}
+\label{tab:ml_features}
+\end{table}
+
+\section{Method}
 
 The initial approach to classification involves a straightforward binary classification of the origin of the movement within a specific edge.
 If the results had been satisfactory, we would then have opted to evaluate progressively more complex models, eventually leading to the actual classification of the movement's origin from a video segment.
 
-\section{Machine Learning Model}
+\subsection{Model creation}
 We started by addressing the issue of imbalanced data in classification. Imbalanced data occurs when one class significantly outnumbers the other(s), leading to challenges in training a classifier that can effectively distinguish between the classes.
 To mitigate this imbalance, a resampling technique known as B-SMOTE is employed (\textit{BS1}). The operational concept is detailed in Section \ref{subsec:borderline}.
 
@@ -34,7 +105,7 @@ To evaluate the performance of the classifier, a test set is chosen using LOOCV,
     \label{tab:ml_param}
 \end{table}
 
-\section{Binary questions to the Model}
+\subsection{Binary questions to the Model}
 
 In our ML model, we posed three different questions regarding the origins of movement. 
 Given the small and imbalanced dataset, some questions proved to be more challenging to classify. 
@@ -43,13 +114,13 @@ Since our dataset is inherently a multi-class dataset, we performed binary class
 \begin{itemize}
 
     \item \textbf{Edge VS All:} In our dataset, the most frequent classification is the edge that links \textit{left\_hand} and \textit{left\_wrist}. 
-    Therefore, we categorized all samples where the classification was "left hand-left elbow" as 1, while we labeled all other samples as 0 as in Table \ref{tab:to_be_edge_or_not}. 
+    Therefore, we categorized all samples where the classification was \textit{left\_hand}-\textit{left\_wrist} as 1, while we labeled all other samples as 0 as in Table \ref{tab:to_be_edge_or_not}. 
     We iteratively asked the model whether the test sample was predicted as that edge or not.  
     
     \item \textbf{Lower VS Upper:} We reclassified the dataset by setting all samples classified in the upper part of the body to 0 and all samples classified in the lower part of the body to 1 following the schema in Table \ref{tab:top_bottom}.
     
-    \item \textbf{Body Part VS All} We regrouped edges based on their respective body part mapped in Table \ref{tab:body_division_5} and took the most frequent to compare against all the others.
-    Therefore, we labeled all samples where the classification was in the \textit{right leg} as 1, while we categorized all other samples as 0.
+    \item \textbf{Body Part VS All:} We regrouped edges based on their respective body part mapped in Table \ref{tab:body_division_5} and took the most frequent to compare against all the others.
+    Therefore, we labeled all samples where the classification was in the \textit{Left Leg} as 1, while we categorized all other samples as 0.
 
 \end{itemize}
 These reclassification strategies were employed to address the challenges posed by our imbalanced and small dataset, allowing us to perform binary classification for our research purposes.
@@ -151,4 +222,28 @@ These reclassification strategies were employed to address the challenges posed 
     \end{minipage}
 \end{figure}
 
-Note that not every edge of the reduced marker set (\ref{tab:labels_joints}) is included because  
+Note that not every edge of the reduced marker set (\ref{tab:labels_joints}) is included because some edges have not been the ground truth for any sample in our dataset.
+
+\section{Results}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}p{4.2cm}|>{\centering\arraybackslash}p{4.2cm}|>{\centering\arraybackslash}p{4.2cm}|}
+    \hline
+    \textbf{Question} & \textbf{Application} & \textbf{Accuracy} \\
+    \hline
+    \textbf{Edge VS All} & left\_hand-left\_wrist  & 90\% \\
+    & Mean for each edge  & 21\% \\
+     & Random  & 6.6\% \\
+    \hline
+    \textbf{Lower VS Upper} & Lower VS Upper  & 78.3\% \\
+    & Random  & 50\% \\
+    \hline
+    \textbf{Body Part VS All} & Left Leg  & 86.7\% \\
+     & Mean for each part  & 40\% \\
+     & Random  & 20\% \\
+    \hline
+    \end{tabular}
+    \caption{Classification accuracy with ML on the overall dataset}
+    \label{tab:cml_results}
+  \end{table}
