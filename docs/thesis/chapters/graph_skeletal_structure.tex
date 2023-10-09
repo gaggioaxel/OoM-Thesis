@@ -1,5 +1,4 @@
 \chapter{Graph Skeletal Structure}
-TODO cambiare sta roba perchè non abbiamo usato tutto e dobbiamo spiegare meglio su cosa lo abbiamo applicato e per ottenere che risultati
 The Graph Skeletal Structure is obtained considering the \textit{reduced marker set}, obtained after the reduction from the \textit{full marker set} which has been discussed previously. \\
 We model the human skeleton as an undirected graph, where the vertices are the joints and the edges represent connections between consecutive physical body joints.\\
 Each edge is associated with a specific weight, the value of which depend on a feature extracted from motion capture data. \\
@@ -132,20 +131,43 @@ The angular momentum has been calculated with respect to the center of mass so w
 Analyzing angular momentum can reveal specific patterns of rotation or changes in orientation. \\
 These patterns can be used to identify distinctive gestures or movements in activities such as gymnastics or choreography.
 
-\section{Cosine similarity}
-To calculate the weights of the edges connecting the different joints, we use the \textit{Cosine similarity}. \\
-The cosine similarity between two vectors \textit{x} and \textit{y} is defined as:
+\section{Similarity measure}
+To calculate the weights of the edges connecting the different joints at each instant, we use different formulas depending on the feature we are considering.
+\\
+
+\textit{Speed and Acceleration:} in the case of Speed and Acceleration features, for each time instant, we have to introduce a factor of tollerance.\\
+$tol_i$ is the tollerance at time instant $i$ and is obtained by computing the mean of all the $features$ at instant $i$ at multipying by a factor 
+$10^{-3}$.
 \begin{equation}
-  cos(\vec{x}, \vec{y}) = \frac{\vec{x} \cdot \vec{y}}{\|\vec{x}\| \cdot \|\vec{y}\|}  =  \frac{\sum_{i=1}^{3} (x_i \cdot y_i)}{\sqrt{\sum_{i=1}^{3} x_i^2} \cdot \sqrt{\sum_{i=1}^{3} y_i^2}} 
+  tol_i = mean(feature_i) \cdot 10^{-3}
+  \label{formula:tol}
 \end{equation}
+This is done to prevent errors in future calculations such as division by zero.
 
-Cosine similarity is a measure of similarity between two vectors, frequently used to gauge how aligned vectors are in space. \\
-It returns a value ranging from -1 to 1.
-A higher value indicates greater similarity, where 1 represents identical vectors (perfect similarity), 0 means no similarity, and -1 indicates perfect dissimilarity (opposite directions).
-We iteratively calculate the similarity between all the joints connected by an edge.
-By doing this, it is possible to compare the directions of the two considered nodes, and thus evaluate if two nodes are associated with
-(nearly) the same direction.
-In order not to have negative values that could lead to we shifted TODO
 
-After obtaining the weights for each edge of the graph, we then have, for each instantaneous frame, a graph $G$ := ($V$, $E$, $w$), where 
-$V$ is the set of $vertices$, $E$ is the set of $edges$ and $w$ is the set of $edge weights$.
+In the subsequent step, we assign a weight to each edge for every pair of joints $v$ and $\hat{v}$ for each instant $i$:
+\begin{itemize}
+  \item If the two joints are indeed connected in the skeleton, for example, $left\_hand$ and $left\_wrist$, we use the following formula:
+    \begin{equation}
+      w^{v\hat{v}}_{i} = \frac{1}{\|feature^{v}_{i}\|-\|feature^{\hat{v}}_{j}\|+tol}
+    \end{equation}
+  \item If the two joints are not actually connected, for example, $head$ and $right\_foot$, we use the following formula:
+    \begin{equation}
+      w^{v\hat{v}}_{i} = \frac{1}{5 \cdot (\|feature^{v}_{i}\|-\|feature^{\hat{v}}_{j}\|+tol}
+      \label{formula:tol}
+    \end{equation}
+\end{itemize}
+
+\textit{Angular Momentum:} in the case of Angular Momentum, we assign a weight to each edge for every pair of joints $v$ and $\hat{v}$ for
+each instant $i$, distinguishing between two cases:
+\begin{itemize}
+  \item If the two joints are indeed connected in the skeleton, we use the following formula:
+    \begin{equation}
+      w^{v\hat{v}}_{i} = \frac{feature^{v}_{i} \times feature^{\hat{v}}_{i}}{\|feature^{v}_{i}\|-\|feature^{\hat{v}}_{j}\|} + 1
+    \end{equation}
+  \item If the two joints are not actually connected, we use the following formula:
+    \begin{equation}
+      w^{v\hat{v}}_{i} = \frac{feature^{v}_{i} \times feature^{\hat{v}}_{i}}{5 \cdot (\|feature^{v}_{i}\|-\|feature^{\hat{v}}_{j}\|+1)}
+      \label{formula:tol}
+    \end{equation}
+\end{itemize}
