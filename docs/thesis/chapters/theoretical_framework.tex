@@ -202,17 +202,50 @@ If there is the same number of vertices in both \textit{A} and \textit{B}, every
   \caption{Bipartite graph}
 \end{figure}
 
+\subsection{Maximum Weight Perfect Matching}
+\label{sec:MaxWPM}
+The Maximum Perfect Weight Matching is an optimization problem concerning graphs.
+The graphs in question are bipartite, meaning the vertices can be divided into two distinct sets in such a way that all edges of the graph connect vertices from different sets, with no edges connecting vertices within the same set.
+Additionally, these graphs are undirected, meaning the relationship between two nodes is bidirectional, in other words, the edge connecting node A to node B automatically implies the existence of the edge connecting node B to node A. \\
+In the MaxWPM problem, the vertices represent elements to be paired, and the edges represent possible connections between these elements. 
+Each edge is associated with a weight that represents the value or importance of the pairing between the connected vertices.\\
+The goal is to find a perfect matching, which is a set of edges in which every node is connected to exactly one other node, with no overlaps or isolated nodes, while maximizing the total weight of the edges in the matching.
+The total weight is the sum of the weights of the edges included in the matching.
+The weights of the edges are collected in a matrix called a \textit{utility matrix}.\\
+The utility matrix will be a square matrix because the number of nodes in the two distinct sets is the same.
+The rows could represent the nodes in the first set, while the columns could represent the nodes in the second set, or vice versa.
+The element (\textit{i}, \textit{j}) of the matrix represents the weight of the edge connecting vertex \textit{i} to vertex \textit{j}. 
+
+
+A MaxWPM problem using an utility matrix can be transformed into a \textbf{Minimum Weight Perfect Matching} problem.
+This can be achieved by introducing an auxiliary matrix, referred to as the \textit{cost matrix}.
+The cost matrix is essentially a duplicate of the utility matrix, but with all its elements negated.
+
+\section{Brute Force Algorithm}
+The BF can be a possible approach to solve the MaxWPM problem for bipartite graphs.
+However, it's important to note that the BF has exponential time complexity, specifically, its time complexity grows exponentially with the number of vertices in the graph.
+This is because the BF examines all possible combinations of matchings within the bipartite graph to find the one with the maximum weight.\\
+If the graph has \textit{n} vertices in both the first and second partitions, there are \textit{n}!\ possible matchings.
+Each matching requires \textit{O}(\textit{n}) time to be computed because you need to check that it is a perfect matching and calculate its total weight.
+Therefore, the overall complexity of the algorithm is on the order of \textit{O}(\textit{n}!$\cdot$\textit{n}). \\
+Since the complexity grows rapidly as \textit{n} increases, it quickly becomes impractical for large-sized graphs. \\
+
+The operation of the BF for MinWPM problems can be summerized in these 3 steps:
+
+\begin{enumerate}
+    \item {Compute the cost matrix for the considered bipartite graph with \textit{n} vertices in each partition.}
+    \item {Compute the total cost of all the \textit{n}!\ permutations.}
+    \item {Choose the assignment with the lowest total cost.}
+\end{enumerate}
+
+
 \subsection{Hungarian Matching Algorithm}
 
-The HM, also called the Kuhn-Munkres algorithm, is a \textit{O}($\textit{n}^3$) algorithm that can be used to find maximum-weight matchings in bipartite graphs with \textit{n} vertices for each partition, which is sometimes called the assignment problem.
-A bipartite graph can easily be represented by an utility matrix, where the weights of edges are the entries. \\
+The HM, also called the Kuhn-Munkres algorithm, is a \textit{O}($\textit{n}^3$) algorithm that can be used to find MaxWPM in bipartite graphs with \textit{n} vertices for each partition, which is sometimes called the assignment problem.
 As previously demonstrated in the Brute Force algorithm, maximum-weight perfect matching problems using the utility matrix can be converted into MinWPM problems using the cost matrix. 
-We will describe the application of the HM to address Minimum Weight Perfect Matching problems.
-\\
+We will describe the application of the HM to address Minimum Weight Perfect Matching problems. \\
 
-\subsubsection{Hungarian Matching Algorithm summarized}
-
-The operation of the HM for minimum-weigth matching problems can be summerized in these 6 steps:
+The operation of the HM for MinWPM problems can be summerized in these 6 steps:
 \begin{enumerate}
     \item {Compute the cost matrix for the considered bipartite graph with \textit{n} vertices in each partition.}
     \item {Subtract the smallest entry in each row from all the other entries in the row. This will make the smallest entry in the row now equal to 0.}
@@ -222,146 +255,7 @@ The operation of the HM for minimum-weigth matching problems can be summerized i
     \item {Find the smallest entry not covered by any line. Subtract this entry from each row that isn’t crossed out, and then add it to each column that is crossed out. Then, go back to Step 3.}
 \end{enumerate}
 
-\subsubsection{Hungarian Matching Algorithm application}
 
-Let's take for example the same cost matrix of the Brute Force example and try to apply the HM for MinWPM problems:
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-  \hline
-  108 & 125 & 150 \\
-  \hline
-  150 & 135 & 175 \\
-  \hline
-  122 & 148 & 250 \\
-  \hline
-\end{tabular}
-\end{table}
-
-Subtract the smallest value in each row from the other values in the row:
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-  \hline
-  0 & 17 & 42 \\
-  \hline
-  15 & 0 & 40 \\
-  \hline
-  0 & 26 & 128 \\
-  \hline
-\end{tabular}
-\end{table}
-
-Now, subtract the smallest value in each column from all other values in the column:
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-  \hline
-  0 & 17 & 2 \\
-  \hline
-  15 & 0 & 0 \\
-  \hline
-  0 & 26 & 88 \\
-  \hline
-\end{tabular}
-\end{table}
-
-There are 2 lines drawn, and 2 is less than 3, so there is not yet the optimal number of zeroes.
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-  \hline
-  \cellcolor{gray!25} 0 & 17 & 2 \\
-  \hline
-  \cellcolor{gray!25} 15 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 \\
-  \hline
-  \cellcolor{gray!25} 0 & 26 & 88 \\
-  \hline
-\end{tabular}
-\end{table}
-
-Find the smallest entry not covered by any line. Subtract this entry from each row that isn’t crossed out, and then add it to each column that is crossed out. Then, go back to Step 3.
-2 is the smallest entry.
-First, subtract from the uncovered rows:
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-  \hline
-  \cellcolor{gray!25} -2 & 15 & 0 \\
-  \hline
-  \cellcolor{gray!25} 15 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 \\
-  \hline
-  \cellcolor{gray!25} -2 & 24 & 86 \\
-  \hline
-\end{tabular}
-\end{table}
-
-Now add to the covered columns:
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-  \hline
-  \cellcolor{gray!25} 0 & 15 & 0 \\
-  \hline
-  \cellcolor{gray!25} 17 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 \\
-  \hline
-  \cellcolor{gray!25} 0 & 24 & 86 \\
-  \hline
-\end{tabular}
-\end{table}
-
-Now go back to step 3, drawing lines through the rows and columns that have 0 entries:
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-  \hline
-  \cellcolor{gray!25} 0 & \cellcolor{gray!25} 15 & \cellcolor{gray!25} 0 \\
-  \hline
-  \cellcolor{gray!25} 17 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 \\
-  \hline
-  \cellcolor{gray!25} 0 & 24 & 86 \\
-  \hline
-\end{tabular}
-\end{table}
-
-There are 3 lines (which is nn), so we are done. The assignment will be where the 0's are in the matrix such that only one 0 per row and column is part of the assignment.
-
-\begin{table}[H]
-  \centering
-  \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-    \hline
-    0 & 15 & \cellcolor{yellow!25} 0 \\
-    \hline
-    17 & \cellcolor{yellow!25} 0 & 0 \\
-    \hline
-    \cellcolor{yellow!25} 0 & 24 & 86 \\
-    \hline
-  \end{tabular}
-  \end{table}
-
-Replace the original values:
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-  \hline
-  108 & 125 & \cellcolor{yellow!25} 150 \\
-  \hline
-  150 & \cellcolor{yellow!25} 135 & 175 \\
-  \hline
-  \cellcolor{yellow!25} 122 & 148 & 250 \\
-  \hline
-\end{tabular}
-\end{table}
-
-We find that the minimum total cost is given by this assignment.
 
 \section{Game theory}
 Game theory is a type of decision theory in which one’s choice of action is determined after taking

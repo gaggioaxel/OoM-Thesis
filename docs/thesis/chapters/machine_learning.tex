@@ -113,13 +113,13 @@ Since our dataset is inherently a multi-class dataset, we performed binary class
 
 \begin{itemize}
 
-    \item \textbf{Edge VS All:} In our dataset, the most frequent classification is the edge that links \textit{left\_hand} and \textit{left\_wrist}. 
+    \item \textbf{Is or is not a specific edge:} In our dataset, the most frequent classification is the edge that links \textit{left\_hand} and \textit{left\_wrist}. 
     Therefore, we categorized all samples where the classification was \textit{left\_hand}-\textit{left\_wrist} as 1, while we labeled all other samples as 0 as in Table \ref{tab:to_be_edge_or_not}. 
     We iteratively asked the model whether the test sample was predicted as that edge or not.  
     
-    \item \textbf{Lower VS Upper:} We reclassified the dataset by setting all samples classified in the upper part of the body to 0 and all samples classified in the lower part of the body to 1 following the schema in Table \ref{tab:top_bottom}.
+    \item \textbf{Is or is not the upper body:} We reclassified the dataset by setting all samples classified in the upper part of the body to 0 and all samples classified in the lower part of the body to 1 following the schema in Table \ref{tab:top_bottom}.
     
-    \item \textbf{Body Part VS All:} We regrouped edges based on their respective body part mapped in Table \ref{tab:body_division_5} and took the most frequent to compare against all the others.
+    \item \textbf{Is or is not a specific body part:} We regrouped edges based on their respective body part mapped in Table \ref{tab:body_division_5} and took the most frequent to compare against all the others.
     Therefore, we labeled all samples where the classification was in the \textit{Left Leg} as 1, while we categorized all other samples as 0.
 
 \end{itemize}
@@ -230,20 +230,258 @@ Note that not every edge of the reduced marker set (\ref{tab:labels_joints}) is 
     \centering
     \begin{tabular}{|>{\centering\arraybackslash}p{4.2cm}|>{\centering\arraybackslash}p{4.2cm}|>{\centering\arraybackslash}p{4.2cm}|}
     \hline
-    \textbf{Question} & \textbf{Application} & \textbf{Accuracy} \\
+    \textbf{Label} & \textbf{Edge} & \textbf{TPR} \\
     \hline
-    \textbf{Edge VS All} & left\_hand-left\_wrist  & 90\% \\
-    & Mean for each edge  & 21\% \\
-     & Random  & 6.6\% \\
+    (a) & left\_hand-left\_wrist  & 49 \\
     \hline
-    \textbf{Lower VS Upper} & Lower VS Upper  & 78.3\% \\
-    & Random  & 50\% \\
+    (b) & left\_hand-left\_wrist  & 50 \\
     \hline
-    \textbf{Body Part VS All} & Left Leg  & 86.7\% \\
-     & Mean for each part  & 40\% \\
-     & Random  & 20\% \\
+    (c) & left\_hand-left\_wrist  & 48 \\
+    \hline
+    (d) & left\_hand-left\_wrist  & 47 \\
+    \hline
+    (e) & left\_hand-left\_wrist  & 51 \\
+    \hline
+    (f) & left\_hand-left\_wrist  & 52 \\
+    \hline
+    (g) & left\_hand-left\_wrist  & 53 \\
+    \hline
+    (h) & left\_hand-left\_wrist  & 54 \\
+    \hline
+    (i) & left\_hand-left\_wrist  & 55 \\
+    \hline
+    (l) & left\_hand-left\_wrist  & 58 \\
+    \hline
+    (m) & left\_hand-left\_wrist  & 59 \\
+    \hline
+    (n) & left\_hand-left\_wrist  & 60 \\
+    \hline
+    (o) & left\_hand-left\_wrist  & 61 \\
+    \hline
+    (p) & left\_hand-left\_wrist  & 62 \\
+    \hline
+    (q) & left\_hand-left\_wrist  & 63 \\
     \hline
     \end{tabular}
-    \caption{Classification accuracy with ML on the overall dataset}
+    \caption{Classification TPR with ML on the overall dataset}
     \label{tab:cml_results}
-  \end{table}
+\end{table}
+
+
+  \begin{table}[H]
+    \begin{minipage}[b]{0.1\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        48 & 3 \\
+        \hline
+        3 & 6 \\
+        \hline
+        \end{tabular}
+        \caption*{(a)}
+        \label{tab:perm1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.1\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        51 & 2 \\
+        \hline
+        6 & 1 \\
+        \hline
+        \end{tabular}
+        \caption*{(b)}
+        \label{tab:perm2}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.1\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        44 & 9 \\
+        \hline
+        7 & 0 \\
+        \hline
+        \end{tabular}
+        \caption*{(c)}
+        \label{tab:perm3}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.1\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        51 & 3 \\
+        \hline
+        4 & 2\\
+        \hline
+        \end{tabular}
+        \caption*{(d)}
+        \label{tab:perm3}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.1\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        52 & 3 \\
+        \hline
+        4 & 1 \\
+        \hline
+        \end{tabular}
+        \caption*{(e)}
+        \label{tab:perm3}
+    \end{minipage}
+\end{table}
+
+\begin{table}[H]
+    \begin{minipage}[b]{0.1\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        50 & 5 \\
+        \hline
+        5 & 0 \\
+        \hline
+        \end{tabular}
+        \caption*{(f)}
+        \label{tab:perm1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.1\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        53 & 2 \\
+        \hline
+        2 & 3 \\
+        \hline
+        \end{tabular}
+        \caption*{(g)}
+        \label{tab:perm2}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.1\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        54 & 2 \\
+        \hline
+        4 & 0 \\
+        \hline
+        \end{tabular}
+        \caption*{(h)}
+        \label{tab:perm3}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.1\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        57 & 0 \\
+        \hline
+        3 & 0 \\
+        \hline
+        \end{tabular}
+        \caption*{(i)}
+        \label{tab:perm3}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.1\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        56 & 2 \\
+        \hline
+        2 & 0 \\
+        \hline
+        \end{tabular}
+        \caption*{(l)}
+        \label{tab:perm3}
+    \end{minipage}
+\end{table}
+
+\begin{table}[H]
+    \begin{minipage}[b]{0.1\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        58 & 0 \\
+        \hline
+        2 & 0 \\
+        \hline
+        \end{tabular}
+        \caption*{(m)}
+        \label{tab:perm1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.1\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        58 & 0 \\
+        \hline
+        2 & 0 \\
+        \hline
+        \end{tabular}
+        \caption*{(n)}
+        \label{tab:perm2}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.1\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        59 & 0 \\
+        \hline
+        1 & 0 \\
+        \hline
+        \end{tabular}
+        \caption*{(o)}
+        \label{tab:perm3}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.1\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        59 & 0 \\
+        \hline
+        1 & 0 \\
+        \hline
+        \end{tabular}
+        \caption*{(p)}
+        \label{tab:perm3}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.1\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        59 & 0 \\
+        \hline
+        1 & 0 \\
+        \hline
+        \end{tabular}
+        \caption*{(q)}
+        \label{tab:perm3}
+    \end{minipage}
+    \caption{Qualcosa}
+    \label{table:results_ml}
+\end{table}
