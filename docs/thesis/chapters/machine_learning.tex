@@ -107,6 +107,9 @@ To evaluate the performance of the classifier, a test set is chosen using LOOCV,
 
 \subsection{Binary questions to the Model}
 
+CI VORREBBE QUI TUTTA UNA PARTE DOVE MOSTRIAMO LE DISTRIBUZIONI SULLE TRE DOMANDE
+
+
 In our ML model, we posed three different questions regarding the origins of movement. 
 Given the small and imbalanced dataset, some questions proved to be more challenging to classify. 
 Since our dataset is inherently a multi-class dataset, we performed binary classification by reclassifying the dataset in these ways to validate our model against different questions:
@@ -225,29 +228,20 @@ These reclassification strategies were employed to address the challenges posed 
 Note that not every edge of the reduced marker set (\ref{tab:labels_joints}) is included because some edges have not been the ground truth for any sample in our dataset.
 
 \section{Results}
+In the following Tables (from \ref{table:15_confusion} to \ref{tab:2_metrics}), you will find confusion matrices and evaluation metrics for the prediction of certain classes.
+To interpret the meaning of the confusion matrices, please refer to Section \ref{subsec:evaluation_metrics}.
+\\
 
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{6cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|}
-    \hline
-    \textbf{Label} & \textbf{Edge} & \textbf{TPR} & \textbf{Accuracy} \\
-    \hline
-    (a) & left\_hand - left\_wrist  & 66\% & 90\% \\
-    \hline
-    (b) & shoulder\_center - head  & 14\% & 87\% \\
-    \hline
-    (c) & right\_elbow - right\_shoulder  & 0\%  & 73\% \\ 
-    \hline
-    (d) & right\_shoulder - shoulder\_center & 33\% & 88\% \\
-    \hline
-    (e) & right\_knee - right\_hip  & 20\%  & 88\%\\
-    \hline
-    (f) & left\_knee - left\_hip  & 60\% & 93\%\\ 
-    \hline
-    \end{tabular}
-    \caption{Metrics of the 6 classes most frequent of the dataset}
-    \label{tab:cml_results}
-\end{table}
+The tests to identify the best model were conducted on the most frequent edge of the dataset, \textit{left\_hand - left\_wrist} with the aim of maximize the accuracy.
+This is because the dataset is unbalanced, and therefore, better prediction results are expected from this class.
+As observed, accuracy consistently remains very high, almost always exceeding 70\%.
+However, beyond this, the model demonstrates high specificity, meaning it excels at maximizing TN but struggles to identify TP effectively.
+This inclination towards minimizing FP comes at the expense of FN.
+This behavior is evident in the TPR, which varies significantly across different classes.
+An emblematic example can be found in (c) of Table \ref{tab:15_metrics}, where the TPR is 0\%.
+The model requires a high level of certainty in predictions before classifying a sample as positive. \\
+In summary, the model tends to favor a conservative strategy, prioritizing the reduction of FP, leading to a high specificity but limited effectiveness in identifying TP.
+
 
   \begin{table}[H]
     \begin{minipage}[b]{0.1\textwidth}
@@ -334,6 +328,164 @@ Note that not every edge of the reduced marker set (\ref{tab:labels_joints}) is 
         \label{tab:perm1}
     \end{minipage}
     \hfill
-    \caption{j}
-    \label{table:results_ml}
+    \caption{Confusion matrices of the 6 classes most frequent of the dataset}
+    \label{table:15_confusion}
+\end{table}
+
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{6cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|}
+    \hline
+    \textbf{Label} & \textbf{Edge} & \textbf{TPR} & \textbf{Accuracy} \\
+    \hline
+    (a) & left\_hand - left\_wrist  & 66\% & 90\% \\
+    \hline
+    (b) & shoulder\_center - head  & 14\% & 87\% \\
+    \hline
+    (c) & right\_elbow - right\_shoulder  & 0\%  & 73\% \\ 
+    \hline
+    (d) & right\_shoulder - shoulder\_center & 33\% & 88\% \\
+    \hline
+    (e) & right\_knee - right\_hip  & 20\%  & 88\%\\
+    \hline
+    (f) & left\_knee - left\_hip  & 60\% & 93\%\\ 
+    \hline
+    \end{tabular}
+    \caption{Metrics of the 6 classes most frequent of the dataset}
+    \label{tab:15_metrics}
+\end{table}
+
+
+
+
+  \begin{table}[H]
+    \begin{minipage}[b]{0.17\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        37 & 5 \\
+        \hline
+        7 & 11 \\
+        \hline
+        \end{tabular}
+        \caption*{(g)}
+        \label{tab:perm1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.17\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        37 & 9 \\
+        \hline
+        10 & 4 \\
+        \hline
+        \end{tabular}
+        \caption*{(h)}
+        \label{tab:perm2}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.17\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        43 & 4 \\
+        \hline
+        6 & 7 \\
+        \hline
+        \end{tabular}
+        \caption*{(i)}
+        \label{tab:perm3}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.17\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        47 & 5 \\
+        \hline
+        7 & 1\\
+        \hline
+        \end{tabular}
+        \caption*{(l)}
+        \label{tab:perm3}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.17\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        51 & 2 \\
+        \hline
+        6 & 1 \\
+        \hline
+        \end{tabular}
+        \caption*{(m)}
+        \label{tab:perm3}
+    \end{minipage}
+    \hfill
+    \caption{Confusion matrices of the 5 Body Parts}
+    \label{table:5_confusion}
+\end{table}
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{6cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|}
+    \hline
+    \textbf{Label} & \textbf{Body Part} & \textbf{TPR} & \textbf{Accuracy} \\
+    \hline
+    (g) & Right Arm  & 61\% & 80\% \\
+    \hline
+    (h) & Left Arm & 29\% & 68\% \\
+    \hline
+    (i) & Right Leg  & 54\%  & 83\% \\ 
+    \hline
+    (l) & Left Leg & 12\% & 80\% \\
+    \hline
+    (m) & Head  & 14\%  & 86\%\\
+    \hline
+    \end{tabular}
+    \caption{Metrics of the 5 Body Parts}
+    \label{tab:5_metrics}
+\end{table}
+
+
+\begin{table}[H]
+    \begin{minipage}[b]{1\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        16 & 5 \\
+        \hline
+        8 & 31 \\
+        \hline
+        \end{tabular}
+        \caption*{(n)}
+        \label{tab:perm1}
+    \end{minipage}
+    \hfill
+    \caption{Confusion matrix of the 2 Body Parts}
+    \label{table:2_confusion}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{6cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|}
+    \hline
+    \textbf{Label} & \textbf{Body Part} & \textbf{TPR} & \textbf{Accuracy} \\
+    \hline
+    (g) & Upper & 79\% & 78\% \\
+    \hline
+    \end{tabular}
+    \caption{Metrics of the 2 Body Parts}
+    \label{tab:2_metrics}
 \end{table}
