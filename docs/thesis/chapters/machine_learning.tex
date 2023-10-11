@@ -228,45 +228,26 @@ Note that not every edge of the reduced marker set (\ref{tab:labels_joints}) is 
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|>{\centering\arraybackslash}p{4.2cm}|>{\centering\arraybackslash}p{4.2cm}|>{\centering\arraybackslash}p{4.2cm}|}
+    \begin{tabular}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{6cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|}
     \hline
-    \textbf{Label} & \textbf{Edge} & \textbf{TPR} \\
+    \textbf{Label} & \textbf{Edge} & \textbf{TPR} & \textbf{Accuracy} \\
     \hline
-    (a) & left\_hand-left\_wrist  & 49 \\
+    (a) & left\_hand - left\_wrist  & 66\% & 90\% \\
     \hline
-    (b) & left\_hand-left\_wrist  & 50 \\
+    (b) & shoulder\_center - head  & 14\% & 87\% \\
     \hline
-    (c) & left\_hand-left\_wrist  & 48 \\
+    (c) & right\_elbow - right\_shoulder  & 0\%  & 73\% \\ 
     \hline
-    (d) & left\_hand-left\_wrist  & 47 \\
+    (d) & right\_shoulder - shoulder\_center & 33\% & 88\% \\
     \hline
-    (e) & left\_hand-left\_wrist  & 51 \\
+    (e) & right\_knee - right\_hip  & 20\%  & 88\%\\
     \hline
-    (f) & left\_hand-left\_wrist  & 52 \\
-    \hline
-    (g) & left\_hand-left\_wrist  & 53 \\
-    \hline
-    (h) & left\_hand-left\_wrist  & 54 \\
-    \hline
-    (i) & left\_hand-left\_wrist  & 55 \\
-    \hline
-    (l) & left\_hand-left\_wrist  & 58 \\
-    \hline
-    (m) & left\_hand-left\_wrist  & 59 \\
-    \hline
-    (n) & left\_hand-left\_wrist  & 60 \\
-    \hline
-    (o) & left\_hand-left\_wrist  & 61 \\
-    \hline
-    (p) & left\_hand-left\_wrist  & 62 \\
-    \hline
-    (q) & left\_hand-left\_wrist  & 63 \\
+    (f) & left\_knee - left\_hip  & 60\% & 93\%\\ 
     \hline
     \end{tabular}
-    \caption{Classification TPR with ML on the overall dataset}
+    \caption{Metrics of the 6 classes most frequent of the dataset}
     \label{tab:cml_results}
 \end{table}
-
 
   \begin{table}[H]
     \begin{minipage}[b]{0.1\textwidth}
@@ -338,22 +319,6 @@ Note that not every edge of the reduced marker set (\ref{tab:labels_joints}) is 
         \caption*{(e)}
         \label{tab:perm3}
     \end{minipage}
-\end{table}
-
-\begin{table}[H]
-    \begin{minipage}[b]{0.1\textwidth}
-        \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
-        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
-        \hline
-        50 & 5 \\
-        \hline
-        5 & 0 \\
-        \hline
-        \end{tabular}
-        \caption*{(f)}
-        \label{tab:perm1}
-    \end{minipage}
     \hfill
     \begin{minipage}[b]{0.1\textwidth}
         \centering
@@ -365,123 +330,10 @@ Note that not every edge of the reduced marker set (\ref{tab:labels_joints}) is 
         2 & 3 \\
         \hline
         \end{tabular}
-        \caption*{(g)}
-        \label{tab:perm2}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.1\textwidth}
-        \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
-        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
-        \hline
-        54 & 2 \\
-        \hline
-        4 & 0 \\
-        \hline
-        \end{tabular}
-        \caption*{(h)}
-        \label{tab:perm3}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.1\textwidth}
-        \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
-        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
-        \hline
-        57 & 0 \\
-        \hline
-        3 & 0 \\
-        \hline
-        \end{tabular}
-        \caption*{(i)}
-        \label{tab:perm3}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.1\textwidth}
-        \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
-        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
-        \hline
-        56 & 2 \\
-        \hline
-        2 & 0 \\
-        \hline
-        \end{tabular}
-        \caption*{(l)}
-        \label{tab:perm3}
-    \end{minipage}
-\end{table}
-
-\begin{table}[H]
-    \begin{minipage}[b]{0.1\textwidth}
-        \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
-        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
-        \hline
-        58 & 0 \\
-        \hline
-        2 & 0 \\
-        \hline
-        \end{tabular}
-        \caption*{(m)}
+        \caption*{(f)}
         \label{tab:perm1}
     \end{minipage}
     \hfill
-    \begin{minipage}[b]{0.1\textwidth}
-        \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
-        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
-        \hline
-        58 & 0 \\
-        \hline
-        2 & 0 \\
-        \hline
-        \end{tabular}
-        \caption*{(n)}
-        \label{tab:perm2}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.1\textwidth}
-        \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
-        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
-        \hline
-        59 & 0 \\
-        \hline
-        1 & 0 \\
-        \hline
-        \end{tabular}
-        \caption*{(o)}
-        \label{tab:perm3}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.1\textwidth}
-        \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
-        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
-        \hline
-        59 & 0 \\
-        \hline
-        1 & 0 \\
-        \hline
-        \end{tabular}
-        \caption*{(p)}
-        \label{tab:perm3}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.1\textwidth}
-        \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
-        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
-        \hline
-        59 & 0 \\
-        \hline
-        1 & 0 \\
-        \hline
-        \end{tabular}
-        \caption*{(q)}
-        \label{tab:perm3}
-    \end{minipage}
-    \caption{Qualcosa}
+    \caption{j}
     \label{table:results_ml}
 \end{table}
