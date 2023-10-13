@@ -1,14 +1,10 @@
 \chapter{Machine Learning}
 
-\section{Features extraction}
-Feature extraction in ML is an essential process that involves transforming raw data into a more suitable format for analysis and model building.
-It helps identify and capture the most relevant information within the data while simplifying excessive complexity that could make model training challenging.
-This process not only contributes to improving model accuracy but also reduces the risk of overfitting and enhances the ability to generalize knowledge gained to new data. \\
+\section{Dataset Normalization}
 As previously mentioned, our dataset consists of 60 samples, each containing the spatial positions of all 20 skeletal joints at each time step.
-From this data, we want to extract the necessary features for ML.
-Here we will see al the steps involved in order to achieve the desired features. \\
+TODO manca sampling!! e mettiamoci pure una bella foto DAI DAI DAI
 
-As a first step, we will calculate the $x$, $y$, and $z$ coordinates of the skeleton's barycenter for each time step. \\
+From the equally sampled timeseries we calculate the $x$, $y$, and $z$ coordinates of the skeleton's barycenter for each time step. \\
 We define the barycenter as the point where all the mass of an object or a system of objects is concentrated. \\
 In this context, each joint is considered to have unit mass, meaning that all joints contribute equally to the barycenter. \\
 If we represent $n$ as the number of 20 joints, the coordinates of the barycenter are obtained by taking the average of the coordinates of these 20 joints, as we can see in the formula:
@@ -35,6 +31,15 @@ However, by computing these distances and further normalizing them within the ra
 
 This normalization process not only standardizes the data but also allows the ML model to focus on the relative spatial distribution of joints rather than their absolute positions.
 Consequently, our model becomes better equipped to recognize patterns and movements across individuals of varying statures, making it more versatile and applicable in real-world scenarios. \\
+
+\section{Features extraction}
+Feature extraction in ML is an essential process that involves transforming raw data into a more suitable format for analysis and model building.
+It helps identify and capture the most relevant information within the data while simplifying excessive complexity that could make model training challenging.
+This process not only contributes to improving model accuracy but also reduces the risk of overfitting and enhances the ability to generalize knowledge gained to new data. \\
+From the preprocessed data, we want to extract the necessary features for ML.
+Here we will see al the steps involved in order to achieve the desired features. \\
+
+
 Finally, to choose the features to extract, we referred to \cite{oneto:2020} and \cite{sama:2010}.
 In Table \ref{tab:ml_features} we can see all the features and their relative function.
 
@@ -203,15 +208,16 @@ As observed, accuracy consistently remains very high, almost always exceeding 70
 However, beyond this, the model demonstrates high specificity, meaning it excels at maximizing TN but struggles to identify TP effectively.
 This inclination towards minimizing FP comes at the expense of FN.
 This behavior is evident in the TPR, which varies significantly across different classes.
-An emblematic example can be found in (c) of Table \ref{tab:15_metrics}, where the TPR is 0\%.
+An emblematic example can be found in Table \ref{tab:results_edgen03}, where the TPR is 0\%.
 The model requires a high level of certainty in predictions before classifying a sample as positive. \\
 In summary, the model tends to favor a conservative strategy, prioritizing the reduction of FP, leading to a high specificity but limited effectiveness in identifying TP.
 
 
-  \begin{table}[H]
-    \begin{minipage}[b]{0.1\textwidth}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+    \begin{subfigure}[b]{0.1\textwidth}
         \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
         \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
         \hline
         48 & 3 \\
@@ -219,13 +225,12 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         3 & 6 \\
         \hline
         \end{tabular}
-        \caption*{(a)}
-        \label{tab:perm1}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.1\textwidth}
+        \caption{}
+        \label{tab:results_edgen01}
+    \end{subfigure}
+    \hspace{0.05\linewidth}
+    \begin{subfigure}[b]{0.1\textwidth}
         \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
         \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
         \hline
         51 & 2 \\
@@ -233,13 +238,12 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         6 & 1 \\
         \hline
         \end{tabular}
-        \caption*{(b)}
-        \label{tab:perm2}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.1\textwidth}
+        \caption{}
+        \label{tab:results_edgen02}
+    \end{subfigure}
+    \hspace{0.05\linewidth}
+    \begin{subfigure}[b]{0.1\textwidth}
         \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
         \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
         \hline
         44 & 9 \\
@@ -247,13 +251,12 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         7 & 0 \\
         \hline
         \end{tabular}
-        \caption*{(c)}
-        \label{tab:perm3}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.1\textwidth}
+        \caption{}
+        \label{tab:results_edgen03}
+    \end{subfigure}
+    \hspace{0.05\linewidth}
+    \begin{subfigure}[b]{0.1\textwidth}
         \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
         \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
         \hline
         51 & 3 \\
@@ -261,13 +264,12 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         4 & 2\\
         \hline
         \end{tabular}
-        \caption*{(d)}
-        \label{tab:perm3}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.1\textwidth}
+        \caption{}
+        \label{tab:results_edgen04}
+    \end{subfigure}
+    \hspace{0.05\linewidth}
+    \begin{subfigure}[b]{0.1\textwidth}
         \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
         \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
         \hline
         52 & 3 \\
@@ -275,13 +277,12 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         4 & 1 \\
         \hline
         \end{tabular}
-        \caption*{(e)}
-        \label{tab:perm3}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.1\textwidth}
+        \caption{}
+        \label{tab:results_edgen05}
+    \end{subfigure}
+    \hspace{0.05\linewidth}
+    \begin{subfigure}[b]{0.1\textwidth}
         \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
         \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
         \hline
         53 & 2 \\
@@ -289,13 +290,14 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         2 & 3 \\
         \hline
         \end{tabular}
-        \caption*{(f)}
-        \label{tab:perm1}
-    \end{minipage}
-    \hfill
-    \caption{Confusion matrices of the 6 classes most frequent of the dataset}
+        \caption{}
+        \label{tab:results_edgen06}
+    \end{subfigure}
+    \hspace{0.05\linewidth}
+    \caption{Confusion matrices of the 6 most frequent classes in the dataset}
     \label{table:15_confusion}
 \end{table}
+
 
 
 
@@ -448,7 +450,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
     \hline
     \textbf{Label} & \textbf{Body Part} & \textbf{TPR} & \textbf{Accuracy} \\
     \hline
-    (g) & Upper & 79\% & 78\% \\
+    (n) & Upper & 79\% & 78\% \\
     \hline
     \end{tabular}
     \caption{Metrics of the 2 Body Parts}

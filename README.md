@@ -26,3 +26,8 @@ Gabriele Romano
 
 # Acknowledgments
 Thanks to Sydney ChatGPT for it's "Dai Dai, Dai", "Portiamo a casa la giornata!", and "Poco Italiano" help.
+
+# Still TODO
+Acknowledgments
+Abstract
+Spaziamento lista figure tabelle etc.

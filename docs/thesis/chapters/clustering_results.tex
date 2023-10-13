@@ -72,7 +72,7 @@ Considering, for example, a graph $G$ with 3 clusters (see Figure \ref{fig:graph
 
 
 \section{Weighted Degree Centrality}
-To identify the edge involved in the OoM, we use the WDG, as explained in Section \ref{subsec:weighted_degree}.
+To identify the edge involved in the OoM, we use the WDC, as explained in Section \ref{subsec:weighted_degree}.
 For each frame, we keep track of the two nodes with the highest WDC.
 At the end of this process, among the selected nodes, we will choose the two nodes that have been chosen as the highest most frequently.
 At this stage, we will examine in the $G^{aux}$ to which edges belonging to $E^{aux}$ these two winning nodes are connected, and these two edges will be considered as the predicted OoM.
@@ -92,7 +92,7 @@ In Table \ref{tab:clust_results} we can see the results.
   \textbf{WDG} & 28.3\%  & 26.7\%  & 36.6\%  \\
   \hline
   \end{tabular}
-  \caption{Classification accuracy with WDG on the overall dataset}
+  \caption{Classification accuracy with WDC on the overall dataset}
   \label{tab:clust_results}
 \end{table}
 

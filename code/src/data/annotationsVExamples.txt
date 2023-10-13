@@ -1,0 +1,2 @@
+folderSrc, trialId, fragId, jointIdOoM, startSecond, endSecond
+2016-05-26, t_044, 0, [1-1], 7.4, 7.9, skeleton20ok
