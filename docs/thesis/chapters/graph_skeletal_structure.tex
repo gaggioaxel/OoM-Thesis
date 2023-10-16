@@ -102,7 +102,7 @@ The speed of a moving object is a fundamental information in understanding how i
 \subsection{Tangential Acceleration}
 By calculating the derivative of velocity, we can obtain tangential acceleration.
 Tangential acceleration is calculated as the norm of the tangential acceleration vector. \\
-Tangential acceleration can be used to express specific emotions, styles, and intentions. \\
+Tangential acceleration can be used to express specific emotions, styles, and intentions.
 For instance, rapid acceleration might be associated with energetic and rhythmic movements, whereas a more gradual acceleration could be linked to fluid and delicate motions.
 
 \begin{equation}
@@ -110,92 +110,89 @@ For instance, rapid acceleration might be associated with energetic and rhythmic
 \end{equation}
 
 \subsection{Angular Momentum}
-The angular momentum has been calculated with respect to the center of mass so we proceeded by:
+The angular momentum has been calculated with respect to the center of mass so we proceeded by calculating:
 \begin{enumerate}
-  \item calculating the relative position with respect to the center of mass as: 
-  \begin{figure}[H]
-    \centering
+  \item The relative position with respect to the center of mass as: 
+  \begin{table}[h]
     \begin{align}
         \vec{s}_{CM} &= \frac{{\sum_{j=1}^{20} \vec{s}_{j}}}{{20}} &
         \vec{s}_{r} &= \vec{s} - \vec{s}_{CM} \label{eq:rel_pos}
     \end{align}
-  \end{figure}
-  \item the relative velocity:
-  \begin{figure}[H]
-    \centering
+  \end{table}
+  \item The relative velocity:
+  \begin{table}[H]
     \begin{align}
         \vec{v}_{CM} &= \frac{\vec{ds}_{CM}}{dt} &
         \vec{v}_{r} &= \vec{v} - \vec{v}_{\text{CM}} \label{eq:rel_vel}
     \end{align}
-  \end{figure}
-  \item Then the formula we use to calculate angular momentum relative to the center of mass:
-  \begin{figure}[H]
-    \centering
+  \end{table}
+  \item Lastly the angular momentum relative to the center of mass:
+  \begin{table}[H]
     \begin{align}
       \vec{L} = \vec{s}_{r} \times (\vec{v}_{r} * m) \quad with \ m = 1 \ for \ every \ joint \label{eq:ang_mom}
     \end{align}
-  \end{figure}
+  \end{table}
 \end{enumerate}
 
-Analyzing angular momentum can reveal specific patterns of rotation or changes in orientation. \\
+Analyzing angular momentum can reveal specific patterns of rotation or changes in orientation.
 These patterns can be used to identify distinctive gestures or movements in activities such as gymnastics or choreography.
 
 \section{Cosine similarity} 
     
 To calculate the weights of the edges connecting the different joints, we use the \textit{Cosine similarity}. \\ 
-The cosine similarity between two vectors \textit{x} and \textit{y} is defined as: 
-
-\begin{equation}  
-  cos(\vec{x}, \vec{y}) = \frac{\vec{x} \cdot \vec{y}}{\|\vec{x}\| \cdot \|\vec{y}\|}  =  \frac{\sum_{i=1}^{3} (x_i \cdot y_i)}{\sqrt{\sum_{i=1}^{3} x_i^2} \cdot \sqrt{\sum_{i=1}^{3} y_i^2}}    
-\end{equation} 
-
 Cosine similarity is a measure of similarity between two vectors, frequently used to gauge how aligned vectors are in space. \\ 
 It returns a value ranging from -1 to 1. 
 The concept is that similar vectors will have a small angle between them, resulting in a cosine similarity value close to 1. \\ 
 Conversely, dissimilar vectors will have a wide angle and a cosine similarity close to 0.\\ 
 A higher value indicates greater similarity, where 1 represents identical vectors (perfect similarity), 0 means no similarity, and -1 indicates perfect dissimilarity (opposite directions). 
 We iteratively calculate the similarity between all the joints connected by an edge. 
+The cosine similarity between two vectors \textit{x} and \textit{y} is defined as: 
+
+\begin{equation}  
+  cos(\vec{x}, \vec{y}) = \frac{\vec{x} \cdot \vec{y}}{\|\vec{x}\| \cdot \|\vec{y}\|}  =  \frac{\sum_{i=1}^{3} (x_i \cdot y_i)}{\sqrt{\sum_{i=1}^{3} x_i^2} \cdot \sqrt{\sum_{i=1}^{3} y_i^2}}    
+\end{equation} 
+
 By doing this, it is possible to compare the directions of the two considered nodes, and thus evaluate if two nodes are associated with (nearly) the same direction. \\ 
 After obtaining the weights for each edge of the graph, we then have, for each instantaneous frame, a graph $G$ := ($V$, $E$, $w$), where   
 $V$ is the set of $vertices$, $E$ is the set of $edges$ and $w$ is the set of $edge weights$.
 
-\section{Similarity measure}
-To calculate the weights of the edges connecting the different joints at each instant, we use different formulas depending on the feature we are considering.
-\\
-
-\textit{Speed and Acceleration:} in the case of Speed and Acceleration features, for each time instant, we have to introduce a factor of tollerance.\\
-$tol_i$ is the tollerance at time instant $i$ and is obtained by computing the mean of all the $features$ at instant $i$ at multipying by a factor 
-$10^{-3}$.
-\begin{equation}
-  tol_i = mean(feature_i) \cdot 10^{-3}
-  \label{formula:tol}
-\end{equation}
-This is done to prevent errors in future calculations such as division by zero.
-
-
-In the subsequent step, we assign a weight to each edge for every pair of joints $v$ and $\hat{v}$ for each instant $i$:
-\begin{itemize}
-  \item If the two joints are indeed connected in the skeleton, for example, $left\_hand$ and $left\_wrist$, we use the following formula:
-    \begin{equation}
-      w^{v\hat{v}}_{i} = \frac{1}{\|feature^{v}_{i}\|-\|feature^{\hat{v}}_{j}\|+tol}
-    \end{equation}
-  \item If the two joints are not actually connected, for example, $head$ and $right\_foot$, we use the following formula:
-    \begin{equation}
-      w^{v\hat{v}}_{i} = \frac{1}{5 \cdot (\|feature^{v}_{i}\|-\|feature^{\hat{v}}_{j}\|+tol)}
-      \label{formula:tol}
-    \end{equation}
-\end{itemize}
-
-\textit{Angular Momentum:} in the case of Angular Momentum, we assign a weight to each edge for every pair of joints $v$ and $\hat{v}$ for
-each instant $i$, distinguishing between two cases:
-\begin{itemize}
-  \item If the two joints are indeed connected in the skeleton, we use the following formula:
-    \begin{equation}
-      w^{v\hat{v}}_{i} = \frac{feature^{v}_{i} \times feature^{\hat{v}}_{i}}{\|feature^{v}_{i}\|-\|feature^{\hat{v}}_{j}\|} + 1
-    \end{equation}
-  \item If the two joints are not actually connected, we use the following formula:
-    \begin{equation}
-      w^{v\hat{v}}_{i} = \frac{feature^{v}_{i} \times feature^{\hat{v}}_{i}}{5 \cdot (\|feature^{v}_{i}\|-\|feature^{\hat{v}}_{j}\|+1)}
-      \label{formula:tol}
-    \end{equation}
-\end{itemize}
+%\section{Similarity measure}
+%To calculate the weights of the edges connecting the different joints at each instant, we use different formulas depending on the feature we are considering.
+%\\
+%
+%\textit{Speed and Acceleration:} in the case of Speed and Acceleration features, for each time instant, we have to introduce a factor of tollerance.\\
+%$tol_i$ is the tollerance at time instant $i$ and is obtained by computing the mean of all the $features$ at instant $i$ at multipying by a factor 
+%$10^{-3}$.
+%\begin{equation}
+%  tol_i = mean(feature_i) \cdot 10^{-3}
+%  \label{formula:tol}
+%\end{equation}
+%This is done to prevent errors in future calculations such as division by zero.
+%
+%
+%In the subsequent step, we assign a weight to each edge for every pair of joints $v$ and $\hat{v}$ for each instant $i$:
+%\begin{itemize}
+%  \item If the two joints are indeed connected in the skeleton, for example, $left\_hand$ and $left\_wrist$, we use the following formula:
+%    \begin{equation}
+%      w^{v\hat{v}}_{i} = \frac{1}{\|feature^{v}_{i}\|-\|feature^{\hat{v}}_{j}\|+tol}
+%    \end{equation}
+%  \item If the two joints are not actually connected, for example, $head$ and $right\_foot$, we use the following formula:
+%    \begin{equation}
+%      w^{v\hat{v}}_{i} = \frac{1}{5 \cdot (\|feature^{v}_{i}\|-\|feature^{\hat{v}}_{j}\|+tol)}
+%      \label{formula:tol}
+%    \end{equation}
+%\end{itemize}
+%
+%\textit{Angular Momentum:} in the case of Angular Momentum, we assign a weight to each edge for every pair of joints $v$ and $\hat{v}$ for
+%each instant $i$, distinguishing between two cases:
+%\begin{itemize}
+%  \item If the two joints are indeed connected in the skeleton, we use the following formula:
+%    \begin{equation}
+%      w^{v\hat{v}}_{i} = \frac{feature^{v}_{i} \times feature^{\hat{v}}_{i}}{\|feature^{v}_{i}\|-\|feature^{\hat{v}}_{j}\|} + 1
+%    \end{equation}
+%  \item If the two joints are not actually connected, we use the following formula:
+%    \begin{equation}
+%      w^{v\hat{v}}_{i} = \frac{feature^{v}_{i} \times feature^{\hat{v}}_{i}}{5 \cdot (\|feature^{v}_{i}\|-\|feature^{\hat{v}}_{j}\|+1)}
+%      \label{formula:tol}
+%    \end{equation}
+%\end{itemize}

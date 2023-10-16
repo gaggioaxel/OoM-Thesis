@@ -27,44 +27,46 @@ Then will repeat this process iteratively until the last frame.
 \subsection{A real application}
 Let's consider a real-world scenario to understand how MaxWPM works in terms of visualization.
 Suppose we have 20 nodes representing joints at time \textit{t} and 3 clusters labeled with different colors, as shown in Figure \ref{fig:clust_t}.
-At time \textit{t+1}, there are the same 20 nodes as before but with 3 clusters labeled differently (see Figure \ref{fig:clust_tplus1}). \\
+At time \textit{t+1}, there are the same 20 nodes as before but with 3 clusters changed but labeled using the same lexicographic order for the nodes (see Figure \ref{fig:clust_tplus1}). \\
 Certainly, this clustering-based assignment cannot be regarded as the optimal assignment, as we still need to assess the \textit{3!} possible color assignments. \\
 We know the colors of the clusters at time \textit{t}, and we want to assign colors to the clusters at time \textit{t+1}. \\
 In Figure \ref{fig:clust_ass}, you can visually see all the possible color assignments, while in Table \ref{tab:table_clust}, all the values of common nodes for each color and the total weight of the matching are gathered.
 
 
 \begin{figure}[H]
-  \centering
-  \begin{tikzpicture}
-    \node[circle, draw, minimum size=0.7cm] (1) at (1,-9) [fill=green!50] {1};
-    \node[circle, draw, minimum size=0.7cm] (2) at (9, -9) [fill=green!50] {2};
-    \node[circle, draw, minimum size=0.7cm] (3) at (2.5,-8.5) [fill=green!50] {3};
-    \node[circle, draw, minimum size=0.7cm] (4) at (7.5, -8.5) [fill=green!50] {4};
-    \node[circle, draw, minimum size=0.7cm] (5) at (3,-6.5) [fill=green!50] {5};
-    \node[circle, draw, minimum size=0.7cm] (6) at (7,-6.5) [fill=green!50] {6};
-    \node[circle, draw, minimum size=0.7cm] (7) at (3.5,-4.5) [fill=green!50] {7};
-    \node[circle, draw, minimum size=0.7cm] (8) at (5, -3.5) [fill=green!50] {8};
-    \node[circle, draw, minimum size=0.7cm] (9) at (6.5,-4.5) [fill=green!50] {9};
-    \node[circle, draw, minimum size=0.7cm] (10) at (5,-1.5) [fill=green!50] {10};
-    \node[circle, draw, minimum size=0.7cm] (11) at (1,-4) [fill=red!50] {11};
-    \node[circle, draw, minimum size=0.7cm] (12) at (9,-4) [fill=blue!50] {12};
-    \node[circle, draw, minimum size=0.7cm] (13) at (2, -3.5) [fill=red!50] {13};
-    \node[circle, draw, minimum size=0.7cm] (14) at (8, -3.5) [fill=blue!50] {14};
-    \node[circle, draw, minimum size=0.7cm] (15) at (2.5,-1) [fill=red!50] {15};
-    \node[circle, draw, minimum size=0.7cm] (16) at (7.5,-1) [fill=blue!50] {16};
-    \node[circle, draw, minimum size=0.7cm] (17) at (3,1) [fill=red!50] {17};
-    \node[circle, draw, minimum size=0.7cm] (18) at (5,1.5) [fill=blue!50] {18};
-    \node[circle, draw, minimum size=0.7cm] (19) at (7,1) [fill=blue!50] {19};
-    \node[circle, draw, minimum size=0.7cm] (20) at (5,3) [fill=blue!50] {20};
-    \foreach \source/\dest/\label/\xshiftval in {20/18//0, 18/17//0, 18/19//0, 17/15//0, 15/13/Cluster 2/-45, 13/11//0, 19/16//0, 16/14/Cluster 3/45, 14/12//0, 18/10//0, 10/8//0, 8/7//0, 7/5//0, 5/3/Cluster 1/-45, 3/1//0, 8/9//0, 9/6//0, 6/4//0, 4/2//0}
-      \path (\source) edge node[xshift=\xshiftval] {\label} (\dest);
-  \end{tikzpicture}
-  \caption{Optimal color assignment to clusters at time \textit{t}}
-  \label{fig:clust_t}
-\end{figure}
+  \begin{subfigure}{\textwidth} % Adjust the width as needed
+    \centering
+    \begin{tikzpicture}
+      \node[circle, draw, minimum size=0.7cm] (1) at (1,-9) [fill=green!50] {1};
+      \node[circle, draw, minimum size=0.7cm] (2) at (9, -9) [fill=green!50] {2};
+      \node[circle, draw, minimum size=0.7cm] (3) at (2.5,-8.5) [fill=green!50] {3};
+      \node[circle, draw, minimum size=0.7cm] (4) at (7.5, -8.5) [fill=green!50] {4};
+      \node[circle, draw, minimum size=0.7cm] (5) at (3,-6.5) [fill=green!50] {5};
+      \node[circle, draw, minimum size=0.7cm] (6) at (7,-6.5) [fill=green!50] {6};
+      \node[circle, draw, minimum size=0.7cm] (7) at (3.5,-4.5) [fill=green!50] {7};
+      \node[circle, draw, minimum size=0.7cm] (8) at (5, -3.5) [fill=green!50] {8};
+      \node[circle, draw, minimum size=0.7cm] (9) at (6.5,-4.5) [fill=green!50] {9};
+      \node[circle, draw, minimum size=0.7cm] (10) at (5,-1.5) [fill=green!50] {10};
+      \node[circle, draw, minimum size=0.7cm] (11) at (1,-4) [fill=red!50] {11};
+      \node[circle, draw, minimum size=0.7cm] (12) at (9,-4) [fill=blue!50] {12};
+      \node[circle, draw, minimum size=0.7cm] (13) at (2, -3.5) [fill=red!50] {13};
+      \node[circle, draw, minimum size=0.7cm] (14) at (8, -3.5) [fill=blue!50] {14};
+      \node[circle, draw, minimum size=0.7cm] (15) at (2.5,-1) [fill=red!50] {15};
+      \node[circle, draw, minimum size=0.7cm] (16) at (7.5,-1) [fill=blue!50] {16};
+      \node[circle, draw, minimum size=0.7cm] (17) at (3,1) [fill=red!50] {17};
+      \node[circle, draw, minimum size=0.7cm] (18) at (5,1.5) [fill=blue!50] {18};
+      \node[circle, draw, minimum size=0.7cm] (19) at (7,1) [fill=blue!50] {19};
+      \node[circle, draw, minimum size=0.7cm] (20) at (5,3) [fill=blue!50] {20};
+      \foreach \source/\dest/\label/\xshiftval in {20/18//0, 18/17//0, 18/19//0, 17/15//0, 15/13/Cluster 2/-45, 13/11//0, 19/16//0, 16/14/Cluster 3/45, 14/12//0, 18/10//0, 10/8//0, 8/7//0, 7/5//0, 5/3/Cluster 1/-45, 3/1//0, 8/9//0, 9/6//0, 6/4//0, 4/2//0}
+        \path (\source) edge node[xshift=\xshiftval] {\label} (\dest);
+    \end{tikzpicture}
+    \caption{}
+    \label{fig:clust_t}
+  \end{subfigure}
 
+  \vspace{1cm}
 
-\begin{figure}[H]
+  \begin{subfigure}{\textwidth}
     \centering
     \begin{tikzpicture}
       \node[circle, draw, minimum size=0.3cm] (1) at (3.5,-1.25) [fill=green!50] {};
@@ -90,9 +92,12 @@ In Figure \ref{fig:clust_ass}, you can visually see all the possible color assig
       \foreach \source/\dest/\label/\xshiftval in {20/18//0, 18/17//0, 18/19//0, 17/15//0, 15/13//-45, 13/11//0, 19/16//0, 16/14/Cluster 6/45, 14/12//0, 18/10//0, 10/8//0, 8/7//0, 7/5//0, 5/3/Cluster 4/-45, 3/1//0, 8/9//0, 9/6//0, 6/4/Cluster 5/45, 4/2//0}
         \path (\source) edge node[xshift=\xshiftval] {\label} (\dest);
     \end{tikzpicture}
-      \caption{Color assignment to clusters at time \textit{t+1} obtained from clustering}
-      \label{fig:clust_tplus1}
+    \caption{}
+    \label{fig:clust_tplus1}
+  \end{subfigure}
+  \caption{Color assignment at time \textit{t} (a) and \textit{t+1} (b)}
 \end{figure}
+
 
 \begin{figure}[H]
   \centering
@@ -332,152 +337,161 @@ The following figure shows the matching with the utility value for every possibl
 
 
 \subsection{Brute Force Algorithm application}
-Let's take for example the following cost matrix and try to apply the BF for MinWPM problems:
-
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-      \hline
-      108 & 125 & 150 \\
-      \hline
-      150 & 135 & 175 \\
-      \hline
-      122 & 148 & 250 \\
-      \hline
-    \end{tabular}
-    \end{table}
-
-Now we compute the total cost of all the \textit{n}!\ permutations: 
-  
-
-  \begin{table}[H]
-    \begin{minipage}[b]{0.3\textwidth}
-        \centering
-        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-            \hline
-            \cellcolor{yellow!25} 108 & 125 & 150 \\
-            \hline
-            150 & \cellcolor{yellow!25} 135 & 175 \\
-            \hline
-            122 & 148 & \cellcolor{yellow!25}250 \\
-            \hline
-        \end{tabular}
-        \caption*{(a)}
-        \label{tab:perm1}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.3\textwidth}
-        \centering
-        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-            \hline
-            108 & \cellcolor{yellow!25} 125 & 150 \\
-            \hline
-            150 & 135 & \cellcolor{yellow!25} 175 \\
-            \hline
-            \cellcolor{yellow!25} 122 & 148 & 250 \\
-            \hline
-        \end{tabular}
-        \caption*{(b)}
-        \label{tab:perm2}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.3\textwidth}
-        \centering
-        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-            \hline
-            108 & 125 & \cellcolor{yellow!25} 150 \\
-            \hline
-            150 & \cellcolor{yellow!25} 135 & 175 \\
-            \hline
-            \cellcolor{yellow!25} 122 & 148 & 250 \\
-            \hline
-        \end{tabular}
-        \caption*{(c)}
-        \label{tab:perm3}
-    \end{minipage}
-\end{table}
-
-\begin{table}[H]
-    \begin{minipage}[b]{0.3\textwidth}
-        \centering
-        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-            \hline
-            \cellcolor{yellow!25} 108 & 125 & 150 \\
-            \hline
-            150 & 135 & \cellcolor{yellow!25} 175 \\
-            \hline
-            122 & \cellcolor{yellow!25} 148 & 250 \\
-            \hline
-        \end{tabular}
-        \caption*{(d)}
-        \label{tab:perm4}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.3\textwidth}
-        \centering
-        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-            \hline
-            108 & \cellcolor{yellow!25} 125 & 150 \\
-            \hline
-            \cellcolor{yellow!25} 150 & 135 & 175 \\
-            \hline
-            122 & 148 & \cellcolor{yellow!25} 250 \\
-            \hline
-        \end{tabular}
-        \caption*{(e)}
-        \label{tab:perm5}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.3\textwidth}
-        \centering
-        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-            \hline
-            108 & 125 & \cellcolor{yellow!25} 150 \\
-            \hline
-            \cellcolor{yellow!25} 150 & 135 & 175 \\
-            \hline
-            122 & \cellcolor{yellow!25} 148 & 250 \\
-            \hline
-        \end{tabular}
-        \caption{}
-        \label{tab:perm6}
-    \end{minipage}
-\caption{BF assignments}
-\label{tab:tab_ass}
-\end{table}
- 
-
-\begin{table}[H]
-  \centering
-  \begin{tabular}{|c|c|c|c|c|}
-    \hline
-   \textbf{Assignment} & \textbf{Total weight} \\
-    \hline
-    (a) & 493 \\
-    \hline
-    (b) & 422 \\
-    \hline
-    (c) & 407 \\
-    \hline
-    (d) & 431 \\
-    \hline
-    (e) & 525 \\
-    \hline
-    (f) & 448 \\
-    \hline
-  \end{tabular}
-  
-  \vspace{0.5cm} % Spazio vuoto tra le righe
-  
-  \caption{Total weights for the 6 assignments}
-  \label{tab:table_costs}
-\end{table}
-
-We find that the minimum total cost is given by the assignment (c) in Table \ref{tab:tab_ass}.  
+A brute-force approach for choosing an option based on the maximum sum of utility values of a graph involves exhaustively evaluating every possible combination of options to find the one with the highest total weight. 
+This method consists of:
+\begin{enumerate}
+  \item Generating all possible combinations: Enumerate all possible subsets or combinations of options within the graph.
+  \item Calculating the sum of weights: For each combination, compute the total weight by summing the weights of the selected options.
+  \item Comparing and selecting: Identify the combination with the minimum total weight as the optimal choice.
+\end{enumerate}
+The Table \ref{tab:table_clust} is a clear example of this approach. \\   
+While this brute-force approach guarantees finding the best option, it can be computationally expensive, especially for large graphs or numerous options since it would require to compute the values of all the \textit{n!} permutations:
+%Let's take for example the following cost matrix and try to apply the BF for MinWPM problems:
+%
+%\begin{table}[H]
+%    \centering
+%    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+%      \hline
+%      108 & 125 & 150 \\
+%      \hline
+%      150 & 135 & 175 \\
+%      \hline
+%      122 & 148 & 250 \\
+%      \hline
+%    \end{tabular}
+%    \end{table}
+%
+%Now we compute the total cost of all the \textit{n}!\ permutations: 
+%  
+%
+%  \begin{table}[H]
+%    \begin{minipage}[b]{0.3\textwidth}
+%        \centering
+%        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+%            \hline
+%            \cellcolor{yellow!25} 108 & 125 & 150 \\
+%            \hline
+%            150 & \cellcolor{yellow!25} 135 & 175 \\
+%            \hline
+%            122 & 148 & \cellcolor{yellow!25}250 \\
+%            \hline
+%        \end{tabular}
+%        \caption*{(a)}
+%        \label{tab:bf_minwpm_perm1}
+%    \end{minipage}
+%    \hfill
+%    \begin{minipage}[b]{0.3\textwidth}
+%        \centering
+%        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+%            \hline
+%            108 & \cellcolor{yellow!25} 125 & 150 \\
+%            \hline
+%            150 & 135 & \cellcolor{yellow!25} 175 \\
+%            \hline
+%            \cellcolor{yellow!25} 122 & 148 & 250 \\
+%            \hline
+%        \end{tabular}
+%        \caption*{(b)}
+%        \label{tab:bf_minwpm_perm2}
+%    \end{minipage}
+%    \hfill
+%    \begin{minipage}[b]{0.3\textwidth}
+%        \centering
+%        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+%            \hline
+%            108 & 125 & \cellcolor{yellow!25} 150 \\
+%            \hline
+%            150 & \cellcolor{yellow!25} 135 & 175 \\
+%            \hline
+%            \cellcolor{yellow!25} 122 & 148 & 250 \\
+%            \hline
+%        \end{tabular}
+%        \caption*{(c)}
+%        \label{tab:bf_minwpm_perm3}
+%    \end{minipage}
+%\end{table}
+%
+%\begin{table}[H]
+%    \begin{minipage}[b]{0.3\textwidth}
+%        \centering
+%        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+%            \hline
+%            \cellcolor{yellow!25} 108 & 125 & 150 \\
+%            \hline
+%            150 & 135 & \cellcolor{yellow!25} 175 \\
+%            \hline
+%            122 & \cellcolor{yellow!25} 148 & 250 \\
+%            \hline
+%        \end{tabular}
+%        \caption*{(d)}
+%        \label{tab:bf_minwpm_perm4}
+%    \end{minipage}
+%    \hfill
+%    \begin{minipage}[b]{0.3\textwidth}
+%        \centering
+%        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+%            \hline
+%            108 & \cellcolor{yellow!25} 125 & 150 \\
+%            \hline
+%            \cellcolor{yellow!25} 150 & 135 & 175 \\
+%            \hline
+%            122 & 148 & \cellcolor{yellow!25} 250 \\
+%            \hline
+%        \end{tabular}
+%        \caption*{(e)}
+%        \label{tab:bf_minwpm_perm5}
+%    \end{minipage}
+%    \hfill
+%    \begin{minipage}[b]{0.3\textwidth}
+%        \centering
+%        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+%            \hline
+%            108 & 125 & \cellcolor{yellow!25} 150 \\
+%            \hline
+%            \cellcolor{yellow!25} 150 & 135 & 175 \\
+%            \hline
+%            122 & \cellcolor{yellow!25} 148 & 250 \\
+%            \hline
+%        \end{tabular}
+%        \caption{}
+%        \label{tab:bf_minwpm_perm6}
+%    \end{minipage}
+%\caption{BF assignments}
+%\label{tab:tab_ass}
+%\end{table}
+% 
+%
+%\begin{table}[H]
+%  \centering
+%  \begin{tabular}{|c|c|c|c|c|}
+%    \hline
+%   \textbf{Assignment} & \textbf{Total weight} \\
+%    \hline
+%    (a) & 493 \\
+%    \hline
+%    (b) & 422 \\
+%    \hline
+%    (c) & 407 \\
+%    \hline
+%    (d) & 431 \\
+%    \hline
+%    (e) & 525 \\
+%    \hline
+%    (f) & 448 \\
+%    \hline
+%  \end{tabular}
+%  
+%  \vspace{0.5cm} % Spazio vuoto tra le righe
+%  
+%  \caption{Total weights for the 6 assignments}
+%  \label{tab:table_costs}
+%\end{table}
+%
+%We find that the minimum total cost is given by the assignment (c) in Table \ref{tab:tab_ass}.  
 
 \subsubsection{Hungarian Matching Algorithm application}
-
-Let's take for example the same cost matrix of the Brute Force example and try to apply the HM for MinWPM problems:
+Another approach consists in 
+Let's take an example of a cost matrix and try to apply the HM for MinWPM problems:
 
 \begin{table}[H]
 \centering

@@ -1,9 +1,30 @@
 \chapter{Machine Learning}
 
+\section{Frames Sampling}
+To address the variable length of segments within the dataset, in instances where we aim to attain a lower number of frames than the actual length of the segments, 
+we have utilized the "uniform spacing" sampling technique to address the variability in segment lengths within the dataset.
+This method entails selecting frames from a list or sequence at regular, even intervals. 
+It proves to be highly advantageous when the goal is to ensure an equal distribution of frames throughout the sequence.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{graphics/subSampling.png}
+    \caption{Uniform Sampling visualized}
+    \label{fig:unif_sampling}
+\end{figure}
+
+Conversely, when dealing with segments that are shorter than the standard number of frames, a different technique is implemented.
+In such cases, for each frame, a variable and uniform number of interpolation frames are inserted to reach the desired frame count. 
+This approach compensates for the shorter segment length by adding interpolated frames, maintaining the consistency required for further analysis or processing.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{graphics/interpolationSampling.png}
+    \caption{Frames interpolation visualized}
+    \label{fig:interp_sampling}
+\end{figure}
+
 \section{Dataset Normalization}
 As previously mentioned, our dataset consists of 60 samples, each containing the spatial positions of all 20 skeletal joints at each time step.
-TODO manca sampling!! e mettiamoci pure una bella foto DAI DAI DAI
-
 From the equally sampled timeseries we calculate the $x$, $y$, and $z$ coordinates of the skeleton's barycenter for each time step. \\
 We define the barycenter as the point where all the mass of an object or a system of objects is concentrated. \\
 In this context, each joint is considered to have unit mass, meaning that all joints contribute equally to the barycenter. \\
@@ -46,29 +67,29 @@ In Table \ref{tab:ml_features} we can see all the features and their relative fu
 \begin{table}[H]
     \centering
     \begin{tabular}{|c|c|}
-    \hline
-    \textbf{Function} & \textbf{Description} \\
-    \hline
-    mean & Mean Value \\
-    var & Variance \\
-    mad & Median Absolute Value \\
-    max & Largest Value in Array \\
-    min & Smallest Value in Array \\
-    sma & Signal Magnitude Area \\
-    energy & Average Sum of Squares \\
-    iqr & Interquantile Range \\
-    entropy & Signal Entropy \\
-    correlation & Correlation Coefficient \\
-    kurtosis & Signal Kurtosis \\
-    skewness & Signal Skewness \\
-    maxFreqInd & Largest Frequency Component \\
-    argMaxFreqInd & Index Largest Frequency Component \\
-    meanFreq & Frequency Signal Weighted Average \\
-    skewnessFreq & Frequency Signal Skewness \\
-    kurtosisFreq & Frequency Signal Kurtosis \\
-    ampSprec & Amplitude Spectrum of the Frequency Signal \\
-    angle & Phase Angle of the Frequency Signal \\
-    \hline
+        \hline
+        \textbf{Function} & \textbf{Description} \\
+        \hline
+        mean & Mean Value \\
+        var & Variance \\
+        mad & Median Absolute Value \\
+        max & Largest Value in Array \\
+        min & Smallest Value in Array \\
+        sma & Signal Magnitude Area \\
+        energy & Average Sum of Squares \\
+        iqr & Interquantile Range \\
+        entropy & Signal Entropy \\
+        correlation & Correlation Coefficient \\
+        kurtosis & Signal Kurtosis \\
+        skewness & Signal Skewness \\
+        maxFreqInd & Largest Frequency Component \\
+        argMaxFreqInd & Index Largest Frequency Component \\
+        meanFreq & Frequency Signal Weighted Average \\
+        skewnessFreq & Frequency Signal Skewness \\
+        kurtosisFreq & Frequency Signal Kurtosis \\
+        ampSprec & Amplitude Spectrum of the Frequency Signal \\
+        angle & Phase Angle of the Frequency Signal \\
+        \hline
     \end{tabular}
     \caption{List of measures for computing feature vectors}
 \label{tab:ml_features}
@@ -93,18 +114,18 @@ To evaluate the performance of the classifier, a test set is chosen using LOOCV,
 \begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|}
-    \hline
-    \textbf{Model} & \textbf{Hyperparameter} & \textbf{Value} \\
-    \hline
-    \textit{BS1} & \textit{k}-\textit{neighbors} & 0.4 $\cdot$ count(Less Frequent Class)  \\
-    & \textit{m}-\textit{neighbors} & 0.4 $\cdot$ count(Most Frequent Class)  \\
-    \hline
-    \textit{RF1} & \textit{n}\_\textit{estimators} & 500  \\
-    & \textit{max}\_\textit{features} & Default  \\
-    \hline
-    \textit{RF2} & \textit{n}\_\textit{estimators} & 200  \\
-    & \textit{max}\_\textit{features} & All  \\
-    \hline
+        \hline
+        \textbf{Model} & \textbf{Hyperparameter} & \textbf{Value} \\
+        \hline
+        \textit{BS1} & \textit{k}-\textit{neighbors} & 0.4 $\cdot$ count(Less Frequent Class)  \\
+        & \textit{m}-\textit{neighbors} & 0.4 $\cdot$ count(Most Frequent Class)  \\
+        \hline
+        \textit{RF1} & \textit{n}\_\textit{estimators} & 500  \\
+        & \textit{max}\_\textit{features} & Default  \\
+        \hline
+        \textit{RF2} & \textit{n}\_\textit{estimators} & 200  \\
+        & \textit{max}\_\textit{features} & All  \\
+        \hline
     \end{tabular}
     \caption{Hyperparameters tuned for our application}
     \label{tab:ml_param}
@@ -118,68 +139,76 @@ In Figures \ref{tab:body_division_5} and \ref{tab:top_bottom}, you can observe w
 Note that not every edge of the reduced marker set (\ref{tab:labels_joints}) is included because some edges have not been the ground truth for any sample in our dataset.
 For ML we have in total 15 classes, that is 15 edges.
 
-\begin{figure}[H]
+\begin{table}[H]
     \centering
     \renewcommand{\arraystretch}{0.85}
-    \begin{tabular}{|c|c|}
-        \hline
-        \textbf{Body Part} & \textbf{Edges} \\
-        \hline
-        Head & shoulder\_center - head \\
-        \hline
-        Right Arm & right\_hand - right\_wrist \\
-        & right\_wrist - right\_elbow \\
-        & right\_elbow - right\_shoulder \\
-        & right\_shoulder - shoulder\_center \\
-        \hline
-        Left Arm & left\_hand - left\_wrist \\
-        & left\_elbow - left\_shoulder \\
-        & left\_shoulder - shoulder\_center \\
-        \hline
-        Right Leg & right\_foot - right\_ankle \\
-        & right\_ankle - right\_knee \\
-        & right\_knee - right\_hip \\
-        & right\_hip - hip\_center \\
-        \hline
-        Left Leg & left\_foot - left\_ankle \\
-        & left\_knee - left\_hip \\
-        & left\_hip - hip\_center \\
-        \hline
-    \end{tabular}
-    \caption{Skeleton division in 5 parts}
-    \label{tab:body_division_5}
-\end{figure}    
+    
+    \begin{subtable}{\textwidth}
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Body Part} & \textbf{Edges} \\
+            \hline
+            Head & shoulder\_center - head \\
+            \hline
+            Right Arm & right\_hand - right\_wrist \\
+            & right\_wrist - right\_elbow \\
+            & right\_elbow - right\_shoulder \\
+            & right\_shoulder - shoulder\_center \\
+            \hline
+            Left Arm & left\_hand - left\_wrist \\
+            & left\_elbow - left\_shoulder \\
+            & left\_shoulder - shoulder\_center \\
+            \hline
+            Right Leg & right\_foot - right\_ankle \\
+            & right\_ankle - right\_knee \\
+            & right\_knee - right\_hip \\
+            & right\_hip - hip\_center \\
+            \hline
+            Left Leg & left\_foot - left\_ankle \\
+            & left\_knee - left\_hip \\
+            & left\_hip - hip\_center \\
+            \hline
+        \end{tabular}
+        \caption{}
+        \label{tab:body_division_5}
+    \end{subtable}
 
-\begin{figure}[H]
-    \centering
-    \renewcommand{\arraystretch}{0.85}
-    \begin{tabular}{|c|c|}
-        \hline
-        \textbf{Body Part} & \textbf{Edges} \\
-        \hline
-        Upper & right\_hand - right\_wrist \\
-        & right\_wrist - right\_elbow \\
-        & right\_elbow - right\_shoulder \\
-        & right\_shoulder - shoulder\_center \\
-        & left\_hand - left\_wrist \\
-        & left\_elbow - left\_shoulder \\
-        & left\_shoulder - shoulder\_center \\
-        & shoulder\_center - head \\
-        \hline
-        Lower & right\_foot - right\_ankle \\
-        & right\_ankle - right\_knee \\
-        & right\_knee - right\_hip \\
-        & right\_hip - hip\_center \\
-        & left\_foot - left\_ankle \\
-        & left\_knee - left\_hip \\
-        & left\_hip - hip\_center \\
-        \hline
-    \end{tabular}
-    \caption{Skeleton division in 2 parts}
-    \label{tab:top_bottom}
-\end{figure}    
+    \vspace{10pt} % Add vertical space between subtables
 
-The Q1 will be posed considering the 15 edges, the Q2 will be posed considering the division of the body into 5 parts as shown in Figure \ref{tab:body_division_5}, while Q3 will be based on the division of the body into 2 parts (Figure \ref{tab:top_bottom}).
+    \begin{subtable}{\textwidth}
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Body Part} & \textbf{Edges} \\
+            \hline
+            Upper & right\_hand - right\_wrist \\
+            & right\_wrist - right\_elbow \\
+            & right\_elbow - right\_shoulder \\
+            & right\_shoulder - shoulder\_center \\
+            & left\_hand - left\_wrist \\
+            & left\_elbow - left\_shoulder \\
+            & left\_shoulder - shoulder\_center \\
+            & shoulder\_center - head \\
+            \hline
+            Lower & right\_foot - right\_ankle \\
+            & right\_ankle - right\_knee \\
+            & right\_knee - right\_hip \\
+            & right\_hip - hip\_center \\
+            & left\_foot - left\_ankle \\
+            & left\_knee - left\_hip \\
+            & left\_hip - hip\_center \\
+            \hline
+        \end{tabular}
+        \caption{}
+        \label{tab:top_bottom}
+    \end{subtable}
+
+    \caption{Skeleton Division in 5 parts (a) and in 2 parts (b)}
+    \label{tab:skeleton_divisions}
+\end{table}
+
+The Q1 will be posed considering the 15 edges, the Q2 will be posed considering the division of the body into 5 parts (Figure \ref{tab:body_division_5}), while Q3 will be based on the division of the body into 2 parts (Figure \ref{tab:top_bottom}).
 
 
 \begin{itemize}
@@ -298,7 +327,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
     \label{table:15_confusion}
 \end{table}
 
-
+TODO AGGIUNGERE TOP FEATURES PER EXPLAINABILITY
 
 
 \begin{table}[H]
@@ -327,98 +356,98 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
 
 
 
-  \begin{table}[H]
-    \begin{minipage}[b]{0.17\textwidth}
-        \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
-        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
-        \hline
-        37 & 5 \\
-        \hline
-        7 & 11 \\
-        \hline
-        \end{tabular}
-        \caption*{(g)}
-        \label{tab:perm1}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.17\textwidth}
-        \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
-        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
-        \hline
-        37 & 9 \\
-        \hline
-        10 & 4 \\
-        \hline
-        \end{tabular}
-        \caption*{(h)}
-        \label{tab:perm2}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.17\textwidth}
-        \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
-        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
-        \hline
-        43 & 4 \\
-        \hline
-        6 & 7 \\
-        \hline
-        \end{tabular}
-        \caption*{(i)}
-        \label{tab:perm3}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.17\textwidth}
-        \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
-        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
-        \hline
-        47 & 5 \\
-        \hline
-        7 & 1\\
-        \hline
-        \end{tabular}
-        \caption*{(l)}
-        \label{tab:perm3}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.17\textwidth}
-        \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
-        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
-        \hline
-        51 & 2 \\
-        \hline
-        6 & 1 \\
-        \hline
-        \end{tabular}
-        \caption*{(m)}
-        \label{tab:perm3}
-    \end{minipage}
-    \hfill
-    \caption{Confusion matrices of the 5 Body Parts}
-    \label{table:5_confusion}
+\begin{table}[H]
+  \begin{minipage}[b]{0.17\textwidth}
+    \centering
+    \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+    \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+    \hline
+    37 & 5 \\
+    \hline
+    7 & 11 \\
+    \hline
+    \end{tabular}
+    \caption*{(g)}
+    \label{tab:perm1}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.17\textwidth}
+    \centering
+    \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+    \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+    \hline
+    37 & 9 \\
+    \hline
+    10 & 4 \\
+    \hline
+    \end{tabular}
+    \caption*{(h)}
+    \label{tab:perm2}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.17\textwidth}
+    \centering
+    \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+    \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+    \hline
+    43 & 4 \\
+    \hline
+    6 & 7 \\
+    \hline
+    \end{tabular}
+    \caption*{(i)}
+    \label{tab:perm3}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.17\textwidth}
+    \centering
+    \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+    \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+    \hline
+    47 & 5 \\
+    \hline
+    7 & 1\\
+    \hline
+    \end{tabular}
+    \caption*{(l)}
+    \label{tab:perm3}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.17\textwidth}
+    \centering
+    \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+    \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+    \hline
+    51 & 2 \\
+    \hline
+    6 & 1 \\
+    \hline
+    \end{tabular}
+    \caption*{(m)}
+    \label{tab:perm3}
+  \end{minipage}
+  \hfill
+  \caption{Confusion matrices of the 5 Body Parts}
+  \label{table:5_confusion}
 \end{table}
 
 
 \begin{table}[H]
     \centering
     \begin{tabular}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{6cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|}
-    \hline
-    \textbf{Label} & \textbf{Body Part} & \textbf{TPR} & \textbf{Accuracy} \\
-    \hline
-    (g) & Right Arm  & 61\% & 80\% \\
-    \hline
-    (h) & Left Arm & 29\% & 68\% \\
-    \hline
-    (i) & Right Leg  & 54\%  & 83\% \\ 
-    \hline
-    (l) & Left Leg & 12\% & 80\% \\
-    \hline
-    (m) & Head  & 14\%  & 86\%\\
-    \hline
+        \hline
+        \textbf{Label} & \textbf{Body Part} & \textbf{TPR} & \textbf{Accuracy} \\
+        \hline
+        (g) & Right Arm  & 61\% & 80\% \\
+        \hline
+        (h) & Left Arm & 29\% & 68\% \\
+        \hline
+        (i) & Right Leg  & 54\%  & 83\% \\ 
+        \hline
+        (l) & Left Leg & 12\% & 80\% \\
+        \hline
+        (m) & Head  & 14\%  & 86\%\\
+        \hline
     \end{tabular}
     \caption{Metrics of the 5 Body Parts}
     \label{tab:5_metrics}
@@ -426,20 +455,15 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
 
 
 \begin{table}[H]
-    \begin{minipage}[b]{1\textwidth}
-        \centering
-        \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
-        \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
-        \hline
-        16 & 5 \\
-        \hline
-        8 & 31 \\
-        \hline
-        \end{tabular}
-        \caption*{(n)}
-        \label{tab:perm1}
-    \end{minipage}
-    \hfill
+    \centering
+    \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+    \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+    \hline
+    16 & 5 \\
+    \hline
+    8 & 31 \\
+    \hline
+    \end{tabular}
     \caption{Confusion matrix of the 2 Body Parts}
     \label{table:2_confusion}
 \end{table}
@@ -447,11 +471,11 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
 \begin{table}[H]
     \centering
     \begin{tabular}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{6cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|}
-    \hline
-    \textbf{Label} & \textbf{Body Part} & \textbf{TPR} & \textbf{Accuracy} \\
-    \hline
-    (n) & Upper & 79\% & 78\% \\
-    \hline
+        \hline
+        \textbf{Label} & \textbf{Body Part} & \textbf{TPR} & \textbf{Accuracy} \\
+        \hline
+        (n) & Upper & 79\% & 78\% \\
+        \hline
     \end{tabular}
     \caption{Metrics of the 2 Body Parts}
     \label{tab:2_metrics}

@@ -11,8 +11,8 @@ Their expertise elevates dataset quality, providing a resource that encapsulates
 
 
 \section{Dataset}
-The dataset contains two categories of expressive movements, each associated with a different recording session. \\
-The details of both types of movements are provided below.
+The dataset contains two categories of expressive movements, each associated with a different recording session.
+The details of both types of movements are provided below.\\
 The dataset comprises 60 segments recorded using different versions of the \textit{Qualisys Motion Capture system}.
 These segments represents various subjects performing simple movement sequences, which are captured from different angles using some cameras.
 The videos are synchronized through SMPTE timecode and each video is accompanied by corresponding motion capture data that records the positions of body parts.
@@ -74,15 +74,15 @@ The following figures (Figure \ref{fig:64markers}, Figure \ref{fig:41markers}) r
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.99\textwidth]{graphics/full_marker_set.png}
-    \caption{64 Markers Set Labels}
+    \includegraphics[width=\textwidth]{graphics/full_marker_set.png}
+    \caption{Markers Set with 64 Labels}
     \label{fig:64markers}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{graphics/41Markers.png}
-    \caption{41 Markers Set Labels}
+    \caption{Markers Set with 41 Labels}
     \label{fig:41markers}
 \end{figure}
 
@@ -90,7 +90,17 @@ The following figures (Figure \ref{fig:64markers}, Figure \ref{fig:41markers}) r
 
 \section{Reduced Marker Set}
 Firstly, we standardized the marker labels following the 64-marker scheme, 
-we renamed some of the 41-marker labels to align with the full version.
+we renamed some of the 41-marker labels to align with the full version (Table \ref{tab:marker_mapping_41}).
+
+The reduced marker set is achieved by reducing the count of markers employed from the full marker set.
+This because a simplified skeletal framework can adeptly communicate essential insights about expressive movements.
+The reduction of multiple markers into individual joints is implemented to mitigate the possibility of marker omission. \\
+This reduction was performed by computing the $barycentre$ of grouped joints (following the grouping scheme provided in Table \ref{tab:marker_mapping_64}) as follows:
+\begin{enumerate}
+    \item Extract the $x$, $y$, $z$ $coordinates$ for each marker of the cluster.
+    \item Compute for each of $x$, $y$, $z$ their average, by summing all the $x$-markers together
+    (and similarly for $y$ and $z$) and then dividing by the number of markers in the cluster.
+\end{enumerate} 
 
 \begin{table}[H]
     \centering
@@ -117,16 +127,6 @@ we renamed some of the 41-marker labels to align with the full version.
     \caption{41 Markers renaming convention}
     \label{tab:marker_mapping_41}
 \end{table}
-
-The reduced marker set is achieved by reducing the count of markers employed from the full marker set.
-This because a simplified skeletal framework can adeptly communicate essential insights about expressive movements.
-The reduction of multiple markers into individual joints is implemented to mitigate the possibility of marker omission.
-This reduction was performed by computing the $barycentre$ of joints in a cluster as follows:
-\begin{enumerate}
-    \item Extract the $x$, $y$, $z$ $coordinates$ for each marker of the cluster.
-    \item Compute for each of $x$, $y$, $z$ their average, by summing all the $x$-markers together
-    (and similarly for $y$ and $z$) and then dividing by the number of markers in the cluster.
-\end{enumerate} 
 
 \begin{table}[H]
     \centering

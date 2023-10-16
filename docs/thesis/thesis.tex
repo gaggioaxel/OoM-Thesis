@@ -8,6 +8,10 @@
 % For cells colors
 \usepackage{colortbl, xcolor}
 
+\usepackage{tocloft}
+\cftsetindents{table}{-1em}{3.5em}
+\cftsetindents{figure}{-1em}{3.5em}
+
 % To fit images
 \usepackage{graphicx}
 
@@ -74,9 +78,9 @@
 
 \coverpage
 
-\newpage
-\mbox{}
-\newpage
+%\newpage
+%\mbox{}
+%\newpage
 
 \include{chapters/acknowledgments.tex}
 \include{chapters/abstract.tex}
@@ -102,7 +106,7 @@
 \part{Background}
 \include{chapters/introduction.tex}
 \include{chapters/motivation.tex}
-\include{chapters/theoretical_framework}
+\include{chapters/theoretical_framework.tex}
 %\include{chapters/stateofart.tex}
 \part{Dataset details}
 \include{chapters/dataset.tex}
@@ -110,11 +114,9 @@
 \include{chapters/graph_skeletal_structure.tex}
 \include{chapters/spectral_clustering.tex}
 \include{chapters/stabilization.tex}
-%\include{chapters/auxiliary_graph.tex}
 \part{Automatic classification}
-\include{chapters/clustering_results}
+\include{chapters/clustering_results.tex}
 \include{chapters/machine_learning.tex}
-\include{chapters/ml_method.tex}
 \part{Results discussion}
 \include{chapters/conclusions.tex}
 

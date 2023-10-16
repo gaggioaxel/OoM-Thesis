@@ -29,6 +29,38 @@ This research aims to contribute to the design of accurate and robust systems fo
 by exploiting both the current techniques of analysis and the emerging ML approaches, 
 which have become feasible thanks to advancements in computational capabilities of modern machines. 
 
+\section{Roadmap}
+The roadmap of this thesis can be outlined as follows: \\
+The dataset was initially acquired through manual annotation of movement origins in numerous MoCap videos. 
+The results were validated by achieving consensus among multiple annotators. 
+Additionally, markers for videos lacking previous labeling were manually assigned and subsequently compressed into clusters.
+The central objectives of your thesis encompass the development of:
+\begin{itemize}
+    \item \textbf{Cluster Stabilization Algorithm} which ensure that clusters, which represent groups of related markers or joints, maintain their consistency and coherence over time. 
+    This stability is crucial for accurately tracking and analyzing movements, as it helps prevent spurious or erratic changes in the clusters' characteristics.
+    \item \textbf{Graph-based Procedure} to recognize the Origin of Movement by identifying key nodes that play pivotal roles in the motion analysis using an algorithmic method.
+    \item \textbf{Machine Learning Approach} to identify the most promising edge of a the skeletal model by finding patterns in data without an algorithmic approach.
+\end{itemize}
+Given the multifaceted objectives, two parallel pipelines were developed.\\
+The first pipeline included the following steps:
+\begin{itemize}
+    \item Smoothing the time series of each movement using two classical smoothing algorithms.
+    \item Extracting physical measurements from the smoothed data.
+    \item Applying cosine similarity to pairs of joints linked by arcs based on a model of physical joints in the human body.
+    \item Clustering joints for each frame of the movement.
+    \item The primary objective here was the temporal stabilization of cluster color changes.
+    \item Formation of a second graph with nodes at cluster borders, connected to other clusters. These nodes are weighted based on their connections and ranked across all frames.
+\end{itemize}
+The second pipeline involved:
+\begin{itemize}
+    \item Normalizing the dataset in terms of segment length (Time series Sampling), performer's body structure (Skeleton Barycenter and Joints Distance), and the entire trajectory of the movement.
+    \item Extracting a wide range of relevant features from the normalized dataset.
+    \item Using these features to train a machine learning model.
+    \item Evaluating the model's performance using various metrics.
+\end{itemize}
+Finally, the results from each pipeline are compared.
+
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{graphics/Walkthrough.png}

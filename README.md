@@ -30,4 +30,3 @@ Thanks to Sydney ChatGPT for it's "Dai Dai, Dai", "Portiamo a casa la giornata!"
 # Still TODO
 Acknowledgments
 Abstract
-Spaziamento lista figure tabelle etc.

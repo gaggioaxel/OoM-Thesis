@@ -3,8 +3,8 @@
 
 \section{Graph theory}
 This section contains definitions, notation and concepts related to Graph Theory according
-to \cite{graph_theory:2010}. \\
-Graph theory deals with connection amongst vertices by edges. \\
+to \cite{graph_theory:2010}.
+Graph theory deals with connection amongst vertices by edges.
 Graphs are the foundation of many day to day processes and concepts, as they provide a convenient
 and intuitive way of representing objects.
 
@@ -539,14 +539,16 @@ While random splitting is often sufficient, there are instances, particularly in
 In this approach, the model undergoes training k times, with k being precisely the total number of samples $n$.
 During each of the \textit{k} iterations, a distinct sample is singled out as the test set, while all the remaining samples are utilized for model training. 
 This procedure ensures that every single sample gets its turn as the test set, comprehensively assessing the model's performance across the entire dataset.
-In Figure \ref{fig:LOOCV} is shown how it works, note that training is performed on the same model at each iteration and 
+In Figure \ref{fig:LOOCV} is shown how it works, note that training and testing is performed on the same model at each iteration.
+The evaluation metric is based on the consistency between the predicted values and the actual values across all iterations.
 
 \begin{figure}[H]
   \centering  
-    \includegraphics[width=0.8\linewidth]{graphics/LOOCV.png}
+    \includegraphics[width=0.6\linewidth]{graphics/LOOCV.png}
     \caption{LOOCV algorithm example on \textit{k} folds}
     \label{fig:LOOCV}
 \end{figure}
+
 However, LOOCV has some downsides:
 \begin{itemize}
   \item \textbf{Computational Cost:} It can be computationally expensive, especially on large datasets, as it requires a significant number of separate model trainings. 
