@@ -58,10 +58,74 @@ Feature extraction in ML is an essential process that involves transforming raw 
 It helps identify and capture the most relevant information within the data while simplifying excessive complexity that could make model training challenging.
 This process not only contributes to improving model accuracy but also reduces the risk of overfitting and enhances the ability to generalize knowledge gained to new data. \\
 From the preprocessed data, we want to extract the necessary features for ML.
-Here we will see al the steps involved in order to achieve the desired features. \\
-
-
-Finally, to choose the features to extract, we referred to \cite{oneto:2020} and \cite{sama:2010}.
+Here we will see al the steps involved in order to achieve the desired features, for every sample of the dataset (note that \textit{n} is the number of frames of the sample). \\
+\begin{itemize}
+    \item \textbf{Mean} is the expected value of the distribution:
+        \begin{equation}
+            mean(\bar{x}) = \frac{1}{n} \sum_{i=1}^{n} x_i
+        \end{equation}
+    \item \textbf{Variance} is the second momentum of the distribution (or the squared deviation of the expected value from the mean):
+        \begin{align}
+            mean_a(x) &= \frac{1}{n} \sum_{i=1}^{n} (x_i - mean(\bar{x}))^a &
+            var(x) &= mean_2(\bar{x})
+        \end{align}
+    \item \textbf{Kurtosis} is the fourth standardized moment:
+        \begin{equation}
+            kurtosis(\bar{x}) = \frac{mean_4(\bar{x})}{\sqrt{var(\bar{x})}^4} - 3
+        \end{equation}
+    \item \textbf{Skewness} is the third standardized moment:
+        \begin{equation}
+            skewness(\bar{x}) = \frac{mean_3(\bar{x})}{\sqrt{var(\bar{x})}^3}
+        \end{equation}
+    \item \textbf{Correlation} between two joints (\textit{x},\textit{y}):
+        \begin{equation}
+            corr(\bar{x},\bar{y}) = \frac{\sum_{i=1}^n (x_i - mean(\bar{x}))(y_i - mean(\bar{y}))}{\sqrt{var(\bar{x})}\cdot\sqrt{var(\bar{y})}}
+        \end{equation}
+    \item \textbf{Mean Absolute Deviation}:
+        \begin{equation}
+            mad(\bar{x}) = \frac{1}{n} \sum_{i=1}^{n} |x_i - mean(\bar{x})|
+        \end{equation}
+    \item \textbf{Mean Standard Error}:
+        \begin{equation}
+            sem(\bar{x}) = \sqrt{\frac{var(\bar{x})}{n}}
+        \end{equation}
+    \item \textbf{Average Sum of Squares}:
+        \begin{equation}
+            energy(\bar{x}) = \sqrt{\sum_{i=1}^{n} x_i^2}
+        \end{equation}
+    \item \textbf{Interquantile Range} measures statistical dispersion in the range between the 25th (Q1) and the 75th percentile (Q3) of the data distribution ($ iqr = Q3 - Q1 $):
+        \begin{equation}
+            iqr(\bar{x}) =  
+                \begin{cases} 
+                \bar{x}_{\frac{3}{4}(n+1)} - \bar{x}_{(\frac{n+1}{4})} & \text{if n is odd} \\
+                \frac{(\bar{x}_{(\frac{3}{4}n)} + \bar{x}_{(\frac{3}{4}n+1)}) - (\bar{x}_{(\frac{n}{4})} + \bar{x}_{(\frac{n}{4}+1)})}{2} & \text{otherwise}
+                \end{cases}
+        \end{equation}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.85\textwidth]{graphics/iqr.png}
+            \caption{Interquantile range of a normal distribution}
+            \label{fig:iqr}
+        \end{figure}
+    \item \textbf{Fundamental Frequency Signal} from the Discrete Fourier Transform (DFT):
+    \begin{equation}
+        firstFreq(\bar{x}) = \angle DFT(\bar{x})[1]
+    \end{equation}
+    \item \textbf{Real part's Average of Frequency Signal}:
+    \begin{equation}
+        meanFreq(\bar{x}) = \sum_{i=1}^{n} Re(DFT(x_i))
+    \end{equation}
+    \item \textbf{Real part's Max of Frequency Signal}:
+    \begin{equation}
+        maxFreq(\bar{x}) = Max(Re(DFT(x)))
+    \end{equation}
+    \item \textbf{Index of the Max of the Real part of Frequency Signal}:
+    \begin{equation}
+        maxFreq(\bar{x}) = Argmax(Re(DFT(x)))
+    \end{equation}
+\end{itemize}
+The last four values correspond to the minimum value and its index, skewness, and kurtosis of the Fourier transform.
+To choose the features to extract, we referred to \cite{oneto:2020} and \cite{sama:2010}.
 In Table \ref{tab:ml_features} we can see all the features and their relative function.
 
 \begin{table}[H]
@@ -70,25 +134,25 @@ In Table \ref{tab:ml_features} we can see all the features and their relative fu
         \hline
         \textbf{Function} & \textbf{Description} \\
         \hline
-        mean & Mean Value \\
+        mean & Mean \\
         var & Variance \\
-        mad & Median Absolute Value \\
-        max & Largest Value in Array \\
-        min & Smallest Value in Array \\
-        sma & Signal Magnitude Area \\
+        kurtosis & Kurtosis \\
+        skewness & Skewness \\
+        corr & Correlation Coefficient \\
+        mad & Mean Absolute Deviation \\
+        sem & Mean Standard Error \\
         energy & Average Sum of Squares \\
         iqr & Interquantile Range \\
-        entropy & Signal Entropy \\
-        correlation & Correlation Coefficient \\
-        kurtosis & Signal Kurtosis \\
-        skewness & Signal Skewness \\
-        maxFreqInd & Largest Frequency Component \\
-        argMaxFreqInd & Index Largest Frequency Component \\
-        meanFreq & Frequency Signal Weighted Average \\
+        min & Smallest Value in Array \\
+        max & Largest Value in Array \\
+        firstFreq & Fundamental Frequency Signal \\
+        meanFreq & Real part's Average of Frequency Signal \\
+        maxFreq & Real part's Max of Frequency Signal \\
+        maxFreqIndx & Index of the Max of the Real part of Frequency Signal \\ 
+        minFreq & Real part's Min of Frequency Signal \\
+        minFreqIndx & Index of the Min of the Real part of Frequency Signal \\ 
         skewnessFreq & Frequency Signal Skewness \\
         kurtosisFreq & Frequency Signal Kurtosis \\
-        ampSprec & Amplitude Spectrum of the Frequency Signal \\
-        angle & Phase Angle of the Frequency Signal \\
         \hline
     \end{tabular}
     \caption{List of measures for computing feature vectors}
@@ -244,7 +308,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
 
 \begin{table}[H]
     \centering
-    \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+    \renewcommand{\arraystretch}{1.2} % Aumenta lo spazio tra le righe del doppio
     \begin{subfigure}[b]{0.1\textwidth}
         \centering
         \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
@@ -327,9 +391,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
     \label{table:15_confusion}
 \end{table}
 
-TODO AGGIUNGERE TOP FEATURES PER EXPLAINABILITY
-
-
+%TODO AGGIUNGERE TOP FEATURES PER EXPLAINABILITY
 \begin{table}[H]
     \centering
     \begin{tabular}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{6cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|}
@@ -357,9 +419,9 @@ TODO AGGIUNGERE TOP FEATURES PER EXPLAINABILITY
 
 
 \begin{table}[H]
-  \begin{minipage}[b]{0.17\textwidth}
+  \begin{minipage}[b]{0.1\textwidth}
     \centering
-    \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+    \renewcommand{\arraystretch}{1.2} % Aumenta lo spazio tra le righe del doppio
     \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
     \hline
     37 & 5 \\
@@ -370,10 +432,10 @@ TODO AGGIUNGERE TOP FEATURES PER EXPLAINABILITY
     \caption*{(g)}
     \label{tab:perm1}
   \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.17\textwidth}
+  \hspace{0.05\linewidth}
+  \begin{minipage}[b]{0.1\textwidth}
     \centering
-    \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+    \renewcommand{\arraystretch}{1.2} % Aumenta lo spazio tra le righe del doppio
     \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
     \hline
     37 & 9 \\
@@ -384,10 +446,10 @@ TODO AGGIUNGERE TOP FEATURES PER EXPLAINABILITY
     \caption*{(h)}
     \label{tab:perm2}
   \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.17\textwidth}
+  \hspace{0.05\linewidth}
+  \begin{minipage}[b]{0.1\textwidth}
     \centering
-    \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+    \renewcommand{\arraystretch}{1.2} % Aumenta lo spazio tra le righe del doppio
     \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
     \hline
     43 & 4 \\
@@ -398,10 +460,10 @@ TODO AGGIUNGERE TOP FEATURES PER EXPLAINABILITY
     \caption*{(i)}
     \label{tab:perm3}
   \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.17\textwidth}
+  \hspace{0.05\linewidth}
+  \begin{minipage}[b]{0.1\textwidth}
     \centering
-    \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+    \renewcommand{\arraystretch}{1.2} % Aumenta lo spazio tra le righe del doppio
     \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
     \hline
     47 & 5 \\
@@ -412,10 +474,10 @@ TODO AGGIUNGERE TOP FEATURES PER EXPLAINABILITY
     \caption*{(l)}
     \label{tab:perm3}
   \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.17\textwidth}
+  \hspace{0.05\linewidth}
+  \begin{minipage}[b]{0.1\textwidth}
     \centering
-    \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
+    \renewcommand{\arraystretch}{1.2} % Aumenta lo spazio tra le righe del doppio
     \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
     \hline
     51 & 2 \\
@@ -426,8 +488,22 @@ TODO AGGIUNGERE TOP FEATURES PER EXPLAINABILITY
     \caption*{(m)}
     \label{tab:perm3}
   \end{minipage}
+  \hspace{0.05\linewidth}
+  \begin{minipage}[b]{0.1\textwidth}
+    \centering
+    \renewcommand{\arraystretch}{1.2} % Aumenta lo spazio tra le righe del doppio
+    \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+        \hline
+        16 & 5 \\
+        \hline
+        8 & 31 \\
+        \hline
+    \end{tabular}
+    \caption*{(n)}
+    \label{tab:perm3}
+  \end{minipage}
   \hfill
-  \caption{Confusion matrices of the 5 Body Parts}
+  \caption{Confusion matrices of the 5 Body Parts classification and of the Upper/Lower one}
   \label{table:5_confusion}
 \end{table}
 
@@ -449,34 +525,13 @@ TODO AGGIUNGERE TOP FEATURES PER EXPLAINABILITY
         (m) & Head  & 14\%  & 86\%\\
         \hline
     \end{tabular}
-    \caption{Metrics of the 5 Body Parts}
-    \label{tab:5_metrics}
-\end{table}
-
-
-\begin{table}[H]
-    \centering
-    \renewcommand{\arraystretch}{1.6} % Aumenta lo spazio tra le righe del doppio
-    \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
-    \hline
-    16 & 5 \\
-    \hline
-    8 & 31 \\
-    \hline
-    \end{tabular}
-    \caption{Confusion matrix of the 2 Body Parts}
-    \label{table:2_confusion}
-\end{table}
-
-\begin{table}[H]
-    \centering
     \begin{tabular}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{6cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|}
         \hline
-        \textbf{Label} & \textbf{Body Part} & \textbf{TPR} & \textbf{Accuracy} \\
+        \textbf{Label} & \textbf{Body Half} & \textbf{TPR} & \textbf{Accuracy} \\
         \hline
         (n) & Upper & 79\% & 78\% \\
         \hline
     \end{tabular}
-    \caption{Metrics of the 2 Body Parts}
-    \label{tab:2_metrics}
+    \caption{Metrics of the 5 Body Parts and the Upper}
+    \label{tab:5_metrics}
 \end{table}

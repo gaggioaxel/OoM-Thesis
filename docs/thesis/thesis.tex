@@ -57,6 +57,16 @@
 \usepackage{fontsize}
 \changefontsize{12pt}
 
+\usepackage{titletoc}
+\titlecontents{chapter}[0pt]
+  {\addvspace{1em}}
+  {\textbf{\thecontentslabel}\hspace{0.8em}\textbf} % Increase the space here (2em in this example)
+  {}
+  {}
+%\titlecontents{chapter}[0pt]{\addvspace{0em}}{\thecontentslabel\hspace{1em}}{}{\titlerule*[1pc]{}\contentspage}
+\titlecontents{section}[8pt]{\addvspace{0em}}{\thecontentslabel\hspace{0.8em}}{}{\titlerule*[0.8pc]{.}\contentspage}
+%\titlecontents{subsection}[2em]{\addvspace{0em}}{\thecontentslabel\hspace{1em}}{}{\titlerule*[1pc]{}\contentspage}
+
 
 % Configurations
 \newcounter{memberrowno}
