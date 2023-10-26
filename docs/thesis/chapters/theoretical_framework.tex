@@ -647,7 +647,14 @@ it's advisable to utilize a model that can provide probability scores for both c
 Components of the ROC Curve are:
 
 \begin{itemize}
-  \item \textbf{True Positive Rate} (TPR) also known as Sensitivity or Recall (\ref{formula:recall}).
+  \item \textbf{True Positive Rate} (TPR) also known as $Sensitivity$ or $Recall$ (\ref{formula:recall}).
+  
+  \item \textbf{True Negative Rate} (TNR), also known as $Specificity$, is the ratio of true negative instances to the total actual negative instances:
+  \begin{equation}
+    \textit{TNR} = \frac{\text{TN}}{\text{TN + FP}}
+    \label{formula:trueNegativeRate}
+  \end{equation}
+
   \item \textbf{False Positive Rate} (FPR) is the ratio of negative instances misclassified as positive to the total actual negative instances:
   \begin{equation}
     \textit{FPR} = \frac{\text{FP}}{\text{FP + TN}}
