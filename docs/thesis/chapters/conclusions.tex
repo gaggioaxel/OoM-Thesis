@@ -5,41 +5,51 @@ Although it was not always easy, addressing and resolving the issues inherent in
 It posed a challenge and provided a glimpse into what we might have to confront in the future, and we are grateful for the opportunity to have had this experience.
 
 In the following section, a synthesis of the results achieved and potential outcomes is presented.
-It particularly focuses on performance analysis in terms of operating conditions and further future developments aimed at improving the obtained results, as outlined in Section \ref{sec:discussion} and Section \ref{sec:future_researches}, respectively.
+It particularly focuses on performance analysis in terms of operating conditions and further future developments aimed at improving the obtained results.
 
 \section{Discussion}
-\label{sec:discussion}
-The main objectives of our work were to achieve temporal stability in cluster visualization and to classify the OoM using both the WDG and ML. \\
+The main objectives of our work were to achieve temporal stability in cluster visualization and to classify the OoM using both the WDC and ML.\\
 
-The MaxWPM algorithm is able to provide a clearer and more consistent visualization of clusters, allowing us to understand which joints are most similar during motion, without the annoying and abrupt color changes. \\
+\underline{Temporal Stabilization and Smoothing Results}:\\
+The MaxWPM algorithm is able to provide a clearer and more consistent visualization of clusters, allowing us to understand which joints are most similar during motion, without abrupt color changes. \\
+Furthermore, the additional smoothing technique allows to better see the evolution of clusters across a longer timespan also in those cases where in a short amount of time clusters still tend to change too fast.\\
 
-NON SO COSA DIRE SUL WDG. \\
+\underline{Weighted Degree Centrality Results}:\\
+As we can see in Figure \ref*{fig:wdc_results}, the WDC approach appears to work reasonably well when it comes to classifying sources of movement in the upper part of the body. 
+However, it's essential to take these results with caution because the dataset is very small and certainly does not have a statistically significant sample of each class. 
+Nevertheless, it remains a good starting point. \\
+Furthermore, a refinement of this algorithmic approach can lead to a procedure with much more natural and immediate explainability 
+compared to the complexity of reconstructing explainability in a machine learning classification.\\
 
-As evident, due to the imbalanced dataset and the limited number of available samples, the ML model proves to be effective only for the most frequent classes.
-Multiclass classification, in fact, resulted in minimal outcomes that are not worth addressing.
-However, the model strives to maximize accuracy and the number of TN at the expense of TP. \\
-
-An essential contribution of this thesis is the development of a movement repository, which will be accessible for any forthcoming research related to movement analysis.
-
-
+\underline{Machine Learning Results}:\\
+From the results obtained in Table \ref{tab:ml_results_joints}, a fluctuating trend is evident, probably due to the limited and imbalanced data. 
+Despite efforts to balance the dataset, as they were tested solely on the majority class among the available ones, whose results can be seen in the confusion matrix in Table \ref{tab:ml_results_cm_edge_1}, 
+they were not sufficient to compensate for the lack of data in the other classes. \\
+What has been achieved, therefore, is an effectiveness in predicting the majority class effectively and a tendency to balance FN and FP. 
+By merging the classes, as done in Q2 and Q3 of Section \ref{sec:ml_bin_questions}, the fluctuations in the results appear to be somewhat mitigated at the expense of a slight deterioration in overall performance (Table \ref{tab:ml_results_body_parts}).
+With an extension of the dataset, better and more robust accuracies can be achieved across all classes.
+Furthermore, it would also be possible to perform multiclass classification for recognition of multiple origin of movements from the same movement.\\
 
 \section{Future researches}
 \label{sec:future_researches}
-There are several possible future extensions of this work, that could improve on the method
-and yield better results. \\
+There are several possible future extensions of this work, that could improve on the method and yield better results. \\
 
-To improve prediction accuracy, we aim to expand the dataset and ensure balance by incorporating new, intentionally designed movement segments.
-This will be done without introducing overly intricate motions that could potentially complicate the movement classification.
-\\
-To move towards real-time automatic classification, markerless MoCap can be useful.
-Achieving real-time classification with a marker-based system is highly unlikely.
-Despite markerless systems having lower precision compared to marker-based ones, they can be the only feasible alternative for real-time classification.
-\\
-A potential future project could involve a study on movement fragments characterized by multiple origins.
-This would be valuable in examining, for instance, during the act of catching a ball, whether the movement origin is symmetrically distributed throughout the body or if there is a dominant component compared to the others.
-\\
-The final extension of our thesis involves the examination of small groups of individuals and the exploration of how coordinated movement patterns emerge within these groups.
-In this context, we conceptualize a group as a cohesive entity, similar to an organism.
-Instead of treating individual joints as players, we adopt a similar approach within the framework of graph and game theory, but at a higher anatomical level.
-Here, the group of individuals collectively functions as a single body, with each person within the group assuming the role of a player.
+\begin{itemize}
+    \item To improve prediction accuracy, we aim to expand the dataset and ensure balance by incorporating new, intentionally designed movement segments.
+        This will be done without introducing overly intricate motions that could potentially complicate the movement classification.
+    \item In future revisions, with a more extensive dataset, additive methods could be employed to measure the amount of useful information added by the WDC approach in a classification problem compared to the other high-level features used.
+    \item To move towards real-time automatic classification, markerless MoCap can be useful.
+        Achieving real-time classification with a marker-based system is highly unlikely.
+        Although markerless systems may exhibit lower precision in comparison to marker-based systems, 
+        they represent a viable alternative for real-world applications that do not require individuals to wear specialized suits, which can be uncomfortable, especially in rehabilitation settings. 
+        Markerless systems may still offer an adequate level of accuracy for conducting body analysis.
+    \item A potential future project could involve a study on movement fragments characterized by multiple origins.
+        This would be valuable in examining, for instance, during the act of catching a ball, whether the movement origin is symmetrically distributed throughout the body or if there is a dominant component compared to the others.
+    \item The final extension of our thesis involves the examination of small groups of individuals and the exploration of how coordinated movement patterns emerge within these groups.
+        In this context, we conceptualize a group as a cohesive entity, similar to an organism.
+        Instead of treating individual joints as players, we may adopt a similar approach within the framework of graph and game theory, but at a higher anatomical level.
+        Here, the group of individuals operates as a cohesive unit, where each person in the group takes on the role of a player. 
+        This approach enables us to examine leading behaviors, including those exhibited by individual initiators whose movements influence the entire group.
+\end{itemize}
+
 As a result, our research aims to investigate the concept of movement origin in the context of leadership within these group dynamics.

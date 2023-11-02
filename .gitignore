@@ -14,6 +14,7 @@ docs/thesis/*.bbl
 docs/thesis/*.lof
 docs/thesis/*.lot
 docs/thesis/*.xdv
-docs/presentation/resources/*.mp4
+docs/presentation/*
+docs/presentation/*
 docs/paperINTETAIN*
 code/src/_*

@@ -30,7 +30,6 @@ We define the barycenter as the point where all the mass of an object or a syste
 In this context, each joint is considered to have unit mass, meaning that all joints contribute equally to the barycenter. \\
 If we represent $n$ as the number of 20 joints, the coordinates of the barycenter are obtained by taking the average of the coordinates of these 20 joints, as we can see in the formula:
 
-
 \begin{equation}
     Barycenter (x, y, z) = \left(\frac{1}{n} \sum_{i=1}^{n} x_i, \frac{1}{n} \sum_{i=1}^{n} y_i, \frac{1}{n} \sum_{i=1}^{n} z_i\right)
     \label{formula:baricentro}
@@ -196,10 +195,11 @@ To evaluate the performance of the classifier, a test set is chosen using LOOCV,
 \end{table}
 
 \subsection{Binary questions to the Model}
+\label{sec:ml_bin_questions}
 In our ML model, we posed three different questions regarding the OoM. 
 Since our dataset is inherently a multi-class dataset, we performed binary classification by reclassifying the dataset.
 These binary questions are posed either to edges or to specific parts of the skeleton, which are themselves composed of edges. \\
-In Figures \ref{tab:body_division_5} and \ref{tab:top_bottom}, you can observe which edges form various parts of the skeleton. \\
+In Figures \ref{tab:ml_division_5_body_parts} and \ref{tab:ml_division_top_bottom}, you can observe which edges form various parts of the skeleton. \\
 Note that not every edge of the reduced marker set (\ref{tab:labels_joints}) is included because some edges have not been the ground truth for any sample in our dataset.
 For ML we have in total 15 classes, that is 15 edges.
 
@@ -235,7 +235,7 @@ For ML we have in total 15 classes, that is 15 edges.
             \hline
         \end{tabular}
         \caption{}
-        \label{tab:body_division_5}
+        \label{tab:ml_division_5_body_parts}
     \end{subtable}
 
     \vspace{10pt} % Add vertical space between subtables
@@ -265,14 +265,14 @@ For ML we have in total 15 classes, that is 15 edges.
             \hline
         \end{tabular}
         \caption{}
-        \label{tab:top_bottom}
+        \label{tab:ml_division_top_bottom}
     \end{subtable}
 
     \caption{Skeleton Division in 5 parts (a) and in 2 parts (b)}
-    \label{tab:skeleton_divisions}
+    \label{tab:ml_skeleton_divisions}
 \end{table}
 
-The Q1 will be posed considering the 15 edges, the Q2 will be posed considering the division of the body into 5 parts (Figure \ref{tab:body_division_5}), while Q3 will be based on the division of the body into 2 parts (Figure \ref{tab:top_bottom}).
+The Q1 will be posed considering the 15 edges, the Q2 will be posed considering the division of the body into 5 parts (Figure \ref{tab:ml_division_5_body_parts}), while Q3 will be based on the division of the body into 2 parts (Figure \ref{tab:ml_division_top_bottom}).
 
 
 \begin{itemize}
@@ -291,7 +291,7 @@ The Q1 will be posed considering the 15 edges, the Q2 will be posed considering 
 For each question, we iteratively asked the model whether the test sample was predicted as that edge/that part of the body or not.
 
 \section{Results}
-In the following Tables (from \ref{table:15_confusion} to \ref{tab:5_metrics}), you will find confusion matrices and evaluation metrics for the prediction of certain classes.
+In the following Tables (from \ref{tab:ml_results_cm_joints} to \ref{tab:ml_results_cm_body_parts}), you will find confusion matrices and evaluation metrics for the prediction of certain classes.
 To interpret the meaning of the confusion matrices, please refer to Section \ref{subsec:evaluation_metrics}.
 \\
 
@@ -299,10 +299,8 @@ The tests to identify the best model were conducted on the most frequent edge of
 This is because the dataset is unbalanced, and therefore, better prediction results are expected from this class.
 As observed, accuracy consistently remains very high, almost always exceeding 70\%.
 However, beyond this, the model demonstrates high $specificity$, meaning it excels at maximizing TN but struggles to identify TP effectively.
-This inclination towards minimizing FP comes at the expense of FN.
 This behavior is evident in the TPR, which varies significantly across different classes.
-An emblematic example can be found in Table \ref{tab:results_edgen03}, where the TPR is 0\%.
-The model requires a high level of certainty in predictions before classifying a sample as positive. \\
+The model requires a high level of certainty in predictions before classifying a sample as positive.
 You can also observe the model's high specificity from the TNR, which is consistently quite high in all cases, typically greater than 80\%. \\
 In summary, the model tends to favor a conservative strategy, prioritizing the reduction of FP, leading to a high specificity but limited effectiveness in identifying TP.
 
@@ -320,7 +318,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         \hline
         \end{tabular}
         \caption{}
-        \label{tab:results_edgen01}
+        \label{tab:ml_results_cm_edge_1}
     \end{subfigure}
     \hspace{0.05\linewidth}
     \begin{subfigure}[b]{0.1\textwidth}
@@ -333,7 +331,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         \hline
         \end{tabular}
         \caption{}
-        \label{tab:results_edgen02}
+        \label{tab:ml_results_cm_edge_2}
     \end{subfigure}
     \hspace{0.05\linewidth}
     \begin{subfigure}[b]{0.1\textwidth}
@@ -346,7 +344,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         \hline
         \end{tabular}
         \caption{}
-        \label{tab:results_edgen03}
+        \label{tab:ml_results_cm_edge_3}
     \end{subfigure}
     \hspace{0.05\linewidth}
     \begin{subfigure}[b]{0.1\textwidth}
@@ -359,7 +357,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         \hline
         \end{tabular}
         \caption{}
-        \label{tab:results_edgen04}
+        \label{tab:ml_results_cm_edge_4}
     \end{subfigure}
     \hspace{0.05\linewidth}
     \begin{subfigure}[b]{0.1\textwidth}
@@ -372,7 +370,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         \hline
         \end{tabular}
         \caption{}
-        \label{tab:results_edgen05}
+        \label{tab:ml_results_cm_edge_5}
     \end{subfigure}
     \hspace{0.05\linewidth}
     \begin{subfigure}[b]{0.1\textwidth}
@@ -385,11 +383,11 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         \hline
         \end{tabular}
         \caption{}
-        \label{tab:results_edgen06}
+        \label{tab:ml_results_cm_edge_6}
     \end{subfigure}
     \hspace{0.05\linewidth}
     \caption{Confusion matrices of the 6 most frequent classes in the dataset}
-    \label{table:15_confusion}
+    \label{tab:ml_results_cm_joints}
 \end{table}
 
 %TODO AGGIUNGERE TOP FEATURES PER EXPLAINABILITY
@@ -413,7 +411,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
     \hline
     \end{tabular}
     \caption{Metrics of the 6 classes most frequent of the dataset}
-    \label{tab:15_metrics}
+    \label{tab:ml_results_joints}
 \end{table}
 
 
@@ -431,7 +429,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
     \hline
     \end{tabular}
     \caption*{(g)}
-    \label{tab:perm1}
+    \label{tab:ml_results_cm_body_part_1}
   \end{minipage}
   \hspace{0.05\linewidth}
   \begin{minipage}[b]{0.1\textwidth}
@@ -445,7 +443,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
     \hline
     \end{tabular}
     \caption*{(h)}
-    \label{tab:perm2}
+    \label{tab:ml_results_cm_body_part_2}
   \end{minipage}
   \hspace{0.05\linewidth}
   \begin{minipage}[b]{0.1\textwidth}
@@ -459,7 +457,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
     \hline
     \end{tabular}
     \caption*{(i)}
-    \label{tab:perm3}
+    \label{tab:ml_results_cm_body_part_3}
   \end{minipage}
   \hspace{0.05\linewidth}
   \begin{minipage}[b]{0.1\textwidth}
@@ -473,7 +471,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
     \hline
     \end{tabular}
     \caption*{(l)}
-    \label{tab:perm3}
+    \label{tab:ml_results_cm_body_part_4}
   \end{minipage}
   \hspace{0.05\linewidth}
   \begin{minipage}[b]{0.1\textwidth}
@@ -487,7 +485,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
     \hline
     \end{tabular}
     \caption*{(m)}
-    \label{tab:perm3}
+    \label{tab:ml_results_cm_body_part_5}
   \end{minipage}
   \hspace{0.05\linewidth}
   \begin{minipage}[b]{0.1\textwidth}
@@ -501,11 +499,11 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         \hline
     \end{tabular}
     \caption*{(n)}
-    \label{tab:perm3}
+    \label{tab:ml_results_cm_body_part_6}
   \end{minipage}
   \hfill
   \caption{Confusion matrices of the 5 Body Parts classification and of the Upper/Lower one}
-  \label{table:5_confusion}
+  \label{tab:ml_results_cm_body_parts}
 \end{table}
 
 
@@ -534,5 +532,5 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         \hline
     \end{tabular}
     \caption{Metrics of the 5 Body Parts and the Upper}
-    \label{tab:5_metrics}
+    \label{tab:ml_results_body_parts}
 \end{table}

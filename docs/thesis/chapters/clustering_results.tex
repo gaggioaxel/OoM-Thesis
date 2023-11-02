@@ -4,6 +4,7 @@
 From the clustered graph a weighted auxiliary graph is defined for each frame, denoted as $G^{aux}$ := ($V$, $E^{aux}$, $w^{aux}$). \\
 The vertices of this auxiliary graph are the same as in the original graph $G$, but the edge set is comprised of a subset of edges that only connect vertices belonging to different clusters.
 The weight of every edge is calculated by applying Euclidean norm (Formula \ref{formula:normalization}) between pairs of vectors.
+Edges that do not represent direct physical connections are ignored.
 One of these edges in the auxiliary graph will be the edge associated with the origin of motion.
 \\
 
@@ -98,3 +99,10 @@ In Table \ref{tab:clust_results} we can see the results.
 
 Even though these results are not impressive, they are still better than a random approach, where two random nodes are selected, and by examining which edges in the auxiliary graph they are connected to, they are compared to the ground truth. \\
 Such an approach, in fact, achieves an accuracy of 19\%.
+In the Figure \ref{fig:wdc_results} is the distribution of the results for each edge of the dataset:
+\begin{figure}
+  \centering
+  \includegraphics[width=0.85\textwidth]{graphics/wdc_results.png}
+  \caption{joints and frequency of the dataset and the correctly classified WDC algorithm}
+  \label{fig:wdc_results}
+\end{figure}

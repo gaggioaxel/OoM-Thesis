@@ -346,286 +346,189 @@ This method consists of:
 \end{enumerate}
 The Table \ref{tab:table_clust} is a clear example of this approach. \\   
 While this brute-force approach guarantees finding the best option, it can be computationally expensive, especially for large graphs or numerous options since it would require to compute the values of all the \textit{n!} permutations:
-%Let's take for example the following cost matrix and try to apply the BF for MinWPM problems:
-%
-%\begin{table}[H]
-%    \centering
-%    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-%      \hline
-%      108 & 125 & 150 \\
-%      \hline
-%      150 & 135 & 175 \\
-%      \hline
-%      122 & 148 & 250 \\
-%      \hline
-%    \end{tabular}
-%    \end{table}
-%
-%Now we compute the total cost of all the \textit{n}!\ permutations: 
-%  
-%
-%  \begin{table}[H]
-%    \begin{minipage}[b]{0.3\textwidth}
-%        \centering
-%        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-%            \hline
-%            \cellcolor{yellow!25} 108 & 125 & 150 \\
-%            \hline
-%            150 & \cellcolor{yellow!25} 135 & 175 \\
-%            \hline
-%            122 & 148 & \cellcolor{yellow!25}250 \\
-%            \hline
-%        \end{tabular}
-%        \caption*{(a)}
-%        \label{tab:bf_minwpm_perm1}
-%    \end{minipage}
-%    \hfill
-%    \begin{minipage}[b]{0.3\textwidth}
-%        \centering
-%        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-%            \hline
-%            108 & \cellcolor{yellow!25} 125 & 150 \\
-%            \hline
-%            150 & 135 & \cellcolor{yellow!25} 175 \\
-%            \hline
-%            \cellcolor{yellow!25} 122 & 148 & 250 \\
-%            \hline
-%        \end{tabular}
-%        \caption*{(b)}
-%        \label{tab:bf_minwpm_perm2}
-%    \end{minipage}
-%    \hfill
-%    \begin{minipage}[b]{0.3\textwidth}
-%        \centering
-%        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-%            \hline
-%            108 & 125 & \cellcolor{yellow!25} 150 \\
-%            \hline
-%            150 & \cellcolor{yellow!25} 135 & 175 \\
-%            \hline
-%            \cellcolor{yellow!25} 122 & 148 & 250 \\
-%            \hline
-%        \end{tabular}
-%        \caption*{(c)}
-%        \label{tab:bf_minwpm_perm3}
-%    \end{minipage}
-%\end{table}
-%
-%\begin{table}[H]
-%    \begin{minipage}[b]{0.3\textwidth}
-%        \centering
-%        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-%            \hline
-%            \cellcolor{yellow!25} 108 & 125 & 150 \\
-%            \hline
-%            150 & 135 & \cellcolor{yellow!25} 175 \\
-%            \hline
-%            122 & \cellcolor{yellow!25} 148 & 250 \\
-%            \hline
-%        \end{tabular}
-%        \caption*{(d)}
-%        \label{tab:bf_minwpm_perm4}
-%    \end{minipage}
-%    \hfill
-%    \begin{minipage}[b]{0.3\textwidth}
-%        \centering
-%        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-%            \hline
-%            108 & \cellcolor{yellow!25} 125 & 150 \\
-%            \hline
-%            \cellcolor{yellow!25} 150 & 135 & 175 \\
-%            \hline
-%            122 & 148 & \cellcolor{yellow!25} 250 \\
-%            \hline
-%        \end{tabular}
-%        \caption*{(e)}
-%        \label{tab:bf_minwpm_perm5}
-%    \end{minipage}
-%    \hfill
-%    \begin{minipage}[b]{0.3\textwidth}
-%        \centering
-%        \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-%            \hline
-%            108 & 125 & \cellcolor{yellow!25} 150 \\
-%            \hline
-%            \cellcolor{yellow!25} 150 & 135 & 175 \\
-%            \hline
-%            122 & \cellcolor{yellow!25} 148 & 250 \\
-%            \hline
-%        \end{tabular}
-%        \caption{}
-%        \label{tab:bf_minwpm_perm6}
-%    \end{minipage}
-%\caption{BF assignments}
-%\label{tab:tab_ass}
-%\end{table}
-% 
-%
-%\begin{table}[H]
-%  \centering
-%  \begin{tabular}{|c|c|c|c|c|}
-%    \hline
-%   \textbf{Assignment} & \textbf{Total weight} \\
-%    \hline
-%    (a) & 493 \\
-%    \hline
-%    (b) & 422 \\
-%    \hline
-%    (c) & 407 \\
-%    \hline
-%    (d) & 431 \\
-%    \hline
-%    (e) & 525 \\
-%    \hline
-%    (f) & 448 \\
-%    \hline
-%  \end{tabular}
-%  
-%  \vspace{0.5cm} % Spazio vuoto tra le righe
-%  
-%  \caption{Total weights for the 6 assignments}
-%  \label{tab:table_costs}
-%\end{table}
-%
-%We find that the minimum total cost is given by the assignment (c) in Table \ref{tab:tab_ass}.  
 
-\subsubsection{Hungarian Matching Algorithm application}
-Another approach consists in 
-Let's take an example of a cost matrix and try to apply the HM for MinWPM problems:
+\subsection{Hungarian Matching Algorithm application}
+Another approach consists in applying the Hungarian Algorithm which is a combinatorial optimization algorithm that also solves the assignment problem.\\
+Let's take an example of a cost matrix and try to apply the HM for MinWPM problems as in Table \ref{tab:hung_alg}:
 
-\begin{table}[H]
-\centering
-\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-  \hline
-  108 & 125 & 150 \\
-  \hline
-  150 & 135 & 175 \\
-  \hline
-  122 & 148 & 250 \\
-  \hline
-\end{tabular}
-\end{table}
-
-Subtract the smallest value in each row from the other values in the row:
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-  \hline
-  0 & 17 & 42 \\
-  \hline
-  15 & 0 & 40 \\
-  \hline
-  0 & 26 & 128 \\
-  \hline
-\end{tabular}
-\end{table}
-
-Now, subtract the smallest value in each column from all other values in the column:
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-  \hline
-  0 & 17 & 2 \\
-  \hline
-  15 & 0 & 0 \\
-  \hline
-  0 & 26 & 88 \\
-  \hline
-\end{tabular}
-\end{table}
-
-There are 2 lines drawn, and 2 is less than 3, so there is not yet the optimal number of zeroes.
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-  \hline
-  \cellcolor{gray!25} 0 & 17 & 2 \\
-  \hline
-  \cellcolor{gray!25} 15 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 \\
-  \hline
-  \cellcolor{gray!25} 0 & 26 & 88 \\
-  \hline
-\end{tabular}
-\end{table}
-
-Find the smallest entry not covered by any line. Subtract this entry from each row that isn’t crossed out, and then add it to each column that is crossed out. Then, go back to Step 3.
-2 is the smallest entry.
-First, subtract from the uncovered rows:
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-  \hline
-  \cellcolor{gray!25} -2 & 15 & 0 \\
-  \hline
-  \cellcolor{gray!25} 15 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 \\
-  \hline
-  \cellcolor{gray!25} -2 & 24 & 86 \\
-  \hline
-\end{tabular}
-\end{table}
-
-Now add to the covered columns:
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-  \hline
-  \cellcolor{gray!25} 0 & 15 & 0 \\
-  \hline
-  \cellcolor{gray!25} 17 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 \\
-  \hline
-  \cellcolor{gray!25} 0 & 24 & 86 \\
-  \hline
-\end{tabular}
-\end{table}
-
-Now go back to step 3, drawing lines through the rows and columns that have 0 entries:
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-  \hline
-  \cellcolor{gray!25} 0 & \cellcolor{gray!25} 15 & \cellcolor{gray!25} 0 \\
-  \hline
-  \cellcolor{gray!25} 17 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 \\
-  \hline
-  \cellcolor{gray!25} 0 & 24 & 86 \\
-  \hline
-\end{tabular}
-\end{table}
-
-There are 3 lines, so we are done. The assignment will be where the 0's are in the matrix such that only one 0 per row and column is part of the assignment.
+\begin{enumerate}
+  \item[(a)] From the original table that describes the cost associated for every assignment
+  \item[(b)] Subtract the smallest value in each row from the other values in the row
+  \item[(c)] Now, subtract the smallest value in each column from all other values in the column
+  \item[(d)] Since there are 2 lines drawn, less than 3, so there is not yet the optimal number of zeroes. 
+  \item[(e)] Find the smallest entry not covered by any line. Subtract this entry from each row that isn’t crossed out, and then add it to each column that is crossed out. 
+              Then, go back to step (c). 2 is the smallest entry. First, subtract from the uncovered rows.
+  \item[(f)] Now add to the covered columns
+  \item[(g)] Now go back to step (c), drawing lines through the rows and columns that have 0 entries 
+  \item[(h)] There are 3 lines, so we are done. The assignment will be where the 0's are in the matrix such that only one 0 per row and column is part of the assignment.
+  \item[(i)] And this results in the following minimum total cost for the assignment problem. 
+\end{enumerate}
 
 \begin{table}[H]
   \centering
-  \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-    \hline
-    0 & 15 & \cellcolor{yellow!25} 0 \\
-    \hline
-    17 & \cellcolor{yellow!25} 0 & 0 \\
-    \hline
-    \cellcolor{yellow!25} 0 & 24 & 86 \\
-    \hline
-  \end{tabular}
-  \end{table}
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      108 & 125 & 150 \\
+      \hline
+      150 & 135 & 175 \\
+      \hline
+      122 & 148 & 250 \\
+      \hline
+    \end{tabular}
+    \caption*{(a)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      0 & 17 & 42 \\
+      \hline
+      15 & 0 & 40 \\
+      \hline
+      0 & 26 & 128 \\
+      \hline
+    \end{tabular}
+    \caption*{(b)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      0 & 17 & 2 \\
+      \hline
+      15 & 0 & 0 \\
+      \hline
+      0 & 26 & 88 \\
+      \hline
+    \end{tabular}
+    \caption*{(c)}
+  \end{minipage}
 
-Replace the original values:
+  \vspace{10pt}
 
-\begin{table}[H]
-\centering
-\begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-  \hline
-  108 & 125 & \cellcolor{yellow!25} 150 \\
-  \hline
-  150 & \cellcolor{yellow!25} 135 & 175 \\
-  \hline
-  \cellcolor{yellow!25} 122 & 148 & 250 \\
-  \hline
-\end{tabular}
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      \cellcolor{gray!25} 0 & 17 & 2 \\
+      \hline
+      \cellcolor{gray!25} 15 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 \\
+      \hline
+      \cellcolor{gray!25} 0 & 26 & 88 \\
+      \hline
+    \end{tabular}
+    \caption*{(d)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      \cellcolor{gray!25} -2 & 15 & 0 \\
+      \hline
+      \cellcolor{gray!25} 15 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 \\
+      \hline
+      \cellcolor{gray!25} -2 & 24 & 86 \\
+      \hline
+    \end{tabular}
+    \caption*{(e)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      \cellcolor{gray!25} 0 & 15 & 0 \\
+      \hline
+      \cellcolor{gray!25} 17 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 \\
+      \hline
+      \cellcolor{gray!25} 0 & 24 & 86 \\
+      \hline
+    \end{tabular}
+    \caption*{(f)}
+  \end{minipage}
+
+  \vspace{10pt}
+
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 15 & \cellcolor{gray!25} 0 \\
+      \hline
+      \cellcolor{gray!25} 17 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 \\
+      \hline
+      \cellcolor{gray!25} 0 & 24 & 86 \\
+      \hline
+    \end{tabular}
+    \caption*{(g)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      0 & 15 & \cellcolor{green!50} 0 \\
+      \hline
+      17 & \cellcolor{green!50} 0 & 0 \\
+      \hline
+      \cellcolor{green!50} 0 & 24 & 86 \\
+      \hline
+    \end{tabular}
+    \caption*{(h)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      108 & 125 & \cellcolor{green!50} 150 \\
+      \hline
+      150 & \cellcolor{green!50} 135 & 175 \\
+      \hline
+      \cellcolor{green!50} 122 & 148 & 250 \\
+      \hline
+    \end{tabular}
+    \caption*{(i)}
+  \end{minipage}
+  \caption{Resolution of the Hungarian Algorithm}
+  \label{tab:hung_alg}
 \end{table}
 
-We find that the minimum total cost is given by this assignment.
+Both these methods provide the same results but lead to different complexities.
+
+\subsection{Clustering Transition Smoothing}
+
+After achieving cluster stabilization at the interframe level, a persistent issue remains. 
+Despite the smoothness of actual movements, the evolution of clusters on joints appears inflexible 
+and primarily optimized from one frame to the next, 
+without considering the temporal progression of clusters in terms of identifying the source of the movement.
+
+For the sole purpose of visualization, a delaying and smoothing procedure has been implemented as follows:
+\begin{enumerate}
+  \item Apply only every $k$ time instant otherwise keep the previous clustering
+  \item Calculate the difference between the sets representing clusters at time t+1 and clusters at time t is computed.
+  \item Weighted degree centrality is applied to the nodes within each cluster in the resulting set, and the maximum value is selected.
+  \item The label of the cluster with the highest weighted degree centrality is then updated.
+\end{enumerate}
+
+By parameterizing $k$ this process appropriately to ensure that clusters do not undergo excessive changes during this time interval, an oscillating effect is achieved. 
+This effect propagates the cluster across the connected nodes that belong to it, thereby making any potential origin of the movement more conspicuous.
+
+\subsection{Stabilization Results}
+In this first example, in Figure 1, we can observe the results of stabilization between two different instants in time. 
+In (a), the preceding time instant is visible, while (b) showcases the subsequent time instant in an unstabilized state. 
+In (c) instead, the subsequent time instant with clusters stabilized.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.99\textwidth]{graphics/ClustersStabilization.png}
+  \caption{Clustering at $t=7.54$ (a), $t=7.84$ unstabilized (b), and $t=7.84$ stabilized (c).}
+  \label{fig:stabilization_results}
+\end{figure}
+TODO redo this picture because t = something is a bit too big\\
+TODO might add a qr code linked to a GIF
