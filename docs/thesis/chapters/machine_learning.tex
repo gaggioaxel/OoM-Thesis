@@ -171,7 +171,7 @@ Following the resampling of the training data, a RF classifier (\textit{RF1}) is
 To further optimize the classifier's performance, a feature selection process is employed with the goal of identifying the most influential features that contribute to accurate classification.
 Initially, the most important features are determined through the training of \textit{RF1} on the resampled data. 
 These crucial features are selected based on their significance in the classification task. 
-Subsequently, a new RF classifier (\textit{RF2}) is trained using only the selected important features. 
+Subsequently, a new RF classifier (\textit{RF2}) is trained using only the original features of the 60 samples. 
 To evaluate the performance of the classifier, a test set is chosen using LOOCV, as detailed in Section \ref{subsec:cross_validation}. 
 
 \begin{table}[H]

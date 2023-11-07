@@ -383,8 +383,8 @@ The SMOTE generates synthetic samples by interpolating between neighboring minor
 
 The \textbf{B-SMOTE} \cite{Han2005BorderlineSMOTEAN:2005}, is a vairant of the SMOTE that focuses on generating synthetic samples only for the boundary instances, which are the minority class instances close to the majority class. 
 This approach aims to concentrate on the regions of the dataset that are near the decision boundary between classes. \\
-The model internally fits two instances of KNN with different \textit{k} parameters (\textit{k-neighbors}, \textit{m-neighbors}): one instance to defines the neighborhood of samples to generate the synthetic samples.
-The other instead is used to determine if a minority sample is in \textit{danger}. A \textit{sample in danger} is one near to the boundary between two or more classes.
+The model internally fits two instances of KNN with different parameters \textit{k-neighbors} and \textit{m-neighbors}: one instance defines the neighborhood of samples to generate the synthetic samples; the other, instead, is used to determine if a minority sample is in \textit{danger}.\\
+A \textit{sample in danger} is one near to the boundary between two or more classes.
 
 In the illustrated scenario depicted in Figure \ref{fig:bordSMOTEnotApplied}, the task involves categorizing two distinct categories of network traffic: 
 one being malicious (depicted in red), the other representing legitimate traffic (shown in blue), and the decision boundaries are the same color meshes.
