@@ -361,10 +361,10 @@ without considering the temporal progression of clusters in terms of identifying
 
 For the sole purpose of visualization, a delaying and smoothing procedure has been implemented as follows:
 \begin{enumerate}
-  \item Apply only every $k$ time instant otherwise keep the previous clustering
+  \item Apply only every $k = \frac{1}{4}framerate$ time instant otherwise keep the previous clustering
   \item Calculate the difference between the sets representing clusters at time t+1 and clusters at time t is computed.
   \item Weighted degree centrality is applied to the nodes within each cluster in the resulting set, and the maximum value is selected.
-  \item The label of the cluster with the highest weighted degree centrality is then updated.
+  \item For each cluster, update the label of the node with the highest weighted degree centrality.
 \end{enumerate}
 
 By parameterizing $k$ this process appropriately to ensure that clusters do not undergo excessive changes during this time interval, an oscillating effect is achieved. 
