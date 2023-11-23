@@ -14,6 +14,8 @@ docs/thesis/*.bbl
 docs/thesis/*.lof
 docs/thesis/*.lot
 docs/thesis/*.xdv
+docs/thesis/*.nav
+docs/thesis/*.snm
 docs/presentation/*
 docs/presentation/*
 docs/paperINTETAIN*

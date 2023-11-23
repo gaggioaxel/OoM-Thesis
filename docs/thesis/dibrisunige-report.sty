@@ -103,26 +103,26 @@
     \includegraphics[width=0.3\textwidth]{graphics/logo_verticale_BLACK.png}
     \\[2\baselineskip]
     \includegraphics[width=0.8\textwidth]{graphics/Dibris-con-dicitura-orizzontale-BN.png}
-    \\[3\baselineskip]
+    \\[4\baselineskip]
     \begin{tabular}{c}
-      \textbf{\Large \@coursename}                        \\
-      {}                                                  \\
+      %\vspace{3cm}
+      %\textbf{\Large \@coursename}                        \\
+      %{}                                                  \\
       \midrule                                            \\
       {}                                                  \\
-      \textbf{\Large \@reporttype}                        \\
-      {}                                                  \\
-      \textbf{\Huge \parbox[c]{16cm}{\centering \@title}} \\
+      %\textbf{\Large \@reporttype}                        \\
+      %{}                                                  \\
+      \textbf{\Large \parbox[c]{16cm}{\centering \@title}} \\
       {}                                                  \\
       \bottomrule
     \end{tabular}
     \vfill%
     \begin{tabular}{rll}
-      
       Advisor\iftoggle{multipleadvisors}{s}: & \iftoggle{multipleadvisors}{\begin{tabular}{ll}\@advisors\end{tabular}}{\@advisor} &    \\
       % Student: & Name      & ID \\
     \end{tabular}
     \\[4\baselineskip]
-    \MakeUppercase{\@reportplace, \@reporttime}
+    \MakeUppercase{\@reportplace}
   \end{center}
 
   \clearpage

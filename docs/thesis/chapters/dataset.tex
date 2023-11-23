@@ -7,14 +7,14 @@ Central to this research is capturing motion dynamics accurately.
 Thus, we require technology for efficient bodily movement capture, like the MoCap.
 The participation of these skilled dancers is crucial because their deep knowledge of body mechanics leads to precise and high-quality motion data.
 This collaboration yields expressive movements with distinct starting points, aligning with research goals.
-Their expertise elevates dataset quality, providing a resource that encapsulates human motion intricacies accurately and artistically.
+Their expertise increases dataset quality, providing a resource that encapsulates human motion intricacies accurately and artistically.
 
 
 \section{Dataset}
 The dataset contains two categories of expressive movements, each associated with a different recording session.
 The details of both types of movements are provided below.\\
 The dataset comprises 60 segments recorded using different versions of the \textit{Qualisys Motion Capture system}.
-These segments represents various subjects performing simple movement sequences, which are captured from different angles using some cameras.
+These segments represents various participants performing simple movement sequences, which are captured from different angles using some cameras.
 The videos are synchronized through SMPTE timecode and each video is accompanied by corresponding motion capture data that records the positions of body parts.
 
 
@@ -47,22 +47,22 @@ the participant throws the ball and retrieves it themselves, while in the other 
 This was done to introduce greater movement diversity.
 It is worth noting that, for the purpose of motion analysis, the receiver and the thrower are considered separately.
 
-\section{Validation}
+\section{Annotations}
 Starting from recordings of movements, we selected 60 segments in which we could clearly identify the origin of the movement.\\
-Each video fragment was therefore classified with a connecting arc between two joints.\\
-The classification process was carried out in several steps:
+Each video fragment was given a label corresponding to the edge between two joints that was deemed to be the origin of the movement.\\
+The labelling process was carried out in several steps:
 \begin{itemize}
-    \item{We individually classified half of the segments}
+    \item{We individually labelled half of the segments}
 
-    \item{We compared our classifications and considered for our dataset only those on which we agreed without any a-priori knowledge on the other's opinion.}
+    \item{We compared our labels and considered for our dataset only those on which we agreed without any a-priori knowledge on the other's opinion.}
 
-    \item{We proposed our classification to our professors and considered for our dataset only those on which all of us agreed.}
+    \item{We proposed those labels to our professors and considered for the dataset only those on which all of us agreed.}
 
-    \item{The final selection was made merging our classification with the opinion of an expert dancer.}
+    \item{The final selection was made merging our labels with the opinion of an expert dancer.}
 \end{itemize}
 
-This process was used to include only the segments where the classification was more certain and evident. \\
-Unfortunately, the dataset obtained ended up being unbalanced, meaning that there are some classifications that are very frequent, some that are infrequent, and some classifications that are completely absent.
+This process was used to include only the segments where the labelling was more certain and evident. \\
+Unfortunately, the dataset obtained ended up being unbalanced, meaning that there are some labels that are very frequent, some that are infrequent, and some labels that are completely absent.
 
 \section{Original Marker Set}
 Due to a four-year gap between the recording of the two distinct subsets of the dataset, 

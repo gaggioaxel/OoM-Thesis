@@ -1,6 +1,32 @@
 \chapter{Theoretical framework}
 \label{sec:theoretical_framework}
 
+\section{Smoothing theory}
+This section contains definitions about the smoothing algorithms used on data to mitigate the impact of noise in data.
+
+\subsection{Median Filtering}
+Median filtering is a digital signal processing technique used to reduce noise in a signal by replacing each data point with the median value within a specified window or neighborhood around that point. 
+This method is effective in removing outliers or random fluctuations while preserving the signal's overall structure.\\
+For every $i$ to $n$, the number of the observations the value of $x_i$ is set to the median of the values within the window $i$ and $i+k$.
+
+\subsection{Rolling Mean}
+The rolling mean involves computing the average of a specific number of consecutive observations while shifting this window along the time series.
+The centering of the window in the middle of it.
+This means that for every $i$ to $n$, the number of the observations:
+\begin{equation}
+  rolling(x_i,k) = \frac{1}{k} \sum_{j=i}^{i+k} x_j
+\end{equation}
+On extreme index of the observations (i.e when $j < 1$ or when $j > n$) the $k$ is reduced such that $1 \leq i-k \leq i+k \leq n$ to keep the centering of the window.
+In the following Figure \ref{fig:sin_corrupted_smoothed} it is plotted a sinusoidal signal with holes that have been replaced with a known value and the different behaviours of the \textit{Median Filtering} function and the \textit{Rolling Mean}. \\
+We can clearly see that while the second method tends to fit the holes, the first one better reconstruct the original signal.
+\begin{figure}[H]
+  \centering  
+    \includegraphics[width=\linewidth]{graphics/mean_median_filter.png}
+    \caption{A sinusoidal signal with corrupted data and smoothing methods applied}
+    \label{fig:sin_corrupted_smoothed}
+\end{figure}
+
+
 \section{Graph theory}
 This section contains definitions, notation and concepts related to Graph Theory according
 to \cite{graph_theory:2010}.
@@ -213,8 +239,7 @@ The total weight is the sum of the weights of the edges included in the matching
 The weights of the edges are collected in a matrix called a \textit{utility matrix}.\\
 The utility matrix will be a square matrix because the number of nodes in the two distinct sets is the same.
 The rows could represent the nodes in the first set, while the columns could represent the nodes in the second set, or vice versa.
-The element (\textit{i}, \textit{j}) of the matrix represents the weight of the edge connecting vertex \textit{i} to vertex \textit{j}. 
-
+The element (\textit{i}, \textit{j}) of the matrix represents the weight of the edge connecting vertex \textit{i} to vertex \textit{j}. \\
 
 A MaxWPM problem using an utility matrix can be transformed into a \textbf{Minimum Weight Perfect Matching} problem.
 This can be achieved by introducing an auxiliary matrix, referred to as the \textit{cost matrix}.
@@ -222,15 +247,13 @@ The cost matrix is essentially a duplicate of the utility matrix, but with all i
 
 \subsection{Brute Force Algorithm}
 The BF can be a possible approach to solve the MaxWPM problem for bipartite graphs.
-However, it's important to note that the BF has exponential time complexity, specifically, its time complexity grows exponentially with the number of vertices in the graph.
+However, it is important to note that the BF has exponential time complexity, specifically, its time complexity grows exponentially with the number of vertices in the graph.
 This is because the BF examines all possible combinations of matchings within the bipartite graph to find the one with the maximum weight.\\
 If the graph has \textit{n} vertices in both the first and second partitions, there are \textit{n}!\ possible matchings.
 Each matching requires \textit{O}(\textit{n}) time to be computed because you need to check that it is a perfect matching and calculate its total weight.
-Therefore, the overall complexity of the algorithm is on the order of \textit{O}(\textit{n}!$\cdot$\textit{n}). \\
+Therefore, the overall complexity of the algorithm is on the order of \textit{O}(\textit{n}!$\cdot$\textit{n}).
 Since the complexity grows rapidly as \textit{n} increases, it quickly becomes impractical for large-sized graphs. \\
-
 The operation of the BF for MinWPM problems can be summerized in these 3 steps:
-
 \begin{enumerate}
     \item {Compute the cost matrix for the considered bipartite graph with \textit{n} vertices in each partition.}
     \item {Compute the total cost of all the \textit{n}!\ permutations.}
@@ -242,8 +265,7 @@ The operation of the BF for MinWPM problems can be summerized in these 3 steps:
 
 The HM, also called the Kuhn-Munkres algorithm, is a \textit{O}($\textit{n}^3$) algorithm that can be used to find MaxWPM in bipartite graphs with \textit{n} vertices for each partition, which is sometimes called the assignment problem.
 As previously demonstrated in the Brute Force algorithm, maximum-weight perfect matching problems using the utility matrix can be converted into MinWPM problems using the cost matrix. 
-We will describe the application of the HM to address Minimum Weight Perfect Matching problems. \\
-
+We will describe the application of the HM to address Minimum Weight Perfect Matching problems.\\
 The operation of the HM for MinWPM problems can be summerized in these 6 steps:
 \begin{enumerate}
     \item {Compute the cost matrix for the considered bipartite graph with \textit{n} vertices in each partition.}
@@ -253,6 +275,155 @@ The operation of the HM for MinWPM problems can be summerized in these 6 steps:
     \item {If there are n lines drawn, an optimal assignment of zeros is possible and the algorithm is finished. If the number of lines is less than n, then the optimal number of zeroes is not yet reached. Go to the next step.}
     \item {Find the smallest entry not covered by any line. Subtract this entry from each row that isn’t crossed out, and then add it to each column that is crossed out. Then, go back to Step 3.}
 \end{enumerate}
+Let's take an example of a cost matrix and try to apply the HM for MinWPM problems as in Table \ref{tab:hung_alg}:
+
+\begin{enumerate}
+  \item[(a)] From the original table that describes the cost associated for every assignment
+  \item[(b)] Subtract the smallest value in each row from the other values in the row
+  \item[(c)] Now, subtract the smallest value in each column from all other values in the column
+  \item[(d)] Since there are 2 lines drawn, less than 3, so there is not yet the optimal number of zeroes. 
+  \item[(e)] Find the smallest entry not covered by any line. Subtract this entry from each row that isn’t crossed out, and then add it to each column that is crossed out. 
+              Then, go back to step (c). 2 is the smallest entry. First, subtract from the uncovered rows.
+  \item[(f)] Now add to the covered columns
+  \item[(g)] Now go back to step (c), drawing lines through the rows and columns that have 0 entries 
+  \item[(h)] There are 3 lines, so we are done. The assignment will be where the 0's are in the matrix such that only one 0 per row and column is part of the assignment.
+  \item[(i)] And this results in the following minimum total cost for the assignment problem. 
+\end{enumerate}
+
+\begin{table}[H]
+  \centering
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      108 & 125 & 150 \\
+      \hline
+      150 & 135 & 175 \\
+      \hline
+      122 & 148 & 250 \\
+      \hline
+    \end{tabular}
+    \caption*{(a)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      0 & 17 & 42 \\
+      \hline
+      15 & 0 & 40 \\
+      \hline
+      0 & 26 & 128 \\
+      \hline
+    \end{tabular}
+    \caption*{(b)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      0 & 17 & 2 \\
+      \hline
+      15 & 0 & 0 \\
+      \hline
+      0 & 26 & 88 \\
+      \hline
+    \end{tabular}
+    \caption*{(c)}
+  \end{minipage}
+
+  \vspace{10pt}
+
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      \cellcolor{gray!25} 0 & 17 & 2 \\
+      \hline
+      \cellcolor{gray!25} 15 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 \\
+      \hline
+      \cellcolor{gray!25} 0 & 26 & 88 \\
+      \hline
+    \end{tabular}
+    \caption*{(d)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      \cellcolor{gray!25} -2 & 15 & 0 \\
+      \hline
+      \cellcolor{gray!25} 15 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 \\
+      \hline
+      \cellcolor{gray!25} -2 & 24 & 86 \\
+      \hline
+    \end{tabular}
+    \caption*{(e)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      \cellcolor{gray!25} 0 & 15 & 0 \\
+      \hline
+      \cellcolor{gray!25} 17 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 \\
+      \hline
+      \cellcolor{gray!25} 0 & 24 & 86 \\
+      \hline
+    \end{tabular}
+    \caption*{(f)}
+  \end{minipage}
+
+  \vspace{10pt}
+
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 15 & \cellcolor{gray!25} 0 \\
+      \hline
+      \cellcolor{gray!25} 17 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 \\
+      \hline
+      \cellcolor{gray!25} 0 & 24 & 86 \\
+      \hline
+    \end{tabular}
+    \caption*{(g)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      0 & 15 & \cellcolor{green!50} 0 \\
+      \hline
+      17 & \cellcolor{green!50} 0 & 0 \\
+      \hline
+      \cellcolor{green!50} 0 & 24 & 86 \\
+      \hline
+    \end{tabular}
+    \caption*{(h)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      108 & 125 & \cellcolor{green!50} 150 \\
+      \hline
+      150 & \cellcolor{green!50} 135 & 175 \\
+      \hline
+      \cellcolor{green!50} 122 & 148 & 250 \\
+      \hline
+    \end{tabular}
+    \caption*{(i)}
+  \end{minipage}
+  \caption{Resolution of the Hungarian Algorithm}
+  \label{tab:hung_alg}
+\end{table}
 
 
 
@@ -286,7 +457,7 @@ The operation of the HM for MinWPM problems can be summerized in these 6 steps:
 %    \item {The expected pay off when all the players of the game follow their optimal strategies is
 %    known as \textit{value of the game}. The main objective of a problem of a game is to find the value
 %    of the game.}
-%    \item {The game is said to be \textit{fair} game if the value of the game is zero otherwise it's known as \textit{unfair}.}
+%    \item {The game is said to be \textit{fair} game if the value of the game is zero otherwise it is known as \textit{unfair}.}
 %    \item {A \textit{coalition} is a subset of the players \textit{n}, whereas a \textit{grand coalition} is the
 %        set \textit{n} of all players. The purpose of a coalition is to coordinate strategies and divide the
 %        total payoff among all the players.}
@@ -312,7 +483,6 @@ ML deals with the ability of a system to improve its performance through experie
 It also serves as the foundation for numerous everyday applications and concepts, 
 as it provides a powerful and efficient way to address complex challenges, make data-driven decisions, 
 and develop intelligent systems that can learn and adapt autonomously.\\
-
 Diving deeper into this concept, one critical aspect is the role of hyperparameters. 
 Hyperparameters are settings or configurations that guide the learning process of ML algorithms. 
 They act as the levers that fine-tune the behavior of these algorithms, influencing their performance, accuracy, and generalization capabilities.\\
@@ -321,7 +491,7 @@ Selecting the right hyperparameters can be a challenging and often iterative tas
 The process of hyperparameter tuning involves experimenting with different combinations of values, assessing the model's performance using techniques like cross-validation, and iteratively adjusting the hyperparameters to optimize the model's accuracy and generalization. 
 This fine-tuning is crucial to ensure that the ML model not only fits the training data well but also performs effectively on unseen data.
 Moreover, the choice of hyperparameters is problem-dependent, and there's no one-size-fits-all solution. 
-It requires a deep understanding of the algorithm, the dataset, and the specific problem at hand.saisi
+It requires a deep understanding of the algorithm, the dataset, and the specific problem at hand.
 
 \subsection{Classifier}
 \label{subsec:classifier}
@@ -336,8 +506,8 @@ A \textbf{Binary Classification Problem} is a specific type of classification pr
 These two classes are typically referred to as the positive class and the negative class, and the task is to assign each data point to one of these two classes based on its features or attributes.
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\linewidth]{graphics/BinaryClassification.png}
-  \caption{Binary Classification example}
+  \includegraphics[width=0.7\linewidth]{graphics/BinaryClassification.png}
+  \caption{A binary classification example}
   \label{fig:bin_classification}
 \end{figure}
 
@@ -355,12 +525,12 @@ When \textit{k} = 5 (dashed line circle), the green dot is assigned to the categ
 If there are 3 blue squares and 2 red triangles inside the outer circle, the green dot is classified as a blue square.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.55\linewidth]{graphics/KNeighbours.png}
+    \includegraphics[width=0.85\linewidth]{graphics/KNeighbours.png}
     \caption{KNN algorithm with \textit{k} = 3 and \textit{k} = 5}
     \label{fig:knn}
 \end{figure}
 
-The choice of distance metric is a critical aspect of the KNN algorithm, and while it's not typically considered a hyperparameter, it significantly influences the model's performance and outcomes. 
+The choice of distance metric is a critical aspect of the KNN algorithm, and while it is not typically considered a hyperparameter, it significantly influences the model's performance and outcomes. 
 The selection of a specific distance metric can have a substantial impact, especially when dealing with datasets of varying sizes and dimensions. \\
 If we consider for example two data points \textit{p}, \textit{q} in \textit{n}-dimensional space, there are various distance metrics that can be used to find the neighbors.\\
 Among the different  most common is the Euclidean distance: 
@@ -398,13 +568,13 @@ The retraining process maintained the same parameters but employed a dataset tha
 The synthetic samples generated by B-SMOTE are represented as light-red dots.
 \begin{figure}[H]
   \centering
-  \begin{subfigure}{0.45\linewidth}
+  \begin{subfigure}{0.49\linewidth}
     \includegraphics[width=\linewidth]{graphics/BordSMOTE_no.png}
     \caption{}
     \label{fig:bordSMOTEnotApplied}
   \end{subfigure}
-  \hspace{0.01\linewidth}
-  \begin{subfigure}{0.45\linewidth}
+  %\hspace{0.0\linewidth}
+  \begin{subfigure}{0.49\linewidth}
     \includegraphics[width=\linewidth]{graphics/BordSMOTE_yes.png}
     \caption{}
     \label{fig:bordSMOTEApplied}
@@ -412,7 +582,7 @@ The synthetic samples generated by B-SMOTE are represented as light-red dots.
   \caption{Visual representation of B-SMOTE algorithm applied on a dataset}
 \end{figure}
 
-However The B-SMOTE algorithm, like any other method, has its limitations and drawbacks:
+However the B-SMOTE algorithm, has its limitations and drawbacks:
 \begin{itemize}
   \item \textbf{Risk of Overfitting:} In the provided example, the malicious data was generated using a normal distribution, while the legitimate data was generated using a uniform distribution.
   This means that the second classification fits better the underlying distribution without any a-priori assumption.
@@ -530,7 +700,7 @@ For example the Figure \ref{fig:rf} is shown a RF classifier made of 3 DTs has b
 It involves dividing the dataset into multiple training and testing subsets called \textit{folds} and then training and evaluating the model on each fold.
 The process of training and testing is typically repeated multiple times and the results from each iteration are often averaged to provide an overall estimate of the model's performance.
 The most common approach in basic cross-validation is to use a 80-20 or 70-30 split between the training and test sets.\\
-When we partition our dataset into folds for techniques like cross-validation, it's crucial to ensure that each fold accurately represents the diversity of the entire dataset. 
+When we partition our dataset into folds for techniques like cross-validation, it is crucial to ensure that each fold accurately represents the diversity of the entire dataset. 
 This entails maintaining the same proportion of different classes or categories within each fold.\\ 
 While random splitting is often sufficient, there are instances, particularly in intricate datasets, where we must deliberately enforce the correct distribution of classes within each fold to maintain data integrity.
 \\
@@ -643,7 +813,7 @@ The confusion matrix is an important resource for calculating various evaluation
 The \textbf{Receiver Operating Characteristic} (ROC) curve  is a fundamental tool in ML and statistics for evaluating and visualizing the performance of binary classification models. 
 It provides valuable insights into how well a model can distinguish between two classes (binary classification) across different classification thresholds.
 For a more comprehensive evaluation of a model's performance across various thresholds, 
-it's advisable to utilize a model that can provide probability scores for both classes rather than relying solely on categorical classifications.
+it is advisable to utilize a model that can provide probability scores for both classes rather than relying solely on categorical classifications.
 Components of the ROC Curve are:
 
 \begin{itemize}

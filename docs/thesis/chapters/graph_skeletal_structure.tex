@@ -1,7 +1,7 @@
 \chapter{Graph Skeletal Structure}
 The Graph Skeletal Structure is obtained considering the \textit{reduced marker set}, obtained after the reduction from the \textit{full marker set} which has been discussed previously. \\
 We model the human skeleton as an undirected graph, where the vertices are the joints and the edges represent connections between consecutive physical body joints.\\
-Each edge is associated with a specific weight, the value of which depend on a feature extracted from motion capture data. \\
+Each edge is associated with a specific weight, the value of which depends on a feature extracted from motion capture data. \\
 From this \textit{graph skeletal structure}, we define a mathematical game in which the vertices are the players and the edges model the communication channels (through which movement can propagate) between these players. \\
 In figure we can see the \textit{graph skeletal structure} without and a table with the joints' labels.
 For simplicity, the links are without weights.
@@ -83,12 +83,14 @@ By incorporating all three quantities as features, a more comprehensive and deta
 
 \subsection{Timeseries Smoothing}
 Prior to computing the features, we implement two smoothing techniques on the time series data. \\
-Firstly, we apply the \textit{Moving Mean}:
+Firstly, we apply a \textit{Median Filtering} algorithm centered in the middle of the window. 
+On the resulting vector we apply the \textit{Rolling Mean} again centered in the middle of the window:
 \begin{equation}
-  Moving Mean(x_i, w) = \frac{1}{w} \cdot \sum_{j=i-w+1}^{i} x_j
+  rolling(x_i,k) = \frac{1}{k} \sum_{j=i-(k-1)/2}^{i+(k-1)/2} x_j
 \end{equation}
-where $x_i$ is the current data point for which you want to calculate the \textit{Moving Mean} and $k$ is the window size, which represents the number of data points to include in the moving average. \\
+Where $x_i$ is the current data point for which you want to calculate the \textit{Moving Mean} and $k$ is the window size, which represents the number of data points to include in the moving average. \\
 After this, we compute the \textit{Moving Median} for a data point $x_i$ using a window of size $k$. 
+
 
 \subsection{Speed}
 Speed is calculated by finding the change in positions with respect to time through differentiation and then applying a moving average to obtain a more accurate estimate that is less affected by noise.
