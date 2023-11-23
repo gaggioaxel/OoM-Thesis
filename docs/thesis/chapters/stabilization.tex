@@ -315,37 +315,155 @@ From the perspective of Bipartite Matching, we can consider the clusters from Fi
 As mentioned earlier, the weight of an edge is equivalent to the number of nodes that the two clusters being connected by that edge have in common. \\
 The following figure shows the matching with the utility value for every possible assignment and the colored ones for the optimal one.
 
+
+
 \begin{figure}[H]
   \centering
-  \begin{tikzpicture}
-    \node[circle, draw, minimum size=1cm, fill=green!50] (1) at (2,-6.5) {Cluster 1};
-    \node[circle, draw, minimum size=1cm, fill=red!50] (2) at (2, -10) {Cluster 2};
-    \node[circle, draw, minimum size=1cm, fill=blue!50] (3) at (2,-13.5) {Cluster 3};
-    \node[circle, draw, minimum size=1cm, fill=red!50] (4) at (8, -6.5) {Cluster 4};
-    \node[circle, draw, minimum size=1cm, fill=green!50] (5) at (8,-10) {Cluster 5};
-    \node[circle, draw, minimum size=1cm, fill=blue!50] (6) at (8,-13.5) {Cluster 6};
-    
-    \foreach \source/\dest/\label/\position/\yshiftval/\xshiftval/\edgecolor in {
-      1/4/6/above/0/0/black, 1/5/4/above/25/-40/green, 1/6/0/above/60/-70/black,
-      2/4/4/below/-15/-60/red, 2/5/0/below/0/-40/black, 2/6/0/below/30/-60/black,
-      3/4/2/below/-60/-70/black, 3/5/0/below/-25/-40/black, 3/6/4/below/0/0/blue}
-      \path (\source) edge[\edgecolor, ->,>=stealth, line width=0.5pt] node[\position, yshift=\yshiftval, xshift=\xshiftval, black] {\label} (\dest);
-  \end{tikzpicture}
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}
+      \node[circle, draw, minimum size=1cm, fill=green!50] (1) at (2,-6.5) {Cluster 1};
+      \node[circle, draw, minimum size=1cm, fill=red!50] (2) at (2, -10) {Cluster 2};
+      \node[circle, draw, minimum size=1cm, fill=blue!50] (3) at (2,-13.5) {Cluster 3};
+      \node[circle, draw, minimum size=1cm, fill=gray!50] (4) at (8, -6.5) {Cluster 4};
+      \node[circle, draw, minimum size=1cm, fill=gray!50] (5) at (8,-10) {Cluster 5};
+      \node[circle, draw, minimum size=1cm, fill=gray!50] (6) at (8,-13.5) {Cluster 6};
+      
+      \foreach \source/\dest/\label/\position/\yshiftval/\xshiftval/\edgecolor in {
+        1/4/6/above/0/0/black, 1/5/4/above/25/-40/black, 1/6/0/above/60/-70/black,
+        2/4/4/below/-15/-60/black, 2/5/0/below/0/-40/black, 2/6/0/below/30/-60/black,
+        3/4/2/below/-60/-70/black, 3/5/0/below/-25/-40/black, 3/6/4/below/0/0/black}
+        \path (\source) edge[\edgecolor, ->,>=stealth, line width=0.5pt] node[\position, yshift=\yshiftval, xshift=\xshiftval, black] {\label} (\dest);
+    \end{tikzpicture}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}
+      \node[circle, draw, minimum size=1cm, fill=green!50] (1) at (2,-6.5) {Cluster 1};
+      \node[circle, draw, minimum size=1cm, fill=red!50] (2) at (2, -10) {Cluster 2};
+      \node[circle, draw, minimum size=1cm, fill=blue!50] (3) at (2,-13.5) {Cluster 3};
+      \node[circle, draw, minimum size=1cm, fill=red!50] (4) at (8, -6.5) {Cluster 4};
+      \node[circle, draw, minimum size=1cm, fill=green!50] (5) at (8,-10) {Cluster 5};
+      \node[circle, draw, minimum size=1cm, fill=blue!50] (6) at (8,-13.5) {Cluster 6};
+      
+      \foreach \source/\dest/\label/\position/\yshiftval/\xshiftval/\edgecolor in {
+        1/4/6/above/0/0/black, 1/5/4/above/25/-40/green, 1/6/0/above/60/-70/black,
+        2/4/4/below/-15/-60/red, 2/5/0/below/0/-40/black, 2/6/0/below/30/-60/black,
+        3/4/2/below/-60/-70/black, 3/5/0/below/-25/-40/black, 3/6/4/below/0/0/blue}
+        \path (\source) edge[\edgecolor, ->,>=stealth, line width=0.5pt] node[\position, yshift=\yshiftval, xshift=\xshiftval, black] {\label} (\dest);
+    \end{tikzpicture}
+  \end{minipage}
   \caption{Bipartite Matching from instant \textit{t} to instant \textit{t+1}}
   \label{fig:clust_match}
 \end{figure}
 
 
+
 \subsection{Brute Force Algorithm application}
-A brute-force approach for choosing an option based on the maximum sum of utility values of a graph involves exhaustively evaluating every possible combination of options to find the one with the highest total weight. 
+A BF approach for choosing an option based on the minimum sum of utility values of a graph involves exhaustively evaluating every possible combination of options to find the one with the highest total weight. 
 This method consists of:
 \begin{enumerate}
   \item Generating all possible combinations: Enumerate all possible subsets or combinations of options within the graph.
   \item Calculating the sum of weights: For each combination, compute the total weight by summing the weights of the selected options.
   \item Comparing and selecting: Identify the combination with the minimum total weight as the optimal choice.
 \end{enumerate}
-The Table \ref{tab:table_clust} is a clear example of this approach. \\   
-While this brute-force approach guarantees finding the best option, it can be computationally expensive, especially for large graphs or numerous options since it would require to compute the values of all the \textit{n!} permutations:
+The Table \ref{tab:bf_alg} is a clear example of this approach. \\   
+
+\begin{table}[H]
+  \centering
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      \cellcolor{green!50}-6 & -4 & 0 \\
+      \hline
+      -4 & \cellcolor{green!50}0 & 0 \\
+      \hline
+      -2 & 0 & \cellcolor{green!50}-4 \\
+      \hline
+    \end{tabular}
+    \caption*{(a)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      \cellcolor{green!50}-6 & -4 & 0 \\
+      \hline
+      -4 & 0 & \cellcolor{green!50}0 \\
+      \hline
+      -2 & \cellcolor{green!50}0 & -4 \\
+      \hline
+    \end{tabular}
+    \caption*{(b)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      -6 & -4 & \cellcolor{green!50}0 \\
+      \hline
+      -4 & \cellcolor{green!50}0 & 0 \\
+      \hline
+      \cellcolor{green!50}-2 & 0 & -4 \\
+      \hline
+    \end{tabular}
+    \caption*{(c)}
+  \end{minipage}
+
+  \vspace{10pt}
+
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      -6 & \cellcolor{green!50}-4 & 0 \\
+      \hline
+      -4 & 0 & \cellcolor{green!50}0 \\
+      \hline
+      \cellcolor{green!50}-2 & 0 & -4 \\
+      \hline
+    \end{tabular}
+    \caption*{(d)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering  
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      -6 & \cellcolor{green!50}-4 & 0 \\
+      \hline
+      \cellcolor{green!50}-4 & 0 & 0 \\
+      \hline
+      -2 & 0 & \cellcolor{green!50}-4 \\
+      \hline
+    \end{tabular}
+    \caption*{(e)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      -6 & -4 & \cellcolor{green!50}0 \\
+      \hline
+      \cellcolor{green!50}-4 & 0 & 0 \\
+      \hline
+      -2 & \cellcolor{green!50}0 & -4 \\
+      \hline
+    \end{tabular}
+    \caption*{(f)}
+  \end{minipage}
+  \caption{Real application of the BF Algorithm}
+  \label{tab:bf_alg}
+\end{table}
+
+
+BF approach guarantees finding the best option, it can be computationally expensive, especially for large graphs.
+As we can see, here we have the computation of all the \textit{n!} permutations and the minimum one is (e).
 
 \subsection{Hungarian Matching Algorithm application}
 Another approach consists in applying the Hungarian Algorithm which is a combinatorial optimization algorithm that also solves the assignment problem.\\
