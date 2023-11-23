@@ -83,14 +83,12 @@ By incorporating all three quantities as features, a more comprehensive and deta
 
 \subsection{Timeseries Smoothing}
 Prior to computing the features, we implement two smoothing techniques on the time series data. \\
-Firstly, we apply a \textit{Median Filtering} algorithm centered in the middle of the window. 
-On the resulting vector we apply the \textit{Rolling Mean} again centered in the middle of the window:
+Firstly, we apply a \textit{Median Filtering} algorithm centered in the middle of the window with $k_1 = 5$. 
+On the resulting vector we apply the \textit{Rolling Mean} again centered in the middle of the window with $k_2 = 25 $. \\
+Formally with respect to the Formula \ref{eq:rolling_mean}, centering the window means:
 \begin{equation}
   rolling(x_i,k) = \frac{1}{k} \sum_{j=i-(k-1)/2}^{i+(k-1)/2} x_j
 \end{equation}
-Where $x_i$ is the current data point for which you want to calculate the \textit{Moving Mean} and $k$ is the window size, which represents the number of data points to include in the moving average. \\
-After this, we compute the \textit{Moving Median} for a data point $x_i$ using a window of size $k$. 
-
 
 \subsection{Speed}
 Speed is calculated by finding the change in positions with respect to time through differentiation and then applying a moving average to obtain a more accurate estimate that is less affected by noise.

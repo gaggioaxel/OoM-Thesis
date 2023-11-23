@@ -15,6 +15,7 @@ The centering of the window in the middle of it.
 This means that for every $i$ to $n$, the number of the observations:
 \begin{equation}
   rolling(x_i,k) = \frac{1}{k} \sum_{j=i}^{i+k} x_j
+  \label{eq:rolling_mean}
 \end{equation}
 On extreme index of the observations (i.e when $j < 1$ or when $j > n$) the $k$ is reduced such that $1 \leq i-k \leq i+k \leq n$ to keep the centering of the window.
 In the following Figure \ref{fig:sin_corrupted_smoothed} it is plotted a sinusoidal signal with holes that have been replaced with a known value and the different behaviours of the \textit{Median Filtering} function and the \textit{Rolling Mean}. \\

@@ -467,6 +467,142 @@ As we can see, here we have the computation of all the \textit{n!} permutations 
 
 \subsection{Hungarian Matching Algorithm application}
 Another approach consists in applying the Hungarian Algorithm which is a combinatorial optimization algorithm that also solves the assignment problem.\\
+\begin{table}[H]
+  \centering
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      -6 & -4 & 0 \\
+      \hline
+      -4 & 0 & 0 \\
+      \hline
+      -2 & 0 & -4 \\
+      \hline
+    \end{tabular}
+    \caption*{(a)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      0 & 2 & 6 \\
+      \hline
+      0 & 4 & 4 \\
+      \hline
+      2 & 4 & 0 \\
+      \hline
+    \end{tabular}
+    \caption*{(b)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      0 & 0 & 6 \\
+      \hline
+      0 & 2 & 4 \\
+      \hline
+      2 & 2 & 0 \\
+      \hline
+    \end{tabular}
+    \caption*{(c)}
+  \end{minipage}
+
+  \vspace{10pt}
+
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 6 \\
+      \hline
+      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 2 & \cellcolor{gray!25} 4 \\
+      \hline
+      2 & 2 & \cellcolor{gray!25} 0 \\
+      \hline
+    \end{tabular}
+    \caption*{(d)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 6 \\
+      \hline
+      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 2 & \cellcolor{gray!25} 4 \\
+      \hline
+      2 & 2 & \cellcolor{green!50} 0 \\
+      \hline
+    \end{tabular}
+    \caption*{(e)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 6 \\
+      \hline
+      \cellcolor{green!50} 0 & \cellcolor{gray!25} 2 & \cellcolor{gray!25} 4 \\
+      \hline
+      2 & 2 & \cellcolor{green!50} 0 \\
+      \hline
+    \end{tabular}
+    \caption*{(f)}
+  \end{minipage}
+
+  \vspace{10pt}
+
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      \cellcolor{gray!25} 0 & \cellcolor{green!50} 0 & \cellcolor{gray!25} 6 \\
+      \hline
+      \cellcolor{green!50} 0 & \cellcolor{gray!25} 2 & \cellcolor{gray!25} 4 \\
+      \hline
+      2 & 2 & \cellcolor{green!50} 0 \\
+      \hline
+    \end{tabular}
+    \caption*{(g)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      0 & \cellcolor{green!50} 0 & 6 \\
+      \hline
+      \cellcolor{green!50} 0 & 2 & 4 \\
+      \hline
+      2 & 2 & \cellcolor{green!50} 0 \\
+      \hline
+    \end{tabular}
+    \caption*{(h)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      -6 & \cellcolor{green!50} -4 & 0 \\
+      \hline
+      \cellcolor{green!50} -4 & 0 & 0 \\
+      \hline
+      -2 & 0 & \cellcolor{green!50} -4 \\
+      \hline
+    \end{tabular}
+    \caption*{(i)}
+  \end{minipage}
+  \caption{Application of the Hungarian Algorithm to clusters stabilization}
+  \label{tab:hung_alg}
+\end{table}
+
+
 
 Both these methods provide the same results but lead to different complexities.
 
