@@ -247,6 +247,7 @@ This can be achieved by introducing an auxiliary matrix, referred to as the \tex
 The cost matrix is essentially a duplicate of the utility matrix, but with all its elements negated.
 
 \subsection{Brute Force Algorithm}
+\label{sec:bf}
 The BF can be a possible approach to solve the MaxWPM problem for bipartite graphs.
 However, it is important to note that the BF has exponential time complexity, specifically, its time complexity grows exponentially with the number of vertices in the graph.
 This is because the BF examines all possible combinations of matchings within the bipartite graph to find the one with the maximum weight.\\
@@ -263,6 +264,7 @@ The operation of the BF for MinWPM problems can be summerized in these 3 steps:
 
 
 \subsection{Hungarian Matching Algorithm}
+\label{sec:ha}
 
 The HM, also called the Kuhn-Munkres algorithm, is a \textit{O}($\textit{n}^3$) algorithm that can be used to find MaxWPM in bipartite graphs with \textit{n} vertices for each partition, which is sometimes called the assignment problem.
 As previously demonstrated in the Brute Force algorithm, maximum-weight perfect matching problems using the utility matrix can be converted into MinWPM problems using the cost matrix. 
