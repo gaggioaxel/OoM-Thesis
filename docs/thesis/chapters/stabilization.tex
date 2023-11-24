@@ -466,9 +466,37 @@ BF approach guarantees finding the best option, it can be computationally expens
 As we can see, here we have the computation of all the \textit{n!} permutations and the minimum one is (e).
 
 \subsection{Hungarian Matching Algorithm application}
-Another approach consists in applying the Hungarian Algorithm (Section \ref{sec:ha}) which is a combinatorial optimization algorithm that also solves the assignment problem.\\
+Another approach consists in applying the Hungarian Algorithm which is a combinatorial optimization algorithm that also solves the assignment problem.\\
+Now let's see the previous example solved with this algorithm in the Table \ref{tab:hung_alg_appl}: 
+\begin{enumerate}
+  \item[(a)] From the original table that describes the utility value associated for every assignment
+  \item[(b)] Invert each element to obtain the cost value of every assignment, since we want to minimize it 
+  \item[(c)] Now, subtract the smallest value for each row
+  \item[(d)] Subtract the smallest value for each column 
+  \item[(e)] Draw the minimum number of lines to cover the rows and columns that have 0 entries
+            There are 3 rows this means that we can find the optimal solution, since there are 3 rows
+  \item[(f)] Starting from the top-left corner select the zero that does not cover other zeros in any uncovered row or column
+  \item[(g)] Select cells that does cover the less amount of 0 for each row and has not the column already covered, so the zero in the bottom right corner
+  \item[(h)] Select the remaining cell that isn't already covered by any column
+  \item[(i)] Restore the original cost matrix 
+\end{enumerate}
+
 \begin{table}[H]
   \centering
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      6 & 4 & 0 \\
+      \hline
+      4 & 0 & 0 \\
+      \hline
+      2 & 0 & 4 \\
+      \hline
+    \end{tabular}
+    \caption*{(a)}
+  \end{minipage}
+  \hfill
   \begin{minipage}{0.3\textwidth}
     \centering
     \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
@@ -480,7 +508,7 @@ Another approach consists in applying the Hungarian Algorithm (Section \ref{sec:
       -2 & 0 & -4 \\
       \hline
     \end{tabular}
-    \caption*{(a)}
+    \caption*{(b)}
   \end{minipage}
   \hfill
   \begin{minipage}{0.3\textwidth}
@@ -494,20 +522,6 @@ Another approach consists in applying the Hungarian Algorithm (Section \ref{sec:
       2 & 4 & 0 \\
       \hline
     \end{tabular}
-    \caption*{(b)}
-  \end{minipage}
-  \hfill
-  \begin{minipage}{0.3\textwidth}
-    \centering
-    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-      \hline
-      0 & 0 & 6 \\
-      \hline
-      0 & 2 & 4 \\
-      \hline
-      2 & 2 & 0 \\
-      \hline
-    \end{tabular}
     \caption*{(c)}
   \end{minipage}
 
@@ -517,11 +531,11 @@ Another approach consists in applying the Hungarian Algorithm (Section \ref{sec:
     \centering
     \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
       \hline
-      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 6 \\
+      0 & 0 & 6 \\
       \hline
-      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 2 & \cellcolor{gray!25} 4 \\
+      0 & 2 & 4 \\
       \hline
-      2 & 2 & \cellcolor{gray!25} 0 \\
+      2 & 2 & 0 \\
       \hline
     \end{tabular}
     \caption*{(d)}
@@ -535,7 +549,7 @@ Another approach consists in applying the Hungarian Algorithm (Section \ref{sec:
       \hline
       \cellcolor{gray!25} 0 & \cellcolor{gray!25} 2 & \cellcolor{gray!25} 4 \\
       \hline
-      2 & 2 & \cellcolor{green!50} 0 \\
+      2 & 2 & \cellcolor{gray!25} 0 \\
       \hline
     \end{tabular}
     \caption*{(e)}
@@ -549,7 +563,7 @@ Another approach consists in applying the Hungarian Algorithm (Section \ref{sec:
       \hline
       \cellcolor{green!50} 0 & \cellcolor{gray!25} 2 & \cellcolor{gray!25} 4 \\
       \hline
-      2 & 2 & \cellcolor{green!50} 0 \\
+      2 & 2 & \cellcolor{gray!25} 0 \\
       \hline
     \end{tabular}
     \caption*{(f)}
@@ -561,7 +575,7 @@ Another approach consists in applying the Hungarian Algorithm (Section \ref{sec:
     \centering
     \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
       \hline
-      \cellcolor{gray!25} 0 & \cellcolor{green!50} 0 & \cellcolor{gray!25} 6 \\
+      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 6 \\
       \hline
       \cellcolor{green!50} 0 & \cellcolor{gray!25} 2 & \cellcolor{gray!25} 4 \\
       \hline
@@ -589,20 +603,18 @@ Another approach consists in applying the Hungarian Algorithm (Section \ref{sec:
     \centering
     \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
       \hline
-      -6 & \cellcolor{green!50} -4 & 0 \\
+      6 & \cellcolor{green!50} 4 & 0 \\
       \hline
-      \cellcolor{green!50} -4 & 0 & 0 \\
+      \cellcolor{green!50} 4 & 0 & 0 \\
       \hline
-      -2 & 0 & \cellcolor{green!50} -4 \\
+      2 & 0 & \cellcolor{green!50} 4 \\
       \hline
     \end{tabular}
     \caption*{(i)}
   \end{minipage}
   \caption{Application of the Hungarian Algorithm to clusters stabilization}
-  \label{tab:hung_alg}
+  \label{tab:hung_alg_appl}
 \end{table}
-
-
 
 Both these methods provide the same results but lead to different complexities.
 
