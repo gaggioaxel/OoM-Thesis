@@ -16,6 +16,7 @@ docs/thesis/*.lot
 docs/thesis/*.xdv
 docs/thesis/*.nav
 docs/thesis/*.snm
+docs/thesis/*.xml
 docs/presentation/*
 docs/presentation/*
 docs/paperINTETAIN*

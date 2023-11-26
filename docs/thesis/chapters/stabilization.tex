@@ -1,8 +1,8 @@
 \chapter{Temporal stabilization of clusters}
 
-After clustering, we need to reassign colors to the clusters to stabilize them over time. \\
+After clustering, when visualizing their evolution over time, we observe a lack of consistency in subsequent assignments of colors. \\
 As mentioned before, the order in which clusters are determined at each moment is random, and the selection order of clusters is represented by a color.
-Therefore, from the initial random color assignment, we aim to transition to a color assignment where two clusters of the same color share as many nodes (joints) as possible between moments.
+Therefore, from the initial random color assignment, we aim to transition to a color assignment where two clusters of the same color share as many nodes (joints) as possible over time.
 
 This is because the random assignment of colors poses visualization issues for the graph.
 It is possible that from one moment to the next, two clusters with many shared joints might have different colors, resulting in a visualization over time that appears as a continuous switching of colors. This could lead to a loss of continuity in the visual representation.
@@ -477,7 +477,7 @@ Now let's see the previous example solved with this algorithm in the Table \ref{
             There are 3 rows this means that we can find the optimal solution, since there are 3 rows
   \item[(f)] Starting from the top-left corner select the zero that does not cover other zeros in any uncovered row or column
   \item[(g)] Select cells that does cover the less amount of 0 for each row and has not the column already covered, so the zero in the bottom right corner
-  \item[(h)] Select the remaining cell that isn't already covered by any column
+  \item[(h)] Select the remaining cell that is not already covered by any column
   \item[(i)] Restore the original cost matrix 
 \end{enumerate}
 
@@ -628,7 +628,7 @@ without considering the temporal progression of clusters in terms of identifying
 For the sole purpose of visualization, a delaying and smoothing procedure has been implemented as follows:
 \begin{enumerate}
   \item Apply only every $k = \frac{1}{4}framerate$ time instant otherwise keep the previous clustering
-  \item Calculate the difference between the sets representing clusters at time t+1 and clusters at time t is computed.
+  \item Calculate the difference between the sets representing clusters at time t+1 and clusters at time t.
   \item Weighted degree centrality is applied to the nodes within each cluster in the resulting set, and the maximum value is selected.
   \item For each cluster, update the label of the node with the highest weighted degree centrality.
 \end{enumerate}
@@ -643,16 +643,17 @@ In (c) instead, the subsequent time instant with clusters stabilized.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.99\textwidth]{graphics/ClustersStabilization.png}
+  \includegraphics[width=0.99\textwidth]{ClustersStabilization.png}
   \caption{Clustering at $t=7.40$ (a), $t=7.67$ unstabilized (b), and $t=7.67$ stabilized (c).}
   \label{fig:stabilization_results}
 \end{figure}
 
-To better visualize the results achieved through stabilization, you can refer to a QR code \ref{fig:QRcode} that leads to a GIF image where the entire motion, as previously seen in Figure \ref{fig:stabilization_results}, can be observed.
+For a comprehensive view of the stabilization outcomes, reference the QR code in Figure \ref{fig:QRcode}. 
+This code leads to a GIF image showcasing the entire motion sequence.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.50\textwidth]{graphics/qrcode.png}
+  \includegraphics[width=0.50\textwidth]{qrcode.png}
   \caption{QRcode to the GIF}
   \label{fig:QRcode}
 \end{figure}

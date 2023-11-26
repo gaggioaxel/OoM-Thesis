@@ -1,0 +1,111 @@
+%\usepackage{dibrisunige-report}
+%\usepackage{thesis-config}
+\usepackage[protrusion=true, expansion=true]{microtype}  % Use microtype to improve readability
+\usepackage{lmodern}     % Use a modern font (that is not pixelated)
+\usepackage{booktabs}    % nicer horizontal rules in tables
+\usepackage{emptypage}   % no headers in empty pages
+\usepackage[small,hang,bf]{caption}    % caption options
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage{parskip}     % paragraph spacing (suppress indentation)
+\usepackage{colortbl, xcolor} % For cells colors
+\usepackage{tocloft}
+\usepackage{graphicx} % To fit images
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{etoolbox}
+\usepackage[doublespacing]{setspace}
+\usepackage{anyfontsize}
+
+% To create graphs
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{positioning}
+\usepackage{diagbox}
+\usepackage{slashbox}
+\usepackage{subcaption}
+\usepackage{titlesec}
+\usepackage{chngcntr}
+
+
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+% Encodings
+\usepackage{amsmath,amssymb,gensymb,textcomp}
+
+% Better tables
+% Wide tables go to https://tex.stackexchange.com/q/332902
+\usepackage{array,multicol,multirow,siunitx,tabularx}
+
+% Better enum
+\usepackage{enumitem}
+
+% Graphics
+\usepackage{caption,float}
+
+% Allow setting >max< width of figure
+% 'export' allows adjustbox keys in \includegraphics
+\usepackage[export]{adjustbox}
+
+
+\usepackage{titletoc}
+
+
+\graphicspath{{graphics/}}
+\newlist{mydescription}{description}{1}
+\setlist[mydescription,1]{labelindent=2em, leftmargin=2em}
+
+\fancyhead[RO]{\nouppercase \leftmark}  % Define the header for odd and even pages
+\fancyhead[LE]{}           % Define the header for odd and even pages
+\fancyfoot[C]{\thepage}
+
+\titlecontents{chapter}[0pt]
+  {\addvspace{1em}}
+  {\textbf{\thecontentslabel}\hspace{0.8em}\textbf} % Increase the space here (2em in this example)
+  {}
+  {}
+%\titlecontents{chapter}[0pt]{\addvspace{0em}}{\thecontentslabel\hspace{1em}}{}{\titlerule*[1pc]{}\contentspage}
+\titlecontents{section}[8pt]{\addvspace{0em}}{\thecontentslabel\hspace{0.8em}}{}{\titlerule*[0.8pc]{.}\contentspage}
+%\titlecontents{subsection}[2em]{\addvspace{0em}}{\thecontentslabel\hspace{1em}}{}{\titlerule*[1pc]{}\contentspage}
+
+
+% Configurations
+\newcounter{memberrowno}
+\setcounter{memberrowno}{0}
+
+%\oreporttype{Thesis}
+\title{A comparative analysis across algorithmic, machine learning, and visual paradigms for the automatic detection of the perceived origin of full-body human movement}
+%\multiadvisor{Gualtiero Volpe}
+%\multiadvisor{Luca Oneto}
+\renewcommand{\headrulewidth}{0.2pt}
+\renewcommand{\contentsname}{\Huge Table of contents}
+\renewcommand{\listfigurename}{\Huge List of Figures}
+\renewcommand{\listtablename}{\Huge List of Tables}
+
+% --------------------------
+% Customize document
+% --------------------------
+% Define the geometry of the document
+\newgeometry {top=2.5cm, bottom=2.5cm, right=2.5cm, left=2.5cm}
+
+\setlength{\parskip}{10pt}   % Change the default value
+
+% hiperlinks
+\hypersetup{
+    colorlinks=true,          % Enable colored links
+    linkcolor=black,          % Color for internal links
+    urlcolor=blue,
+    citecolor=blue
+}
+\setlength{\parskip}{10pt}   % Change the default value
+
+
+%\cftsetindents{table}{-1em}{3.5em}
+%\cftsetindents{figure}{-1em}{3.5em}
+
+% Reset the figure counter at the beginning of each chapter
+\counterwithin{figure}{section}
+\counterwithin{table}{section}

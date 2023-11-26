@@ -1,0 +1,110 @@
+\ProvidesPackage{thesis-config}
+
+\RequirePackage[utf8]{inputenc}
+
+\RequirePackage{etoolbox}
+\RequirePackage{geometry,graphicx,setspace}
+\RequirePackage{anyfontsize}
+\RequirePackage{booktabs}
+%\RequirePackage{fancyhdr,lastpage,hyperref}
+
+% Change to '[english,vietnamese]' to use Vietnamese labels
+\RequirePackage[english]{babel}
+
+\graphicspath{{graphics/}}
+
+\newcommand{\Month}{
+  \ifcase \the\month
+  \or January
+  \or February
+  \or March
+  \or April
+  \or May
+  \or June
+  \or July
+  \or August
+  \or September
+  \or October
+  \or November
+  \or December
+  \fi
+}
+
+\newcommand{\University}{\protect{University of Genoa}}
+\newcommand{\UNIVERSITY}{\protect{UNIVERSITY OF GENOA}}
+%\newcommand{\Centre}{\protect{Polytechnic School}}
+\newcommand{\COURSE}{COMPUTER ENGINEERING}
+
+\newcommand{\@deptname}{DIBRIS}
+\newcommand{\odeptname}[1]{\renewcommand{\@deptname}{#1}}
+
+\newcommand{\@coursename}{Course name}
+\newcommand{\ocoursename}[1]{\renewcommand{\@coursename}{#1}}
+
+\newcommand{\@reporttype}{Assignment Report}
+\newcommand{\oreporttype}[1]{\renewcommand{\@reporttype}{#1}}
+
+\renewcommand{\@title}{Thesis title}
+\newcommand{\otitle}[1]{\renewcommand{\@title}{#1}}
+
+\newcommand{\candidate}{Martina Fausto, Gabriele Romano}
+%\newcommand{\ocandidate}[1]{\renewcommand{\@candidate}{#1}}
+
+\newcommand{\advisor}{}
+\newcommand{\advisors}{Luca Oneto, Gualtiero Volpe}
+%\newtoggle{multipleadvisors}
+%\togglefalse{multipleadvisors}
+
+%\newcommand{\singleadvisor}[1]{\togglefalse{multipleadvisors}\renewcommand{\@advisor}{#1}}
+%\newcommand{\multiadvisor}[1]{\toggletrue{multipleadvisors}\appto{\@advisors}{#1\\}}
+
+\newcommand{\@reportplace}{University of Genoa}
+\newcommand{\oreportplace}[1]{\renewcommand{\@reportplace}{#1}}
+
+\newcommand{\thesistime}{\the\numexpr\year-1\relax/\the\year}
+%\newcommand{\thesistime}[1]{\renewcommand{\@thesistime}{#1}}
+
+
+
+\def\coverpage{
+  % called by main.tex
+  \thispagestyle{empty}
+  \begin{center}
+    \begin{spacing}{2} % Adjust the spacing between lines
+       \textbf{\large {\UNIVERSITY}}\\
+    \end{spacing}
+
+    \includegraphics[width=4cm]{logoColorized.png}
+    
+    \begin{spacing}{2} % Adjust the spacing between lines
+      \textbf{\large {\COURSE}}\\
+    \end{spacing}
+
+    \vspace{1cm} % Adjust vertical space
+
+    \begin{spacing}{2.4} % Adjust the spacing between lines
+      \textbf{\LARGE {\@title}}
+    \end{spacing}
+  
+    \vspace{2cm} % Adjust vertical space
+  
+    \begin{spacing}{1.5} % Adjust the spacing between lines
+      \textbf{\large {Candidates}}\\
+      {\large \candidate}\\
+    \end{spacing}
+
+    \vspace{0.5cm} % Adjust vertical space
+
+    \begin{spacing}{1.5} % Adjust the spacing between lines
+      \textbf {\large {Advisors}} \\
+      {\large \advisors}\\
+    \end{spacing}
+
+    \vfill
+    \begin{center}
+      {\large Academic year \thesistime}
+    \end{center}
+  \end{center}
+  \clearpage
+}
+

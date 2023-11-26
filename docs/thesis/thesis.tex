@@ -1,124 +1,51 @@
-\documentclass{report}
+\documentclass[
+A4paper,                % paper size A4
+twoside,                % onesite or twoside printing
+openright,              % doublepage cleaning ends up right side
+chapterprefix=true,     % prefix for chapter marks
+12pt,                   % font size
+headings=normal,        % size of headings
+titlepage=on            % own page for each title page
+]{book}
 
-\usepackage{dibrisunige-report}
-
-% Sub-preambles
-% https://github.com/MartinScharrer/standalone
-
-% For cells colors
-\usepackage{colortbl, xcolor}
-
-\usepackage{tocloft}
-\cftsetindents{table}{-1em}{3.5em}
-\cftsetindents{figure}{-1em}{3.5em}
-
-% To fit images
-\usepackage{graphicx}
-
-%
-\usepackage{float}
-
-% To create graphs
-\usepackage{tikz}
-\usepackage{pgfplots}
-\usetikzlibrary{positioning}
-\usepackage{diagbox}
-\usepackage{slashbox}
-\usepackage{subcaption}
-\usepackage{titlesec}
-\usepackage{chngcntr}
-% Reset the figure counter at the beginning of each chapter
-\counterwithin{figure}{section}
-\counterwithin{table}{section}
-
-\usepackage{algorithm}
-\usepackage[noend]{algpseudocode}
-
-% Encodings
-\usepackage{amsmath,amssymb,gensymb,textcomp}
-
-% Better tables
-% Wide tables go to https://tex.stackexchange.com/q/332902
-\usepackage{array,multicol,multirow,siunitx,tabularx}
-
-% Better enum
-\usepackage{enumitem}
-
-% Graphics
-\usepackage{caption,float}
-
-% Allow setting >max< width of figure
-% 'export' allows adjustbox keys in \includegraphics
-\usepackage[export]{adjustbox}
-
-% For demonstration purposes, remove in production
-\usepackage{mwe}
-
-% Cambiare font del corpo del documento
-\usepackage{fontsize}
-\changefontsize{12pt}
-
-\usepackage{titletoc}
-\titlecontents{chapter}[0pt]
-  {\addvspace{1em}}
-  {\textbf{\thecontentslabel}\hspace{0.8em}\textbf} % Increase the space here (2em in this example)
-  {}
-  {}
-%\titlecontents{chapter}[0pt]{\addvspace{0em}}{\thecontentslabel\hspace{1em}}{}{\titlerule*[1pc]{}\contentspage}
-\titlecontents{section}[8pt]{\addvspace{0em}}{\thecontentslabel\hspace{0.8em}}{}{\titlerule*[0.8pc]{.}\contentspage}
-%\titlecontents{subsection}[2em]{\addvspace{0em}}{\thecontentslabel\hspace{1em}}{}{\titlerule*[1pc]{}\contentspage}
-
-
-% Configurations
-\newcounter{memberrowno}
-\setcounter{memberrowno}{0}
-
-\ocoursename{}
-%\oreporttype{Thesis}
-\title{A comparative analysis across algorithmic, machine learning, and visual paradigms for the automatic detection of the perceived origin of full-body human movement.}
-\multiadvisor{Gualtiero Volpe}
-\multiadvisor{Luca Oneto}
-\reportlayout
-
-% Custom commands
-\newcommand*\mean[1]{\bar{#1}}
+\input{thesis_details}
+\input{settings}
 
 \begin{document}
-\titleformat{\part}[display]
-  {\centering\Huge\bfseries}{\partname\ \thepart}{20pt}{\Huge}
+%\titleformat{\part}[display]
+%  {\centering\Huge\bfseries}{\partname\ \thepart}{20pt}{\Huge}
+\frontmatter
+\pagestyle{empty}				    % no header nor footer
+\input{frontmatter/cover.tex}
+\newpage
 
-\coverpage
-
-%\newpage
-%\mbox{}
-%\newpage
+\pagenumbering{roman}			    % roman page numbering 
+\pagestyle{plain}				    % empty header, just page number in footer
 
 \include{chapters/acknowledgments.tex}
 \include{chapters/abstract.tex}
 
 \newpage
-\renewcommand{\contentsname}{\Huge Table of contents}
-\tableofcontents
+
+\setcounter{tocdepth}{3}		% define depth of toc
+\tableofcontents				% display table of contents
 \newpage
-\renewcommand{\listfigurename}{\Huge List of Figures}
+
+\addcontentsline{toc}{section}{List of Figures}
 \listoffigures
 \newpage
-\renewcommand{\listtablename}{\Huge List of Tables}
+
 \listoftables
 \newpage
+
 \include{chapters/acronyms.tex}
+\cleardoublepage
 
-\newpage
-%To import other files, you can use \mintinline{latex}{\input{}} or \mintinline{latex}{\include{}}.
-%There differences can be found at \url{https://tex.stackexchange.com/a/250}, but in short
-
-%\[\mintinline{latex}{\include{filename}} = \mintinline{latex}{\clearpage \input{filename} \clearpage}\]
 
 \part{Background}
 \include{chapters/introduction.tex}
 \include{chapters/motivation.tex}
 \include{chapters/theoretical_framework.tex}
-%\include{chapters/stateofart.tex}
 \part{Dataset details}
 \include{chapters/dataset.tex}
 \part{Cluster visualization}

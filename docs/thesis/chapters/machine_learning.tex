@@ -8,7 +8,7 @@ It proves to be highly advantageous when the goal is to ensure an equal distribu
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{graphics/subSampling.png}
+    \includegraphics[width=0.8\textwidth]{subSampling.png}
     \caption{Uniform Sampling visualized}
     \label{fig:unif_sampling}
 \end{figure}
@@ -18,7 +18,7 @@ In such cases, for each frame, a variable and uniform number of interpolation fr
 This approach compensates for the shorter segment length by adding interpolated frames, maintaining the consistency required for further analysis or processing.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\textwidth]{graphics/interpolationSampling.png}
+    \includegraphics[width=0.4\textwidth]{interpolationSampling.png}
     \caption{Frames interpolation visualized}
     \label{fig:interp_sampling}
 \end{figure}
@@ -56,8 +56,8 @@ Consequently, our model becomes better equipped to recognize patterns and moveme
 Feature extraction in ML is an essential process that involves transforming raw data into a more suitable format for analysis and model building.
 It helps identify and capture the most relevant information within the data while simplifying excessive complexity that could make model training challenging.
 This process not only contributes to improving model accuracy but also reduces the risk of overfitting and enhances the ability to generalize knowledge gained to new data. \\
-From the preprocessed data, we want to extract the necessary features for ML.
-Here we will see al the steps involved in order to achieve the desired features, for every sample of the dataset (note that \textit{n} is the number of frames of the sample). \\
+From the normalized Euclidean distance of every joint with respect to the center of mass calculated for every time instant, we want to extract the necessary features for ML.
+Here we will see all the steps involved in order to achieve the desired features, for every sample of the dataset (note that \textit{n} is the number of frames of the sample). \\
 \begin{itemize}
     \item \textbf{Mean} is the expected value of the distribution:
         \begin{equation}
@@ -102,7 +102,7 @@ Here we will see al the steps involved in order to achieve the desired features,
         \end{equation}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.85\textwidth]{graphics/iqr.png}
+            \includegraphics[width=0.85\textwidth]{iqr.png}
             \caption{Interquantile range of a normal distribution}
             \label{fig:iqr}
         \end{figure}
@@ -165,7 +165,11 @@ If the results had been satisfactory, we would then have opted to evaluate progr
 
 \subsection{Model creation}
 We started by addressing the issue of imbalanced data in classification. Imbalanced data occurs when one class significantly outnumbers the other(s), leading to challenges in training a classifier that can effectively distinguish between the classes.
-To mitigate this imbalance, a resampling technique known as B-SMOTE is employed (\textit{BS1}). The operational concept is detailed in Section \ref{subsec:borderline}.
+To mitigate this imbalance, a resampling technique known as B-SMOTE is employed (\textit{BS1}). 
+This technique equalizes the number of training samples for the minority class with that of the majority class at each iteration.
+B-SMOTE generates additional samples for the minority class to balance the number of samples of the majority class.
+For instance, if there are 50 samples of one class and 9 of the other during a training step, B-SMOTE will artificially create 41 samples for the second class. \\
+The operational concept is detailed in Section \ref{subsec:borderline}.
 
 Following the resampling of the training data, a RF classifier (\textit{RF1}) is trained on this newly balanced dataset.
 To further optimize the classifier's performance, a feature selection process is employed with the goal of identifying the most influential features that contribute to accurate classification.
@@ -199,7 +203,7 @@ To evaluate the performance of the classifier, a test set is chosen using LOOCV,
 In our ML model, we posed three different questions regarding the OoM. 
 Since our dataset is inherently a multi-class dataset, we performed binary classification by reclassifying the dataset.
 These binary questions are posed either to edges or to specific parts of the skeleton, which are themselves composed of edges. \\
-In Figures \ref{tab:ml_division_5_body_parts} and \ref{tab:ml_division_top_bottom}, you can observe which edges form various parts of the skeleton. \\
+In Figures \ref{tab:ml_division_5_body_parts} and \ref{tab:ml_division_top_bottom}, you can see the edges composing different segments of the skeleton. \\
 Note that not every edge of the reduced marker set (\ref{tab:labels_joints}) is included because some edges have not been the ground truth for any sample in our dataset.
 For ML we have in total 15 classes, that is 15 edges.
 
@@ -272,7 +276,7 @@ For ML we have in total 15 classes, that is 15 edges.
     \label{tab:ml_skeleton_divisions}
 \end{table}
 
-The Q1 will be posed considering the 15 edges, the Q2 will be posed considering the division of the body into 5 parts (Figure \ref{tab:ml_division_5_body_parts}), while Q3 will be based on the division of the body into 2 parts (Figure \ref{tab:ml_division_top_bottom}).
+Q1 will be posed considering the 15 edges, Q2 will be posed considering the division of the body into 5 parts (Figure \ref{tab:ml_division_5_body_parts}), while Q3 will be based on the division of the body into 2 parts (Figure \ref{tab:ml_division_top_bottom}).
 
 
 \begin{itemize}
