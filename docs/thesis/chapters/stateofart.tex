@@ -1,17 +1,20 @@
 \chapter{State of Art}
-Currently the method for automated analysis of body movement consists of an approach involving transferable-utility cooperative games on graph \cite{kolykhalova:2020} that has been summed up below:  
-\begin{enumerate}
-    \item {A Motion Capture dataset is originated by recording with 13 infra-red cameras. two professional dancers that were equipped with 64 infra-red reflective markers, 5 accelerometers and 1 microphone.} 
-    \item{The perceived Origin of Movement are manually annotated by experts in the field.} 
-    \item{With the native software “Qualisys Track Manager” have been computed the trajectories of each point.}  
-    \item{Joints are created according to the human skeletal structure and then clustered into a set of 20 points.} 
-    \item{Then the Shapley value approach is used as solution to the mathematical game built with the weighted vertices.} 
-\end{enumerate}
+Currently the method for automated analysis of body movement consists of an approach involving transferable-utility cooperative games on graph \cite{kolykhalova:2020}.
+A Motion Capture dataset is originated by recording with 13 infra-red cameras. two professional dancers that were equipped with 64 infra-red reflective markers, 5 accelerometers and 1 microphone.
+Then the perceived Origin of Movement are manually annotated by experts in the field.
+By using the native software “Qualisys Track Manager” have been computed the trajectories of each point and tracked across the whole timeframe of the sample.\\
+The output of the software is a highly precise description of the trajectories of either 64, 62 or 41 markers based on the version of the capture system. 
+Then the number of markers has been compressed by clustering and mapping the markers based on a scheme that uniquely maps the human skeletal structure, resulting in 20 points, that from now will be called "joints".
+By iterating this process over each sample of the dataset a list of 36 labeled timeseries is obtained.\\
+From here three kinds of movements features are calculated for each joint: speed, acceleration and angular momentum.
+The analysis is performed separately for each kind of feature.
+Then a first graph is created by linking each joint that is physically connected with another.
+A weight for each arc (or edge) is assigned based on the similarity of the selected feature calculated on the two joints.
+Henceforth a clustering algorithm is applied on the graph to further reduce the analysis on the edges that are outliers and fall across two different clusters.
+Then the weight of the edge is split between the two joints and the Shapley value approach is used as solution to the mathematical game built with the weighted vertices.\\
+
 Results are validated with an online survey, where have been asked to users at various level of self-assessed proficiency, 
 to select one or two vertices of the skeletal structure as the origin of movement.
 They were given hints in three diverse ways by highlighting the joints, either, 
 with the highest Shapley values, with the maximum speed, or randomly chosen. 
-This study has proven that the most expert users consistently chose as 
-origin of movement the one suggested by Shapley values. 
-
-\section{Origin of Movement}
+This study has proven that the most expert users consistently chose as origin of movement the one suggested by Shapley values. 

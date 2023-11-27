@@ -9,11 +9,11 @@ The participation of these skilled dancers is crucial because their deep knowled
 This collaboration yields expressive movements with distinct starting points, aligning with research goals.
 Their expertise increases dataset quality, providing a resource that encapsulates human motion intricacies accurately and artistically.
 
-
 \section{Dataset}
+\label{sec:dataset}
 The dataset contains two categories of expressive movements, each associated with a different recording session.
 The details of both types of movements are provided below.\\
-The dataset comprises 60 segments recorded using different versions of the \textit{Qualisys Motion Capture system}.
+The dataset comprises 60 segments recorded using different versions of the \textit{Qualisys Motion Capture system}, divided between 58 recordings coming from the "WhoLoDance" and 2 from the "Montpellier - Unige" session.
 These segments represents various participants performing simple movement sequences, which are captured from different angles using some cameras.
 The videos are synchronized through SMPTE timecode and each video is accompanied by corresponding motion capture data that records the positions of body parts.
 
@@ -65,6 +65,7 @@ This process was used to include only the segments where the labelling was more 
 Unfortunately, the dataset obtained ended up being unbalanced, meaning that there are some labels that are very frequent, some that are infrequent, and some labels that are completely absent.
 
 \section{Original Marker Set}
+\label{sec:orig_markers}
 Due to a four-year gap between the recording of the two distinct subsets of the dataset, 
 some differences in marker technology have emerged. 
 In particular, the WhoLoDance recordings feature a full marker set consisting of 64 reflective markers. 
@@ -89,6 +90,7 @@ The following figures (Figure \ref{fig:64markers}, Figure \ref{fig:41markers}) r
 
 
 \section{Reduced Marker Set}
+\label{sec:reduced_markers}
 Firstly, we standardized the marker labels following the 64-marker scheme, 
 we renamed some of the 41-marker labels to align with the full version (Table \ref{tab:marker_mapping_41}).
 
@@ -104,7 +106,7 @@ This reduction was performed by computing the $barycentre$ of grouped joints (fo
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|c|}
+    \begin{tabular}{||c||c||}
     \hline
     \textbf{41 Sport Marker Set Labels} & \textbf{64 Marker Set Labels} \\
     \hline
@@ -130,7 +132,7 @@ This reduction was performed by computing the $barycentre$ of grouped joints (fo
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|c|}
+    \begin{tabular}{||c||c||}
         \hline
         \textbf{Reduced Marker Set Labels} & \textbf{Partition of the 64 Marker Set Labels} \\
         \hline

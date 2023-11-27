@@ -1,4 +1,5 @@
 \chapter{Machine Learning}
+\label{chap:ml_method}
 
 \section{Frames Sampling}
 To address the variable length of segments within the dataset, in instances where we aim to attain a lower number of frames than the actual length of the segments, 
@@ -129,7 +130,7 @@ In Table \ref{tab:ml_features} we can see all the features and their relative fu
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|c|}
+    \begin{tabular}{||c||c||}
         \hline
         \textbf{Function} & \textbf{Description} \\
         \hline
@@ -180,7 +181,7 @@ To evaluate the performance of the classifier, a test set is chosen using LOOCV,
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|c|c|}
+    \begin{tabular}{||c||c||c||}
         \hline
         \textbf{Model} & \textbf{Hyperparameter} & \textbf{Value} \\
         \hline
@@ -213,7 +214,7 @@ For ML we have in total 15 classes, that is 15 edges.
     
     \begin{subtable}{\textwidth}
         \centering
-        \begin{tabular}{|c|c|}
+        \begin{tabular}{||c||c||}
             \hline
             \textbf{Body Part} & \textbf{Edges} \\
             \hline
@@ -246,7 +247,7 @@ For ML we have in total 15 classes, that is 15 edges.
 
     \begin{subtable}{\textwidth}
         \centering
-        \begin{tabular}{|c|c|}
+        \begin{tabular}{||c||c||}
             \hline
             \textbf{Body Part} & \textbf{Edges} \\
             \hline
@@ -397,7 +398,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
 %TODO AGGIUNGERE TOP FEATURES PER EXPLAINABILITY
 \begin{table}[H]
     \centering
-    \begin{tabular}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{6cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|}
+    \begin{tabular}{||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{6cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||}
     \hline
     \textbf{Label} & \textbf{Edge} & \textbf{TPR} & \textbf{TNR} &\textbf{Accuracy} \\
     \hline
@@ -506,14 +507,14 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
     \label{tab:ml_results_cm_body_part_6}
   \end{minipage}
   \hfill
-  \caption{Confusion matrices of the 5 Body Parts classification and of the Upper/Lower one}
+  \caption{Confusion matrices of the 5 Body Parts and of the Upper/Lower part}
   \label{tab:ml_results_cm_body_parts}
 \end{table}
 
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{6cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|}
+    \begin{tabular}{||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{6cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||}
         \hline
         \textbf{Label} & \textbf{Body Part} & \textbf{TPR} & \textbf{TNR} & \textbf{Accuracy} \\
         \hline
@@ -527,9 +528,9 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         \hline
         (m) & Head  & 14\%  & 96\% & 86\%\\
         \hline
-    \end{tabular}
-    \begin{tabular}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{6cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|}
         \hline
+    \end{tabular}
+    \begin{tabular}{||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{6cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||}
         \textbf{Label} & \textbf{Body Half} & \textbf{TPR} & \textbf{TNR} & \textbf{Accuracy} \\
         \hline
         (n) & Upper & 79\% & 76\% & 78\% \\

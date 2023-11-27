@@ -1,33 +1,13 @@
-\chapter{Motivation}
+\chapter{Proposed Approach}
+Our work builds upon certain aspects of the previous research while introducing a novel and more innovative method for predicting movement origins using machine learning. 
+Similar to the previous approach, the pipeline to reach the 20-joints skeleton remains the same (see Sections \ref{sec:orig_markers}, \ref{sec:reduced_markers}).
 
-While relationships between emotions and facial expressions or voice changes have been widely explored, 
-leading to the availability of feasible methods for real-time automatic analysis, 
-full-body movement has not been equally investigated. 
-Various studies have shown great potential for inferring about emotions and many other human activities. 
-Being able to automatically analyse the origin of movement could improve human performances, 
-prevent injuries, promote physical activity, develop cognitive and motor rehabilitation strategies \cite{piana:2016}. 
-
-For this reason, the research in human movement has branches in various fields of study such as biomechanics and neuroscience \cite{vaessen:2019}, 
-experimental psychology, and theories from the arts and humanities \cite{camurri:2016}. 
-
-The progress made in this field still does not allow a complete and robust classification of the origin of movement, in an automated way, 
-because this relies mainly on arbitrary thresholds to distinguish between different origins and current state of the body, 
-like if it is moving or standing still. 
-For example, to recognize the instant when a movement starts it is required to manually tune 
-minimum speed values that are difficult to automate and generalize for every context. 
-
-Furthermore in movement recognition there are a lot of mid-level features, like the joint angles,
-or the limb trajectories or the body segment coordination, which can be extracted and exploited by a comprehensive algorithm 
-that weights every feature in an optimize manner, resulting in improved accuracy over all the possible approaches 
-that work on them individually, because it could take into account the possible interactions and dependencies between them. 
-An holistic approach in this way could leverage the complementary informations present in each feature by weighting them 
-based on their relative importance. 
-One last point to take into consideration is that algorithms based on single features could end up in overfitting the data
-while the comprehensive one has more generalization capability. 
-
-This research aims to contribute to the design of accurate and robust systems for the automated analysis of the origin of movement
-by exploiting both the current techniques of analysis and the emerging ML approaches, 
-which have become feasible thanks to advancements in computational capabilities of modern machines. 
+We chose to utilize an ensamble of some movements from the previous dataset (the one used in \cite{kolykhalova:2020}), enriching the number of samples from other internal resources provided by Casa Paganini \cite{casaPaganini}. 
+This choice has been motivated by the necessity to have many short samples that clearly present an origin of movement instead of few samples that are hard to infer in terms of origin of movement, in order to 
+reach a high-quality data that can be used in machine learning techniques that will be explained in Chapter \ref{chap:ml_method}.\\
+Since we started from the previous work which was based on game theory and the concept of Shapley values in our approach we considered that there is not a clear contribution in terms of added value derived from nodes cooperation. 
+Therefore, we opted for WDC (Weighted Degree Centrality) to determine the perceived origin of the movement for the algorithmic approach.\\
+Furthermore for visualization purposes we implemented a method to prevent inconsistent coloring behaviours among clusters over time, by introducing a novel cluster stabilization algorithm. 
 
 \section{Roadmap}
 From the starting point of our work \cite{kolykhalova:2020}, we re-implemented, improved and modified it to compare the method for identifying the origin of movement obtained based on graphs with our new machine learning-based approach.
@@ -38,7 +18,6 @@ Additionally, markers for videos lacking previous labeling were manually assigne
 The central objectives of this thesis encompass the development of:
 \begin{itemize}
     \item \textbf{Cluster Stabilization Algorithm} which ensure that clusters, which represent groups of related markers or joints, maintain their consistency and coherence over time. 
-    This stability is crucial for accurately tracking and analyzing movements, as it helps prevent spurious or erratic changes in the clusters' characteristics.
     \item \textbf{Graph-based Procedure} to recognize the Origin of Movement by identifying key nodes that play pivotal roles in the motion analysis using an algorithmic method.
     \item \textbf{Machine Learning Approach} to identify the most promising edge of a the skeletal model by finding patterns in data without an algorithmic approach.
 \end{itemize}

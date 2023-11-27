@@ -1,9 +1,9 @@
 \chapter{Introduction}
 The study of analyzing human movement traces its origins back to the 19th century, notably with Charles Darwin's investigations into the connection between movement and its meaning. 
 Over the years, the fields of movement analysis and non-verbal communication have made significant progress in deciphering the significance of various movements. 
-They have grappled with questions like, “Do movements convey meaning in their own right?" and “How do movements convey meaning?"
-Movements and non-verbal expressions hold a unique place in communication as they transcend verbal language. 
-They contribute to the intricate web of conscious and subconscious communication during interactions \cite{Daly:1988},\cite{laffaye:2013}. 
+They have grappled with questions like, “Do movements convey meaning in their own right?" and “How do movements convey meaning?".
+Movements and non-verbal expressions hold a unique place in communication as they transcend verbal language.
+They contribute to the intricate web of conscious and subconscious communication during interactions \cite{Daly:1988, laffaye:2013}. 
 
 However, while there is a wealth of research exploring how emotions are conveyed through facial expressions and vocal cues, the role of full-body movement and expressive gestures in this context has been somewhat overlooked until recent times.
 
@@ -18,12 +18,10 @@ One notable contribution from the realm of non-verbal communication research is 
 It posits that “movement is a psycho-physical process, an outward expression of inward intent" \cite{Groff1995LabanMA}. 
 LMA provides a structured notation system for examining the structure and expressiveness of movements, particularly in dance.
 Within the framework of LMA, there are four distinct categories of movement elements, and one of these categories holds particular relevance to the research conducted in this thesis. 
-Specifically, LMA delves into the “Body" category, which encompasses several critical aspects:
-\begin{itemize}
-    \item Differentiation of Body Parts and Their Interactions: LMA explores how various parts of the body differentiate and interact during movements.
-    \item Description of Sequences and Simultaneous Movements: It provides a means to describe both sequences of movements and movements that occur simultaneously.  
-    \item Identification of Movement Initiation Sources: Importantly, within the context of this thesis, LMA focuses on identifying the sources that initiate movements \cite{zhao2001synthesis}.
-\end{itemize}
+The Laban Movement Analysis (LMA) encompasses several crucial aspects within the study of movement:
+LMA delves into the differentiation and interactions among different body parts during movements, providing insights into how these components function together.
+It serves as a method to articulate both sequences of movements and those that occur simultaneously, offering a comprehensive framework for movement description.
+Crucially, within the scope of this thesis, LMA focuses on discerning the sources responsible for initiating movements \cite{zhao2001synthesis}.
 In essence, it seeks to define the \textit{origin of movement}.
     
 \section{Research context}
@@ -51,18 +49,6 @@ where the central nervous system organizes the execution of the motion act, with
 that originates from a leading joint and propagates back to the body part that expresses the action. 
 In sports and dance, the junction between effectiveness and efficiency of a movement, while also minimizing injuries on the long-term, 
 lays in the awareness and exploitation of this concept. 
-In my personal experience as a martial art athlete, understanding the correct motion, 
-practicing and fixing misaligned posture is the key for an efficient energy allocation and the whole performance appearance. 
-For example, the correct execution of a cross punch according to the common 
-knowledge within the discipline consists of a complex 
-twist of the upper body with a final braking involving hips, abdominal and back muscles, 
-and the rear foot’s partial rotation \cite{wasik:2013}.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Taekwon-do-joomuk-jirugi.jpeg}
-    \caption{MoCap movement of the Taekwon-do joomuk jirugi}
-    \label{fig:example}
-\end{figure}
 
 \section{Origins and technological rise of Motion Capture}
 The origin of motion capture can be traced back to the mid-20th century when rudimentary methods were employed, 
@@ -91,10 +77,6 @@ such as joint positions and skeletal structure, from video footage.
     \label{fig:mocap}
 \end{figure}
 
-The transition from marker-based to markerless MoCap was a result of advancements in computer vision, machine learning, and AI. 
-Researchers developed algorithms capable of recognizing and tracking human motion patterns from video data, 
-enabling more accurate and efficient MoCap.
-
 The movie “Avatar," directed by James Cameron and released in December 2009, 
 played a pivotal role in showcasing the potential of MoCap-based cgi applied to entertainment. 
 The film featured groundbreaking visual effects, 
@@ -109,8 +91,37 @@ Additionally, facial MoCap was used to capture nuanced facial expressions, enhan
     \label{fig:avatar}
 \end{figure}
 
-While the film's production involved a mix of traditional animation and advanced MoCap techniques, 
-the seamless integration of these technologies pushed the boundaries of what was possible in terms of visual storytelling 
-and character animation. 
-“Avatar" demonstrated how MoCap could be used to create lifelike and emotive characters in a fantastical setting.
+The film's production involved a mix of traditional animation and advanced MoCap techniques, by giving particular emphasis on the facial expression recognition.
 From marker-based recording to detection through advanced sensors and high-definition cameras, we see how technological innovations have made the MoCap process increasingly precise and detailed.
+Researchers developed algorithms capable of recognizing and tracking human motion patterns from video data, 
+enabling more accurate and efficient MoCap.
+
+\section{Motivation}
+While relationships between emotions and facial expressions or voice changes have been widely explored, 
+leading to the availability of feasible methods for real-time automatic analysis, 
+full-body movement has not been equally investigated. 
+Various studies have shown great potential for inferring about emotions and many other human activities \cite{Bachmann:2020, preiler:2023}. 
+Being able to automatically analyse the origin of movement could improve human performances, 
+prevent injuries, promote physical activity, develop cognitive and motor rehabilitation strategies \cite{piana:2016}. 
+
+For this reason, the research in human movement has branches in various fields of study such as biomechanics and neuroscience \cite{vaessen:2019}, 
+experimental psychology, and theories from the arts and humanities \cite{camurri:2016}. 
+
+The progress made in this field still does not allow a complete and robust classification of the origin of movement, in an automated way, 
+because this relies mainly on arbitrary thresholds to distinguish between different origins and current state of the body, 
+like if it is moving or standing still. 
+For example, to recognize the instant when a movement starts it is required to manually tune 
+minimum speed values that are difficult to automate and generalize for every context. 
+
+Furthermore in movement recognition there are a lot of mid-level features, like the joint angles,
+or the limb trajectories or the body segment coordination, which can be extracted and exploited by a comprehensive algorithm 
+that weights every feature in an optimize manner, resulting in improved accuracy over all the possible approaches 
+that work on them individually, because it could take into account the possible interactions and dependencies between them. 
+An holistic approach in this way could leverage the complementary informations present in each feature by weighting them 
+based on their relative importance. 
+One last point to take into consideration is that algorithms based on single features could end up in overfitting the data
+while the comprehensive one has more generalization capability. 
+
+This research aims to contribute to the design of accurate and robust systems for the automated analysis of the origin of movement
+by exploiting both the current techniques of analysis and the emerging ML approaches, 
+which have become feasible thanks to advancements in computational capabilities of modern machines. 

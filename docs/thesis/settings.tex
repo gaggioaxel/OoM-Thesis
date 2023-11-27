@@ -58,9 +58,11 @@
 \newlist{mydescription}{description}{1}
 \setlist[mydescription,1]{labelindent=2em, leftmargin=2em}
 
-\fancyhead[RO]{\nouppercase \leftmark}  % Define the header for odd and even pages
-\fancyhead[LE]{}           % Define the header for odd and even pages
-\fancyfoot[C]{\thepage}
+\fancyhead[RE]{}
+\fancyhead[RO]{} 
+\fancyhead[LE]{} 
+\fancyhead[LO]{}
+%\fancyfoot[C]{\thepage}
 
 \titlecontents{chapter}[0pt]
   {\addvspace{1em}}
@@ -68,7 +70,7 @@
   {}
   {}
 %\titlecontents{chapter}[0pt]{\addvspace{0em}}{\thecontentslabel\hspace{1em}}{}{\titlerule*[1pc]{}\contentspage}
-\titlecontents{section}[8pt]{\addvspace{0em}}{\thecontentslabel\hspace{0.8em}}{}{\titlerule*[0.8pc]{.}\contentspage}
+%\titlecontents{section}[8pt]{\addvspace{0em}}{\thecontentslabel\hspace{0.8em}}{}{\titlerule*[0.8pc]{.}\contentspage}
 %\titlecontents{subsection}[2em]{\addvspace{0em}}{\thecontentslabel\hspace{1em}}{}{\titlerule*[1pc]{}\contentspage}
 
 
@@ -76,14 +78,23 @@
 \newcounter{memberrowno}
 \setcounter{memberrowno}{0}
 
-%\oreporttype{Thesis}
-\title{A comparative analysis across algorithmic, machine learning, and visual paradigms for the automatic detection of the perceived origin of full-body human movement}
-%\multiadvisor{Gualtiero Volpe}
-%\multiadvisor{Luca Oneto}
+
 \renewcommand{\headrulewidth}{0.2pt}
-\renewcommand{\contentsname}{\Huge Table of contents}
+\renewcommand{\contentsname}{\Huge Table of Contents}
 \renewcommand{\listfigurename}{\Huge List of Figures}
 \renewcommand{\listtablename}{\Huge List of Tables}
+
+% Adjust the spacing between lines in the Table of Contents
+\setlength{\cftbeforepartskip}{0.5em}
+\setlength{\cftbeforechapskip}{-0.6em}
+\setlength{\cftbeforesecskip}{-0.5em} 
+\setlength{\cftbeforesubsecskip}{-0.4em} 
+
+\setlength{\cftfignumwidth}{3em}
+\setlength{\cftfigindent}{0em}
+
+\setlength{\cfttabnumwidth}{3.5em}
+\setlength{\cfttabindent}{0em}
 
 % --------------------------
 % Customize document

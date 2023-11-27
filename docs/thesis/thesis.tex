@@ -31,31 +31,42 @@ titlepage=on            % own page for each title page
 \tableofcontents				% display table of contents
 \newpage
 
-\addcontentsline{toc}{section}{List of Figures}
+\addcontentsline{toc}{section}{\textbf{List of Figures}}
 \listoffigures
 \newpage
 
+\addcontentsline{toc}{section}{\textbf{List of Tables}}
 \listoftables
 \newpage
 
 \include{chapters/acronyms.tex}
 \cleardoublepage
 
+% --------------------------
+% Main matter
+% --------------------------
+\mainmatter
+\pagenumbering{arabic}			% arabic page numbering
+%\setcounter{page}{1}			% set page counter
+\pagestyle{fancy} 	            % fancy header and footer
+\parskip=7pt                    % space after each paragraph
+\parindent=0pt                  % suppress indentation of paragraphs
 
-\part{Background}
+%\part{Background}
 \include{chapters/introduction.tex}
-\include{chapters/motivation.tex}
+\include{chapters/stateofart.tex}
+\include{chapters/proposition.tex}
 \include{chapters/theoretical_framework.tex}
-\part{Dataset details}
+%\part{Proposed Method}
 \include{chapters/dataset.tex}
-\part{Cluster visualization}
+%\part{Cluster visualization}
 \include{chapters/graph_skeletal_structure.tex}
 \include{chapters/spectral_clustering.tex}
 \include{chapters/stabilization.tex}
-\part{Automatic classification}
+%\part{Automatic classification}
 \include{chapters/clustering_results.tex}
 \include{chapters/machine_learning.tex}
-\part{Results discussion}
+%\part{Results discussion}
 \include{chapters/conclusions.tex}
 
 
