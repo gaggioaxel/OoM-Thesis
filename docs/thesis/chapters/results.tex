@@ -1,5 +1,5 @@
 \chapter{Results}
-TODO AGGIUNGERE
+%TODO AGGIUNGERE
 
 \section{Graph-based Framework}
 The OoM was classified using three distinct features: speed, acceleration and angular momentum, as described in Section \ref{subsec:alg_features}.
@@ -19,9 +19,15 @@ In Table \ref{tab:clust_results} we can see the results.
   \label{tab:clust_results}
 \end{table}
 
-Even though these results are not impressive, they are still better than a random approach, where two random nodes are selected, and by examining which edges in the auxiliary graph they are connected to, they are compared to the ground truth. \\
-Such an approach, in fact, achieves an accuracy of 19\%.
-Figure \ref{fig:wdc_results} shows the distribution of the results for each edge of the dataset:
+Even though these results are not impressive, they are still better than a random approach, where two random nodes are selected, are compared to the ground truth. \\
+Such an approach, achieves an accuracy of 19\% 
+The probability of picking at least one joint of the two is shown in Equation \ref{eq:prob_rand}
+\begin{equation}
+  \mathbb{P}(x) = 2 \cdot \frac{2}{20} \cdot \frac{18}{20} + \frac{2}{20} \cdot \frac{2}{20} = \frac{19}{100}
+  \label{eq:prob_rand}
+\end{equation}
+
+While in Figure \ref{fig:wdc_results} we can see the distribution of the results for each edge of the dataset with respecto to their ground truth.
 \begin{figure}
   \centering
   \includegraphics[width=0.85\textwidth]{wdc_results.png}
@@ -57,9 +63,6 @@ Throughout the movement, the left arm descends while moving backward, the torso 
 \clearpage
 
 \section{Machine Learning}
-In the following Tables (from \ref{tab:ml_results_cm_joints} to \ref{tab:ml_results_cm_body_parts}), you will find confusion matrices and evaluation metrics for the prediction of certain classes.
-To interpret the meaning of the confusion matrices, please refer to Section \ref{subsec:evaluation_metrics}.
-\\
 
 The tests to identify the best model were conducted on the most frequent edge of the dataset, \textit{left\_hand - left\_wrist} with the aim of maximize the accuracy.
 This is because the dataset is unbalanced, and therefore, better prediction results are expected from this class.
@@ -70,10 +73,13 @@ The model requires a high level of certainty in predictions before classifying a
 You can also observe the model's high specificity from the TNR, which is consistently quite high in all cases, typically greater than 80\%. \\
 In summary, the model tends to favor a conservative strategy, prioritizing the reduction of FP, leading to a high specificity but limited effectiveness in identifying TP.
 
+In the following Tables (from \ref{tab:ml_results_cm_joints} to \ref{tab:ml_results_cm_body_parts}), there are the confusion matrices and evaluation metrics for the prediction of certain classes.
+To interpret the meaning of the confusion matrices, please refer to Section \ref{subsec:evaluation_metrics}.
+
 \clearpage
 \begin{table}[H]
     \centering
-    \renewcommand{\arraystretch}{1.2} % Aumenta lo spazio tra le righe del doppio
+    \renewcommand{\arraystretch}{1.5} % Aumenta lo spazio tra le righe del doppio
     \begin{subfigure}[b]{0.1\textwidth}
         \centering
         \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
@@ -151,7 +157,6 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         \caption{}
         \label{tab:ml_results_cm_edge_6}
     \end{subfigure}
-    \hspace{0.05\linewidth}
     \caption{Confusion matrices of the 6 most frequent classes in the dataset}
     \label{tab:ml_results_cm_joints}
 \end{table}
@@ -159,7 +164,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
 %TODO AGGIUNGERE TOP FEATURES PER EXPLAINABILITY
 \begin{table}[H]
     \centering
-    \begin{tabular}{||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{6cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||}
+    \begin{tabular}{||>{\centering\arraybackslash}p{1.6cm}||>{\centering\arraybackslash}p{5.7cm}||>{\centering\arraybackslash}p{1.6cm}||>{\centering\arraybackslash}p{1.6cm}||>{\centering\arraybackslash}p{1.9cm}||}
     \hline
     \textbf{Label} & \textbf{Edge} & \textbf{TPR} & \textbf{TNR} &\textbf{Accuracy} \\
     \hline
@@ -184,9 +189,10 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
 
 
 \begin{table}[H]
-  \begin{minipage}[b]{0.1\textwidth}
+  \centering
+  \begin{subfigure}[b]{0.1\textwidth}
     \centering
-    \renewcommand{\arraystretch}{1.2} % Aumenta lo spazio tra le righe del doppio
+    \renewcommand{\arraystretch}{1.5} % Aumenta lo spazio tra le righe del doppio
     \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
     \hline
     37 & 5 \\
@@ -194,13 +200,12 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
     7 & 11 \\
     \hline
     \end{tabular}
-    \caption*{(g)}
+    \caption*{\textbf{(g)}}
     \label{tab:ml_results_cm_body_part_1}
-  \end{minipage}
+  \end{subfigure}
   \hspace{0.05\linewidth}
-  \begin{minipage}[b]{0.1\textwidth}
+  \begin{subfigure}[b]{0.1\textwidth}
     \centering
-    \renewcommand{\arraystretch}{1.2} % Aumenta lo spazio tra le righe del doppio
     \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
     \hline
     37 & 9 \\
@@ -208,13 +213,12 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
     10 & 4 \\
     \hline
     \end{tabular}
-    \caption*{(h)}
+    \caption*{\textbf{(h)}}
     \label{tab:ml_results_cm_body_part_2}
-  \end{minipage}
+  \end{subfigure}
   \hspace{0.05\linewidth}
-  \begin{minipage}[b]{0.1\textwidth}
+  \begin{subfigure}[b]{0.1\textwidth}
     \centering
-    \renewcommand{\arraystretch}{1.2} % Aumenta lo spazio tra le righe del doppio
     \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
     \hline
     43 & 4 \\
@@ -222,13 +226,12 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
     6 & 7 \\
     \hline
     \end{tabular}
-    \caption*{(i)}
+    \caption*{\textbf{(i)}}
     \label{tab:ml_results_cm_body_part_3}
-  \end{minipage}
+  \end{subfigure}
   \hspace{0.05\linewidth}
-  \begin{minipage}[b]{0.1\textwidth}
+  \begin{subfigure}[b]{0.1\textwidth}
     \centering
-    \renewcommand{\arraystretch}{1.2} % Aumenta lo spazio tra le righe del doppio
     \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
     \hline
     47 & 5 \\
@@ -236,13 +239,12 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
     7 & 1\\
     \hline
     \end{tabular}
-    \caption*{(l)}
+    \caption*{\textbf{(l)}}
     \label{tab:ml_results_cm_body_part_4}
-  \end{minipage}
+  \end{subfigure}
   \hspace{0.05\linewidth}
-  \begin{minipage}[b]{0.1\textwidth}
+  \begin{subfigure}[b]{0.1\textwidth}
     \centering
-    \renewcommand{\arraystretch}{1.2} % Aumenta lo spazio tra le righe del doppio
     \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
     \hline
     51 & 2 \\
@@ -250,13 +252,12 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
     6 & 1 \\
     \hline
     \end{tabular}
-    \caption*{(m)}
+    \caption*{\textbf{(m)}}
     \label{tab:ml_results_cm_body_part_5}
-  \end{minipage}
+  \end{subfigure}
   \hspace{0.05\linewidth}
-  \begin{minipage}[b]{0.1\textwidth}
+  \begin{subfigure}[b]{0.1\textwidth}
     \centering
-    \renewcommand{\arraystretch}{1.2} % Aumenta lo spazio tra le righe del doppio
     \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
         \hline
         16 & 5 \\
@@ -264,10 +265,9 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         8 & 31 \\
         \hline
     \end{tabular}
-    \caption*{(n)}
+    \caption*{\textbf{(n)}}
     \label{tab:ml_results_cm_body_part_6}
-  \end{minipage}
-  \hfill
+  \end{subfigure}
   \caption{Confusion matrices of the 5 Body Parts and of the Upper/Lower part}
   \label{tab:ml_results_cm_body_parts}
 \end{table}
@@ -275,7 +275,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{6cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||}
+    \begin{tabular}{||>{\centering\arraybackslash}p{1.8cm}||>{\centering\arraybackslash}p{4cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||}
         \hline
         \textbf{Label} & \textbf{Body Part} & \textbf{TPR} & \textbf{TNR} & \textbf{Accuracy} \\
         \hline
@@ -291,7 +291,7 @@ In summary, the model tends to favor a conservative strategy, prioritizing the r
         \hline
         \hline
     \end{tabular}
-    \begin{tabular}{||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{6cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||}
+    \begin{tabular}{||>{\centering\arraybackslash}p{1.8cm}||>{\centering\arraybackslash}p{4cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||}
         \textbf{Label} & \textbf{Body Half} & \textbf{TPR} & \textbf{TNR} & \textbf{Accuracy} \\
         \hline
         (n) & Upper & 79\% & 76\% & 78\% \\

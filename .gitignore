@@ -1,4 +1,5 @@
 docs/thesis/chapters/*.aux
+docs/thesis/frontmatter/*.aux
 docs/thesis/*.aux
 docs/thesis/*.blg
 docs/thesis/*.dvi

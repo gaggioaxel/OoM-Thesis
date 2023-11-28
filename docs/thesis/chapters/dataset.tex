@@ -9,13 +9,13 @@ The participation of these skilled dancers is crucial because their deep knowled
 This collaboration yields expressive movements with distinct starting points, aligning with research goals.
 Their expertise increases dataset quality, providing a resource that encapsulates human motion intricacies accurately and artistically.
 
-\section{Dataset}
+\section{Raw Data Sources}
 \label{sec:dataset}
 The dataset contains two categories of expressive movements, each associated with a different recording session.
 The details of both types of movements are provided below.\\
-The dataset comprises 60 segments recorded using different versions of the \textit{Qualisys Motion Capture system}, divided between 58 recordings coming from the "WhoLoDance" and 2 from the "Montpellier - Unige" session.
 These segments represents various participants performing simple movement sequences, which are captured from different angles using some cameras.
 The videos are synchronized through SMPTE timecode and each video is accompanied by corresponding motion capture data that records the positions of body parts.
+The systems used for the recording are different versions of the same software, the \textit{Qualisys Motion Capture system}.
 
 
 \subsection{WhoLoDance Dataset}
@@ -47,23 +47,6 @@ the participant throws the ball and retrieves it themselves, while in the other 
 This was done to introduce greater movement diversity.
 It is worth noting that, for the purpose of motion analysis, the receiver and the thrower are considered separately.
 
-\section{Annotations}
-Starting from recordings of movements, we selected 60 segments in which we could clearly identify the origin of the movement.\\
-Each video fragment was given a label corresponding to the edge between two joints that was deemed to be the origin of the movement.\\
-The labelling process was carried out in several steps:
-\begin{itemize}
-    \item{We individually labelled half of the segments}
-
-    \item{We compared our labels and considered for our dataset only those on which we agreed without any a-priori knowledge on the other's opinion.}
-
-    \item{We proposed those labels to our professors and considered for the dataset only those on which all of us agreed.}
-
-    \item{The final selection was made merging our labels with the opinion of an expert dancer.}
-\end{itemize}
-
-This process was used to include only the segments where the labelling was more certain and evident. \\
-Unfortunately, the dataset obtained ended up being unbalanced, meaning that there are some labels that are very frequent, some that are infrequent, and some labels that are completely absent.
-
 \section{Original Marker Set}
 \label{sec:orig_markers}
 Due to a four-year gap between the recording of the two distinct subsets of the dataset, 
@@ -86,8 +69,6 @@ The following figures (Figure \ref{fig:64markers}, Figure \ref{fig:41markers}) r
     \caption{Markers Set with 41 Labels}
     \label{fig:41markers}
 \end{figure}
-
-
 
 \section{Reduced Marker Set}
 \label{sec:reduced_markers}
@@ -143,7 +124,7 @@ This reduction was performed by computing the $barycentre$ of grouped joints (fo
         right\_knee & RKNE, RKNI \\
         left\_knee & LKNE, LKNI \\
         right\_hip & RFWT, RBWT \\
-        hip\_centre & RFWT, LFWT, RBWT, LBWT \\
+        hip\_center & RFWT, LFWT, RBWT, LBWT \\
         left\_hip & LFWT, LBWT \\
         spine & C6, C7, T5, T10, BWT, STRN, CLAV, FWT \\
         right\_hand & RPLM, RTHMB, RINDX, RMID, RPNKY\\
@@ -153,7 +134,7 @@ This reduction was performed by computing the $barycentre$ of grouped joints (fo
         right\_elbow & RELB, RIEL, RFRM\\
         left\_elbow & LELB, LIEL, LFRM \\
         right\_shoulder & RSHO \\
-        shoulder\_centre & LSHO, RSHO \\
+        shoulder\_center & LSHO, RSHO \\
         left\_shoulder & LSHO \\
         head & RBHD, LBHD, LFHD, RFHD, ARIEL \\
         \hline
@@ -161,3 +142,24 @@ This reduction was performed by computing the $barycentre$ of grouped joints (fo
     \caption{Mapping of the full marker set to the reduced marker set}
     \label{tab:marker_mapping_64}
 \end{table}
+
+\section{Annotations}
+\label{sec:annotations}
+Starting from the recordings of movements from these sources, we selected about one hundred segments in which we could clearly identify the origin of the movement.\\
+Each video fragment was given a label corresponding to the edge between two joints that was deemed to be the origin of the movement.\\
+The labelling process was carried out by individually labelling half of the segments. Then we compared our labels and considered for our dataset only those on which we agreed without any a-priori knowledge on the other's opinion.
+We proposed those labels to our professors and considered for the dataset only those on which all of us agreed.
+The final selection was made merging our labels with the opinion of an expert dancer.\\
+This process was used to include only the segments where the labelling was more certain and evident.\\ 
+
+The ending result comprises an amount of 60 fragments,divided between 58 recordings coming from the "WhoLoDance" and 2 from the "Montpellier - Unige" session. 
+It spaced over 15 of the 20 joints available, the others are discarted during refinement process.
+Unfortunately, the dataset obtained ended up being unbalanced, meaning that there are some labels that are very frequent, some that are infrequent, and some labels that are completely absent.
+In Figure \ref{fig:dataset_distribution} we can see the resulting distribution of each edge as the origin of movement.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{datasetDistribution.png}
+    \caption{Edges frequencies in the Dataset}
+    \label{fig:dataset_distribution}
+\end{figure}

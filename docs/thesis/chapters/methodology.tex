@@ -51,7 +51,7 @@ For simplicity, the links are without weights.
         5 & right\_knee \\
         6 & left\_knee \\
         7 & right\_hip \\
-        8 & hip\_centre \\
+        8 & hip\_center \\
         9 & left\_hip \\
         10 & spine \\
         11 & right\_hand \\
@@ -61,7 +61,7 @@ For simplicity, the links are without weights.
         15 & right\_elbow \\
         16 & left\_elbow \\
         17 & right\_shoulder \\
-        18 & shoulder\_centre \\
+        18 & shoulder\_center \\
         19 & left\_shoulder \\
         20 & head \\
         \hline
@@ -74,7 +74,7 @@ For simplicity, the links are without weights.
 
 
 \section{Graph-based Framework}
-TODO AGGIUNGERE qualcosa
+%TODO AGGIUNGERE qualcosa
 
 \subsection{Timeseries Smoothing}
 Prior to computing the features, we implement two smoothing techniques on the time series data. \\
@@ -128,7 +128,7 @@ For instance, rapid acceleration might be associated with energetic and rhythmic
   \item Lastly the angular momentum relative to the center of mass:
   \begin{table}[H]
     \begin{align}
-      \vec{L} = \vec{s}_{r} \times (\vec{v}_{r} * m) \quad with \ m = 1 \ for \ every \ joint \label{eq:ang_mom}
+      \vec{L} = \vec{s}_{r} \times (\vec{v}_{r} \cdot m) \quad with \ m = 1 \ for \ every \ joint \label{eq:ang_mom}
     \end{align}
   \end{table}
 \end{enumerate}
@@ -155,46 +155,6 @@ By doing this, it is possible to compare the directions of the two considered no
 After obtaining the weights for each edge of the graph, we then have, for each instantaneous frame, a graph $G$ := ($V$, $E$, $w$), where   
 $V$ is the set of $vertices$, $E$ is the set of $edges$ and $w$ is the set of $edge weights$.
 
-%\section{Similarity measure}
-%To calculate the weights of the edges connecting the different joints at each instant, we use different formulas depending on the feature we are considering.
-%\\
-%
-%\textit{Speed and Acceleration:} in the case of Speed and Acceleration features, for each time instant, we have to introduce a factor of tollerance.\\
-%$tol_i$ is the tollerance at time instant $i$ and is obtained by computing the mean of all the $features$ at instant $i$ at multipying by a factor 
-%$10^{-3}$.
-%\begin{equation}
-%  tol_i = mean(feature_i) \cdot 10^{-3}
-%  \label{formula:tol}
-%\end{equation}
-%This is done to prevent errors in future calculations such as division by zero.
-%
-%
-%In the subsequent step, we assign a weight to each edge for every pair of joints $v$ and $\hat{v}$ for each instant $i$:
-%\begin{itemize}
-%  \item If the two joints are indeed connected in the skeleton, for example, $left\_hand$ and $left\_wrist$, we use the following formula:
-%    \begin{equation}
-%      w^{v\hat{v}}_{i} = \frac{1}{\|feature^{v}_{i}\|-\|feature^{\hat{v}}_{j}\|+tol}
-%    \end{equation}
-%  \item If the two joints are not actually connected, for example, $head$ and $right\_foot$, we use the following formula:
-%    \begin{equation}
-%      w^{v\hat{v}}_{i} = \frac{1}{5 \cdot (\|feature^{v}_{i}\|-\|feature^{\hat{v}}_{j}\|+tol)}
-%      \label{formula:tol}
-%    \end{equation}
-%\end{itemize}
-%
-%\textit{Angular Momentum:} in the case of Angular Momentum, we assign a weight to each edge for every pair of joints $v$ and $\hat{v}$ for
-%each instant $i$, distinguishing between two cases:
-%\begin{itemize}
-%  \item If the two joints are indeed connected in the skeleton, we use the following formula:
-%    \begin{equation}
-%      w^{v\hat{v}}_{i} = \frac{feature^{v}_{i} \times feature^{\hat{v}}_{i}}{\|feature^{v}_{i}\|-\|feature^{\hat{v}}_{j}\|} + 1
-%    \end{equation}
-%  \item If the two joints are not actually connected, we use the following formula:
-%    \begin{equation}
-%      w^{v\hat{v}}_{i} = \frac{feature^{v}_{i} \times feature^{\hat{v}}_{i}}{5 \cdot (\|feature^{v}_{i}\|-\|feature^{\hat{v}}_{j}\|+1)}
-%      \label{formula:tol}
-%    \end{equation}
-%\end{itemize}
 
 \subsection{Spectral Clustering}
 Clusterization aims to identify groups of nodes that exhibit significant similarity based on the features or data they represent.
@@ -206,7 +166,7 @@ The objective is to unveil hidden structures within data so that similar objects
 The algorithm has some limitations due to the initialization phase, such as sensitivity to the initial choice of centroids and the requirement to specify the number of clusters beforehand.\\
 This is why there will be a subsequent phase of cluster stabilization over time.
 
-\paragraph{Shi-Malik Algorithm} can be summarized in these 8 steps:
+\paragraph{Shi-Malik Algorithm} The algorithm can be summarized in these 8 steps:
 
 \begin{enumerate}
     
@@ -330,7 +290,7 @@ At this stage, we will examine in the $G^{aux}$ to which edges belonging to $E^{
 
 
 \section{Visualization Framework}
-TODO AGGIUNGERE
+%TODO AGGIUNGERE
 
 \subsection{Temporal stabilization of clusters}
 
@@ -693,12 +653,7 @@ The following figure shows the matching with the utility value for every possibl
 We explored two algorithmns for computing the MaxWPM.
 
 \paragraph{Brute Force} for choosing an option based on the minimum sum of utility values of a graph involves exhaustively evaluating every possible combination of options to find the one with the highest total weight. 
-This method consists of:
-\begin{enumerate}
-  \item Generating all possible combinations: Enumerate all possible subsets or combinations of options within the graph.
-  \item Calculating the sum of weights: For each combination, compute the total weight by summing the weights of the selected options.
-  \item Comparing and selecting: Identify the combination with the minimum total weight as the optimal choice.
-\end{enumerate}
+This method consists of enumerating all possible subsets or combinations of options within the graph, computing theier sum of weights, ranking results and choosing the best one.
 The Table \ref{tab:bf_alg} is a clear example of this approach. \\   
 
 \begin{table}[H]
@@ -952,13 +907,11 @@ Now let's see the previous example solved with this algorithm in the Table \ref{
 After achieving cluster stabilization at the interframe level, a persistent issue remains. 
 Despite the smoothness of actual movements, the transition of a cluster from a part of the body is still too fast.
 This is due to the fact that is a greedy approach and is not considering the temporal progression of clusters.
-To address this issue a delay and smoothing procedure has been implemented as follows:
-\begin{enumerate}
-  \item Apply only every $k = \frac{1}{4}framerate$ time instant otherwise keep the previous clustering
-  \item Calculate the difference between the sets representing clusters at time t+1 and clusters at time t.
-  \item Weighted degree centrality is applied to the nodes within each cluster in the resulting set, and the maximum value is selected.
-  \item For each cluster, update the label of the node with the highest weighted degree centrality.
-\end{enumerate}
+To address this issue a delay and smoothing procedure has been used.
+It consists in computing the difference between the sets representing clusters at time t+1 and clusters at time t.
+Apply the weighted degree centrality to the nodes within each cluster in the resulting set, and select the maximum value.
+For each cluster, update the label of the node with the highest weighted degree centrality.
+This algorithm is applied only every $k = \frac{1}{4}framerate$ time instant, effectively updating the clusters, in the other time instants these are not updated.
 
 By parameterizing $k$ this process appropriately to ensure that clusters do not undergo excessive changes during this time interval, an oscillating effect is achieved. 
 This effect propagates the cluster across the connected nodes that belong to it, thereby making any potential origin of the movement more conspicuous.
@@ -966,34 +919,23 @@ This effect propagates the cluster across the connected nodes that belong to it,
 \clearpage
 \section{Machine Learning Framework}
 \label{sec:ml_method}
-TODO AGGIUNGERE
+In this section, we describe the process of extracting and engineering features from the raw data, the process to refine the model in order to obtain highly accurate model, and the different formulations of binary questions posed to it.
 
-\subsection{Frames Sampling}
-To address the variable length of segments within the dataset, in instances where we aim to attain a lower number of frames than the actual length of the segments, 
-we have utilized the \textit{uniform spacing} sampling technique to address the variability in segment lengths within the dataset.
-This method entails selecting frames from a list or sequence at regular, even intervals. 
-It proves to be highly advantageous when the goal is to ensure an equal distribution of frames throughout the sequence.
+\subsection{Features engineering}
+The initial dataset we started from, as described in Section \ref{sec:annotations}, consists of 60 time series of the 20 joints trajectories.
+In order to avoid noise or presence of more origin of movements, we trimmed the videos finely, resulting in clips of variable lengths ($\mu = 1.96s , \sigma^{2} = 1.49s$).
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{subSampling.png}
-    \caption{Uniform Sampling visualized}
-    \label{fig:unif_sampling}
-\end{figure}
+\paragraph{Frames sampling} To address the variable length of segments within the dataset, in instances where we aim to attain a uniform number of frames than the actual length of the segments, 
+we have utilized the \textit{uniform spacing sampling} technique to address the variability in segment lengths within the dataset.
+This method entails selecting frames from a list or sequence at regular, even intervals, by fixing a number of frames that we wanted, in our case 200, and then keeping only those frames equally spaced between eachother.
 
-Conversely, when dealing with segments that are shorter than the standard number of frames, a different technique is implemented.
+Conversely, when dealing with segments that are shorter than the required number of frames, a different technique is implemented.
 In such cases, for each frame, a variable and uniform number of interpolation frames are inserted to reach the desired frame count. 
-This approach compensates for the shorter segment length by adding interpolated frames, maintaining the consistency required for further analysis or processing.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.4\textwidth]{interpolationSampling.png}
-    \caption{Frames interpolation visualized}
-    \label{fig:interp_sampling}
-\end{figure}
+This approach compensates for the shorter segment length by adding approximately the same amount of interpolated frames across the whole segment, maintaining the consistency required for the following statistical analysis.
 
-\subsection{Dataset Normalization}
-As previously mentioned, our dataset consists of 60 samples, each containing the spatial positions of all 20 skeletal joints at each time step.
-From the equally sampled timeseries we calculate the $x$, $y$, and $z$ coordinates of the skeleton's barycenter for each time step. \\
+
+\paragraph{Dataset Normalization}
+From the timeseries produced by the sampling process we calculate the $x$, $y$, and $z$ coordinates of the skeleton's barycenter for each time step. \\
 We define the barycenter as the point where all the mass of an object or a system of objects is concentrated. \\
 In this context, each joint is considered to have unit mass, meaning that all joints contribute equally to the barycenter. \\
 If we represent $n$ as the number of 20 joints, the coordinates of the barycenter are obtained by taking the average of the coordinates of these 20 joints, as we can see in the formula:
@@ -1006,7 +948,7 @@ If we represent $n$ as the number of 20 joints, the coordinates of the barycente
 where $x_i$, $y_i$, and $z_i$ represent the $x$, $y$, and $z$ coordinates of the $i$-th joint, respectively.
 
 Subsequently, we calculate the distance between each joint and the barycenter, at each time step, using the Euclidean distance in Formula \ref{formula:distance}. \\
-These distances from the barycenter will be normalized for each joint, in order to obtain normalized time series between 0 and 1.
+These distances from the barycenter will be normalized for each joint, in order to obtain a time series whose values space between 0 and 1.
 
 \begin{equation}
     x_{norm} = \frac{{x - min(x)}}{{max(x) - min(x)}}
@@ -1017,15 +959,9 @@ The choice to calculate the distances between joints and the barycenter for each
 In scenarios where dancers or subjects may have different heights or body proportions, relying solely on absolute joint coordinates could introduce bias into the model.
 However, by computing these distances and further normalizing them within the range of 0 to 1, we effectively eliminate the influence of scale variations.
 
-This normalization process not only standardizes the data but also allows the ML model to focus on the relative spatial distribution of joints rather than their absolute positions.
-Consequently, our model becomes better equipped to recognize patterns and movements across individuals of varying statures, making it more versatile and applicable in real-world scenarios. \\
-
-\subsection{Features extraction}
-Feature extraction in ML is an essential process that involves transforming raw data into a more suitable format for analysis and model building.
-It helps identify and capture the most relevant information within the data while simplifying excessive complexity that could make model training challenging.
-This process not only contributes to improving model accuracy but also reduces the risk of overfitting and enhances the ability to generalize knowledge gained to new data. \\
-From the normalized Euclidean distance of every joint with respect to the center of mass calculated for every time instant, we want to extract the necessary features for ML.
-Here we will see all the steps involved in order to achieve the desired features, for every sample of the dataset (note that \textit{n} is the number of frames of the sample). \\
+\paragraph{Features extraction}
+This process involves transforming raw data into a more suitable format for analysis and model building.
+Here are all the functions calculated for every sample of the dataset (note that \textit{n} is the number of frames of the sample). \\
 \begin{itemize}
     \item \textbf{Mean} is the expected value of the distribution:
         \begin{equation}
@@ -1127,9 +1063,9 @@ In Table \ref{tab:ml_features} we can see all the features and their relative fu
 \end{table}
 
 \subsection{Classification}
-The initial approach involves a straightforward binary classification of the origin of the movement within a specific edge.
-If the results had been satisfactory, we would then have opted to evaluate progressively more complex models, eventually leading to the actual classification of the movement's origin from a video segment.
-We started by addressing the issue of imbalanced data in classification. Imbalanced data occurs when one class significantly outnumbers the other(s), leading to challenges in training a classifier that can effectively distinguish between the classes.
+The initial approach involves a simple binary classification of the origin of the movement in a specific edge or not.
+If the results had been satisfactory, we would then have opted to evaluate progressively more complex models, eventually leading to the multiclass classification.
+We started by addressing the issue of imbalanced data in classification.
 To mitigate this imbalance, a resampling technique known as B-SMOTE is employed (\textit{BS1}). 
 This technique equalizes the number of training samples for the minority class with that of the majority class at each iteration.
 B-SMOTE generates additional samples for the minority class to balance the number of samples of the majority class.
@@ -1138,9 +1074,10 @@ The operational concept is detailed in Section \ref{subsec:borderline}.
 
 Following the resampling of the training data, a RF classifier (\textit{RF1}) is trained on this newly balanced dataset.
 To further optimize the classifier's performance, a feature selection process is employed with the goal of identifying the most influential features that contribute to accurate classification.
-Initially, the most important features are determined through the training of \textit{RF1} on the resampled data. 
-These crucial features are selected based on their significance in the classification task. 
-Subsequently, a new RF classifier (\textit{RF2}) is trained using only the original features of the 60 samples. 
+The most important features are determined through the training of \textit{RF1} on the resampled data. 
+These features are selected based on the amount of information that they provide in the classification task.
+In particular the selection is based on the Gini importance of the feature across all the trees. \\
+Subsequently, a new RF classifier (\textit{RF2}) is trained using only the 50 most important features of the previous model, with the \textit{max\_features} hyperparameter tuned to choose among all the available features in each split.
 To evaluate the performance of the classifier, a test set is chosen using LOOCV, as detailed in Section \ref{subsec:cross_validation}. 
 
 \begin{table}[H]
@@ -1164,11 +1101,12 @@ To evaluate the performance of the classifier, a test set is chosen using LOOCV,
 \end{table}
 
 In our ML model, we posed three different questions regarding the OoM. 
-Since our dataset is inherently a multi-class dataset, we performed binary classification by reclassifying the dataset.
+Since our dataset is inherently a multi-class dataset, we performed binary classification by reclassifying the dataset based on our necessities.
 These binary questions are posed either to edges or to specific parts of the skeleton, which are themselves composed of edges. \\
 In Figures \ref{tab:ml_division_5_body_parts} and \ref{tab:ml_division_top_bottom}, you can see the edges composing different segments of the skeleton. \\
 Note that not every edge of the reduced marker set (\ref{tab:labels_joints}) is included because some edges have not been the ground truth for any sample in our dataset.
 For ML we have in total 15 classes, that is 15 edges.
+After each reclassification the same pipeline of training and testing is used.
 
 \begin{table}[H]
     \centering
@@ -1240,17 +1178,12 @@ For ML we have in total 15 classes, that is 15 edges.
 
 Q1 will be posed considering the 15 edges, Q2 will be posed considering the division of the body into 5 parts (Figure \ref{tab:ml_division_5_body_parts}), while Q3 will be based on the division of the body into 2 parts (Figure \ref{tab:ml_division_top_bottom}).
 
-\begin{itemize}
-
-    \item \textbf{(Q1) Is or is not a specific edge:} In our dataset, the most frequent classification is the edge that links \textit{left\_hand} and \textit{left\_wrist}. 
-    Therefore, we categorized all samples where the classification was \textit{left\_hand}-\textit{left\_wrist} as 1, while we labeled all other samples as 0.   
+\paragraph{Q1: Is or is not a specific edge} In our dataset, the most frequent classification is the edge that links \textit{left\_hand} and \textit{left\_wrist}. 
+Therefore, we categorized all samples where the classification was \textit{left\_hand}-\textit{left\_wrist} as 1, while we labeled all other samples as 0.   
     
-    \item \textbf{(Q2) Is or is not a specific body part:} The most frequent class to compare against all the others is \textit{Right Leg}.
-    Therefore, we labeled all samples where the classification was in the \textit{Right Leg} as 1, while we categorized all other samples as 0.
+\paragraph{Q2: Is or is not a specific body part} The most frequent class to compare against all the others is \textit{Right Leg}.
+Therefore, we labeled all samples where the classification was in the \textit{Right Leg} as 1, while we categorized all other samples as 0.
 
-    \item \textbf{(Q3) Is or is not a specific body part:} The most frequent class between the two is \textit{Upper}, so we labeled all the $Upper$ with 1 and all the $Lower$ with 0.
-    
-   
-\end{itemize}
+\paragraph{Q3: Is or is not a specific body part} The most frequent class between the two is \textit{Upper}, so we labeled all the $Upper$ with 1 and all the $Lower$ with 0.\\
 
 For each question, we iteratively asked the model whether the test sample was predicted as that edge/that part of the body or not.

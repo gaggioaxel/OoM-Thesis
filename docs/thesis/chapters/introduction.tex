@@ -3,84 +3,45 @@ The study of analyzing human movement traces its origins back to the 19th centur
 Over the years, the fields of movement analysis and non-verbal communication have made significant progress in deciphering the significance of various movements. 
 They have grappled with questions like, “Do movements convey meaning in their own right?" and “How do movements convey meaning?".\\
 Movements and non-verbal expressions hold a unique place in communication as they transcend verbal language.
-They contribute to the intricate web of conscious and subconscious communication during interactions \cite{Daly:1988, laffaye:2013}. 
+They contribute to the intricate web of conscious and subconscious communication during interactions \cite{Daly:1988, laffaye:2013}.
 
 However, while there is a wealth of research exploring how emotions are conveyed through facial expressions and vocal cues, the role of full-body movement and expressive gestures in this context has been somewhat overlooked until recent times.
 
 The need for further investigation arises from the rapid advancements in technology that have made full-body real-time movement analysis more accessible and affordable. 
 Humans are adept at interpreting the emotional content of non-verbal cues, which underscores the importance of studying the perception of human motion \cite{samadani:2011}. 
-Emotions have been observed to manifest through posture and movements, reinforcing the idea that movement plays a crucial role in how we perceive, understand and comunicate emotions to others in a nonverbal way \cite{gelder:2009,kleinsmith:2013,karg:2013}.
+Emotions have been observed to manifest through posture and movements, reinforcing the idea that movement plays a crucial role in how we perceive, understand and comunicate emotions in a nonverbal way \cite{gelder:2009,kleinsmith:2013,karg:2013}.
 
 For example, the behaviour behind a “caress” can vary from care to hostility, 
-if the origin of that movement is either the wrist, the shoulder or if it involves a complex 
-contraction of muscle torques from the arm down to the leg. 
-
+if the origin of that movement is either the wrist, the shoulder or if it involves a complex contraction of muscle torques from the arm down to the leg. 
 Nonetheless, the challenge lies in determining the correct interpretation of a specific movement.
-    
-\section{Research context}
-Movement analysis has found applications in various fields, spanning sports, the arts, and scientific research. 
-One notable contribution from the realm of non-verbal communication research is the Laban Movement Analysis (LMA). 
-It posits that “movement is a psycho-physical process, an outward expression of inward intent" \cite{Groff1995LabanMA}. 
-LMA provides a structured notation system for examining the structure and expressiveness of movements, particularly in dance.
-Within the framework of LMA, there are four distinct categories of movement elements, and one of these categories holds particular relevance to the research conducted in this thesis. 
-The Laban Movement Analysis (LMA) encompasses several crucial aspects within the study of movement:
-LMA delves into the differentiation and interactions among different body parts during movements, providing insights into how these components function together.
-It serves as a method to articulate both sequences of movements and those that occur simultaneously, offering a comprehensive framework for movement description.
-Crucially, within the scope of this thesis, LMA focuses on discerning the sources responsible for initiating movements \cite{zhao2001synthesis}.
-In essence, it seeks to define the \textit{origin of movement}.  
-
-This interconnection between many different body parts, brought us to the leading joint hypothesis \cite{dounskaia:2010} 
-which offers a novel interpretation of control of human movements that involve multiple joints 
-where the central nervous system organizes the execution of the motion act, with a hierarchical process 
-that originates from a leading joint and propagates back to the body part that expresses the action. 
-In sports and dance, the junction between effectiveness and efficiency of a movement, while also minimizing injuries on the long-term, 
-lays in the awareness and exploitation of this concept. 
 
 \section{Origins and technological rise of Motion Capture}
 The origin of motion capture can be traced back to the mid-20th century when rudimentary methods were employed, 
 often involving manual tracking of key points on a subject's body. 
 The introduction of marker-based MoCap in the 1970s marked a significant advancement. 
-This technique involved attaching reflective markers to specific body points, 
-which were then tracked by cameras to reconstruct the subject's movement in a digital environment. 
+This technique involved attaching reflective markers to specific body points, which were then tracked by cameras to reconstruct the subject's movement in a digital environment. 
+The example depicted in Figure \ref{fig:mocap_scene} illustrates two performers at the top engaged in a ball game, throwing it from one side to the other. Below, you can see the corresponding digital reconstruction. 
+Technically, only the markers are automatically recognized, while the connections between markers are manually made, so these are later added.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{bodyMarkersExampleImage.png}
-    \includegraphics[width=0.7\textwidth]{bodyMarkersExampleMoCap.png}
+    \includegraphics[width=0.75\textwidth]{bodyMarkersExampleImage.png}
+    \includegraphics[width=0.75\textwidth]{bodyMarkersExampleMoCap.png}
     \caption{Video frame and MoCap scene with infrared cameras and markers}
-    \label{fig:common}
+    \label{fig:mocap_scene}
 \end{figure}
-
+\vspace{-1.5\baselineskip}
 However, marker-based MoCap had limitations, including occlusion 
 (when markers were hidden from view), inaccuracies, and the need for time-consuming calibration processes. 
 These limitations led to the development of markerless MoCap technology. 
 Markerless MoCap uses computer vision algorithms to track and reconstruct movement without the need for physical markers. 
 This approach relies on complex algorithms that can identify and track features of the human body, 
 such as joint positions and skeletal structure, from video footage.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{MoCapMarkerlessQualisys.png}
-    \caption{Markerless MoCap scene}
-    \label{fig:mocap}
-\end{figure}
-
-The movie “Avatar," directed by James Cameron and released in December 2009, 
-played a pivotal role in showcasing the potential of MoCap-based cgi applied to entertainment. 
-The film featured groundbreaking visual effects, 
-including the integration of live-action performances with computer-generated characters and environments. 
-The production used a combination of marker-based and markerless MoCap techniques to capture the actors' 
-performances and translate them into the movements of their virtual counterparts, such as the Na'vi characters.
-Additionally, facial MoCap was used to capture nuanced facial expressions, enhancing the realism of the characters.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{avatar_markers.jpg}
-    \caption[]{The actor Sam Worthington and his Na'vi Jake Sully}
-    \label{fig:avatar}
-\end{figure}
-
-The film's production involved a mix of traditional animation and advanced MoCap techniques, by giving particular emphasis on the facial expression recognition.
-From marker-based recording to detection through advanced sensors and high-definition cameras, we see how technological innovations have made the MoCap process increasingly precise and detailed.
-Researchers developed algorithms capable of recognizing and tracking human motion patterns from video data, 
-enabling more accurate and efficient MoCap.
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.7\textwidth]{MoCapMarkerlessQualisys.png}
+%    \caption{Markerless MoCap scene}
+%    \label{fig:mocap}
+%\end{figure}
 
 \section{Motivation}
 While relationships between emotions and facial expressions or voice changes have been widely explored, 

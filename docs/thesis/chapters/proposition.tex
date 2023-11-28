@@ -15,12 +15,12 @@ The roadmap of this thesis can be outlined as follows: \\
 The dataset was initially acquired through manual annotation of movement origins in numerous MoCap videos. 
 The results were validated by achieving consensus among multiple annotators. 
 Additionally, markers for videos lacking previous labeling were manually assigned and subsequently compressed into clusters.
-The central objectives of this thesis encompass the development of:
-\begin{itemize}
-    \item \textbf{Cluster Stabilization Algorithm} which ensure that clusters, which represent groups of related markers or joints, maintain their consistency and coherence over time. 
-    \item \textbf{Graph-based Procedure} to recognize the Origin of Movement by identifying key nodes that play pivotal roles in the motion analysis using an algorithmic method.
-    \item \textbf{Machine Learning Approach} to identify the most promising edge of a the skeletal model by finding patterns in data without an algorithmic approach.
-\end{itemize}
+The central objectives of this thesis encompass the development of three main objectives.
+A \textbf{Cluster Stabilization Algorithm} which ensure that clusters representing groups of related markers or joints, maintain their consistency and coherence over time.
+This first one is just for visualization purposes and does not implement a classification method that can be compared with the others.\\
+A \textbf{Graph-based Procedure} to recognize the Origin of Movement by identifying key nodes that play pivotal roles in the motion analysis using an algorithmic method that has been handcrafted for this dataset.
+A \textbf{Machine Learning Model} that perform the same classification task as the previous, but automatically recognizes patterns within the data, without explicitly coding them by hand.
+
 Given the multifaceted objectives, two parallel pipelines were developed.\\
 The first pipeline included the following steps:
 \begin{itemize}

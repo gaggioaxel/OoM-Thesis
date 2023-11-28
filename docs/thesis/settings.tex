@@ -99,7 +99,7 @@
 % Customize document
 % --------------------------
 % Define the geometry of the document
-\newgeometry {top=2.5cm, bottom=2.5cm, right=2.5cm, left=2.5cm}
+\newgeometry {bindingoffset=1cm, top=2.5cm, bottom=2.5cm, right=2.5cm, left=2.5cm}
 
 \setlength{\parskip}{10pt}   % Change the default value
 
@@ -121,3 +121,8 @@
 \counterwithin{table}{section}
 
 \renewcommand{\arraystretch}{1.5}
+
+\newcounter{supervisorscount}
+\titlespacing*{\section} {0pt}{4ex}{2ex}
+%\titlespacing{\section}{0pt}{\parskip}{-\parskip}
+%\titlespacing{\subsection}{0pt}{\parskip}{-\parskip}
