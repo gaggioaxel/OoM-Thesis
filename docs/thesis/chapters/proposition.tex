@@ -3,10 +3,11 @@
 Our work builds upon certain aspects of the previous research while introducing a novel and more innovative method for predicting movement origins using machine learning. 
 Similar to the previous approach, the pipeline to reach the 20-joints skeleton remains the same (see Sections \ref{sec:orig_markers}, \ref{sec:reduced_markers}).
 
-We chose to utilize an ensamble of some movements from the previous dataset (the one used in \cite{kolykhalova:2020}), enriching the number of samples from other internal resources provided by Casa Paganini \cite{casaPaganini}. 
+We chose to utilize a subset of the previous dataset (the one used in \cite{kolykhalova:2020}), and also increase the number of samples by manually annotating videos from other internal resources provided by Casa Paganini \cite{casaPaganini}.\\ 
 This choice has been motivated by the necessity to have many short samples that clearly present an origin of movement instead of few samples that are hard to infer in terms of origin of movement, in order to 
 reach a high-quality data that can be used in machine learning techniques that will be explained in Section \ref{sec:ml_method}.\\
-Since we started from the previous work which was based on game theory and the concept of Shapley values in our approach we considered that there is not a clear contribution in terms of added value derived from nodes cooperation. 
+Another modifica che abbiamo fatto al precedente lavoro è stato confrontare due metodi di misura di similarità, quello implementato nel lavoro originale e la Cosine Similarity (concept explained in Section \ref{subsec:cosine_sim})
+Infine abbiamo ridotto la teoria dei giochi a semplice weighted degree centrality
 Therefore, we opted for WDC (Weighted Degree Centrality) to determine the perceived origin of the movement for the algorithmic approach.\\
 Furthermore for visualization purposes we implemented a method to prevent inconsistent coloring behaviours among clusters over time, by introducing a novel cluster stabilization algorithm. 
 
