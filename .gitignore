@@ -18,6 +18,7 @@ docs/thesis/*.xdv
 docs/thesis/*.nav
 docs/thesis/*.snm
 docs/thesis/*.xml
+docs/thesis/*(busy)
 docs/presentation/*
 docs/presentation/*
 docs/paperINTETAIN*
