@@ -156,13 +156,13 @@ Alternatively, a bipartite graph is one whose vertices can be coloured red and b
     \centering
     \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.7cm}]
         % Livello superiore
-        \node (A) at (3,0) [fill=red!50] {a};
-        \node (B) at (3,-3) [fill=red!50] {b};
+        \node (A) at (3,0) [fill=red!75] {a};
+        \node (B) at (3,-3) [fill=red!75] {b};
         
         % Livello inferiore
-        \node (C) at (5,0) [fill=blue!50] {c};
-        \node (D) at (5,-1.5) [fill=blue!50] {d};
-        \node (E) at (5,-3) [fill=blue!50] {e};
+        \node (C) at (5,0) [fill=blue!75] {c};
+        \node (D) at (5,-1.5) [fill=blue!75] {d};
+        \node (E) at (5,-3) [fill=blue!75] {e};
         
         % Collegamenti
         \draw (A) -- (C);
@@ -188,13 +188,13 @@ If there is the same number of vertices in both \textit{A} and \textit{B}, every
     \centering
     \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.7cm}]
       % Livello superiore
-      \node (A) at (3,0) [fill=red!50] {a};
-      \node (B) at (3,-3) [fill=red!50] {b};
+      \node (A) at (3,0) [fill=red!75] {a};
+      \node (B) at (3,-3) [fill=red!75] {b};
 
       % Livello inferiore
-      \node (C) at (5,0) [fill=blue!50] {c};
-      \node (D) at (5,-1.5) [fill=blue!50] {d};
-      \node (E) at (5,-3) [fill=blue!50] {e};
+      \node (C) at (5,0) [fill=blue!75] {c};
+      \node (D) at (5,-1.5) [fill=blue!75] {d};
+      \node (E) at (5,-3) [fill=blue!75] {e};
 
       % Collegamenti
       \draw (A) -- (C);
@@ -208,14 +208,14 @@ If there is the same number of vertices in both \textit{A} and \textit{B}, every
     \centering
     \begin{tikzpicture}[every node/.style={circle, draw, minimum size=0.7cm}]
       % Livello superiore
-      \node (A) at (3,0) [fill=red!50] {a};
-      \node (B) at (3,-1.5) [fill=red!50] {b};
-      \node (C) at (3,-3) [fill=red!50] {c};
+      \node (A) at (3,0) [fill=red!75] {a};
+      \node (B) at (3,-1.5) [fill=red!75] {b};
+      \node (C) at (3,-3) [fill=red!75] {c};
 
       % Livello inferiore
-      \node (D) at (5,0) [fill=blue!50] {d};
-      \node (E) at (5,-1.5) [fill=blue!50] {e};
-      \node (F) at (5,-3) [fill=blue!50] {f};
+      \node (D) at (5,0) [fill=blue!75] {d};
+      \node (E) at (5,-1.5) [fill=blue!75] {e};
+      \node (F) at (5,-3) [fill=blue!75] {f};
 
       % Collegamenti
       \draw (A) -- (E);
@@ -401,11 +401,11 @@ Let's take an example of a cost matrix and try to apply the HM for MinWPM proble
     \centering
     \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
       \hline
-      0 & 15 & \cellcolor{green!50} 0 \\
+      0 & 15 & \cellcolor{green!75} 0 \\
       \hline
-      17 & \cellcolor{green!50} 0 & 0 \\
+      17 & \cellcolor{green!75} 0 & 0 \\
       \hline
-      \cellcolor{green!50} 0 & 24 & 86 \\
+      \cellcolor{green!75} 0 & 24 & 86 \\
       \hline
     \end{tabular}
     \caption*{(h)}
@@ -415,11 +415,11 @@ Let's take an example of a cost matrix and try to apply the HM for MinWPM proble
     \centering
     \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
       \hline
-      108 & 125 & \cellcolor{green!50} 150 \\
+      108 & 125 & \cellcolor{green!75} 150 \\
       \hline
-      150 & \cellcolor{green!50} 135 & 175 \\
+      150 & \cellcolor{green!75} 135 & 175 \\
       \hline
-      \cellcolor{green!50} 122 & 148 & 250 \\
+      \cellcolor{green!75} 122 & 148 & 250 \\
       \hline
     \end{tabular}
     \caption*{(i)}
@@ -810,12 +810,12 @@ The underlying idea is that a perfect classifier achieves a distinct separation 
 In the case of an imperfect classifier, there exists a tradeoff between FP and FN.
 \begin{figure}[H]
   \centering
-  \begin{subfigure}{0.73\linewidth}
+  \begin{subfigure}{0.8\linewidth}
     \includegraphics[width=\linewidth]{ROC_AUC.png}
     \caption{}
     \label{fig:ROC_AUC}
   \end{subfigure}
-  \begin{subfigure}{0.65\linewidth}
+  \begin{subfigure}{0.8\linewidth}
     \includegraphics[width=\linewidth]{PN_Distribution_Thresholded.png}
     \caption{}
     \label{fig:PNDistribution}

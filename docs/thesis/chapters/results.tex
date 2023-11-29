@@ -38,7 +38,7 @@ While in Figure \ref{fig:wdc_results} we can see the distribution of the results
 \clearpage
 
 \section{Clusters Stabilization}
-In this first example, in Figure \ref{fig:stabilization_results}, we can observe the results of stabilization between two different instants in time. 
+In this first example, in Figure \ref{fig:stabilization_results}, we can observe the results of stabilization of three clusters with the same color scheme applied on two different time instants. 
 In (a), the preceding time instant is visible, while (b) showcases the subsequent time instant in an unstabilized state. 
 In (c) instead, the subsequent time instant with clusters stabilized.
 \begin{figure}[H]
@@ -48,17 +48,46 @@ In (c) instead, the subsequent time instant with clusters stabilized.
   \label{fig:stabilization_results}
 \end{figure}
 
-For a comprehensive view of the stabilization outcomes, reference the QR code in Figure \ref{fig:QRcode}. 
-This code leads to a GIF image showcasing the entire motion sequence.
-\begin{figure}[H]
+A further extension of this concept for visualization purposes can be applied by analyzing a movement evolving in realtime, by recording a small segment of video, which is able to provide a better view of the stabilization outcomes.
+The transition smoothing algorithm explained in Section \ref{subsec:clusters_smoothing} is here visualized in the videos whose link has been embedded in the QR code in Figure \ref{fig:qr_movements}. \\
+
+These 3 QR codes lead to a video that represents the same movement in the 20 joints skeleton, where the dancer begins from a stance with slightly spread legs and the left arm raised upwards.
+Throughout the movement, the left arm descends while moving backward, the torso leans forward, taking the right arm along with it, and the left foot lifts off the ground, walking back to follow the left arm.\\
+
+The first QR (Figure \ref{fig:qr_movement_pure}) leads to the original clustering method without the application of any stabilization method, visually it can be clearly seen how the instability of the simple clustering creates a flickering effect, resulting in a poor visualization capability.
+Instead the second (Figure \ref{fig:qr_movement_stabilized}), which is the stabilized version the flickering has been removed by swapping the clusters colors on subsequent frames based on the proposed approach mentioned in Section \ref{subsec:clustering_stabilization}.
+Moreover by applying this method the recognition of eventual origins of movement where they can be clearly seen in a video segment is facilitated. \\
+
+In the last one (Figure \ref{fig:qr_movement_smooth}), clusters' evolution is further smoothed by picking the node with highest degree centrality of the cluster every 5 frames in a 100 fps video.
+By further smoothing the clusters transition one can also visually inspect the appearing of multiple origins at the expense of the continuity of each cluster. 
+Infact with this method the clusters will have transitory frames in which are inconsistent.
+
+\begin{figure}[h]
   \centering
-  \includegraphics[width=0.50\textwidth]{qrcode.png}
-  \caption{QRcode to the GIF}
-  \label{fig:QRcode}
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{qrcode_clustering_pure.png}
+    \caption{}
+    \label{fig:qr_movement_pure}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{qrcode_clustering_stabilized.png}
+    \caption{}
+    \label{fig:qr_movement_stabilized}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{qrcode_clustering_smooth.png}
+    \caption{}
+    \label{fig:qr_movement_smooth}
+  \end{subfigure}
+  \caption{QR codes referencing to the pure clustering method (a), the stabilized version (b) and a combination of stabilization and smoothing (c)}
+  \label{fig:qr_movements}
 \end{figure}
 
-As evident from the GIF, the dancer begins from a stance with slightly spread legs and the left arm raised upwards.
-Throughout the movement, the left arm descends while moving backward, the torso leans forward, taking the right arm along with it, and the left foot lifts off the ground, taking a step backward.
 
 \clearpage
 
@@ -73,7 +102,8 @@ The model requires a high level of certainty in predictions before classifying a
 You can also observe the model's high specificity from the TNR, which is consistently quite high in all cases, typically greater than 80\%. \\
 In summary, the model tends to favor a conservative strategy, prioritizing the reduction of FP, leading to a high specificity but limited effectiveness in identifying TP.
 
-In the following Tables (from \ref{tab:ml_results_cm_joints} to \ref{tab:ml_results_cm_body_parts}), there are the confusion matrices and evaluation metrics for the prediction of certain classes.
+In the following Tables (from \ref{tab:ml_results_cm_joints} to \ref{tab:ml_results_cm_body_parts}), there are the confusion matrices, the TPR, the TNR and the Accuracy score for three cases: 
+The most frequent 6 classes of our dataset (Table \ref{tab:ml_results_cm_joints} and \ref{tab:ml_results_joints}) in the by-joint-subdivision, the 5 boby parts in which have been grouped the joints (Table \ref{tab:ml_results_cm_body_parts} and \ref{tab:ml_results_body_parts}), and the division into the upper and lower body part.
 To interpret the meaning of the confusion matrices, please refer to Section \ref{subsec:evaluation_metrics}.
 
 \clearpage
@@ -300,3 +330,16 @@ To interpret the meaning of the confusion matrices, please refer to Section \ref
     \caption{Metrics of the 5 Body Parts and the Upper}
     \label{tab:ml_results_body_parts}
 \end{table}
+
+Further insights of the model can be infered by looking at the ROC curve and it's corresponding AUC, in particular let's see what the one associated to the most frequent joint tells us (Figure \ref{fig:roc_auc_results}):
+By following the thresholds we can see that $Thresh = 0.28$ provides the best results. This means that by thresholding in that way the output of the forest (which is a score) we can achieve a 90\% of TPR with just a 20\% of FPR.
+By default the RF will apply a threshold of $0.5$ (in other words classify as positive a sample whose score is greater than $0.5$).\\
+
+Moreover, with an AUC of $0.83$, it's evident that the model has almost reached curve saturation. This signifies the model's high performance level.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{ROC_AUC_result_best_joint.png}
+  \caption{ROC curve of the most frequent joint of the dataset}
+  \label{fig:roc_auc_results}
+\end{figure}

@@ -292,7 +292,7 @@ def compute_minimum_weight_cluster(fromLabels:list,toLabels:list,method:Literal[
         clusters = list(fromClustersMap.keys())
         toClustersUnlabelized = list(clusterize_labels(toLabels).values())
         rightNodes = (np.array(clusters) + max(clusters)+1).tolist()
-        color_pool = ['#e31a1c', '#1f78b4', '#33a02c', '#ff7f00', '#6a3d9a', '#b15928']
+        print(rightNodes)
 
         edgeWeights = {fromLabel : 
                             {toLabelAssigned+max(clusters)+1 : 
@@ -305,6 +305,7 @@ def compute_minimum_weight_cluster(fromLabels:list,toLabels:list,method:Literal[
         minWeightsEdges = {fromNode:toNode for fromNode, toNode in min_wei_ful_match(G,clusters,'weight').items() if fromNode not in rightNodes}
         reversedWeightsEdgesDict = {value:key for key,value in minWeightsEdges.items()}
         if visualize:
+            color_pool = ['#e31a1c', '#1f78b4', '#33a02c', '#ff7f00', '#6a3d9a', '#b15928']
             plt.figure(figsize=(11,8))
             pos = nx.bipartite_layout(G, clusters)
             nx.draw(G, 

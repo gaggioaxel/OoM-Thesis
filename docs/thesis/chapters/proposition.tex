@@ -15,14 +15,28 @@ The roadmap of this thesis can be outlined as follows: \\
 The dataset was initially acquired through manual annotation of movement origins in numerous MoCap videos. 
 The results were validated by achieving consensus among multiple annotators. 
 Additionally, markers for videos lacking previous labeling were manually assigned and subsequently compressed into clusters.
-The central objectives of this thesis encompass the development of three main objectives.
+The central objectives of this thesis encompass the development of three main objectives.\\
 A \textbf{Cluster Stabilization Algorithm} which ensure that clusters representing groups of related markers or joints, maintain their consistency and coherence over time.
 This first one is just for visualization purposes and does not implement a classification method that can be compared with the others.\\
-A \textbf{Graph-based Procedure} to recognize the Origin of Movement by identifying key nodes that play pivotal roles in the motion analysis using an algorithmic method that has been handcrafted for this dataset.
+A \textbf{Graph-based Procedure} to recognize the Origin of Movement by identifying key nodes that play pivotal roles in the motion analysis using an algorithmic method that has been handcrafted for this dataset.\\
 A \textbf{Machine Learning Model} that perform the same classification task as the previous, but automatically recognizes patterns within the data, without explicitly coding them by hand.
 
 Given the multifaceted objectives, two parallel pipelines were developed.\\
-The first pipeline included the following steps:
+The algorithmic pipeline encompasses several more steps than the other. 
+Initially, we smooth the time series of each sample of movement in order to clean the data from impurities such as noise, missing data for markers occlusion or tracking errors that could end up creating unnatural accelerations of some markers. 
+Subsequently, we extract physical derived measurements from the trajectories, like the speed, acceleration and angular momentum from the smoothed data. 
+Then, employing a model of human body joints, we apply cosine similarity to connected pairs of joints. 
+This aids in clustering joints within each movement frame. 
+The primary aim at this stage is to ensure the stability of color changes within these clusters. 
+Additionally, we construct a secondary graph, where nodes at cluster borders are interconnected and weighted based on their connections across all frames.
+
+The machine learning pipeline follows a different approach on the data. 
+We start by normalizing the dataset concerning segment length, the performer's body structure (Skeleton Barycenter and Joints Distance), and the complete movement trajectory. 
+Following this, we extract a diverse set of pertinent features from this normalized dataset. These extracted features are then utilized to train a machine learning model, whose performance is thoroughly evaluated using diverse metrics.
+
+Eventually, the outcomes from each pipeline are compared and contrasted to discern their respective effectiveness.
+
+The first pipeline is composed of 
 \begin{itemize}
     \item Smoothing the time series of each movement using two classical smoothing algorithms.
     \item Extracting physical measurements from the smoothed data.
