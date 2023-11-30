@@ -74,16 +74,7 @@ For simplicity, the links are without weights.
 
 
 \section{Graph-based Framework}
-%TODO AGGIUNGERE qualcosa
-
-\subsection{Timeseries Smoothing}
-Prior to computing the features, we implement two smoothing techniques on the time series data. \\
-Firstly, we apply a \textit{Median Filtering} algorithm centered in the middle of the window with $k_1 = 5$. 
-On the resulting vector we apply the \textit{Rolling Mean} again centered in the middle of the window with $k_2 = 25 $. \\
-Formally with respect to the Formula \ref{eq:rolling_mean}, centering the window means:
-\begin{equation}
-  rolling(x_i,k) = \frac{1}{k} \sum_{j=i-(k-1)/2}^{i+(k-1)/2} x_j
-\end{equation}
+\label{sec:graph_method}
 
 \subsection{Movement features extraction}
 \label{subsec:alg_features}
@@ -92,22 +83,28 @@ While speed indicates how quickly an object is moving, acceleration indicates ho
 Angular momentum provides information about the rotation of an object around a fixed point.
 By incorporating all three quantities as features, a more comprehensive and detailed view of the overall motion is obtained.
 
-\paragraph{Speed} is calculated by finding the change in positions with respect to time through differentiation and then applying a moving average to obtain a more accurate estimate that is less affected by noise.
+\paragraph{Average Velocity} is calculated by finding the change in positions with respect to the delta time, which is the sampling time of the MoCap system and then applying a moving average to obtain a more accurate estimate that is less affected by noise.
 We calculate this speed as the norm of the velocity vector.
-The speed of a moving object is a fundamental information in understanding how it moves and how its trajectory might evolve.
 \begin{equation}
-  \vec{v}(t) = \frac{d\vec{r}}{dt} = \left(\frac{dx}{dt}, \frac{dy}{dt}, \frac{dz}{dt}\right)
+  \vec{v}(t) = \frac{\Delta\vec{r}}{\Delta  t} = \left(\frac{\Delta x}{\Delta t}, \frac{\Delta  y}{\Delta t}, \frac{\Delta z}{\Delta t}\right)
+\end{equation}
+The final feature consists of the magnitude of the average velocity.
+
+\paragraph{Tangential Acceleration} is obtained by calculating the variation of the average velocity with respect to the sampling time.
+\begin{equation}
+  \vec{a}(t) = \frac{\Delta\vec{v}}{\Delta t}
 \end{equation}
 
-
-\paragraph{Tangential Acceleration} is obtained by calculating the derivative of velocity.
-Tangential acceleration is defined as the norm of the tangential acceleration vector.
-It can be used to express specific emotions, styles, and intentions.
-For instance, rapid acceleration might be associated with energetic and rhythmic movements, whereas a more gradual acceleration could be linked to fluid and delicate motions.
+\subsection{Timeseries Smoothing}
+After computing the features, we implement two smoothing techniques on the time series data. \\
+Firstly, we apply a \textit{Median Filtering} algorithm centered in the middle of the window with $k_1 = 5$. 
+On the resulting vector we apply the \textit{Rolling Mean} again centered in the middle of the window with $k_2 = 25 $. \\
+Formally with respect to the Formula \ref{eq:rolling_mean}, centering the window means:
 \begin{equation}
-  \vec{a}(t) = \frac{d\vec{v}}{dt} = \left(\frac{d^2x}{dt^2}, \frac{d^2y}{dt^2}, \frac{d^2z}{dt^2}\right)
+  rolling(x_i,k) = \frac{1}{k} \sum_{j=i-(k-1)/2}^{i+(k-1)/2} x_j
 \end{equation}
 
+The two final features are obtained by applying this procedure and then extracting the magnitude.
 
 \paragraph{Angular Momentum} has been calculated with respect to the center of mass in this way:
 \begin{enumerate}
