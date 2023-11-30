@@ -269,8 +269,10 @@ Considering, for example, a graph $G$ with 3 clusters (see Figure \ref{fig:graph
 
 \subsection{Weighted Degree Centrality}
 To identify the edge involved in the OoM, we use the WDC, as explained in Section \ref{subsec:weighted_degree}.
+The calculation of the WDG is done on nodes, not on edges.
+However, we will show how from a WDG calculated on nodes, we can derive the perceived movement origin on an edge.
 For each frame, we keep track of the two nodes with the highest WDC.
-At the end of this process, among the selected nodes, we will choose the two nodes that have been chosen as the highest most frequently.
+Among the collected nodes, the two most frequent ones are selected across all frames.
 At this stage, we will examine in the $G^{aux}$ to which edges belonging to $E^{aux}$ these two winning nodes are connected, and these two edges will be considered as the predicted OoM.
 
 
@@ -949,41 +951,41 @@ However, by computing these distances and further normalizing them within the ra
 \paragraph{Features extraction}
 This process involves transforming raw data into a more suitable format for analysis and model building.
 Here are all the functions calculated for every sample of the dataset (note that \textit{n} is the number of frames of the sample). \\
-\begin{itemize}
-    \item \textbf{Mean} is the expected value of the distribution:
+
+\textbf{Mean} is the expected value of the distribution:
         \begin{equation}
             mean(\bar{x}) = \frac{1}{n} \sum_{i=1}^{n} x_i
         \end{equation}
-    \item \textbf{Variance} is the second momentum of the distribution (or the squared deviation of the expected value from the mean):
+\textbf{Variance} is the second momentum of the distribution (or the squared deviation of the expected value from the mean):
         \begin{align}
             mean_a(x) &= \frac{1}{n} \sum_{i=1}^{n} (x_i - mean(\bar{x}))^a &
             var(x) &= mean_2(\bar{x})
         \end{align}
-    \item \textbf{Kurtosis} is the fourth standardized moment:
+\textbf{Kurtosis} is the fourth standardized moment:
         \begin{equation}
             kurtosis(\bar{x}) = \frac{mean_4(\bar{x})}{\sqrt{var(\bar{x})}^4} - 3
         \end{equation}
-    \item \textbf{Skewness} is the third standardized moment:
+\textbf{Skewness} is the third standardized moment:
         \begin{equation}
             skewness(\bar{x}) = \frac{mean_3(\bar{x})}{\sqrt{var(\bar{x})}^3}
         \end{equation}
-    \item \textbf{Correlation} between two joints (\textit{x},\textit{y}):
+\textbf{Correlation} between two joints (\textit{x},\textit{y}):
         \begin{equation}
             corr(\bar{x},\bar{y}) = \frac{\sum_{i=1}^n (x_i - mean(\bar{x}))(y_i - mean(\bar{y}))}{\sqrt{var(\bar{x})}\cdot\sqrt{var(\bar{y})}}
         \end{equation}
-    \item \textbf{Mean Absolute Deviation}:
+\textbf{Mean Absolute Deviation}:
         \begin{equation}
             mad(\bar{x}) = \frac{1}{n} \sum_{i=1}^{n} |x_i - mean(\bar{x})|
         \end{equation}
-    \item \textbf{Mean Standard Error}:
+ \textbf{Mean Standard Error}:
         \begin{equation}
             sem(\bar{x}) = \sqrt{\frac{var(\bar{x})}{n}}
         \end{equation}
-    \item \textbf{Average Sum of Squares}:
+\textbf{Average Sum of Squares}:
         \begin{equation}
             energy(\bar{x}) = \sqrt{\sum_{i=1}^{n} x_i^2}
         \end{equation}
-    \item \textbf{Interquantile Range} measures statistical dispersion in the range between the 25th (Q1) and the 75th percentile (Q3) of the data distribution ($ iqr = Q3 - Q1 $):
+\textbf{Interquantile Range} measures statistical dispersion in the range between the 25th (Q1) and the 75th percentile (Q3) of the data distribution ($ iqr = Q3 - Q1 $):
         \begin{equation}
             iqr(\bar{x}) =  
                 \begin{cases} 
@@ -997,23 +999,23 @@ Here are all the functions calculated for every sample of the dataset (note that
             \caption{Interquantile range of a normal distribution}
             \label{fig:iqr}
         \end{figure}
-    \item \textbf{Fundamental Frequency Signal} from the Discrete Fourier Transform (DFT):
+\textbf{Fundamental Frequency Signal} from the Discrete Fourier Transform (DFT):
     \begin{equation}
         firstFreq(\bar{x}) = \angle DFT(\bar{x})[1]
     \end{equation}
-    \item \textbf{Real part's Average of Frequency Signal}:
+\textbf{Real part's Average of Frequency Signal}:
     \begin{equation}
         meanFreq(\bar{x}) = \sum_{i=1}^{n} Re(DFT(x_i))
     \end{equation}
-    \item \textbf{Real part's Max of Frequency Signal}:
+\textbf{Real part's Max of Frequency Signal}:
     \begin{equation}
         maxFreq(\bar{x}) = Max(Re(DFT(x)))
     \end{equation}
-    \item \textbf{Index of the Max of the Real part of Frequency Signal}:
+\textbf{Index of the Max of the Real part of Frequency Signal}:
     \begin{equation}
         maxFreq(\bar{x}) = Argmax(Re(DFT(x)))
     \end{equation}
-\end{itemize}
+
 The last four values correspond to the minimum value and its index, skewness, and kurtosis of the Fourier transform.
 To choose the features to extract, we referred to \cite{oneto:2020} and \cite{sama:2010}.
 In Table \ref{tab:ml_features} we can see all the features and their relative function.
