@@ -1,64 +1,58 @@
-\chapter{Results}
-%TODO AGGIUNGERE
+\chapter{Results and Discussion}
+TODO da rivedere se coerente
+
+In questa sezione sono presentati, i risultati del migliore approccio, descritto anche nel Capitolo METODOLOGIA vari tentativi fatti, quelli del processo di raffinamento risultati ottenuti conclusions are drawn regarding the study of OoM and the improved visualization of skeletal clusters.
+The original planned work underwent modifications due to the limitations of a reduced and unbalanced dataset, coupled with challenges in finding additional complete and consistent samples to enrich the dataset.
+Although it was not always easy, addressing and resolving the issues inherent in this type of research proved to be immensely enriching both personally and professionally.
+It posed a challenge and provided a glimpse into what we might have to confront in the future, and we are grateful for the opportunity to have had this experience.
+
+In the following section, a synthesis of the results achieved and potential outcomes is presented.
+It particularly focuses on performance analysis in terms of operating conditions and further future developments aimed at improving the obtained results.
 
 \section{Graph-based Framework}
 The OoM was classified using three distinct features: velocity, acceleration and angular momentum, as described in Section \ref{subsec:alg_features}.
-For each feature, we applied two different similarity functions, a monte della pipeline spiegata nel Capitolo \ref{sec:graph_method}.
-Le due funzioni di similarità sono la \textit{Cosine Similarity} (concetto spiegato nella sezione \ref{subsec:cosine_sim}) e una funzione custom spiegata nella sezione \ref{sec:starting_point} qui riproposta per comodità:
-\begin{itemize}
-  \item Nel caso in cui la feature sia scalare (velocità e accelerazione) si applica la seguente formula:
-  \begin{equation}
-    \left\{
-      \begin{array}{ll}
-        \frac{1}{{\|x_{j} - x_{i}\| + \text{tol}}}, & \text{if an edge exists between } i \text{ and } j \\
-        \frac{1}{{5 \cdot (\|x_{j} - x_{i}\| + \text{tol})}}, & \text{if no edge exists between } i \text{ and } j 
-        \end{array}
-      \right.
-  \end{equation}
-  \item Invece se la feature è vettoriale, come il momento angolare:
-  \begin{equation}
-    \left\{
-      \begin{array}{ll}
-        \frac{1}{{\|x_{j}\| \cdot \|x_{i}\| + 1}}, & \text{if an edge exists between } i \text{ and } j \\
-        \frac{1}{{5 \cdot (\|x_{j} - x_{i}\| + \text{tol})}}, & \text{if no edge exists between } i \text{ and } j 
-        \end{array}
-      \right.
-  \end{equation}
-\end{itemize}
+For each feature, we applied two different similarity functions, as part of the pipeline explained in Chapter \ref{sec:graph_method}.
+The two similarity functions are the \textit{Cosine Similarity} (concept explained in Section \ref{subsec:cosine_sim}) and a custom function described in Section \ref{sec:starting_point}.
 
-Come è evidente nella the accuracy of the method in predicting the correct edge compared to the true label.\\
-In Table \ref{tab:clust_results} we can see the results.
+In Table \ref{tab:clust_results} we can see that the Cosine similarity outperforms the custom-made function. 
+Therefore, it was chosen as the similarity function for this specific dataset.
 
 \begin{table}[H]
   \centering
-  \begin{tabular}{||>{\centering\arraybackslash}p{2.5cm}||>{\centering\arraybackslash}p{2.5cm}||>{\centering\arraybackslash}p{3.0cm}||>{\centering\arraybackslash}p{2.8cm}||}
+  \begin{tabular}{||>{\centering\arraybackslash}p{4.3cm}||>{\centering\arraybackslash}p{2.0cm}||>{\centering\arraybackslash}p{2.7cm}||>{\centering\arraybackslash}p{4.4cm}||}
   \hline
-  \textbf{Similarity Function} & \vspace{1pt} \textbf{Speed} & \textbf{Acceleration} & \textbf{Angular Momentum} \\
+  \textbf{Similarity Function} & \textbf{Speed} & \textbf{Acceleration} & \textbf{Angular Momentum} \\
   \hline
-  \textbf{Cosine} & 28.3\%  & 26.7\%  & 36.6\%  \\
+  Cosine & 28.3\%  & 26.7\%  & 36.6\%  \\
   \hline
-  \textbf{Custom} & 18\%  & 21.1\%  & 34.2\%  \\
+  Custom & 18\%  & 21.1\%  & 34.2\%  \\
   \hline
   \end{tabular}
-  \caption{Classification accuracy with WDC on the overall dataset}
+  \caption{Classification accuracy over the whole dataset obtained by using the two different similarity functions}
   \label{tab:clust_results}
 \end{table}
 
-Even though these results are not impressive, they are still better than a random approach, where two random nodes are selected, are compared to the ground truth. \\
-Such an approach, achieves an accuracy of 19\% 
-The probability of picking at least one joint of the two is shown in Equation \ref{eq:prob_rand}
+From here on, the graphs will reflect the results obtained using cosine similarity as the measurement method.
+While these results may not be exceptional, they still outperform a random approach, in which two random nodes are selected and compared to the ground truth. \\
+Infact such an approach, achieves an accuracy of 19\% 
+The formula to calculate the probability of picking at least one joint of the two is shown in Equation \ref{eq:prob_rand}
 \begin{equation}
-  \mathbb{P}(x) = 2 \cdot \frac{2}{20} \cdot \frac{18}{20} + \frac{2}{20} \cdot \frac{2}{20} = \frac{19}{100}
+  \mathbb{P}(\textit{"picking at least one of the two joints"}) = 2 \cdot \frac{2}{20} \cdot \frac{18}{20} + \frac{2}{20} \cdot \frac{2}{20} = \frac{19}{100}
   \label{eq:prob_rand}
 \end{equation}
+TODO controllare probabilità
 
-While in Figure \ref{fig:wdc_results} we can see the distribution of the results for each edge of the dataset with respecto to their ground truth.
-\begin{figure}
+In Figure \ref{fig:wdc_results} we can see the distribution of the results for each edge of the dataset with respecto to their ground truth.
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.85\textwidth]{wdc_results.png}
   \caption{Joints and frequency of the dataset and the correctly classified WDC algorithm}
   \label{fig:wdc_results}
 \end{figure}
+TODO rifare
+
+
+
 
 \clearpage
 
@@ -87,7 +81,7 @@ In the last one (Figure \ref{fig:qr_movement_smooth}), clusters' evolution is fu
 By further smoothing the clusters transition one can also visually inspect the appearing of multiple origins at the expense of the continuity of each cluster. 
 Infact with this method the clusters will have transitory frames in which are inconsistent.
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
   \begin{subfigure}[b]{0.49\textwidth}
     \centering

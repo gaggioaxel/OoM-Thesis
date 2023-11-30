@@ -69,6 +69,7 @@ Despite not being the lowest pedaling frequency, this rate proves to be the safe
 
 
 \section{Starting point and problem statement}
+\label{sec:starting_point}
 Currently the method for automated analysis of body movement consists of an approach involving transferable-utility cooperative games on graph \cite{kolykhalova:2020}.
 A Motion Capture dataset is originated by recording with 13 infra-red cameras, two professional dancers that were equipped with 64 infra-red reflective markers, 5 accelerometers and 1 microphone.
 Then the perceived Origin of Movement are manually annotated by experts in the field.
@@ -78,9 +79,31 @@ For each sample, only the time frame in which there is a clear origin of the mov
 From this result the process is moved on the MATLAB programming language. 
 The number of markers has been compressed by clustering and mapping the markers based on a scheme that uniquely maps the human skeletal structure, resulting in 20 points, that from now will be called $joint$.
 By iterating this process over each sample of the dataset a list of 36 labeled timeseries is obtained.\\
-From here three kinds of movements features are calculated for each joint: speed, acceleration and angular momentum.
+From here three kinds of movements features are calculated for each joint and for each time instant: velocity, acceleration and angular momentum.
 A first graph is created by linking each joint that is physically connected with another, simulating the real connections of each joint.
 A weight for each arc (that from now will be called $edge$) is assigned based on a custom made similarity measure based on the inverse of the norm of the selected feature calculated between two joints.
+Here, the similarity function used in the previous work is reintroduced.
+\begin{itemize}
+  \item In the case where the feature (referred to here as $x$) is scalar, as with velocity and acceleration, the following formula is applied:
+  \begin{equation}
+    \left\{
+      \begin{array}{ll}
+        \frac{1}{{\|x_{j} - x_{i}\| + \text{tol}}}, & \text{if an edge exists between joint } i \text{ and } j \\
+        \frac{1}{{5 \cdot (\|x_{j} - x_{i}\| + \text{tol})}}, & \text{if no edge exists between joint } i \text{ and } j 
+        \end{array}
+      \right.
+  \end{equation}
+  \item Instead, if the feature is vectorial ($\vec{x}$), such as angular momentum, the following formula is applied:
+  \begin{equation}
+    \left\{
+      \begin{array}{ll}
+        \frac{\vec{x}_{i}\times\vec{x}_{j}}{{\|x_{j}\| \cdot \|x_{i}\|}+1}, & \text{if an edge exists between } i \text{ and } j \\
+        \frac{\vec{x}_{i}\times\vec{x}_{j}}{{5 \cdot (\|x_{j} - x_{i}\| + 1)}}, & \text{if no edge exists between } i \text{ and } j 
+        \end{array}
+      \right.
+  \end{equation}
+\end{itemize}
+Where the factor $tol$ is a small number to prevent divisions by zero.
 
 A clustering algorithm was applied to the graph, resulting in an auxiliary graph where the only edges present connect nodes belonging to different clusters. Upon this auxiliary graph, a mathematical game was constructed, and the solution was found by calculating the Shapley values for each joint.
 
@@ -90,7 +113,7 @@ The study revealed that the most confident users consistently chose the suggeste
 
 This work has been reevaluated due to certain critical aspects and has been expanded with our contribution.\\
 Specifically, the number of samples in the dataset was too limited, and the movements were overly complex, making the identification of the movement origin challenging, especially in cases where it presented multiple origin of movements in the same fragment.
-The similarity measure used for calculating the features had not been compared with other similarity measures. \\
+The similarity measure used for calculating the features had not been compared with others available. \\
 Moreover, it appears that there there is not a clear contribution in terms of added value derived from nodes cooperation, thus reducing Shapley values and game theory to a weighted degree centrality.
 Additionally, the entire pipeline was developed using MATLAB's proprietary software, which, however, is quite limited in terms of data analysis libraries.\\
 Finally, a manual annotation performed by only one individual may be prone to biases.
