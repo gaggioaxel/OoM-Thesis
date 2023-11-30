@@ -106,7 +106,7 @@ Infact with this method the clusters will have transitory frames in which are in
   \caption{QR codes referencing to the pure clustering method (a), the stabilized version (b) and a combination of stabilization and smoothing (c)}
   \label{fig:qr_movements}
 \end{figure}
-
+\clearpage
 
 In conclusion, the MaxWPM algorithm is able to provide a clearer and more consistent visualization of clusters, allowing us to understand which joints are most similar during motion, without abrupt color changes. \\
 Furthermore, the additional smoothing technique allows to better see the evolution of clusters across a longer timespan also in those cases where in a short amount of time clusters still tend to change too fast.\\
@@ -117,18 +117,51 @@ Furthermore, the additional smoothing technique allows to better see the evoluti
 
 \section{Machine Learning}
 
+\paragraph{Trial \#1}
+Il processo di raffinamento dei risultati è passato attraverso vari tentativi qui illustrati.
 The tests to identify the best model were conducted on the most frequent edge of the dataset, \textit{left\_hand - left\_wrist} with the aim of maximize the accuracy.
+Siamo partiti direttamente dalla LOOCV come strategia di validazione cercando di ribilanciare il dataset applicando varie strategie di bilanciamento.
+Un primo tentativo è stato fatto con un \textit{Random Undersampler} che è una classica strategia di sampling in cui la classe di maggioranza viene ridotta tramite l'estrazione randomica di sample che verranno poi utilizzati per un addestramento bilanciato.
+I risultati sono stati fin da subito molto promettenti come si può vedere dalla confusion matrix in Table \ref{tab:ml_results_cm_trial1}
+
+\begin{table}[H]
+  \centering
+  \renewcommand{\arraystretch}{1.5} % Aumenta lo spazio tra le righe del doppio
+  \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+  \hline
+  41 & 10 \\
+  \hline
+  2 & 7 \\
+  \hline
+  \end{tabular}
+  \caption{Confusion matrix for Random Undersampler and LOOCV strategy}
+  \label{tab:ml_results_cm_trial1}
+\end{table}
+
+
+
+\paragraph{Best Results}
+In the following Tables (from \ref{tab:ml_results_cm_joints} to \ref{tab:ml_results_cm_body_parts}), there are the confusion matrices, the TPR, TSS, TNR and the Accuracy score for the final model defined in Section \ref{sec:ml_method} in our three formulations:
+\begin{itemize}
+  \item The most frequent 6 classes of our dataset (Table \ref{tab:ml_results_cm_joints} and \ref{tab:ml_results_joints}) in the by-joint-subdivision.
+  \item The 5 boby parts in which have been grouped the joints (Table \ref{tab:ml_results_cm_body_parts} and \ref{tab:ml_results_body_parts})
+  \item and the division into the upper and lower body part, which is in the same tables.
+\end{itemize} 
+To interpret the meaning of the confusion matrices, please refer to Section \ref{subsec:evaluation_metrics}.
 This is because the dataset is unbalanced, and therefore, better prediction results are expected from this class.
 As observed, accuracy consistently remains very high, almost always exceeding 70\%.
 However, beyond this, the model demonstrates high $specificity$, meaning it excels at maximizing TN but struggles to identify TP effectively.
 This behavior is evident in the TPR, which varies significantly across different classes.
 The model requires a high level of certainty in predictions before classifying a sample as positive.
 You can also observe the model's high specificity from the TNR, which is consistently quite high in all cases, typically greater than 80\%. \\
-In summary, the model tends to favor a conservative strategy, prioritizing the reduction of FP, leading to a high specificity but limited effectiveness in identifying TP.
 
-In the following Tables (from \ref{tab:ml_results_cm_joints} to \ref{tab:ml_results_cm_body_parts}), there are the confusion matrices, the TPR, the TNR and the Accuracy score for three cases: 
-The most frequent 6 classes of our dataset (Table \ref{tab:ml_results_cm_joints} and \ref{tab:ml_results_joints}) in the by-joint-subdivision, the 5 boby parts in which have been grouped the joints (Table \ref{tab:ml_results_cm_body_parts} and \ref{tab:ml_results_body_parts}), and the division into the upper and lower body part.
-To interpret the meaning of the confusion matrices, please refer to Section \ref{subsec:evaluation_metrics}.
+Furthermore, for a more comprehensive assessment of the results, we included the TSS (True Skill Statistic), normalized between 0 and 1 and presented as a percentage. 
+This metric is considered effective in demonstrating the model's potential to balance predictions and overall incorrect predictions.
+
+As the TSS ranges from -1 (performing poorly in both cases), 0 (performing well in one case but poorly in the other), to 1 (performing well in both cases), in our case, after shifting and scaling, 
+we observed the TSS consistently exceeding halfway, signifying that the model is generally successful in minimizing errors across all predictions. 
+
+
 
 \clearpage
 \begin{table}[H]
@@ -218,21 +251,21 @@ To interpret the meaning of the confusion matrices, please refer to Section \ref
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{||>{\centering\arraybackslash}p{1.6cm}||>{\centering\arraybackslash}p{5.7cm}||>{\centering\arraybackslash}p{1.6cm}||>{\centering\arraybackslash}p{1.6cm}||>{\centering\arraybackslash}p{1.9cm}||>{\centering\arraybackslash}p{1.6cm}||}
+    \begin{tabular}{||>{\centering\arraybackslash}p{1.2cm}||>{\centering\arraybackslash}p{5.7cm}||>{\centering\arraybackslash}p{1.3cm}||>{\centering\arraybackslash}p{1.2cm}||>{\centering\arraybackslash}p{1.3cm}||>{\centering\arraybackslash}p{1.9cm}||}
     \hline
-    \textbf{Label} & \textbf{Edge} & \textbf{TPR} & \textbf{TNR} &\textbf{Accuracy} &\textbf{TSS}\\
+    \textbf{Label} & \textbf{Edge} & \textbf{TPR} & \textbf{TSS} &\textbf{TNR} &\textbf{Accuracy}\\
     \hline
-    (a) & left\_hand - left\_wrist  & 66\% & 94\% & 90\% & 80\% \\
+    (a) & left\_hand - left\_wrist  & 66\% & 80\% & 94\% & 90\%  \\
     \hline
-    (b) & shoulder\_center - head  & 14\% & 96\% & 87\% & 55\%\\
+    (b) & shoulder\_center - head  & 14\% & 55\% & 96\% & 87\% \\
     \hline
-    (c) & right\_elbow - right\_shoulder  & 0\%  & 83\% & 73\% & 42\%\\ 
+    (c) & right\_elbow - right\_shoulder  & 0\%  & 42\% & 83\% & 73\% \\ 
     \hline
-    (d) & right\_shoulder - shoulder\_center & 33\% & 94\% & 88\% & 64\%\\
+    (d) & right\_shoulder - shoulder\_center & 33\% & 64\% & 94\% & 88\%\\
     \hline
-    (e) & right\_knee - right\_hip  & 20\%  & 95\% & 88\% & 57\% \\
+    (e) & right\_knee - right\_hip  & 20\% & 57\% & 95\% & 88\%  \\
     \hline
-    (f) & left\_knee - left\_hip  & 60\% & 96\% & 93\% & 78\%\\ 
+    (f) & left\_knee - left\_hip  & 60\% & 78\% & 96\% & 93\% \\ 
     \hline
     \end{tabular}
     \caption{Metrics of the 6 classes most frequent of the dataset}
@@ -329,26 +362,26 @@ To interpret the meaning of the confusion matrices, please refer to Section \ref
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{||>{\centering\arraybackslash}p{1.8cm}||>{\centering\arraybackslash}p{4cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||}
+    \begin{tabular}{||>{\centering\arraybackslash}p{1.2cm}||>{\centering\arraybackslash}p{5.7cm}||>{\centering\arraybackslash}p{1.3cm}||>{\centering\arraybackslash}p{1.2cm}||>{\centering\arraybackslash}p{1.3cm}||>{\centering\arraybackslash}p{1.9cm}||}
         \hline
-        \textbf{Label} & \textbf{Body Part} & \textbf{TPR} & \textbf{TNR} & \textbf{Accuracy} & \textbf{TSS} \\
+        \textbf{Label} & \textbf{Body Part} & \textbf{TPR} & \textbf{TSS} & \textbf{TNR} & \textbf{Accuracy} \\
         \hline
-        (g) & Right Arm  & 61\% & 88\% & 80\% & 75\% \\
+        (g) & Right Arm  & 61\% & 75\% & 88\% & 80\%  \\
         \hline
-        (h) & Left Arm & 29\% & 80\% & 68\% & 55\% \\
+        (h) & Left Arm & 29\% & 55\% & 80\% & 68\% \\
         \hline
-        (i) & Right Leg  & 54\%  & 91\% & 83\% & 73\% \\ 
+        (i) & Right Leg  & 54\% & 73\% & 91\% & 83\% \\ 
         \hline
-        (l) & Left Leg & 12\% & 90\% & 80\% & 51\% \\
+        (l) & Left Leg & 12\% & 51\% & 90\% & 80\%  \\
         \hline
-        (m) & Head  & 14\%  & 96\% & 86\% & 55\% \\
+        (m) & Head  & 14\% & 55\% & 96\% & 86\% \\
         \hline
         \hline
     \end{tabular}
-    \begin{tabular}{||>{\centering\arraybackslash}p{1.8cm}||>{\centering\arraybackslash}p{4cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||}
-        \textbf{Label} & \textbf{Body Half} & \textbf{TPR} & \textbf{TNR} & \textbf{Accuracy} & \textbf{TSS}\\
+    \begin{tabular}{||>{\centering\arraybackslash}p{1.2cm}||>{\centering\arraybackslash}p{5.7cm}||>{\centering\arraybackslash}p{1.3cm}||>{\centering\arraybackslash}p{1.2cm}||>{\centering\arraybackslash}p{1.3cm}||>{\centering\arraybackslash}p{1.9cm}||}
+        \textbf{Label} & \textbf{Body Part} & \textbf{TPR} & \textbf{TSS} & \textbf{TNR} & \textbf{Accuracy} \\
         \hline
-        (n) & Upper & 79\% & 76\% & 78\% & 78\% \\
+        (n) & Upper & 79\% & 78\% & 76\% & 78\% \\
         \hline
     \end{tabular}
     \caption{Metrics of the 5 Body Parts and the Upper}
