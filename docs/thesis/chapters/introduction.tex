@@ -79,19 +79,14 @@ From this result the process is moved on the MATLAB programming language.
 The number of markers has been compressed by clustering and mapping the markers based on a scheme that uniquely maps the human skeletal structure, resulting in 20 points, that from now will be called $joint$.
 By iterating this process over each sample of the dataset a list of 36 labeled timeseries is obtained.\\
 From here three kinds of movements features are calculated for each joint: speed, acceleration and angular momentum.
-The analysis is performed separately for each kind of feature.
 A first graph is created by linking each joint that is physically connected with another, simulating the real connections of each joint.
-A weight for each arc, that from now will be called $edge$ is assigned based on a custom made similarity measure based on the inverse of the norm of the selected feature calculated between two joints.
-Henceforth a clustering algorithm is applied on the graph to further reduce the analysis on the edges that are outliers and fall across two different clusters.
-Then the weight of the edge is split between the two joints and the Shapley value approach is used as solution to the mathematical game built with the weighted edges.\\
-To find the Origin of Movement, the two highest Shapley values are selected. In case of a tie, the third Shapley value is also taken.
+A weight for each arc (that from now will be called $edge$) is assigned based on a custom made similarity measure based on the inverse of the norm of the selected feature calculated between two joints.
 
-The method's validation was conducted through an online survey. Users were asked indicate their level of confidence and
-to select one or two vertices of the skeletal structure as the origin of movement.
-They were given hints in three diverse ways by highlighting the joints, either, 
-with either the highest Shapley value, the two highest Shapley values (eventually also the third), or randomly chosen, in a shuffled way for each partecipant. 
-This study revealed that the most confident users consistently chose the movement's origin suggested by the two highest Shapley values and, on average, intersected with the ground truth by 31.1\%.
-Overall the maximum accuracy score between the ground truth and the highest or two highest.
+A clustering algorithm was applied to the graph, resulting in an auxiliary graph where the only edges present connect nodes belonging to different clusters. Upon this auxiliary graph, a mathematical game was constructed, and the solution was found by calculating the Shapley values for each joint.
+
+Once the Shapley values were obtained, an online survey was used to validate their reliability in accurately predicting the perceived origin of movement. Users were asked to indicate their confidence level and select one or two vertices from the skeletal structure as the movement's origin. They were provided hints in three different ways by highlighting joints based on either the highest Shapley value, the two highest Shapley values (potentially also the third), or randomly chosen joints, shuffled for each participant. This methodology was applied across three distinct features: speed, acceleration, and angular momentum.
+
+The study revealed that the most confident users consistently chose the suggested movement origin indicated by the two highest Shapley values, specifically those associated with the velocity feature.
 
 This work has been reevaluated due to certain critical aspects and has been expanded with our contribution.\\
 Specifically, the number of samples in the dataset was too limited, and the movements were overly complex, making the identification of the movement origin challenging, especially in cases where it presented multiple origin of movements in the same fragment.
