@@ -60,11 +60,6 @@ Nevertheless, it remains a good starting point. \\
 
 
 
-
-
-
-
-
 \clearpage
 
 \section{Clusters Stabilization}
@@ -117,6 +112,11 @@ Infact with this method the clusters will have transitory frames in which are in
   \caption{QR codes referencing to the pure clustering method (a), the stabilized version (b) and a combination of stabilization and smoothing (c)}
   \label{fig:qr_movements}
 \end{figure}
+
+
+In conclusion, the MaxWPM algorithm is able to provide a clearer and more consistent visualization of clusters, allowing us to understand which joints are most similar during motion, without abrupt color changes. \\
+Furthermore, the additional smoothing technique allows to better see the evolution of clusters across a longer timespan also in those cases where in a short amount of time clusters still tend to change too fast.\\
+
 
 
 \clearpage
@@ -375,6 +375,21 @@ Moreover, with an AUC of $0.83$, it's evident that the model has almost reached 
 \end{figure}
 
 
+
+PARTE DA AGGIUNGERE BENE DA QUALCHE PARTE
+From the results obtained in Table \ref{tab:ml_results_joints}, a fluctuating trend is evident, probably due to the limited and imbalanced data. 
+Despite efforts to balance the dataset, as they were tested solely on the majority class among the available ones, whose results can be seen in the confusion matrix in Table \ref{tab:ml_results_cm_edge_1}, 
+they were not sufficient to compensate for the lack of data in the other classes. \\
+What has been achieved, therefore, is an effectiveness in predicting the majority class effectively and a tendency to balance FN and FP. 
+By merging the classes, as done in Q2 and Q3, the fluctuations in the results appear to be somewhat mitigated at the expense of a slight deterioration in overall performance (Table \ref{tab:ml_results_body_parts}).
+With an extension of the dataset, better and more robust accuracies can be achieved across all classes.
+Furthermore, it would also be possible to perform multiclass classification for recognition of multiple origin of movements from the same movement.\\
+
+
+
+
+
+\clearpage
 
 
 \section{Future researches}
