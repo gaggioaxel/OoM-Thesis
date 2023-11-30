@@ -747,6 +747,17 @@ The confusion matrix is an important resource for calculating various evaluation
   }
   \item{
 
+  \textbf{TSS} or True Skill Statistic is a evaluation metric excellent for imbalanced datasets. 
+  TSS, in these cases, performs better than Accuracy, which might appear high despite the poor prediction of TP.
+
+  \begin{equation}
+    \textit{TSS} = \frac{\text{TN}}{\text{TN + FP}} + \frac{\text{TP}}{\text{TP + FN}} - 1
+    \label{formula:tss}
+  \end{equation}
+
+  }
+  \item{
+
   \textbf{Precision} measures the percentage of positive predictions made by the model that are actually correct.
 
   \begin{equation}

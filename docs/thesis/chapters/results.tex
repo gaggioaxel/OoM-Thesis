@@ -210,24 +210,24 @@ To interpret the meaning of the confusion matrices, please refer to Section \ref
     \label{tab:ml_results_cm_joints}
 \end{table}
 
-%TODO AGGIUNGERE TOP FEATURES PER EXPLAINABILITY
+
 \begin{table}[H]
     \centering
-    \begin{tabular}{||>{\centering\arraybackslash}p{1.6cm}||>{\centering\arraybackslash}p{5.7cm}||>{\centering\arraybackslash}p{1.6cm}||>{\centering\arraybackslash}p{1.6cm}||>{\centering\arraybackslash}p{1.9cm}||}
+    \begin{tabular}{||>{\centering\arraybackslash}p{1.6cm}||>{\centering\arraybackslash}p{5.7cm}||>{\centering\arraybackslash}p{1.6cm}||>{\centering\arraybackslash}p{1.6cm}||>{\centering\arraybackslash}p{1.9cm}||>{\centering\arraybackslash}p{1.6cm}||}
     \hline
-    \textbf{Label} & \textbf{Edge} & \textbf{TPR} & \textbf{TNR} &\textbf{Accuracy} \\
+    \textbf{Label} & \textbf{Edge} & \textbf{TPR} & \textbf{TNR} &\textbf{Accuracy} &\textbf{TSS}\\
     \hline
-    (a) & left\_hand - left\_wrist  & 66\% & 94\% & 90\% \\
+    (a) & left\_hand - left\_wrist  & 66\% & 94\% & 90\% & 80\% \\
     \hline
-    (b) & shoulder\_center - head  & 14\% & 96\% & 87\% \\
+    (b) & shoulder\_center - head  & 14\% & 96\% & 87\% & 55\%\\
     \hline
-    (c) & right\_elbow - right\_shoulder  & 0\%  & 83\% & 73\% \\ 
+    (c) & right\_elbow - right\_shoulder  & 0\%  & 83\% & 73\% & 42\%\\ 
     \hline
-    (d) & right\_shoulder - shoulder\_center & 33\% & 94\% & 88\% \\
+    (d) & right\_shoulder - shoulder\_center & 33\% & 94\% & 88\% & 64\%\\
     \hline
-    (e) & right\_knee - right\_hip  & 20\%  & 95\% & 88\%\\
+    (e) & right\_knee - right\_hip  & 20\%  & 95\% & 88\% & 57\% \\
     \hline
-    (f) & left\_knee - left\_hip  & 60\% & 96\% & 93\%\\ 
+    (f) & left\_knee - left\_hip  & 60\% & 96\% & 93\% & 78\%\\ 
     \hline
     \end{tabular}
     \caption{Metrics of the 6 classes most frequent of the dataset}
@@ -324,26 +324,26 @@ To interpret the meaning of the confusion matrices, please refer to Section \ref
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{||>{\centering\arraybackslash}p{1.8cm}||>{\centering\arraybackslash}p{4cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||}
+    \begin{tabular}{||>{\centering\arraybackslash}p{1.8cm}||>{\centering\arraybackslash}p{4cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||}
         \hline
-        \textbf{Label} & \textbf{Body Part} & \textbf{TPR} & \textbf{TNR} & \textbf{Accuracy} \\
+        \textbf{Label} & \textbf{Body Part} & \textbf{TPR} & \textbf{TNR} & \textbf{Accuracy} & \textbf{TSS} \\
         \hline
-        (g) & Right Arm  & 61\% & 88\% & 80\% \\
+        (g) & Right Arm  & 61\% & 88\% & 80\% & 75\% \\
         \hline
-        (h) & Left Arm & 29\% & 80\% & 68\% \\
+        (h) & Left Arm & 29\% & 80\% & 68\% & 55\% \\
         \hline
-        (i) & Right Leg  & 54\%  & 91\% & 83\% \\ 
+        (i) & Right Leg  & 54\%  & 91\% & 83\% & 73\% \\ 
         \hline
-        (l) & Left Leg & 12\% & 90\% & 80\% \\
+        (l) & Left Leg & 12\% & 90\% & 80\% & 51\% \\
         \hline
-        (m) & Head  & 14\%  & 96\% & 86\%\\
+        (m) & Head  & 14\%  & 96\% & 86\% & 55\% \\
         \hline
         \hline
     \end{tabular}
-    \begin{tabular}{||>{\centering\arraybackslash}p{1.8cm}||>{\centering\arraybackslash}p{4cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||}
-        \textbf{Label} & \textbf{Body Half} & \textbf{TPR} & \textbf{TNR} & \textbf{Accuracy} \\
+    \begin{tabular}{||>{\centering\arraybackslash}p{1.8cm}||>{\centering\arraybackslash}p{4cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||>{\centering\arraybackslash}p{2cm}||}
+        \textbf{Label} & \textbf{Body Half} & \textbf{TPR} & \textbf{TNR} & \textbf{Accuracy} & \textbf{TSS}\\
         \hline
-        (n) & Upper & 79\% & 76\% & 78\% \\
+        (n) & Upper & 79\% & 76\% & 78\% & 78\% \\
         \hline
     \end{tabular}
     \caption{Metrics of the 5 Body Parts and the Upper}
