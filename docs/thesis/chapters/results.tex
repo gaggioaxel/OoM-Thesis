@@ -145,7 +145,7 @@ In the following Tables (from \ref{tab:ml_results_cm_joints} to \ref{tab:ml_resu
 \begin{itemize}
   \item The most frequent 6 classes of our dataset (Table \ref{tab:ml_results_cm_joints} and \ref{tab:ml_results_joints}) in the by-joint-subdivision.
   \item The 5 boby parts in which have been grouped the joints (Table \ref{tab:ml_results_cm_body_parts} and \ref{tab:ml_results_body_parts})
-  \item and the division into the upper and lower body part, which is in the same tables.
+  \item The division into the upper and lower body part, which is in the same tables.
 \end{itemize} 
 To interpret the meaning of the confusion matrices, please refer to Section \ref{subsec:evaluation_metrics}.
 This is because the dataset is unbalanced, and therefore, better prediction results are expected from this class.
@@ -155,7 +155,7 @@ This behavior is evident in the TPR, which varies significantly across different
 The model requires a high level of certainty in predictions before classifying a sample as positive.
 You can also observe the model's high specificity from the TNR, which is consistently quite high in all cases, typically greater than 80\%. \\
 
-Furthermore, for a more comprehensive assessment of the results, we included the TSS (True Skill Statistic), normalized between 0 and 1 and presented as a percentage. 
+Furthermore, for a more comprehensive assessment of the results, we included the TSS, normalized between 0 and 1 and presented as a percentage. 
 This metric is considered effective in demonstrating the model's potential to balance predictions and overall incorrect predictions.
 
 As the TSS ranges from -1 (performing poorly in both cases), 0 (performing well in one case but poorly in the other), to 1 (performing well in both cases), in our case, after shifting and scaling, 
@@ -388,6 +388,14 @@ we observed the TSS consistently exceeding halfway, signifying that the model is
     \label{tab:ml_results_body_parts}
 \end{table}
 
+From the results obtained in Table \ref{tab:ml_results_joints}, a fluctuating trend is evident, probably due to the limited and imbalanced data. 
+Despite efforts to balance the dataset, as they were tested solely on the majority class among the available ones, whose results can be seen in the confusion matrix in Table \ref{tab:ml_results_cm_edge_1}, 
+they were not sufficient to compensate for the lack of data in the other classes. \\
+What has been achieved, therefore, is an effectiveness in predicting the majority class effectively and a tendency to balance FN and FP. 
+By merging the classes, as done in Q2 and Q3, the fluctuations in the results appear to be somewhat mitigated at the expense of a slight deterioration in overall performance (Table \ref{tab:ml_results_body_parts}).
+With an extension of the dataset, better and more robust accuracies can be achieved across all classes.
+Furthermore, it would also be possible to perform multiclass classification for recognition of multiple origin of movements from the same movement.\\
+
 Further insights of the model can be infered by looking at the ROC curve and it's corresponding AUC, in particular let's see what the one associated to the most frequent joint tells us (Figure \ref{fig:roc_auc_results}):
 By following the thresholds we can see that $Thresh = 0.28$ provides the best results. This means that by thresholding in that way the output of the forest (which is a score) we can achieve a 90\% of TPR with just a 20\% of FPR.
 By default the RF will apply a threshold of $0.5$ (in other words classify as positive a sample whose score is greater than $0.5$).\\
@@ -403,14 +411,24 @@ Moreover, with an AUC of $0.83$, it's evident that the model has almost reached 
 
 
 
-PARTE DA AGGIUNGERE BENE DA QUALCHE PARTE
-From the results obtained in Table \ref{tab:ml_results_joints}, a fluctuating trend is evident, probably due to the limited and imbalanced data. 
-Despite efforts to balance the dataset, as they were tested solely on the majority class among the available ones, whose results can be seen in the confusion matrix in Table \ref{tab:ml_results_cm_edge_1}, 
-they were not sufficient to compensate for the lack of data in the other classes. \\
-What has been achieved, therefore, is an effectiveness in predicting the majority class effectively and a tendency to balance FN and FP. 
-By merging the classes, as done in Q2 and Q3, the fluctuations in the results appear to be somewhat mitigated at the expense of a slight deterioration in overall performance (Table \ref{tab:ml_results_body_parts}).
-With an extension of the dataset, better and more robust accuracies can be achieved across all classes.
-Furthermore, it would also be possible to perform multiclass classification for recognition of multiple origin of movements from the same movement.\\
+\begin{table}[H]
+  \centering
+  \begin{tabular}{||>{\centering\arraybackslash}p{5.0cm}||>{\centering\arraybackslash}p{1.3cm}||>{\centering\arraybackslash}p{1.2cm}||>{\centering\arraybackslash}p{1.3cm}||>{\centering\arraybackslash}p{1.9cm}||}
+  \hline
+  \textbf{Method} & \textbf{TPR} & \textbf{TSS} &\textbf{TNR} &\textbf{Accuracy}\\
+  \hline
+  Random Undersampler & 78\% & 79\% & 80\% & 82\%  \\
+  \hline
+  Random Oversampler & 11\% & 56\% & 100\% & 87\%  \\
+  \hline
+  SMOTE & 33\% & 66\% & 98\% & 88\%  \\
+  \hline
+  ADASYN & 22\% & 60\% & 98\% & 87\%  \\
+  \hline
+  \end{tabular}
+  \caption{Metrics of different methods on the most frequent class of the dataset}
+  \label{tab:ml_tentativi}
+\end{table}
 
 
 
