@@ -117,13 +117,19 @@ Furthermore, the additional smoothing technique allows to better see the evoluti
 
 \section{Machine Learning}
 
-\paragraph{Trial \#1}
-Il processo di raffinamento dei risultati è passato attraverso vari tentativi qui illustrati.
-The tests to identify the best model were conducted on the most frequent edge of the dataset, \textit{left\_hand - left\_wrist} with the aim of maximize the accuracy.
-Siamo partiti direttamente dalla LOOCV come strategia di validazione cercando di ribilanciare il dataset applicando varie strategie di bilanciamento.
-Un primo tentativo è stato fatto con un \textit{Random Undersampler} che è una classica strategia di sampling in cui la classe di maggioranza viene ridotta tramite l'estrazione randomica di sample che verranno poi utilizzati per un addestramento bilanciato.
-I risultati sono stati fin da subito molto promettenti come si può vedere dalla confusion matrix in Table \ref{tab:ml_results_cm_trial1}
+\paragraph{Prior Attempts}
+The refinement process of the results went through various attempts, as illustrated here. 
+We began with the Random Forest (RF) as the initial model, suggested as the best option in previous works in the field of motion analysis \cite{oneto:2020}, with a hyperparameter $n\_estimators = 400$, a generally sufficient value.
 
+The tests to identify the best model were performed on the most frequent edge of the dataset, \textit{left\_hand - left\_wrist}, aiming to balance TPR and TNR.
+
+We directly started with LOOCV as the validation strategy, attempting to rebalance the dataset by applying various balancing strategies. 
+Initially, we attempted a strategy using the \textit{Random Undersampler}, a classic sampling method where the majority class is reduced by randomly extracting the same number of samples as the minority class. 
+These samples were then used for balanced training.
+
+The initial results were quite promising, as depicted in the confusion matrix shown in Table \ref{tab:ml_results_cm_trial1}. 
+However, we decided to discard the undersampling approach, considering that with an already limited number of diverse movements, further reducing the number of samples would lead to significant information loss. 
+This conclusion is also supported by the relatively high False Positive rates, indicating that the model tends to classify a sample as positive with too much confidence.
 \begin{table}[H]
   \centering
   \renewcommand{\arraystretch}{1.5} % Aumenta lo spazio tra le righe del doppio
@@ -138,7 +144,63 @@ I risultati sono stati fin da subito molto promettenti come si può vedere dalla
   \label{tab:ml_results_cm_trial1}
 \end{table}
 
+Even applying a \textit{Random Oversampling} strategy to the minority class (while still excluding the testing sample for each iteration of LOOCV) yields poor results, as seen in Table \ref{tab:ml_results_cm_trial2}.
+\begin{table}[H]
+  \centering
+  \renewcommand{\arraystretch}{1.5} % Aumenta lo spazio tra le righe del doppio
+  \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+  \hline
+  51 & 0 \\
+  \hline
+  8 & 1 \\
+  \hline
+  \end{tabular}
+  \caption{Confusion matrix for Random Undersampler and LOOCV strategy}
+  \label{tab:ml_results_cm_trial2}
+\end{table}
+We realized during the various trials that to achieve better results, we needed to carefully choose the resampling strategy. 
+Therefore, we explored alternatives capable of artificially creating samples to better represent the boundaries in the multidimensional space of our features, rather than emphasizing individual points.
 
+Among these alternatives, we also experimented with the SMOTE algorithm, which generates synthetic data by uniformly interpolating points in the multidimensional feature space, and ADASYN, which serves the same purpose as SMOTE but estimates data distribution for resampling.
+
+Below, in Table \ref{tab:ml_results_cm_trial3} and \ref{tab:ml_results_cm_trial4}, the confusion matrices for the two algorithms are presented.
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.4\textwidth}
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Increase row spacing by double
+    \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+      \hline
+      50 & 1 \\
+      \hline
+      6 & 3 \\
+      \hline
+    \end{tabular}
+    \caption{}
+    \label{tab:ml_results_cm_trial3}
+  \end{subfigure}
+  \hspace{1cm} % Horizontal space between the two tables
+  \begin{subfigure}{0.4\textwidth}
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Increase row spacing by double
+    \begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{0.5cm}|}
+      \hline
+      51 & 0 \\
+      \hline
+      5 & 4 \\
+      \hline
+    \end{tabular}
+    \caption{}
+    \label{tab:ml_results_cm_trial4}
+  \end{subfigure}
+  \caption{Confusion matrices of the SMOTE and ADASYN algorithms}
+\end{figure}
+
+Finally, considered the potential presence of zones with single points that might have been marginalized during the minimization phase of the Gini impurity loss function and others that could be more dense, which means that are been sufficiently represented, we opted for a variation of the SMOTE.
+This assumpution lead us to the B-SMOTE to have a better representativeness of those marginalized samples. 
+By balancing the two characteristic hyperparameters of B-SMOTE (\textit{k\_neighbors} and \textit{m\_neighbors}) in proportion to the ratio between the sizes of the two classes, we aimed to refine the model.
+
+The final result was based on expanding the minority class, training a Random Forest with numerous trees to thoroughly comprehend the best features to select, and subsequently reducing the learning of a second forest optimized on a smaller subset of features.
 
 \paragraph{Best Results}
 In the following Tables (from \ref{tab:ml_results_cm_joints} to \ref{tab:ml_results_cm_body_parts}), there are the confusion matrices, the TPR, TSS, TNR and the Accuracy score for the final model defined in Section \ref{sec:ml_method} in our three formulations:
@@ -160,8 +222,6 @@ This metric is considered effective in demonstrating the model's potential to ba
 
 As the TSS ranges from -1 (performing poorly in both cases), 0 (performing well in one case but poorly in the other), to 1 (performing well in both cases), in our case, after shifting and scaling, 
 we observed the TSS consistently exceeding halfway, signifying that the model is generally successful in minimizing errors across all predictions. 
-
-
 
 \clearpage
 \begin{table}[H]
