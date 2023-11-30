@@ -38,23 +38,18 @@ The formula to calculate the probability of picking at least one joint of the tw
 TODO controllare probabilità
 
 In Figure \ref{fig:wdc_results} we can see the distribution of the results for each edge of the dataset with respecto to their ground truth.
-The WDC approach appears to work reasonably well when it comes to classifying sources of movement in the upper part of the body. 
+The WDC method seems to perform reasonably well in classifying sources of movement in the upper part of the body, where there are generally a greater number of edges per node.
+But performs generally bad on lower body and the most borderline nodes (those connected to the rest of the graph by only one arc)
+This might suggest that by varying the number of clusters to allow for the creation of smaller clusters, perhaps using a hierarchical clustering approach, it could be possible to isolate multiple splits of the same body part . 
 However, it is essential to take these results with caution because the dataset is very small and certainly does not have a statistically significant sample of each class. 
 Nevertheless, it remains a good starting point. \\
-
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.85\textwidth]{wdc_results.png}
-  \caption{Joints and frequency of the dataset and the correctly classified WDC algorithm}
+  \caption{Joints and frequency of the dataset and the correctly classified graph-based algorithm applied on the angular momentum feature}
   \label{fig:wdc_results}
 \end{figure}
-
-
-
-
-
-\clearpage
 
 \section{Clusters Stabilization}
 In this first example, in Figure \ref{fig:stabilization_results}, we can observe the results of stabilization of three clusters with the same color scheme applied on two different time instants. 

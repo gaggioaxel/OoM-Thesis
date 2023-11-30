@@ -489,12 +489,12 @@ These two classes are typically referred to as the positive class and the negati
 The \textbf{KNN} algorithm is a supervised ML algorithm used for classification and regression tasks.
 It is a simple and intuitive algorithm that makes predictions based on the similarity between a data point and its \textit{k}-nearest neighbors in a training dataset.
 The \textit{k} in \textit{k}-nearest neighbors refers to the number of items that the algorithm uses to make its prediction whether its a classification problem or a regression problem.
-In Figure \ref{fig:knn} we can see a test sample represented by a green dot and we want to classify 
-it either as a blue square or a red triangle based on a KNN algorithm, the decision depends on the value of \textit{k}, which determines how many nearest neighbors we consider.\\
-When \textit{k} = 3 (solid line circle), the green dot is assigned to the category that has the majority among its three nearest neighbors. 
-In this case, if there are 2 red triangles and only 1 blue square inside the inner circle, the green dot is classified as a red triangle. \\
-When \textit{k} = 5 (dashed line circle), the green dot is assigned to the category with the majority among its five nearest neighbors. 
-If there are 3 blue squares and 2 red triangles inside the outer circle, the green dot is classified as a blue square.
+In Figure \ref{fig:knn} we can see an example of a test sample represented by a gray dot and we want to classify
+it either as a blue circle or a red circle based on a KNN algorithm, the decision depends on the value of \textit{k}, which determines how many nearest neighbors we consider to take the decision in a majority voting mechanism.\\
+When \textit{k} = 3 (solid line circle), the gray dot is assigned to the category that has the majority among its three nearest neighbors. 
+In this case, if there are 2 red circles and only 1 blue circle inside the inner circle, the gray dot is classified as a red circle. \\
+When \textit{k} = 5 (dashed line circle), the gray dot is assigned to the category with the majority among its five nearest neighbors. 
+If there are 3 blue circles and 2 red circles inside the outer circle, the gray dot is classified as a blue circle.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\linewidth]{KNeighbours.png}
