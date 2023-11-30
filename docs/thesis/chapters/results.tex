@@ -38,19 +38,29 @@ While these results may not be exceptional, they still outperform a random appro
 Infact such an approach, achieves an accuracy of 19\% 
 The formula to calculate the probability of picking at least one joint of the two is shown in Equation \ref{eq:prob_rand}
 \begin{equation}
-  \mathbb{P}(\textit{"picking at least one of the two joints"}) = 2 \cdot \frac{2}{20} \cdot \frac{18}{20} + \frac{2}{20} \cdot \frac{2}{20} = \frac{19}{100}
+  \mathbb{P}(\textit{picking at least one of the two joints}) = 2 \cdot \frac{2}{20} \cdot \frac{18}{20} + \frac{2}{20} \cdot \frac{2}{20} = \frac{19}{100}
   \label{eq:prob_rand}
 \end{equation}
 TODO controllare probabilità
 
 In Figure \ref{fig:wdc_results} we can see the distribution of the results for each edge of the dataset with respecto to their ground truth.
+The WDC approach appears to work reasonably well when it comes to classifying sources of movement in the upper part of the body. 
+However, it is essential to take these results with caution because the dataset is very small and certainly does not have a statistically significant sample of each class. 
+Nevertheless, it remains a good starting point. \\
+
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.85\textwidth]{wdc_results.png}
   \caption{Joints and frequency of the dataset and the correctly classified WDC algorithm}
   \label{fig:wdc_results}
 \end{figure}
-TODO rifare
+
+
+
+
+
+
 
 
 
