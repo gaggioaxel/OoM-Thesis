@@ -75,7 +75,6 @@ Then the perceived Origin of Movement are manually annotated by experts in the f
 By using the native software “Qualisys Track Manager” have been computed the trajectories of each point and tracked across the whole timeframe of the sample.\\
 The output of the software is a highly precise description of the trajectories of either 64 or 41 markers based on the version of the capture system; thus, for each marker we obtain a timeseries of $x$, $y$ and $z$ positions.
 For each sample, only the time frame in which there is a clear origin of the movement is considered.
-The sample is labelled with its OoM.
 From this result the process is moved on the MATLAB programming language. 
 The number of markers has been compressed by clustering and mapping the markers based on a scheme that uniquely maps the human skeletal structure, resulting in 20 points, that from now will be called $joint$.
 By iterating this process over each sample of the dataset a list of 36 labeled timeseries is obtained.\\
@@ -87,11 +86,12 @@ Henceforth a clustering algorithm is applied on the graph to further reduce the 
 Then the weight of the edge is split between the two joints and the Shapley value approach is used as solution to the mathematical game built with the weighted edges.\\
 To find the Origin of Movement, the two highest Shapley values are selected. In case of a tie, the third Shapley value is also taken.
 
-The agreement between the method and the ground truth has been evaluated with an online survey, where have been asked to users at various level of self-assessed proficiency, 
+The method's validation was conducted through an online survey. Users were asked indicate their level of confidence and
 to select one or two vertices of the skeletal structure as the origin of movement.
 They were given hints in three diverse ways by highlighting the joints, either, 
-with the highest Shapley values, with the two highest Shapley values, or randomly chosen. 
-This study has proven that the most expert users consistently chose as origin of movement the one suggested by Shapley values. \\
+with either the highest Shapley value, the two highest Shapley values (eventually also the third), or randomly chosen, in a shuffled way for each partecipant. 
+This study revealed that the most confident users consistently chose the movement's origin suggested by the two highest Shapley values and, on average, intersected with the ground truth by 31.1\%.
+Overall the maximum accuracy score between the ground truth and the highest or two highest.
 
 This work has been reevaluated due to certain critical aspects and has been expanded with our contribution.\\
 Specifically, the number of samples in the dataset was too limited, and the movements were overly complex, making the identification of the movement origin challenging, especially in cases where it presented multiple origin of movements in the same fragment.
