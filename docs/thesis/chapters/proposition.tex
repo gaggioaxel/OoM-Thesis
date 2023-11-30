@@ -7,8 +7,10 @@ We chose to utilize a subset of the previous dataset (the one used in \cite{koly
 This choice has been motivated by the necessity to have many short samples that clearly present an origin of movement instead of few samples that are hard to infer in terms of origin of movement, in order to 
 reach a high-quality data that can be used in machine learning techniques that will be explained in Section \ref{sec:ml_method}.\\
 Another modifica che abbiamo fatto al precedente lavoro è stato confrontare due metodi di misura di similarità, quello implementato nel lavoro originale e la Cosine Similarity (concept explained in Section \ref{subsec:cosine_sim})
-Infine abbiamo ridotto la teoria dei giochi a semplice weighted degree centrality
-Therefore, we opted for WDC (Weighted Degree Centrality) to determine the perceived origin of the movement for the algorithmic approach.\\
+Inoltre abbiamo ridotto la teoria dei giochi a semplice weighted degree centrality per velocizzare la pipeline ed evitare il calcolo di $20!$ coalizioni.\\
+Infine abbiamo spostato la convalidazione dei frammenti a inizio pipeline utilizzando un meccanismo di validazione a più step tra annotatori esperti e non, di modo da ridurre al minimo l'effetto che i bias avrebbero potuto introdurre nel modello che poi avremmo utilizzato.
+
+TODO DECIDERE SE COENS KAPPA
 Furthermore for visualization purposes we implemented a method to prevent inconsistent coloring behaviours among clusters over time, by introducing a novel cluster stabilization algorithm. 
 
 \section{Roadmap}
