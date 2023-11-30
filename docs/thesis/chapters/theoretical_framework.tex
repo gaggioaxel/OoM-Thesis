@@ -572,7 +572,7 @@ So in general, even if it aims to improve the classification of the minority cla
 \subsection{Random Forest Classifier}
 \label{subsec:RF}
 
-A \textbf{Decision Tree} (DT) is a non-parametric supervised learning algorithm, which is utilized for both classification and regression tasks. 
+\paragraph{Decision Tree} A (DT) is a non-parametric supervised learning algorithm, which is utilized for both classification and regression tasks. 
 It has a hierarchical, tree structure, which consists of a internal nodes, leaf nodes and branches.
 From the root node, splitting criterias are applied on the samples creating branches and child nodes that lead to leaf nodes which represent the final classification of the tree.
 The most common impurity measure used to quantify the impurity of a dataset is the Gini criterion:
@@ -630,8 +630,8 @@ The term \textit{value} represents the distribution of classes or labels of the 
 It is a vector that indicates how many training samples in that node belong to each class or category. 
 For instance, if we see $value$ = [0, 2], it means that there are 0 samples belonging to class \textit{Not Approved} and 2 samples belonging to class \textit{Approved} in that node.
 This example is simply used for showing the behaviour of a DT\\
-\clearpage
-\textbf{Random Forest} is an ensemble learning method that builds multiple DTs during training and combines their predictions to make more accurate and robust classifications or regressions.
+
+\paragraph{Random Forest} is an ensemble learning method that builds multiple DTs during training and combines their predictions to make more accurate and robust classifications or regressions.
 A RF is typically constructed in this way:
 \begin{enumerate}
   \item \textbf{Bootstrapped Data:} A random subset of the training data (with replacement) is used to train each DT. This results in each tree being trained on a slightly different dataset.
@@ -641,7 +641,6 @@ A RF is typically constructed in this way:
 \end{enumerate}
 The key idea behind the RF method is that by aggregating the predictions of multiple DTs, the ensemble can reduce overfitting, improve generalization, and provide more robust and accurate results.
 For example the Figure \ref{fig:rf} is shown a RF classifier made of 3 DTs has been created applying the bootstrap method on the dataset and correctly classifies the first sample of the dataset in Table \ref{tab:tableDecisionTreeDataset}.
-\clearpage
 \begin{figure}[H]
   \centering
   \begin{subfigure}{0.49\linewidth}

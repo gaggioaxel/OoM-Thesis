@@ -69,7 +69,7 @@ The following figures (Figure \ref{fig:64markers}, Figure \ref{fig:41markers}) r
     \caption{Markers Set with 41 Labels}
     \label{fig:41markers}
 \end{figure}
-
+\clearpage
 \section{Reduced Marker Set}
 \label{sec:reduced_markers}
 Firstly, we standardized the marker labels following the 64-marker scheme, 
@@ -77,13 +77,10 @@ we renamed some of the 41-marker labels to align with the full version (Table \r
 
 The reduced marker set is achieved by reducing the count of markers employed from the full marker set.
 This because a simplified skeletal framework can adeptly communicate essential insights about expressive movements.
-The reduction of multiple markers into individual joints is implemented to mitigate the possibility of marker omission. \\
-This reduction was performed by computing the $barycentre$ of grouped joints (following the grouping scheme provided in Table \ref{tab:marker_mapping_64}) as follows:
-\begin{enumerate}
-    \item Extract the $x$, $y$, $z$ $coordinates$ for each marker of the cluster.
-    \item Compute for each of $x$, $y$, $z$ their average, by summing all the $x$-markers together
-    (and similarly for $y$ and $z$) and then dividing by the number of markers in the cluster.
-\end{enumerate} 
+The reduction process involved computing the \textit{barycenter} of grouped joints, following the specified grouping scheme provided in Table \ref{tab:marker_mapping_64}. 
+Initially, the coordinates ($x$, $y$, $z$) for each marker within the cluster were extracted. 
+Subsequently, the averages of each cohordinate was calculated.
+The joints are considered all equally weighted.
 
 \begin{table}[H]
     \centering
@@ -143,6 +140,7 @@ This reduction was performed by computing the $barycentre$ of grouped joints (fo
     \label{tab:marker_mapping_64}
 \end{table}
 
+\clearpage
 \section{Annotations}
 \label{sec:annotations}
 Starting from the recordings of movements from these sources, we selected about one hundred segments in which we could clearly identify the origin of the movement.\\

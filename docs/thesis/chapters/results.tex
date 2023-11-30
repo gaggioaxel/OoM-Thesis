@@ -39,8 +39,8 @@ TODO controllare probabilità
 
 In Figure \ref{fig:wdc_results} we can see the distribution of the results for each edge of the dataset with respecto to their ground truth.
 The WDC method seems to perform reasonably well in classifying sources of movement in the upper part of the body, where there are generally a greater number of edges per node.
-But performs generally bad on lower body and the most borderline nodes (those connected to the rest of the graph by only one arc)
-This might suggest that by varying the number of clusters to allow for the creation of smaller clusters, perhaps using a hierarchical clustering approach, it could be possible to isolate multiple splits of the same body part . 
+But performs generally bad on lower body and the most borderline nodes (those connected to the rest of the graph by only one arc).\\
+This might suggest that by varying the number of clusters to allow for the creation of smaller clusters, perhaps using a hierarchical clustering approach, it could be possible to isolate multiple splits of the same body part.\\ 
 However, it is essential to take these results with caution because the dataset is very small and certainly does not have a statistically significant sample of each class. 
 Nevertheless, it remains a good starting point. \\
 
@@ -114,7 +114,7 @@ Furthermore, the additional smoothing technique allows to better see the evoluti
 
 \paragraph{Prior Attempts}
 The refinement process of the results went through various attempts, as illustrated here. 
-We began with the Random Forest (RF) as the initial model, suggested as the best option in previous works in the field of motion analysis \cite{oneto:2020}, with a hyperparameter $n\_estimators = 400$, a generally sufficient value.
+We began with the RF as the initial model, suggested as the best option in previous works in the field of motion analysis \cite{oneto:2020}, with a hyperparameter $n\_estimators = 400$, a generally sufficient value.
 
 The tests to identify the best model were performed on the most frequent edge of the dataset, \textit{left\_hand - left\_wrist}, aiming to balance TPR and TNR.
 
@@ -124,7 +124,7 @@ These samples were then used for balanced training.
 
 The initial results were quite promising, as depicted in the confusion matrix shown in Table \ref{tab:ml_results_cm_trial1}. 
 However, we decided to discard the undersampling approach, considering that with an already limited number of diverse movements, further reducing the number of samples would lead to significant information loss. 
-This conclusion is also supported by the relatively high False Positive rates, indicating that the model tends to classify a sample as positive with too much confidence.
+This conclusion is also supported by the relatively high FP rates, indicating that the model tends to classify a sample as positive with too much confidence.
 \begin{table}[H]
   \centering
   \renewcommand{\arraystretch}{1.5} % Aumenta lo spazio tra le righe del doppio
@@ -150,7 +150,7 @@ Even applying a \textit{Random Oversampling} strategy to the minority class (whi
   8 & 1 \\
   \hline
   \end{tabular}
-  \caption{Confusion matrix for Random Undersampler and LOOCV strategy}
+  \caption{Confusion matrix for Random Oversampler and LOOCV strategy}
   \label{tab:ml_results_cm_trial2}
 \end{table}
 We realized during the various trials that to achieve better results, we needed to carefully choose the resampling strategy. 
@@ -191,11 +191,41 @@ Below, in Table \ref{tab:ml_results_cm_trial3} and \ref{tab:ml_results_cm_trial4
   \caption{Confusion matrices of the SMOTE and ADASYN algorithms}
 \end{figure}
 
-Finally, considered the potential presence of zones with single points that might have been marginalized during the minimization phase of the Gini impurity loss function and others that could be more dense, which means that are been sufficiently represented, we opted for a variation of the SMOTE.
+In general, these methods exhibit promising results with almost no parameterization required. 
+However, a notable observation is that while the \textit{Random Undersampler} demonstrates similar and high TPR and TNR, it might be challenging to improve significantly due to its simplicity. 
+The same notion applies to the \textit{Random Oversampler}.
+
+Regarding SMOTE and ADASYN, they compete with each other, but ADASYN remains challenging to apply because of its reduced number of samples, making it difficult to infer from such a limited data distribution.
+In Table \ref{tab:ml_trials_metrics}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{||>{\centering\arraybackslash}p{5.0cm}||>{\centering\arraybackslash}p{1.5cm}||>{\centering\arraybackslash}p{1.5cm}||>{\centering\arraybackslash}p{1.5cm}||>{\centering\arraybackslash}p{2.5cm}||}
+  \hline
+  \textbf{Method} & \textbf{TPR} & \textbf{TSS} &\textbf{TNR} &\textbf{Accuracy}\\
+  \hline
+  Random Undersampler & 78\% & 79\% & 80\% & 82\%  \\
+  \hline
+  Random Oversampler & 11\% & 56\% & 100\% & 87\%  \\
+  \hline
+  SMOTE & 33\% & 66\% & 98\% & 88\%  \\
+  \hline
+  ADASYN & 44\% & 72\% & 100\% & 92\%  \\
+  \hline
+  \end{tabular}
+  \caption{Metrics of different methods on the most frequent class of the dataset}
+  \label{tab:ml_trials_metrics}
+\end{table}
+
+Finally, considered the potential presence of zones with single points that might have been marginalized during the minimization phase of the Gini impurity loss function and others that could be more dense, which means that are been sufficiently represented, we opted for a variation of the SMOTE.\\
 This assumpution lead us to the B-SMOTE to have a better representativeness of those marginalized samples. 
 By balancing the two characteristic hyperparameters of B-SMOTE (\textit{k\_neighbors} and \textit{m\_neighbors}) in proportion to the ratio between the sizes of the two classes, we aimed to refine the model.
 
-The final result was based on expanding the minority class, training a Random Forest with numerous trees to thoroughly comprehend the best features to select, and subsequently reducing the learning of a second forest optimized on a smaller subset of features.
+The final result was based on expanding the minority class, training a RF with numerous trees to thoroughly comprehend the best features to select, and subsequently reducing the learning of a second forest optimized on a smaller subset of features.
+
+
+
+
 
 \paragraph{Best Results}
 In the following Tables (from \ref{tab:ml_results_cm_joints} to \ref{tab:ml_results_cm_body_parts}), there are the confusion matrices, the TPR, TSS, TNR and the Accuracy score for the final model defined in Section \ref{sec:ml_method} in our three formulations:
@@ -459,35 +489,10 @@ Moreover, with an AUC of $0.83$, it's evident that the model has almost reached 
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{ROC_AUC_result_best_joint.png}
+  \includegraphics[width=\textwidth]{ROC_AUC_result_best_joint.png}
   \caption{ROC curve of the most frequent joint of the dataset}
   \label{fig:roc_auc_results}
 \end{figure}
-
-
-
-\begin{table}[H]
-  \centering
-  \begin{tabular}{||>{\centering\arraybackslash}p{5.0cm}||>{\centering\arraybackslash}p{1.3cm}||>{\centering\arraybackslash}p{1.2cm}||>{\centering\arraybackslash}p{1.3cm}||>{\centering\arraybackslash}p{1.9cm}||}
-  \hline
-  \textbf{Method} & \textbf{TPR} & \textbf{TSS} &\textbf{TNR} &\textbf{Accuracy}\\
-  \hline
-  Random Undersampler & 78\% & 79\% & 80\% & 82\%  \\
-  \hline
-  Random Oversampler & 11\% & 56\% & 100\% & 87\%  \\
-  \hline
-  SMOTE & 33\% & 66\% & 98\% & 88\%  \\
-  \hline
-  ADASYN & 22\% & 60\% & 98\% & 87\%  \\
-  \hline
-  \end{tabular}
-  \caption{Metrics of different methods on the most frequent class of the dataset}
-  \label{tab:ml_tentativi}
-\end{table}
-
-
-
-
 
 \clearpage
 
