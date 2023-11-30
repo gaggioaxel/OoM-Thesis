@@ -1,4 +1,5 @@
 \chapter{Results and Discussion}
+\label{chapter:results}
 TODO da rivedere se coerente
 
 In questa sezione sono presentati, i risultati del migliore approccio, descritto anche nel Capitolo METODOLOGIA vari tentativi fatti, quelli del processo di raffinamento risultati ottenuti conclusions are drawn regarding the study of OoM and the improved visualization of skeletal clusters.
@@ -362,3 +363,31 @@ Moreover, with an AUC of $0.83$, it's evident that the model has almost reached 
   \caption{ROC curve of the most frequent joint of the dataset}
   \label{fig:roc_auc_results}
 \end{figure}
+
+
+
+
+\section{Future researches}
+\label{sec:future_researches}
+There are several possible future extensions of this work, that could improve on the method and yield better results. \\
+
+To improve prediction accuracy, we aim to expand the dataset and ensure balance by incorporating new, intentionally designed movement segments.
+This will be done without introducing overly intricate motions that could potentially complicate the movement classification.\\
+
+In future revisions, with a more extensive dataset, additive methods could be employed to measure the amount of useful information added by the WDC approach in a classification problem compared to the other high-level features used.
+To move towards real-time automatic classification, markerless MoCap can be useful.\\
+
+Achieving real-time classification with a marker-based system is highly improbable.
+Although markerless systems may exhibit lower precision in comparison to marker-based systems, 
+they represent a viable alternative for real-world applications.\\
+
+Another potential future expansion of this concept could involve a study on movement fragments characterized by multiple origins.
+This would be valuable in examining, for instance, during the act of catching a ball, whether the movement origin is symmetrically distributed throughout the body or if there is a dominant component compared to the others.\\
+
+The final extension of our thesis involves the examination of small groups of individuals and the exploration of how coordinated movement patterns emerge within these groups.
+In this context, we conceptualize a group as a cohesive entity, similar to an organism.
+Instead of treating individual joints as players, we may adopt a similar approach within the framework of graph and game theory, but at a higher anatomical level.
+Here, the group of individuals operates as a cohesive unit, where each person in the group takes on the role of a player. 
+This approach enables us to examine leading behaviors, including those exhibited by individual initiators whose movements influence the entire group.
+In scenarios with a limited number of potential permutations for clustering, the advantages between favoring the Hungarian algorithm or the brute force approach are not substantial. 
+However, in more intricate situations involving numerous nodes, such as those with groups of people, selecting the most efficient algorithm for graph manipulation becomes crucial to achieve real-time feasibility.
