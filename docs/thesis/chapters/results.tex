@@ -29,12 +29,13 @@ Therefore, it was chosen as the similarity function for this specific dataset.
 
 From here on, the graphs will reflect the results obtained using cosine similarity as the measurement method.
 While these results may not be exceptional, they still outperform a random approach, in which two random nodes are selected and compared to the ground truth. \\
-Infact such an approach, achieves an accuracy of 19\% 
+Infact such an approach, achieves an accuracy of 19.4\% 
 The formula to calculate the probability of picking at least one joint of the two is shown in Equation \ref{eq:prob_rand}
 \begin{equation}
-  \mathbb{P}(\textit{"picking at least one of the two joints"}) = 2 \cdot \frac{2}{20} \cdot \frac{18}{20} + \frac{2}{20} \cdot \frac{2}{20} = \frac{19}{100}
+  \mathbb{P}(\textit{picking at least one of the two joints}) = \frac{\binom{2}{1} \binom{18}{1}}{\binom{20}{2}} + \frac{\binom{2}{2} \binom{18}{0}}{\binom{20}{2}} = \frac{37}{190} \cong 19.4 \%
   \label{eq:prob_rand}
 \end{equation}
+  
 %TODO controllare probabilità
 
 In Figure \ref{fig:wdc_results} we can see the distribution of the results for each edge of the dataset with respecto to their ground truth.
