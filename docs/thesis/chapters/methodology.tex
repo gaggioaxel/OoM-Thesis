@@ -643,12 +643,168 @@ The following figure shows the matching with the utility value for every possibl
   \caption{Bipartite Matching from instant \textit{t} to instant \textit{t+1}}
   \label{fig:clust_match}
 \end{figure}
+We explored two algorithmns for computing the MaxWPM.
 \clearpage
 
-We explored two algorithmns for computing the MaxWPM.
+\paragraph{Hungarian Matching}
+One approach consists in applying the Hungarian Algorithm which is a combinatorial optimization algorithm that also solves the assignment problem.\\
+Now let's see the previous example solved with this algorithm in the Table \ref{tab:hung_alg_appl}:
+The initial step (a) involves working with a table describing the utility values associated with each assignment. Each cell in this table represents the cost or utility of assigning a task to a resource.
 
-\paragraph{Brute Force} for choosing an option based on the minimum sum of utility values of a graph involves exhaustively evaluating every possible combination of options to find the one with the highest total weight. 
+In (b) we inverted each element in the table to obtain the cost value associated with each assignment. This step transforms the utility table into a cost table, turning the problem into a minimization one.
+
+For each row in the cost table, subtract the smallest value in that row from all the elements (c).
+
+Similarly, for each column in the table, subtract the smallest value in that column from all the elements (d).
+
+Draw the minimum number of lines required to cover rows and columns that have zero entries (e). Since the number of lines equals the number of rows, we can already reach an optimal solution.
+
+Starting from the top-left corner, select a zero that doesn't cover any other zeros (f). This selection initiates the assignment process.
+
+Continue by selecting cells that cover the minimum number of zeros for each row and are not in columns that have already been covered (g).
+
+Proceed by selecting the remaining cell that hasn't been covered by any column (h). We reached the end of the assignment process.
+
+Finally, revert back to the original cost matrix (i).
+
+\begin{table}[H]
+  \centering
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      6 & 4 & 0 \\
+      \hline
+      4 & 0 & 0 \\
+      \hline
+      2 & 0 & 4 \\
+      \hline
+    \end{tabular}
+    \caption*{(a)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      -6 & -4 & 0 \\
+      \hline
+      -4 & 0 & 0 \\
+      \hline
+      -2 & 0 & -4 \\
+      \hline
+    \end{tabular}
+    \caption*{(b)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      0 & 2 & 6 \\
+      \hline
+      0 & 4 & 4 \\
+      \hline
+      2 & 4 & 0 \\
+      \hline
+    \end{tabular}
+    \caption*{(c)}
+  \end{minipage}
+
+  \vspace{5pt}
+
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      0 & 0 & 6 \\
+      \hline
+      0 & 2 & 4 \\
+      \hline
+      2 & 2 & 0 \\
+      \hline
+    \end{tabular}
+    \caption*{(d)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 6 \\
+      \hline
+      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 2 & \cellcolor{gray!25} 4 \\
+      \hline
+      2 & 2 & \cellcolor{gray!25} 0 \\
+      \hline
+    \end{tabular}
+    \caption*{(e)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 6 \\
+      \hline
+      \cellcolor{green!75} 0 & \cellcolor{gray!25} 2 & \cellcolor{gray!25} 4 \\
+      \hline
+      2 & 2 & \cellcolor{gray!25} 0 \\
+      \hline
+    \end{tabular}
+    \caption*{(f)}
+  \end{minipage}
+
+  \vspace{5pt}
+
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 6 \\
+      \hline
+      \cellcolor{green!75} 0 & \cellcolor{gray!25} 2 & \cellcolor{gray!25} 4 \\
+      \hline
+      2 & 2 & \cellcolor{green!75} 0 \\
+      \hline
+    \end{tabular}
+    \caption*{(g)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      0 & \cellcolor{green!75} 0 & 6 \\
+      \hline
+      \cellcolor{green!75} 0 & 2 & 4 \\
+      \hline
+      2 & 2 & \cellcolor{green!75} 0 \\
+      \hline
+    \end{tabular}
+    \caption*{(h)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
+      \hline
+      6 & \cellcolor{green!75} 4 & 0 \\
+      \hline
+      \cellcolor{green!75} 4 & 0 & 0 \\
+      \hline
+      2 & 0 & \cellcolor{green!75} 4 \\
+      \hline
+    \end{tabular}
+    \caption*{(i)}
+  \end{minipage}
+  \caption{Application of the Hungarian Algorithm to clusters stabilization}
+  \label{tab:hung_alg_appl}
+\end{table}
+
+\paragraph{Brute Force} Another approach consists in a brute force method for choosing an option based on the minimum sum of utility values of a graph involves exhaustively evaluating every possible combination of options to find the one with the highest total weight. 
 This method consists of enumerating all possible subsets or combinations of options within the graph, computing theier sum of weights, ranking results and choosing the best one.
+It can be also used to validate the first one.
 The Table \ref{tab:bf_alg} is a clear example of this approach. \\   
 
 \begin{table}[H]
@@ -745,157 +901,6 @@ The Table \ref{tab:bf_alg} is a clear example of this approach. \\
 
 BF approach guarantees finding the best option, it can be computationally expensive, especially for large graphs.
 As we can see, here we have the computation of all the \textit{n!} permutations and the minimum one is (e).
-
-\paragraph{Hungarian Matching}
-The second approach consists in applying the Hungarian Algorithm which is a combinatorial optimization algorithm that also solves the assignment problem.\\
-Now let's see the previous example solved with this algorithm in the Table \ref{tab:hung_alg_appl}: 
-\begin{enumerate}
-  \item[(a)] From the original table that describes the utility value associated for every assignment
-  \item[(b)] Invert each element to obtain the cost value of every assignment, since we want to minimize it 
-  \item[(c)] Now, subtract the smallest value for each row
-  \item[(d)] Subtract the smallest value for each column 
-  \item[(e)] Draw the minimum number of lines to cover the rows and columns that have 0 entries
-            There are 3 rows this means that we can find the optimal solution, since there are 3 rows
-  \item[(f)] Starting from the top-left corner select the zero that does not cover other zeros in any uncovered row or column
-  \item[(g)] Select cells that does cover the less amount of 0 for each row and has not the column already covered, so the zero in the bottom right corner
-  \item[(h)] Select the remaining cell that is not already covered by any column
-  \item[(i)] Restore the original cost matrix 
-\end{enumerate}
-
-\begin{table}[H]
-  \centering
-  \begin{minipage}{0.3\textwidth}
-    \centering
-    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-      \hline
-      6 & 4 & 0 \\
-      \hline
-      4 & 0 & 0 \\
-      \hline
-      2 & 0 & 4 \\
-      \hline
-    \end{tabular}
-    \caption*{(a)}
-  \end{minipage}
-  \hfill
-  \begin{minipage}{0.3\textwidth}
-    \centering
-    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-      \hline
-      -6 & -4 & 0 \\
-      \hline
-      -4 & 0 & 0 \\
-      \hline
-      -2 & 0 & -4 \\
-      \hline
-    \end{tabular}
-    \caption*{(b)}
-  \end{minipage}
-  \hfill
-  \begin{minipage}{0.3\textwidth}
-    \centering
-    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-      \hline
-      0 & 2 & 6 \\
-      \hline
-      0 & 4 & 4 \\
-      \hline
-      2 & 4 & 0 \\
-      \hline
-    \end{tabular}
-    \caption*{(c)}
-  \end{minipage}
-
-  \vspace{10pt}
-
-  \begin{minipage}{0.3\textwidth}
-    \centering
-    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-      \hline
-      0 & 0 & 6 \\
-      \hline
-      0 & 2 & 4 \\
-      \hline
-      2 & 2 & 0 \\
-      \hline
-    \end{tabular}
-    \caption*{(d)}
-  \end{minipage}
-  \hfill
-  \begin{minipage}{0.3\textwidth}
-    \centering
-    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-      \hline
-      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 6 \\
-      \hline
-      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 2 & \cellcolor{gray!25} 4 \\
-      \hline
-      2 & 2 & \cellcolor{gray!25} 0 \\
-      \hline
-    \end{tabular}
-    \caption*{(e)}
-  \end{minipage}
-  \hfill
-  \begin{minipage}{0.3\textwidth}
-    \centering
-    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-      \hline
-      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 6 \\
-      \hline
-      \cellcolor{green!75} 0 & \cellcolor{gray!25} 2 & \cellcolor{gray!25} 4 \\
-      \hline
-      2 & 2 & \cellcolor{gray!25} 0 \\
-      \hline
-    \end{tabular}
-    \caption*{(f)}
-  \end{minipage}
-
-  \vspace{10pt}
-
-  \begin{minipage}{0.3\textwidth}
-    \centering
-    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-      \hline
-      \cellcolor{gray!25} 0 & \cellcolor{gray!25} 0 & \cellcolor{gray!25} 6 \\
-      \hline
-      \cellcolor{green!75} 0 & \cellcolor{gray!25} 2 & \cellcolor{gray!25} 4 \\
-      \hline
-      2 & 2 & \cellcolor{green!75} 0 \\
-      \hline
-    \end{tabular}
-    \caption*{(g)}
-  \end{minipage}
-  \hfill
-  \begin{minipage}{0.3\textwidth}
-    \centering
-    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-      \hline
-      0 & \cellcolor{green!75} 0 & 6 \\
-      \hline
-      \cellcolor{green!75} 0 & 2 & 4 \\
-      \hline
-      2 & 2 & \cellcolor{green!75} 0 \\
-      \hline
-    \end{tabular}
-    \caption*{(h)}
-  \end{minipage}
-  \hfill
-  \begin{minipage}{0.3\textwidth}
-    \centering
-    \begin{tabular}{|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|>{\centering\arraybackslash}m{0.6cm}|}
-      \hline
-      6 & \cellcolor{green!75} 4 & 0 \\
-      \hline
-      \cellcolor{green!75} 4 & 0 & 0 \\
-      \hline
-      2 & 0 & \cellcolor{green!75} 4 \\
-      \hline
-    \end{tabular}
-    \caption*{(i)}
-  \end{minipage}
-  \caption{Application of the Hungarian Algorithm to clusters stabilization}
-  \label{tab:hung_alg_appl}
-\end{table}
 
 \subsection{Clustering Transition Smoothing}
 \label{subsec:clusters_smoothing}
@@ -1003,7 +1008,7 @@ Here are all the functions calculated for every sample of the dataset (note that
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.85\textwidth]{iqr.png}
-            \caption{Interquantile range of a normal distribution TODO va fatta non colorata ma con una freccia}
+            \caption{Interquantile range of a normal distribution}
             \label{fig:iqr}
         \end{figure}
 \textbf{Fundamental Frequency Signal} from the Discrete Fourier Transform (DFT):
@@ -1067,7 +1072,7 @@ Here is the operative Python code for the extraction of the features from the ra
 The initial approach involves a simple binary classification of the origin of the movement in a specific edge or not.
 If the results had been satisfactory, we would then have opted to evaluate progressively more complex models, eventually leading to the multiclass classification.
 We started by addressing the issue of imbalanced data in classification.
-La scelta del LOOCV è stata motivata dalla presenza di un dataset molto piccolo che permette di computare il massimo numero di cicli di addestramento di modo da avere un modello praticamente unbiased.
+The choice of LOOCV was motivated by the presence of a very small dataset, allowing us to compute the maximum number of training cycles to have a virtually unbiased model.
 
 To mitigate this imbalance, a resampling technique known as B-SMOTE is employed (\textit{BS1}). 
 This technique equalizes the number of training samples for the minority class with that of the majority class at each iteration.
@@ -1078,8 +1083,7 @@ The operational concept is detailed in Section \ref{subsec:borderline}.
 Following the resampling of the training data, a RF classifier (\textit{RF1}) is trained on this newly balanced dataset.
 To further optimize the classifier's performance, a feature selection process is employed with the goal of identifying the most influential features that contribute to accurate classification.
 The most important features are determined through the training of \textit{RF1} on the resampled data. 
-These features are selected based on the amount of information that they provide in the classification task.
-In particular the selection is based on the Gini importance of the feature across all the trees. \\
+These features are selected based on the amount of information that they provide in the classification task weighting Gini importance of the feature across all the trees. \\
 Subsequently, a new RF classifier (\textit{RF2}) is trained using only the 50 most important features of the previous model, with the \textit{max\_features} hyperparameter tuned to choose among all the available features in each split.
 To evaluate the performance of the classifier, a test set is chosen using LOOCV, as detailed in Section \ref{subsec:cross_validation}. 
 
