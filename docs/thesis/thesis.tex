@@ -19,16 +19,19 @@ titlepage=on            % own page for each title page
 \include{frontmatter/cover.tex}
 \newpage
 
+
 \pagenumbering{roman}			    % roman page numbering 
 \pagestyle{plain}				    % empty header, just page number in footer
-
-%\include{chapters/acknowledgments.tex}
-%\include{chapters/abstract.tex}
 
 \newpage
 
 \setcounter{tocdepth}{3}		% define depth of toc
 \tableofcontents				% display table of contents
+\newpage
+
+\newpage
+\thispagestyle{empty}
+\mbox{} % Testo vuoto per garantire la creazione di una pagina completamente bianca
 \newpage
 
 \addcontentsline{toc}{section}{\textbf{List of Figures}}
@@ -39,8 +42,12 @@ titlepage=on            % own page for each title page
 \listoftables
 \newpage
 
+\newpage
+\thispagestyle{empty}
+\mbox{} % Testo vuoto per garantire la creazione di una pagina completamente bianca
+\newpage
+
 \include{chapters/acronyms.tex}
-\cleardoublepage
 
 % --------------------------
 % Main matter
@@ -51,6 +58,7 @@ titlepage=on            % own page for each title page
 \pagestyle{fancy} 	            % fancy header and footer
 \parskip=7pt                    % space after each paragraph
 \parindent=0pt                  % suppress indentation of paragraphs
+
 
 %\part{Background}
 \include{chapters/introduction.tex}
