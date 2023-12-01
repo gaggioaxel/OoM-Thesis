@@ -667,7 +667,7 @@ For example the Figure \ref{fig:rf} is shown a RF classifier made of 3 DTs has b
 \subsection{Cross Validation}
 \label{subsec:cross_validation}
 
-\textbf{Cross Validation} is a technique used to estimate the effectiveness of a ML model based on a data sample.
+\paragraph{Cross Validation} is a technique used to estimate the effectiveness of a ML model based on a data sample.
 It involves dividing the dataset into multiple training and testing subsets called \textit{folds} and then training and evaluating the model on each fold.
 The process of training and testing is typically repeated multiple times and the results from each iteration are often averaged to provide an overall estimate of the model's performance.
 The most common approach in basic cross-validation is to use a 80-20 or 70-30 split between the training and test sets.\\
@@ -676,7 +676,8 @@ This entails maintaining the same proportion of different classes or categories 
 While random splitting is often sufficient, there are instances, particularly in intricate datasets, where we must deliberately enforce the correct distribution of classes within each fold to maintain data integrity.
 \\
 
-\textbf{Leave-One-Out Cross-Validation} (LOOCV) is a specific type of cross-validation where the number of folds $k$ is set equal to the number of samples in the dataset $n$. 
+\paragraph{Leave-One-Out Cross-Validation} (LOOCV) is a specific type of cross-validation where the number of folds $k$ is set equal to the number of samples in the dataset $n$. 
+\label{subsec:loocv_theoretical}
 In this approach, the model undergoes training k times, with k being precisely the total number of samples $n$.
 During each of the \textit{k} iterations, a distinct sample is singled out as the test set, while all the remaining samples are utilized for model training. 
 This procedure ensures that every single sample gets its turn as the test set, comprehensively assessing the model's performance across the entire dataset.
@@ -690,14 +691,12 @@ The evaluation metric is based on the consistency between the predicted values a
     \label{fig:LOOCV}
 \end{figure}
 
-However, LOOCV has some downsides:
-\begin{itemize}
-  \item \textbf{Computational Cost:} It can be computationally expensive, especially on large datasets, as it requires a significant number of separate model trainings. 
-  Training the model repeatedly for each sample can be time-consuming and resource-intensive.
-  \item \textbf{Variance:} In some cases, LOOCV may have high variance because it relies on the performance of a single sample as the test set in each iteration. 
-  This can lead to variability in the estimated performance.
-\end{itemize}  
-    
+However, LOOCV has some downsides because it can be computationally expensive, especially on large datasets, as it requires a significant number of separate model trainings. 
+Training the model repeatedly for each sample can be time-consuming and resource-intensive.
+Instead, it's important to emphasize that although it's the preferable choice for small datasets, as it allows an unbiased estimation of the model's accuracy, in some cases, it can lead to high variance. 
+This phenomenon has been observed especially in situations with the presence of outliers in the dataset and unstable models across multiple specific studies \cite{kohavi:1995,bengio:2003,zhang:2015}.
+
+Moreover, utilizing RF as a model for high-dimensional, small-sample, and high-complexity datasets has been shown to further increase instability in repeated runs \cite{wang:2016}, adding an additional layer of averaging of results across multiple runs to obtain more truthful outcomes.
 \subsection{Evaluation Metrics}
 \label{subsec:evaluation_metrics}
 

@@ -1003,7 +1003,7 @@ Here are all the functions calculated for every sample of the dataset (note that
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.85\textwidth]{iqr.png}
-            \caption{Interquantile range of a normal distribution}
+            \caption{Interquantile range of a normal distribution TODO va fatta non colorata ma con una freccia}
             \label{fig:iqr}
         \end{figure}
 \textbf{Fundamental Frequency Signal} from the Discrete Fourier Transform (DFT):
@@ -1067,6 +1067,8 @@ Here is the operative Python code for the extraction of the features from the ra
 The initial approach involves a simple binary classification of the origin of the movement in a specific edge or not.
 If the results had been satisfactory, we would then have opted to evaluate progressively more complex models, eventually leading to the multiclass classification.
 We started by addressing the issue of imbalanced data in classification.
+La scelta del LOOCV è stata motivata dalla presenza di un dataset molto piccolo che permette di computare il massimo numero di cicli di addestramento di modo da avere un modello praticamente unbiased.
+
 To mitigate this imbalance, a resampling technique known as B-SMOTE is employed (\textit{BS1}). 
 This technique equalizes the number of training samples for the minority class with that of the majority class at each iteration.
 B-SMOTE generates additional samples for the minority class to balance the number of samples of the majority class.

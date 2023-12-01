@@ -487,12 +487,33 @@ By default the RF will apply a threshold of $0.5$ (in other words classify as po
 
 Moreover, with an AUC of $0.83$, it's evident that the model has almost reached curve saturation. This signifies the model's high performance level.
 
-\begin{figure}
+\begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{ROC_AUC_result_best_joint.png}
+  \includegraphics[width=0.66\textwidth]{ROC_AUC_result_best_joint.png}
   \caption{ROC curve of the most frequent joint of the dataset}
   \label{fig:roc_auc_results}
 \end{figure}
+
+Moreover, it is essential to note that the results remained unstable, and the previous ones were the best outcomes across multiple runs of the algorithm, as explained in Section \ref{subsec:loocv_theoretical} of the LOOCV.\\
+To compensate for this, 30 runs were executed, and the mean and variance of the main metrics were calculated.
+In Table \ref{tab:overall_results}, it can be observed that the metrics on the majority class remain generally high, but with a variability that exceeds 10\% in terms of standard deviation.
+Meanwhile, the minority class presents intermediate scores, as expected from the model.\\
+Finally, concerning the overall accuracy, it also averages at 0.868 with a standard deviation of 0.023.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{||>{\centering\arraybackslash}p{1.8cm}||>{\centering\arraybackslash}p{1.9cm}||>{\centering\arraybackslash}p{1.9cm}||>{\centering\arraybackslash}p{1.3cm}||>{\centering\arraybackslash}p{1.3cm}||>{\centering\arraybackslash}p{1.7cm}||>{\centering\arraybackslash}p{1.7cm}||}
+  \hline
+  \textbf{Class} & \textbf{precision mean} & \textbf{precision std} & \textbf{recall mean} &\textbf{recall std} &\textbf{f1-score mean} &\textbf{f1-score std} \\
+  \hline
+  Negative & 0.934 & 0.010 & 0.909 & 0.025 & 0.921 & 0.015 \\
+  \hline
+  Positive & 0.560 & 0.077 & 0.637 & 0.058 & 0.594 & 0.057 \\
+  \hline
+  \end{tabular}
+  \caption{Statistics of the metrics for the most frequent joint binary classification}
+  \label{tab:overall_results}
+\end{table}
 
 \clearpage
 
