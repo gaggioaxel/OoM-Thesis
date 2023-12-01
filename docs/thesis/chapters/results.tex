@@ -1,7 +1,12 @@
 \chapter{Results and Discussion}
 \label{chapter:results}
 In this section, we present the attempts made to achieve the best outcome along with the respective intermediate results obtained at various steps.
-We discuss the outcomes of the best approach, as described in Chapter \ref{chapter:methodology}, and the enhanced visualization of skeletal clusters. The originally planned work underwent modifications due to constraints posed by a limited and imbalanced dataset. Additionally, challenges were encountered in sourcing additional complete and consistent samples to augment the dataset.
+We discuss the outcomes of the best approach, as described in Chapter \ref{chapter:methodology}, and the enhanced visualization of skeletal clusters. The originally planned work underwent modifications due to constraints posed by a limited and imbalanced dataset. 
+Additionally, challenges were encountered in sourcing additional complete and consistent samples to augment the dataset.
+Despite achieving excellent results, the major limitation stemmed from the considerably small dataset. 
+Its limited size constrained the analysis to a binary classification, preventing the exploration of a multiclass classification approach. \\
+Consequently, the outcome was the ability to predict whether an origin was at a certain point or not within the realm of machine learning. 
+Due to the unfeasibility in machine learning, a decision was made not to pursue this approach in the algorithmic realm to maintain comparability in results. 
 
 Subsequent sections offer a summary of the accomplished results and potential implications. The focus lies on performance analysis concerning operational conditions and proposes future developments aimed at enhancing the obtained results.
 \section{Graph-based Framework}
@@ -28,15 +33,14 @@ Therefore, it was chosen as the similarity function for this specific dataset.
 \end{table}
 
 From here on, the graphs will reflect the results obtained using cosine similarity as the measurement method.
-While these results may not be exceptional, they still outperform a random approach, in which two random nodes are selected and compared to the ground truth. \\
-Infact such an approach, achieves an accuracy of 19.4\% 
-The formula to calculate the probability of picking at least one joint of the two is shown in Equation \ref{eq:prob_rand}
+While these results may not be exceptional, they still outperform a random approach, in which two random nodes are selected and compared to the ground truth.
+Infact such an approach, achieves an accuracy of 19.4\%,\\
+The formula to calculate the probability of picking at least one joint of the two by extracting two joints between the 20 available is shown in Equation \ref{eq:prob_rand}, where \textit{X} is the random variable representing the number of joints in the OoM, so \textit{X} takes values in \{0,1,2\}.
 \begin{equation}
-  \mathbb{P}(\textit{picking at least one of the two joints}) = \frac{\binom{2}{1} \binom{18}{1}}{\binom{20}{2}} + \frac{\binom{2}{2} \binom{18}{0}}{\binom{20}{2}} = \frac{37}{190} \cong 19.4 \%
+  \mathbb{P}(X\geq1) = \mathbb{P}(X=1)+\mathbb{P}(X=2) = \frac{\binom{2}{1} \binom{18}{1}}{\binom{20}{2}} + \frac{\binom{2}{2} \binom{18}{0}}{\binom{20}{2}} = \frac{37}{190} \approx  19.4 \%
   \label{eq:prob_rand}
 \end{equation}
-  
-%TODO controllare probabilità
+
 
 In Figure \ref{fig:wdc_results} we can see the distribution of the results for each edge of the dataset with respecto to their ground truth.
 The WDC method seems to perform reasonably well in classifying sources of movement in the upper part of the body, where there are generally a greater number of edges per node.
@@ -47,11 +51,47 @@ Nevertheless, it remains a good starting point. \\
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.85\textwidth]{wdc_results.png}
+  \includegraphics[width=0.89\textwidth]{wdc_results.png}
   \caption{Joints and frequency of the dataset and the correctly classified graph-based algorithm applied on the angular momentum feature}
   \label{fig:wdc_results}
 \end{figure}
 
+\clearpage
+
+In the first Figure \ref{fig:firstmax_wdc}, by computing the WDC for each sample in the dataset, it is evident that the joints with the highest WDC values are predominantly situated in the upper part of the body. 
+Particularly noteworthy is the observation that the right shoulder appears to be the most frequent.
+This anomaly might serve as an indicator of bias within the algorithm.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{firstmaxwdc.png}
+  \caption{Distribution of the nodes for first max of the WDC}
+  \label{fig:firstmax_wdc}
+\end{figure}
+
+In the second figure, the frequency distribution of joints with the second-highest WDC value is presented. 
+The joints appear to be more evenly distributed compared to the previous case. 
+In both scenarios, it is evident that the extremities, such as hands, feet, and head, never emerge as the joints with the highest WDC. 
+This observation is likely attributable to certain limitations in the cluster creation process, resulting in clusters with a node count that is certainly greater than 1.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{secondmaxwdc.png}
+  \caption{Distribution of the nodes for the second max WDC}
+  \label{fig:secondmax_wdc}
+\end{figure}
+
+In the last image, the pairs of adjacent nodes for each sample related to the edge classified as the OoM are depicted. 
+Overall, it appears that the combination of the first and second maximums better fits the dataset distribution, even though it struggles to identify peripheral nodes as OoM. 
+It's worth noting that the spine, as structured in the skeleton, would hardly be the origin of movement, and in our experiments, we never managed to recognize it.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{datasetDistributionWDC.png}
+  \caption{Distribution of the adjacent nodes of the edges' OoM in the dataset}
+  \label{fig:datasetdistrib_wdc}
+\end{figure}
+
+\clearpage
 \section{Clusters Stabilization}
 In this first example, in Figure \ref{fig:stabilization_results}, we can observe the results of stabilization of three clusters with the same color scheme applied on two different time instants. 
 In (a), the preceding time instant is visible, while (b) showcases the subsequent time instant in an unstabilized state. 
@@ -77,23 +117,28 @@ In the last one (Figure \ref{fig:qr_movement_smooth}), clusters' evolution is fu
 By further smoothing the clusters transition one can also visually inspect the appearing of multiple origins at the expense of the continuity of each cluster. 
 Infact with this method the clusters will have transitory frames in which are inconsistent.
 
+In conclusion, the MaxWPM algorithm is able to provide a clearer and more consistent visualization of clusters, allowing us to understand which joints are most similar during motion, without abrupt color changes. \\
+Furthermore, the additional smoothing technique allows to better see the evolution of clusters across a longer timespan also in those cases where in a short amount of time clusters still tend to change too fast.\\
+
+\clearpage
 \begin{figure}[H]
   \centering
-  \begin{subfigure}[b]{0.49\textwidth}
+  \begin{subfigure}[b]{0.45\textwidth}
     \centering
     \includegraphics[width=\textwidth]{qrcode_clustering_pure.png}
     \caption{}
     \label{fig:qr_movement_pure}
   \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.49\textwidth}
+  \hspace{0.08\textwidth}
+  \begin{subfigure}[b]{0.45\textwidth}
     \centering
     \includegraphics[width=\textwidth]{qrcode_clustering_stabilized.png}
     \caption{}
     \label{fig:qr_movement_stabilized}
   \end{subfigure}
   \hfill
-  \begin{subfigure}[b]{0.49\textwidth}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \vspace{0.6cm}
     \centering
     \includegraphics[width=\textwidth]{qrcode_clustering_smooth.png}
     \caption{}
@@ -102,13 +147,6 @@ Infact with this method the clusters will have transitory frames in which are in
   \caption{QR codes referencing to the pure clustering method (a), the stabilized version (b) and a combination of stabilization and smoothing (c)}
   \label{fig:qr_movements}
 \end{figure}
-\clearpage
-
-In conclusion, the MaxWPM algorithm is able to provide a clearer and more consistent visualization of clusters, allowing us to understand which joints are most similar during motion, without abrupt color changes. \\
-Furthermore, the additional smoothing technique allows to better see the evolution of clusters across a longer timespan also in those cases where in a short amount of time clusters still tend to change too fast.\\
-
-
-
 \clearpage
 
 \section{Machine Learning}
@@ -223,9 +261,6 @@ This assumpution lead us to the B-SMOTE to have a better representativeness of t
 By balancing the two characteristic hyperparameters of B-SMOTE (\textit{k\_neighbors} and \textit{m\_neighbors}) in proportion to the ratio between the sizes of the two classes, we aimed to refine the model.
 
 The final result was based on expanding the minority class, training a RF with numerous trees to thoroughly comprehend the best features to select, and subsequently reducing the learning of a second forest optimized on a smaller subset of features.
-
-
-
 
 
 \paragraph{Best Results}
@@ -359,8 +394,6 @@ we observed the TSS consistently exceeding halfway, signifying that the model is
 \end{table}
 
 
-
-
 \begin{table}[H]
   \centering
   \begin{subfigure}[b]{0.1\textwidth}
@@ -462,9 +495,9 @@ we observed the TSS consistently exceeding halfway, signifying that the model is
         \hline
         (m) & Head  & 14\% & 55\% & 96\% & 86\% \\
         \hline
-        \hline
     \end{tabular}
     \begin{tabular}{||>{\centering\arraybackslash}p{1.2cm}||>{\centering\arraybackslash}p{5.7cm}||>{\centering\arraybackslash}p{1.3cm}||>{\centering\arraybackslash}p{1.2cm}||>{\centering\arraybackslash}p{1.3cm}||>{\centering\arraybackslash}p{1.9cm}||}
+        \hline
         \textbf{Label} & \textbf{Body Part} & \textbf{TPR} & \textbf{TSS} & \textbf{TNR} & \textbf{Accuracy} \\
         \hline
         (n) & Upper & 79\% & 78\% & 76\% & 78\% \\
@@ -507,9 +540,9 @@ Finally, concerning the overall accuracy, it also averages at 0.868 with a stand
   \hline
   \textbf{Class} & \textbf{precision mean} & \textbf{precision std} & \textbf{recall mean} &\textbf{recall std} &\textbf{f1-score mean} &\textbf{f1-score std} \\
   \hline
-  Negative & 0.934 & 0.010 & 0.909 & 0.025 & 0.921 & 0.015 \\
+  Negative & 93.4\% & 1\% & 90.9\% & 2.5\% & 92.1\% & 1.5\% \\
   \hline
-  Positive & 0.560 & 0.077 & 0.637 & 0.058 & 0.594 & 0.057 \\
+  Positive & 56\% & 7.7\% & 63.7\% & 5.8\% & 59.4\% & 5.7\% \\
   \hline
   \end{tabular}
   \caption{Statistics of the metrics for the most frequent joint binary classification}
@@ -523,7 +556,7 @@ Finally, concerning the overall accuracy, it also averages at 0.868 with a stand
 \label{sec:future_researches}
 There are several possible future extensions of this work, that could improve on the method and yield better results. \\
 
-To improve prediction accuracy, we aim to expand the dataset and ensure balance by incorporating new, intentionally designed movement segments.
+To improve prediction accuracy the dataset should be expanded and ensure balance by incorporating new, intentionally designed movement segments.
 This will be done without introducing overly intricate motions that could potentially complicate the movement classification.\\
 
 In future revisions, with a more extensive dataset, additive methods could be employed to measure the amount of useful information added by the WDC approach in a classification problem compared to the other high-level features used.

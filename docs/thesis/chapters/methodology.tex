@@ -1071,13 +1071,12 @@ Here is the operative Python code for the extraction of the features from the ra
 \subsection{Classification}
 The initial approach involves a simple binary classification of the origin of the movement in a specific edge or not.
 If the results had been satisfactory, we would then have opted to evaluate progressively more complex models, eventually leading to the multiclass classification.
-We started by addressing the issue of imbalanced data in classification.
-The choice of LOOCV was motivated by the presence of a very small dataset, allowing us to compute the maximum number of training cycles to have a virtually unbiased model.
-
+We started by addressing the issue of imbalanced data in classification.\\
+The choice of LOOCV was motivated by the presence of a very small dataset, allowing us to compute the maximum number of training cycles to have an almost unbiased model.
 To mitigate this imbalance, a resampling technique known as B-SMOTE is employed (\textit{BS1}). 
-This technique equalizes the number of training samples for the minority class with that of the majority class at each iteration.
+This technique equalizes the number of training samples for the minority class with that of the majority class at each iteration.\\
 B-SMOTE generates additional samples for the minority class to balance the number of samples of the majority class.
-For instance, if there are 50 samples of one class and 9 of the other during a training step, B-SMOTE will artificially create 41 samples for the second class. \\
+For instance, if there are 50 samples of one class and 9 of the other during a training step, B-SMOTE will artificially create 41 samples for the second class that are more . \\
 The operational concept is detailed in Section \ref{subsec:borderline}.
 
 Following the resampling of the training data, a RF classifier (\textit{RF1}) is trained on this newly balanced dataset.
@@ -1107,7 +1106,15 @@ To evaluate the performance of the classifier, a test set is chosen using LOOCV,
     \label{tab:ml_param}
 \end{table}
 
-Below is the code used to train and test the RF with the aforementioned parameters.
+Below is the python code used to train and test the RF with the aforementioned parameters.
+For the BSMOTE implementation we used the \texttt{imblearn} library.\\
+The \texttt{imbalanced-learn} library, commonly abbreviated as \texttt{imblearn}, is a powerful Python library designed for handling imbalanced datasets commonly encountered in machine learning problems. 
+It provides all the main techniques to address the issue of imbalanced class distributions, such as ADASYN, SMOTE, SMOTE-ENN and more.\\
+Instead, for the RF implementation, we used the classical \texttt{sklearn}, which is an abbreviation for the \texttt{scikit-learn} library.\\
+It is an open-source Python library that provides efficient tools for machine learning and data analysis. 
+It includes various models for classification, regression, clustering, and feature extraction.\\ 
+Some of the most common models within scikit-learn are Support Vector Machines, decision trees, RF, linear and logistic regression, k-Nearest Neighbors, among others. 
+The library also offers functionalities for model validation, dimensionality reduction, and feature selection.
 \clearpage
 \lstsetnormal
 \lstinputlisting[firstline=33, lastline=77]{code/ml.py}
@@ -1191,11 +1198,14 @@ After each reclassification the same pipeline of training and testing is used.
 Q1 will be posed considering the 15 edges, Q2 will be posed considering the division of the body into 5 parts (Figure \ref{tab:ml_division_5_body_parts}), while Q3 will be based on the division of the body into 2 parts (Figure \ref{tab:ml_division_top_bottom}).
 
 \paragraph{Q1: Is or is not a specific edge} In our dataset, the most frequent classification is the edge that links \textit{left\_hand} and \textit{left\_wrist}. 
-Therefore, we categorized all samples where the classification was \textit{left\_hand}-\textit{left\_wrist} as 1, while we labeled all other samples as 0.   
+Therefore, the dataset will be relabelled in a way that where the classification is \textit{left\_hand}-\textit{left\_wrist}, that sample will belong to class 1, otherwise to class 0.   
     
 \paragraph{Q2: Is or is not a specific body part} The most frequent class to compare against all the others is \textit{Right Leg}.
-Therefore, we labeled all samples where the classification was in the \textit{Right Leg} as 1, while we categorized all other samples as 0.
+Therefore, the relabelling process will rename \textit{Right Leg} as 1, and all other samples as 0.
 
 \paragraph{Q3: Is or is not a specific body part} The most frequent class between the two is \textit{Upper}, so we labeled all the $Upper$ with 1 and all the $Lower$ with 0.\\
 
-For each question, we iteratively asked the model whether the test sample was predicted as that edge/that part of the body or not.
+For each question, the model will be iteratively asked whether the test sample should be predicted as that edge/that part of the body or not.\\
+After cycling through all the samples and comparing the predictions with the true labels, a confusion matrix will be constructed to encapsulate all possible outcomes.\\ 
+Finally, metrics will be calculated based on this matrix.\\
+This process will be repeated multiple times to ensure result consistency.
