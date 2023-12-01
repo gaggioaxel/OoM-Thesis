@@ -961,32 +961,32 @@ Here are all the functions calculated for every sample of the dataset (note that
 
 \textbf{Mean} is the expected value of the distribution:
         \begin{equation}
-            mean(\bar{x}) = \frac{1}{n} \sum_{i=1}^{n} x_i
+            \mu = \frac{1}{n} \sum_{i=1}^{n} x_i
         \end{equation}
 \textbf{Variance} is the second momentum of the distribution (or the squared deviation of the expected value from the mean):
         \begin{align}
-            mean_a(x) &= \frac{1}{n} \sum_{i=1}^{n} (x_i - mean(\bar{x}))^a &
-            var(x) &= mean_2(\bar{x})
+          \sigma^2 &= \mu_2 &
+          \mu_k &= \frac{1}{n} \sum_{i=1}^{n} (x_i - \mu)^k 
         \end{align}
 \textbf{Kurtosis} is the fourth standardized moment:
         \begin{equation}
-            kurtosis(\bar{x}) = \frac{mean_4(\bar{x})}{\sqrt{var(\bar{x})}^4} - 3
+            Kurt[X] = \frac{\mu_4}{\sigma^4} - 3
         \end{equation}
 \textbf{Skewness} is the third standardized moment:
         \begin{equation}
-            skewness(\bar{x}) = \frac{mean_3(\bar{x})}{\sqrt{var(\bar{x})}^3}
+            \gamma_1 = \frac{\mu_3}{\sigma^3}
+        \end{equation}
+\textbf{Mean Standard Error}:
+        \begin{equation}
+            \sigma_{\bar{x}} = \sqrt{\frac{\sigma^2}{n}}
         \end{equation}
 \textbf{Correlation} between two joints (\textit{x},\textit{y}):
         \begin{equation}
-            corr(\bar{x},\bar{y}) = \frac{\sum_{i=1}^n (x_i - mean(\bar{x}))(y_i - mean(\bar{y}))}{\sqrt{var(\bar{x})}\cdot\sqrt{var(\bar{y})}}
+            \rho_{X,Y} = \frac{\sum_{i=1}^n (x_i - \mu_{X})(y_i - \mu_{Y})}{\sigma_{X}\cdot\sigma_{Y}}
         \end{equation}
 \textbf{Mean Absolute Deviation}:
         \begin{equation}
-            mad(\bar{x}) = \frac{1}{n} \sum_{i=1}^{n} |x_i - mean(\bar{x})|
-        \end{equation}
- \textbf{Mean Standard Error}:
-        \begin{equation}
-            sem(\bar{x}) = \sqrt{\frac{var(\bar{x})}{n}}
+            mad(\bar{x}) = \frac{1}{n} \sum_{i=1}^{n} |x_i - \mu|
         \end{equation}
 \textbf{Average Sum of Squares}:
         \begin{equation}
@@ -1035,8 +1035,8 @@ In Table \ref{tab:ml_features} we can see all the features and their relative fu
         \hline
         mean & Mean \\
         var & Variance \\
-        kurtosis & Kurtosis \\
-        skewness & Skewness \\
+        kurt & Kurtosis \\
+        skew & Skewness \\
         corr & Correlation Coefficient \\
         mad & Mean Absolute Deviation \\
         sem & Mean Standard Error \\
@@ -1050,13 +1050,18 @@ In Table \ref{tab:ml_features} we can see all the features and their relative fu
         maxFreqIndx & Index of the Max of the Real part of Frequency Signal \\ 
         minFreq & Real part's Min of Frequency Signal \\
         minFreqIndx & Index of the Min of the Real part of Frequency Signal \\ 
-        skewnessFreq & Frequency Signal Skewness \\
-        kurtosisFreq & Frequency Signal Kurtosis \\
+        skewFreq & Frequency Signal Skewness \\
+        kurtFreq & Frequency Signal Kurtosis \\
         \hline
     \end{tabular}
     \caption{List of measures for computing feature vectors}
 \label{tab:ml_features}
 \end{table}
+
+Here is the operative Python code for the extraction of the features from the raw data after the normalization.
+\clearpage 
+\lstsetlarge
+\lstinputlisting[firstline=1, lastline=30]{code/ml.py}
 
 \subsection{Classification}
 The initial approach involves a simple binary classification of the origin of the movement in a specific edge or not.
@@ -1095,6 +1100,11 @@ To evaluate the performance of the classifier, a test set is chosen using LOOCV,
     \caption{Hyperparameters tuned for our application}
     \label{tab:ml_param}
 \end{table}
+
+Below is the code used to train and test the RF with the aforementioned parameters.
+\clearpage
+\lstsetnormal
+\lstinputlisting[firstline=33, lastline=77]{code/ml.py}
 
 In our ML model, we posed three different questions regarding the OoM. 
 Since our dataset is inherently a multi-class dataset, we performed binary classification by reclassifying the dataset based on our necessities.

@@ -53,6 +53,7 @@
 
 \usepackage{titletoc}
 
+\usepackage{listings}
 
 \graphicspath{{graphics/}}
 \newlist{mydescription}{description}{1}
@@ -126,3 +127,28 @@
 \titlespacing*{\section} {0pt}{4ex}{2ex}
 %\titlespacing{\section}{0pt}{\parskip}{-\parskip}
 %\titlespacing{\subsection}{0pt}{\parskip}{-\parskip}
+
+\newcommand{\lstsetlarge}{\lstset{
+  language=Python,
+  numbers=left,
+  numberstyle=\tiny,
+  numbersep=5pt,
+  basicstyle=\footnotesize\ttfamily,
+  frame=tb,
+  breaklines=true,
+  columns=fullflexible,
+  showstringspaces=false,
+}}
+\newcommand{\lstsetnormal}{\lstset{
+  language=Python,
+  numbers=left,
+  numberstyle=\tiny,
+  numbersep=5pt,
+  basicstyle=\footnotesize\ttfamily,
+  frame=tb,
+  breaklines=true,
+  columns=fullflexible,
+  showstringspaces=false,
+  basewidth=0.4em, % Reduce the width of each character
+  lineskip=0.35em % Reduce line spacing
+}}
