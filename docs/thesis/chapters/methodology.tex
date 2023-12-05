@@ -82,13 +82,13 @@ For simplicity, the links are without weights.
 
 \subsection{Movement features extraction}
 \label{subsec:alg_features}
-The low-level features extracted for our purpose are \textit{speed}, \textit{tangential acceleration}, and \textit{angular momentum}. \\
-While speed indicates how quickly an object is moving, acceleration indicates how rapidly its velocity is changing.
+The low-level features extracted for our purpose are \textit{velocity}, \textit{tangential acceleration}, and \textit{angular momentum}. \\
+While velocity indicates how quickly an object is moving, acceleration indicates how rapidly its velocity is changing.
 Angular momentum provides information about the rotation of an object around a fixed point.
 By incorporating all three quantities as features, a more comprehensive and detailed view of the overall motion is obtained.
 
 \paragraph{Average Velocity} is calculated by finding the change in positions with respect to the delta time, which is the sampling time of the MoCap system and then applying a moving average to obtain a more accurate estimate that is less affected by noise.
-We calculate this speed as the norm of the velocity vector.
+We calculate this velocity as the norm of the velocity vector.
 \begin{equation}
   \vec{v}(t) = \frac{\Delta\vec{r}}{\Delta  t} = \left(\frac{\Delta x}{\Delta t}, \frac{\Delta  y}{\Delta t}, \frac{\Delta z}{\Delta t}\right)
 \end{equation}
@@ -196,7 +196,7 @@ This is why there will be a subsequent phase of cluster stabilization over time.
 \end{enumerate}
 
 In essence, the algorithm starts by dividing data into two initial clusters, then proceeds with iteratively splitting smaller clusters until the desired number of clusters is achieved.
-This method leverages the spectral information of the data graph to obtain a data partition into clusters.
+This method leverages the spectral information of the data graph to obtain a data partition into clusters with at least 5 nodes for each one.
 
 
 \subsection{Auxiliary Graph}
@@ -310,12 +310,11 @@ As previously mentioned, at this stage of the pipeline, we already have informat
 The previous clustering groups the joints into clusters and assigns them random colors, while in this phase of the pipeline, we optimize the color assignment.\\
 We will start by analyzing the colors of the clusters at the initial frame and choose the best color assignment for the next frame.
 Then will repeat this process iteratively until the last frame.\\
-
 For example, we can consider a case that can we have frequently encountered in which the use of MaxWPM improved the visualization.
 Let's suppose we have 20 nodes representing joints at time \textit{t} and 3 clusters labeled with different colors, as shown in Figure \ref{fig:clust_t}.
 At time \textit{t+1}, there are the same 20 nodes as before but with 3 clusters changed but labeled using the same lexicographic order for the nodes (see Figure \ref{fig:clust_tplus1}). \\
 Certainly, this clustering-based assignment cannot be regarded as the optimal assignment, as we still need to assess the \textit{3!} possible color assignments. \\
-We know the colors of the clusters at time \textit{t}, and we want to assign colors to the clusters at time \textit{t+1}. \\
+We know the colors of the clusters at time \textit{t}, and we want to assign colors to the clusters at time \textit{t+1}. 
 In Figure \ref{fig:clust_ass}, you can visually see all the possible color assignments, while in Table \ref{tab:table_clust}, all the values of common nodes for each color and the total weight of the matching are gathered.
 
 
@@ -643,9 +642,8 @@ The following figure shows the matching with the utility value for every possibl
   \caption{Bipartite Matching from instant \textit{t} to instant \textit{t+1}}
   \label{fig:clust_match}
 \end{figure}
-We explored two algorithmns for computing the MaxWPM.
 \clearpage
-
+Now we will discuss two algorithmns for computing the MaxWPM.
 \paragraph{Hungarian Matching}
 One approach consists in applying the Hungarian Algorithm which is a combinatorial optimization algorithm that also solves the assignment problem.\\
 Now let's see the previous example solved with this algorithm in the Table \ref{tab:hung_alg_appl}:
@@ -1076,14 +1074,14 @@ The choice of LOOCV was motivated by the presence of a very small dataset, allow
 To mitigate this imbalance, a resampling technique known as B-SMOTE is employed (\textit{BS1}). 
 This technique equalizes the number of training samples for the minority class with that of the majority class at each iteration.\\
 B-SMOTE generates additional samples for the minority class to balance the number of samples of the majority class.
-For instance, if there are 50 samples of one class and 9 of the other during a training step, B-SMOTE will artificially create 41 samples for the second class that are more . \\
+For instance, if there are 50 samples of one class and 9 of the other during a training step, B-SMOTE will artificially create 41 samples for the second class that are more at risk of being misclassified because they are isolated from the rest of the samples of the same class. \\
 The operational concept is detailed in Section \ref{subsec:borderline}.
 
 Following the resampling of the training data, a RF classifier (\textit{RF1}) is trained on this newly balanced dataset.
 To further optimize the classifier's performance, a feature selection process is employed with the goal of identifying the most influential features that contribute to accurate classification.
 The most important features are determined through the training of \textit{RF1} on the resampled data. 
 These features are selected based on the amount of information that they provide in the classification task weighting Gini importance of the feature across all the trees. \\
-Subsequently, a new RF classifier (\textit{RF2}) is trained using only the 50 most important features of the previous model, with the \textit{max\_features} hyperparameter tuned to choose among all the available features in each split.
+Subsequently, a new RF classifier (\textit{RF2}) is trained using only the 50 most important features of the previous model, with the \textit{max\_features} hyperparameter tuned to choose among all the available features in each split.\\
 To evaluate the performance of the classifier, a test set is chosen using LOOCV, as detailed in Section \ref{subsec:cross_validation}. 
 
 \begin{table}[H]

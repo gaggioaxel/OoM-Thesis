@@ -1,0 +1,721 @@
+<?xml version="1.0"?>
+<QTM_Label_List_Ver_1.00>
+    <Trajectories>
+        <Trajectory>
+            <Name>RKneeIn_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RKneeIn_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RKneeOut_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RKneeOut_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LKneeIn_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>HeadFront_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>HeadFront_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LKneeIn_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>HeadL_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>HeadL_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>HeadR_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>HeadR_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>Chest_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>Chest_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>WaistLFront_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>WaistLFront_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>WaistRFront_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>WaistRFront_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LShoulderTop_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LShoulderTop_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RShoulderTop_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RShoulderTop_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>SpineThoracic2_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>SpineThoracic2_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>SpineThoracic12_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>SpineThoracic12_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>WaistL_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>WaistL_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>WaistR_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>WaistR_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>WaistBack_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>WaistBack_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LHeelBack_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LHeelBack_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RHeelBack_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RHeelBack_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LAnkleOut_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LAnkleOut_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RAnkleOut_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RAnkleOut_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LForefoot2_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RForefoot2_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LForefoot2_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RForefoot2_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LForefoot5_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RForefoot5_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LForefoot5_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RForefoot5_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LHand2_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LHand2_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RHand2_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RHand2_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LWristIn_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LWristIn_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RWristIn_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RWristIn_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LWristOut_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RWristOut_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LWristOut_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RWristOut_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LElbowIn_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LElbowIn_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RElbowIn_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RElbowIn_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LElbowOut_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LElbowOut_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RElbowOut_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>RElbowOut_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LKneeOut_A</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+        <Trajectory>
+            <Name>LKneeOut_B</Name>
+            <Color R="255" G="0" B="0"/>
+        </Trajectory>
+    </Trajectories>
+    <Bones>
+        <Color R="192" G="192" B="192"/>
+        <Thickness>10.000000</Thickness>
+        <Bone>
+            <Index Low="6" High="10"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="6" High="12"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="10" High="12"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="10" High="24"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="12" High="24"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="20" High="24"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="14" High="20"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="22" High="24"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="14" High="22"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="22" High="64"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="22" High="68"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="64" High="68"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="56" High="64"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="60" High="68"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="56" High="60"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="52" High="56"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="52" High="60"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="20" High="62"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="20" High="66"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="62" High="66"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="59" High="66"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="54" High="62"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="50" High="54"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="50" High="59"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="54" High="59"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="24" High="26"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="26" High="32"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="16" High="28"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="16" High="18"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="18" High="30"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="28" High="32"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="30" High="32"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="22" High="30"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="14" High="18"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="14" High="16"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="20" High="28"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="5" High="16"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="5" High="70"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="16" High="70"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="5" High="38"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="38" High="70"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="2" High="4"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="2" High="18"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="4" High="18"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="2" High="40"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="4" High="40"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="36" High="40"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="34" High="38"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="36" High="44"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="36" High="48"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="44" High="48"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="34" High="43"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="34" High="47"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="43" High="47"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="7" High="9"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="7" High="11"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="9" High="11"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="9" High="23"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="11" High="23"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="23" High="25"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="25" High="31"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="27" High="31"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="29" High="31"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="15" High="27"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="17" High="29"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="15" High="17"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="19" High="23"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="21" High="23"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="13" High="19"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="13" High="21"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="21" High="29"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="13" High="15"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="13" High="17"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="19" High="27"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="19" High="61"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="19" High="65"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="61" High="65"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="57" High="65"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="53" High="61"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="53" High="57"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="49" High="53"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="49" High="57"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="21" High="63"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="21" High="67"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="63" High="67"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="55" High="63"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="58" High="67"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="51" High="55"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="51" High="58"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="55" High="58"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="1" High="3"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="1" High="17"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="3" High="17"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="8" High="15"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="8" High="69"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="15" High="69"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="1" High="39"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="3" High="39"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="8" High="37"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="37" High="69"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="35" High="39"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="33" High="37"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="33" High="41"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="33" High="45"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="41" High="45"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="35" High="42"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="35" High="46"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+        <Bone>
+            <Index Low="42" High="46"/>
+            <Color R="50" G="205" B="50"/>
+        </Bone>
+    </Bones>
+</QTM_Label_List_Ver_1.00>

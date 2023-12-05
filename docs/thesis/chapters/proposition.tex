@@ -44,17 +44,18 @@ The algorithmic pipeline (on the left) encompasses several more steps than the o
 \\
 Initially, we smooth the time series of each sample of movement in order to clean the data from impurities such as noise, missing data for markers occlusion or tracking errors that could end up creating unnatural accelerations of some markers (Timeseries Smoothing).
 
-Subsequently, we extract physical derived measurements from the trajectories, like the speed, acceleration and angular momentum from the smoothed data (Features Extraction). \\
-Then, employing a model of human body joints, we apply cosine similarity to connected pairs of joints (Cosine Similarity). 
-This aids in clustering joints within each movement frame. \\
+Subsequently, we extract physical derived measurements from the trajectories, like the velocity, acceleration and angular momentum from the smoothed data (\textit{Features Extraction}). \\
+Then, employing a model of human body joints, we apply cosine similarity to connected pairs of joints (\textit{Cosine Similarity}).
+A graph is created with joints as nodes and physical connections as edges (\textit{Graph}). 
+A clustering algorithm is employed to create a certain number of group of nodes (\textit{Clustering}). \\
 The primary aim at this stage is to ensure the stability of color changes within these clusters. \\
-Additionally, we construct a secondary graph, where only nodes at cluster borders are interconnected (Auxiliary Graph).
-These nodes are weighted based on their connections and ranked across all frames (Weighted Degree Centrality).
+Additionally, we construct a secondary graph, where only nodes at cluster borders are interconnected (\textit{Auxiliary Graph}).
+These nodes are weighted based on their connections and ranked across all frames (\textit{Weighted Degree Centrality}).
 
 The machine learning pipeline (on the right) follows a different approach on the data. 
-We start by normalizing the dataset concerning segment length, the performer's body structure, and the complete movement trajectory (Timeseries Normalization).\\
-Following this, we extract a diverse set of pertinent features from this set of normalized timeseries (Features Extraction).\\
-These extracted features are then utilized to train a machine learning model (Machine Learning Model), whose performance is thoroughly evaluated using diverse metrics (Evaluation Metrics).
+We start by normalizing the dataset concerning segment length, the performer's body structure, and the complete movement trajectory (\textit{Timeseries Normalization}).\\
+Following this, we extract a diverse set of pertinent features from this set of normalized timeseries (\textit{Features Extraction}).\\
+These extracted features are then utilized to train a machine learning model (\textit{Machine Learning Model}), whose performance is thoroughly evaluated using diverse metrics (\textit{Evaluation Metrics}).
 
 Finally, the results from each pipeline are compared and contrasted to evaluate their individual effectiveness.
 

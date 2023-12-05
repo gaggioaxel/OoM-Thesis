@@ -1,7 +1,7 @@
 \chapter{Introduction}
 The thesis consists of a summary report and a pipeline written in Python.
 The dataset was sourced from the archives of Casa Paganini, the same location where artists' performances were recorded. 
-All the figures included in this thesis are our own creation.
+All the figures and the tables included in this thesis are our own creation.
 
 \section{Context}
 In sports, dance, and physical activities, motion capture technology stands as a game-changer.
@@ -107,7 +107,7 @@ Where the factor $tol$ is a small number to prevent divisions by zero.
 
 A clustering algorithm was applied to the graph, resulting in an auxiliary graph where the only edges present connect nodes belonging to different clusters. Upon this auxiliary graph, a mathematical game was constructed, and the solution was found by calculating the Shapley values for each joint.
 
-Once the Shapley values were obtained, an online survey was used to validate their reliability in accurately predicting the perceived origin of movement. Users were asked to indicate their confidence level and select one or two vertices from the skeletal structure as the movement's origin. They were provided hints in three different ways by highlighting joints based on either the highest Shapley value, the two highest Shapley values (potentially also the third), or randomly chosen joints, shuffled for each participant. This methodology was applied across three distinct features: speed, acceleration, and angular momentum.
+Once the Shapley values were obtained, an online survey was used to validate their reliability in accurately predicting the perceived origin of movement. Users were asked to indicate their confidence level and select one or two vertices from the skeletal structure as the movement's origin. They were provided hints in three different ways by highlighting joints based on either the highest Shapley value, the two highest Shapley values (potentially also the third), or randomly chosen joints, shuffled for each participant. This methodology was applied across three distinct features: velocity, acceleration, and angular momentum.
 
 The study revealed that the most confident users consistently chose the suggested movement origin indicated by the two highest Shapley values, specifically those associated with the velocity feature.
 
@@ -124,7 +124,7 @@ This paragraph outlines the structure of our thesis.
 
 Chapter \ref{chapter:proposed_approach} introduces our proposed approach, highlighting the key differences from the starting point, emphasizing the added value and innovative proposition that our work brings. 
 
-Chapter \ref{chapter:theoretical} covers theoretical concepts and relevant notions essential for comprehending our thesis, including graph theory, theoretical aspects of machine learning, and definitions from smoothing theory. 
+Chapter \ref{chapter:theoretical} covers theoretical concepts and relevant notions essential for comprehending our thesis, including graph theory, theoretical aspects of machine learning, and definitions from smoothing theory and clustering stabilization. 
 
 Chapter \ref{chapter:dataset} introduces the dataset used in our work, composed of movement samples sourced from two distinct datasets: \textit{Wholodance} and the \textit{Montpellier - UniGe} dataset.
 As the datasets were recorded in different years, the technologies used to capture movements differs, leading to distinct data formats based on the number of marker sets on the dancers' suits.

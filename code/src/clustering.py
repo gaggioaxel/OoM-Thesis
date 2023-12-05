@@ -3,29 +3,11 @@ import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
 ################### remapping dataframes
-def group_table_by_joints(table: pd.DataFrame) -> pd.DataFrame:
-    columns = [col.replace('_X','') for col in list(table.columns)[::3]]
-    result = pd.DataFrame(columns=columns)
-    for j in range(0,table.shape[1],3):
-        lst = []
-        for i in range(table.shape[0]):
-            lst.append(table.iloc[i,j:j+3].values)
-        result[columns[int(j/3)]] = np.array(lst)
-    return result
-
-# Not used
-def group_table_by_jointsV2(table: pd.DataFrame) -> pd.DataFrame:
-    # Get unique joint names by removing '_X' from column names
-    columns = [col.replace('_X', '') for col in table.columns[::3]]
-
-    # Group the DataFrame by joint name and aggregate the grouped values as lists
-    result = table.groupby([col.replace('_X', '') for col in table.columns], axis=1).agg(lambda x: x.values.tolist())
-
-    # Rename the columns to match the joint names
-    result.columns = columns
-
-    return result
-
+def group_table_by_joints(table:pd.DataFrame) -> pd.DataFrame:
+    num_columns = len(table.columns)
+    for i in range(0,num_columns, 3):
+        table[table.columns[i][:-2]] = table.apply(lambda row: np.array([row.iloc[i], row.iloc[i+1], row.iloc[i+2]]), axis=1)
+    return table.drop(table.columns[:num_columns], axis=1)
 
 def joints_array_to_xyz_columns(table: pd.DataFrame) -> pd.DataFrame:
     return pd.concat([table[column].apply(lambda row: pd.Series(row,index=[column+'_X',column+'_Y',column+'_Z'])) for column in table.columns],axis=1)
@@ -343,3 +325,20 @@ def compute_minimum_weight_cluster(fromLabels:list,toLabels:list,method:Literal[
         if return_relabeling:
             out_elements.append({fromNode: minWeightsEdges[fromNode]-max(clusters)-1 for fromNode in minWeightsEdges.keys()})
     return out_elements if len(out_elements) > 1 else out_elements[0]
+
+def compute_auxiliary_graph(featuresTable:pd.DataFrame,clusters:np.ndarray,adjacencyMatrix:np.ndarray) -> np.ndarray:
+    auxiliary_graph = np.zeros(adjacencyMatrix.shape)
+    if isinstance(featuresTable.iloc[0],np.ndarray):
+        vectorsArray = np.stack(featuresTable.values)
+        normMatrix = np.linalg.norm(vectorsArray[:,None] - vectorsArray, axis=2)
+    else:
+        normMatrix = np.abs(featuresTable.values[:,None] - featuresTable.values)
+    mask = np.logical_and(adjacencyMatrix,clusters[:,None] != clusters)
+    auxiliary_graph[mask] = normMatrix[mask]
+    return auxiliary_graph
+
+def calculate_shapley_values(auxiliaryGraph:np.ndarray):
+    shapleys = 0.5 * np.sum(auxiliaryGraph,axis=1)
+    maxShapley = np.max(shapleys)
+    utilityNormFactor = np.sum(shapleys)
+    return shapleys, shapleys / maxShapley, shapleys / utilityNormFactor # should also return mean across every time instant

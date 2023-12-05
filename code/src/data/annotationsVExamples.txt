@@ -1,3 +1,5 @@
 folderSrc, trialId, fragId, jointIdOoM, startSecond, endSecond
 2016-05-26, t_044, 0, [1-1], 7.4, 7.9, skeleton20ok
 2016-05-26, t_006, 99, [1-1], 0.0, 61.95, skeleton20ok 
+2020-07-08, t_052, 98, (A), [1-1], 8.29, 15.49, skeleton20ok 
+2020-07-08, t_052, 99, (B), [1-1], 8.29, 15.49, skeleton20ok 

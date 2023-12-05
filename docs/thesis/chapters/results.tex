@@ -21,7 +21,7 @@ Therefore, it was chosen as the similarity function for this specific dataset.
   \centering
   \begin{tabular}{||>{\centering\arraybackslash}p{4.3cm}||>{\centering\arraybackslash}p{2.0cm}||>{\centering\arraybackslash}p{2.7cm}||>{\centering\arraybackslash}p{4.4cm}||}
   \hline
-  \textbf{Similarity Function} & \textbf{Speed} & \textbf{Acceleration} & \textbf{Angular Momentum} \\
+  \textbf{Similarity Function} & \textbf{Velocity} & \textbf{Acceleration} & \textbf{Angular Momentum} \\
   \hline
   Cosine & 28.3\%  & 26.7\%  & 36.6\%  \\
   \hline
@@ -267,7 +267,7 @@ The final result was based on expanding the minority class, training a RF with n
 In the following Tables (from \ref{tab:ml_results_cm_joints} to \ref{tab:ml_results_cm_body_parts}), there are the confusion matrices, the TPR, TSS, TNR and the Accuracy score for the final model defined in Section \ref{sec:ml_method} in our three formulations:
 \begin{itemize}
   \item The most frequent 6 classes of our dataset (Table \ref{tab:ml_results_cm_joints} and \ref{tab:ml_results_joints}) in the by-joint-subdivision.
-  \item The 5 boby parts in which have been grouped the joints (Table \ref{tab:ml_results_cm_body_parts} and \ref{tab:ml_results_body_parts})
+  \item The 5 body parts in which have been grouped the joints (Table \ref{tab:ml_results_cm_body_parts} and \ref{tab:ml_results_body_parts})
   \item The division into the upper and lower body part, which is in the same tables.
 \end{itemize} 
 To interpret the meaning of the confusion matrices, please refer to Section \ref{subsec:evaluation_metrics}.
