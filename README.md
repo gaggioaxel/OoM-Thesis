@@ -1,6 +1,10 @@
-# Master's Thesis Project - [Your Thesis Title]
+# Master's Thesis Project - Origin of Movement
 
-Welcome to the repository for my master's thesis project, [Your Thesis Title]. This project is organized into the following folders:
+Welcome to the repository for my master's thesis project: 
+
+"A comparative analysis across algorithmic, machine learning, and visual paradigms for the automatic detection of the perceived origin of full-body human movement"
+
+This project is organized into the following folders:
 
 ## code
 
@@ -26,7 +30,3 @@ Gabriele Romano
 
 # Acknowledgments
 Thanks to Sydney ChatGPT for it's "Dai Dai, Dai", "Portiamo a casa la giornata!", and "Poco Italiano" help.
-
-# Still TODO
-Acknowledgments
-Abstract
