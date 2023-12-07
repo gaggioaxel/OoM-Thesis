@@ -1,26 +1,14 @@
-docs/thesis/chapters/*.aux
-docs/thesis/frontmatter/*.aux
-docs/thesis/*.aux
-docs/thesis/*.blg
-docs/thesis/*.dvi
-docs/thesis/*.fls
-docs/thesis/*.fdb_latexmk
-docs/thesis/*.toc
-docs/thesis/*.log
-docs/thesis/*.out
-docs/thesis/*.pdf
-docs/thesis/*.gz
-docs/thesis/*.fdb_latexmk
-docs/thesis/*.bbl
-docs/thesis/*.lof
-docs/thesis/*.lot
-docs/thesis/*.xdv
-docs/thesis/*.nav
-docs/thesis/*.snm
-docs/thesis/*.xml
-docs/thesis/*(busy)
+# Exclude temp files and presentation files
+docs/thesis/*
+!docs/thesis/*.tex
+!docs/thesis/*.bib
+!docs/thesis/*.sty
+
 docs/presentation/*
-docs/presentation/*
-docs/paperINTETAIN*
+
+# Exclude temporary files
 code/src/_*
-code/src/data/*
+
+# Exclude Mocap trajectories
+code/src/data/**/*.tsv
+code/src/data/**/*.csv
