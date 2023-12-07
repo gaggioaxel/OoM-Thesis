@@ -2,45 +2,125 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
-################### remapping dataframes
 def group_table_by_joints(table:pd.DataFrame) -> pd.DataFrame:
+    """
+    Groups columns in a DataFrame representing joint data into arrays per joint.
+    
+    Parameters:
+    table (pd.DataFrame): Input DataFrame with joint data.
+    
+    Returns:
+    pd.DataFrame: DataFrame with columns representing joints as arrays.
+    """
     num_columns = len(table.columns)
     for i in range(0,num_columns, 3):
         table[table.columns[i][:-2]] = table.apply(lambda row: np.array([row.iloc[i], row.iloc[i+1], row.iloc[i+2]]), axis=1)
     return table.drop(table.columns[:num_columns], axis=1)
 
 def joints_array_to_xyz_columns(table: pd.DataFrame) -> pd.DataFrame:
+    """
+    Converts arrays of joint data in columns to separate X, Y, Z columns for each joint.
+    
+    Parameters:
+    table (pd.DataFrame): Input DataFrame with joint arrays in columns.
+    
+    Returns:
+    pd.DataFrame: DataFrame with separate X, Y, Z columns for each joint.
+    """
     return pd.concat([table[column].apply(lambda row: pd.Series(row,index=[column+'_X',column+'_Y',column+'_Z'])) for column in table.columns],axis=1)
     
 def table_to_list_xyz_tables(table:pd.DataFrame,into="xyz"):
+    """
+    Converts DataFrame containing joint data into separate X, Y, Z tables or a list of point tables.
+    
+    Parameters:
+    table (pd.DataFrame): Input DataFrame with joint data.
+    into (str): Specifies the output format. Default is "xyz" to return separate X, Y, Z tables per joint. 
+                If "points" is specified, returns a list of point tables with X, Y, Z columns.
+    
+    Returns:
+    If into == "xyz":
+        tuple: Three DataFrames representing X, Y, Z tables respectively.
+    If into == "points":
+        list: List of DataFrames, each representing a point with X, Y, Z columns.
+    """
     if into == "xyz":
         return table.iloc[:,::3],table.iloc[:,1::3],table.iloc[:,2::3]
     elif into == "points":
         return [table.iloc[:,j:j+3] for j in range(0,table.shape[1],3)]
 
 def xyz_tables_to_xyz_columns(tablesList):
+    """
+    Merges separate X, Y, Z tables into a single DataFrame with columns for X, Y, Z coordinates.
+    
+    Parameters:
+    tablesList (list of pd.DataFrame): List containing separate X, Y, Z DataFrames for each joint.
+    
+    Returns:
+    pd.DataFrame: DataFrame with columns for X, Y, Z coordinates of each joint.
+    """
     xTable,yTable,zTable = tablesList
     mergedTable = pd.DataFrame()
     for joint in range(xTable.shape[1]):
         mergedTable = pd.concat([mergedTable,xTable.iloc[:,joint],yTable.iloc[:,joint],zTable.iloc[:,joint]],axis=1)
     return mergedTable
-####################
 
 
 #################### reproducing MATLAB movmean and movmedian
 def movmean(x, w):
+    """
+    Calculates the moving average of a series.
+    
+    Parameters:
+    x (array-like): Input array or series.
+    w (int): Window size for the moving average calculation.
+    
+    Returns:
+    pd.Series: Series containing the moving average values.
+    """
     return pd.Series(x).rolling(window=w,min_periods=1,center=True).mean()
 
 from scipy.signal import medfilt
+
 def movmedian(x,w):
+    """
+    Calculates the moving median of a sequence.
+    
+    Parameters:
+    x (array-like): Input array or sequence.
+    w (int): Window size for the moving median calculation.
+    
+    Returns:
+    np.ndarray: Array containing the moving median values.
+    """
     return np.concatenate([np.convolve(x[:w-1], np.ones(w-1), 'valid') / (w-1),medfilt(x,w)[1:-1],np.convolve(x[-w+1:], np.ones(w-1), 'valid') / (w-1)])
 ###################
 
 ################### features computation
 def smoothing(x: pd.DataFrame) -> pd.DataFrame:
+    """
+    Performs smoothing on each column of a DataFrame using moving median followed by moving average.
+    
+    Parameters:
+    x (pd.DataFrame): Input DataFrame.
+    
+    Returns:
+    pd.DataFrame: DataFrame with smoothed values for each column.
+    """
     return x.apply(lambda col: movmedian(col,5)).apply(lambda col: movmean(col,25))
     
 def compute_derivatives(x:pd.DataFrame,dt:float,smooth=True) -> pd.DataFrame:
+    """
+    Computes derivatives of a DataFrame representing motion data.
+
+    Parameters:
+    x (pd.DataFrame): Input DataFrame containing motion data.
+    dt (float): Time interval between samples.
+    smooth (bool): Indicates whether to apply smoothing to the computed derivatives. Default is True.
+
+    Returns:
+    pd.DataFrame: DataFrame containing computed derivatives or smoothed derivatives if smooth is True.
+    """
     v : pd.DataFrame
     v = x.diff() / dt
     v = v.fillna(v.iloc[1:10,:].mean())
@@ -100,23 +180,72 @@ def calculate_weight_matrix(featuresTable: pd.DataFrame, adjacencyMatrix: np.nda
 
 # Spectral clustering using Shi and Malik algorithm
 def shi_malik_spectral_clustering(weightMatrix:np.ndarray) -> np.array:
-    laplacian_matrix = np.diag(np.array(weightMatrix.sum(axis=0))) - weightMatrix
-    eigenvalues, eigenvectors = np.linalg.eig(laplacian_matrix)
+    """
+    Performs spectral clustering using the Shi-Malik algorithm.
 
+    Parameters:
+    weightMatrix (np.ndarray): Weight matrix representing similarities between data points.
+
+    Returns:
+    np.array: Array containing cluster assignments based on spectral clustering.
+    """
+    # Compute the Laplacian matrix
+    laplacian_matrix = np.diag(np.array(weightMatrix.sum(axis=0))) - weightMatrix
+    
+    # Compute eigenvalues and eigenvectors of the Laplacian matrix
+    eigenvalues, eigenvectors = np.linalg.eig(laplacian_matrix)
+    
+    # Find the index of the second smallest eigenvalue
     idx = np.argsort(-eigenvalues)[1]
-    new_features = eigenvectors[:,idx]
+    
+    # Extract new features from the corresponding eigenvector
+    new_features = eigenvectors[:, idx]
+    
+    # Perform spectral clustering based on the sign of the new features
     return (new_features > 0).astype(int)
 
-def myeigs(S: np.ndarray,unused_k=2):
-    #S = pd.read_csv('S.csv',header=None).to_numpy()
-    Sdiff = S-S.T
+
+def myeigs(S: np.ndarray, unused_k=2):
+    """
+    Computes eigenvectors and eigenvalues of a given matrix.
+
+    Parameters:
+    S (np.ndarray): Input matrix.
+    unused_k (int): Unused parameter in the function. Default value is 2.
+
+    Returns:
+    tuple: Tuple containing eigenvector and eigenvalue.
+    """
+    Sdiff = S - S.T  # Compute the difference between S and its transpose
+    
+    # Compute eigenvalues and eigenvectors of the matrix S
     eigenvalues, eigenvectors = np.linalg.eig(S)
-    if np.max(Sdiff) < 10**-20: # symmetric matrix, don't know how to implement largest absolute option
+    
+    # Check if the matrix is symmetric
+    if np.max(Sdiff) < 10**-20:
         raise ValueError("Symmetric matrix S, not implemented")
+    
+    # Find the index of the second largest eigenvalue
     idx = np.argsort(-eigenvalues)[1]
-    return eigenvectors[:,idx].T, eigenvalues[idx]
+    
+    # Return the corresponding eigenvector and eigenvalue
+    return eigenvectors[:, idx].T, eigenvalues[idx]
+
+
 
 def split_a_cluster(S, ww, nmin, optimizationOptions=None): # optimizationOptions is always ncut in this instance
+    """
+    Splits a cluster using some magic tricks of permutations.
+
+    Parameters:
+    S (np.ndarray): Input matrix.
+    ww (array-like): Array containing cluster information.
+    nmin (int): Minimum number of elements required in a cluster.
+    optimizationOptions (str or None): Specifies the optimization option. Default is None.
+
+    Returns:
+    tuple: Tuple containing cluster elements, eigenvalues, and cluster information after splitting.
+    """
     n = len(ww)
     tt = np.sum(S,axis=0)
     iPerm = np.argsort(ww)
@@ -157,6 +286,16 @@ def split_a_cluster(S, ww, nmin, optimizationOptions=None): # optimizationOption
 
 
 def shi_malik_spectral_clustering_matlab_version(S: np.ndarray, k:int=4):
+    """
+    Performs spectral clustering using the Shi-Malik algorithm.
+
+    Parameters:
+    S (np.ndarray): Input matrix.
+    k (int): Number of clusters to generate. Default is 4.
+
+    Returns:
+    np.ndarray: Array containing cluster assignments based on spectral clustering.
+    """
     n = len(S)
     T = np.sum(S,axis=1)
     P = S / np.tile(T[:,np.newaxis],len(T))
@@ -206,6 +345,20 @@ import networkx as nx
 from matplotlib import pyplot as plt
 
 def compute_cost(fromLabels:list,toLabels:list,labels_kind:Literal['full','cluster']='full'):
+    """
+    Computes the cost based on label differences between two label lists.
+
+    Parameters:
+    fromLabels (list): List of original labels.
+    toLabels (list): List of new labels.
+    labels_kind (Literal['full', 'cluster']): Specifies the kind of labels comparison. Default is 'full'.
+
+    Returns:
+    int: Cost computed based on label differences between the two label lists.
+    
+    Raises:
+    Exception: If the provided method is not implemented.
+    """
     if labels_kind == 'full':
         assert len(fromLabels) == len(toLabels)
         return sum(array(fromLabels) != array(toLabels))
@@ -213,7 +366,18 @@ def compute_cost(fromLabels:list,toLabels:list,labels_kind:Literal['full','clust
         return len(set(toLabels).difference(set(fromLabels)))
     raise Exception("method not implemented")
 
-def clusterize_labels(labels:list): # assuming labels as list of integers going from 0 to n
+
+
+def clusterize_labels(labels:list):
+    """
+    Groups labels into clusters based on integer values ranging from 0 to n.
+
+    Parameters:
+    labels (list): List of integers ranging from 0 to n.
+
+    Returns:
+    dict: Dictionary with keys representing clusters and values as lists containing labels in each cluster.
+    """
     df = Series(labels)
     clusters = df.groupby(df).groups
     keys = set(clusters.keys())
@@ -222,13 +386,42 @@ def clusterize_labels(labels:list): # assuming labels as list of integers going 
             clusters[i] = []
     return clusters
 
+
+
 def labelize_clusters(clusters:dict):
+    """
+    Assigns cluster labels to nodes based on the given clusters.
+
+    Parameters:
+    clusters (dict): Dictionary containing clusters with node indices.
+
+    Returns:
+    np.ndarray: Array containing cluster labels assigned to nodes.
+    """
     clusterLabels = np.zeros(sum(len(nodes) for nodes in clusters.values()), dtype=int)
     for clusterLabel, indices in clusters.items():
         clusterLabels[indices] = clusterLabel
     return clusterLabels
 
+
 def compute_minimum_weight_cluster(fromLabels:list,toLabels:list,method:Literal['BF','MWPM']="BF",visualize=False,return_relabeling=False) -> tuple :
+    """
+    Computes the minimum weight cluster based on different methods.
+
+    Parameters:
+    fromLabels (list): List of original labels.
+    toLabels (list): List of new labels.
+    method (Literal['BF', 'MWPM']): Method for computing minimum weight cluster. Default is 'BF'.
+    visualize (bool): Indicates whether to visualize the process. Default is False.
+    return_relabeling (bool): Indicates whether to return the relabeling information. Default is False.
+
+    Returns:
+    tuple: Tuple containing elements representing cluster labels or relabeling information based on the method used.
+    
+    Raises:
+    ValueError: If an unsupported method is provided.
+    """
+
     # Reassign labels 
     out_elements = []
     if method.upper() == "BF":
@@ -326,7 +519,20 @@ def compute_minimum_weight_cluster(fromLabels:list,toLabels:list,method:Literal[
             out_elements.append({fromNode: minWeightsEdges[fromNode]-max(clusters)-1 for fromNode in minWeightsEdges.keys()})
     return out_elements if len(out_elements) > 1 else out_elements[0]
 
+
+
 def compute_auxiliary_graph(featuresTable:pd.DataFrame,clusters:np.ndarray,adjacencyMatrix:np.ndarray) -> np.ndarray:
+    """
+    Computes an auxiliary graph based on the features table, clusters, and adjacency matrix.
+
+    Parameters:
+    featuresTable (pd.DataFrame): DataFrame containing features.
+    clusters (np.ndarray): Array representing clusters.
+    adjacencyMatrix (np.ndarray): Adjacency matrix.
+
+    Returns:
+    np.ndarray: Computed auxiliary graph.
+    """
     auxiliary_graph = np.zeros(adjacencyMatrix.shape)
     if isinstance(featuresTable.iloc[0],np.ndarray):
         vectorsArray = np.stack(featuresTable.values)
@@ -337,7 +543,18 @@ def compute_auxiliary_graph(featuresTable:pd.DataFrame,clusters:np.ndarray,adjac
     auxiliary_graph[mask] = normMatrix[mask]
     return auxiliary_graph
 
+
 def calculate_shapley_values(auxiliaryGraph:np.ndarray):
+    """
+    Calculates Shapley values based on the provided auxiliary graph.
+
+    Parameters:
+    auxiliaryGraph (np.ndarray): Auxiliary graph for Shapley value calculation.
+
+    Returns:
+    tuple: Tuple containing Shapley values, normalized Shapley values (scaled to maximum),
+           and normalized Shapley values (scaled to the utility norm factor).
+    """
     shapleys = 0.5 * np.sum(auxiliaryGraph,axis=1)
     maxShapley = np.max(shapleys)
     utilityNormFactor = np.sum(shapleys)
