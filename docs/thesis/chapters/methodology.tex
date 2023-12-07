@@ -202,8 +202,7 @@ This method leverages the spectral information of the data graph to obtain a dat
 \subsection{Auxiliary Graph}
 From the clustered graph a weighted auxiliary graph is defined for each frame, denoted as $G^{aux}$ := ($V$, $E^{aux}$, $w^{aux}$). \\
 The vertices of this auxiliary graph are the same as in the original graph $G$, but the edge set is comprised of a subset of edges that only connect vertices belonging to different clusters.
-The weight of every edge is calculated by applying Euclidean norm (Formula \ref{formula:normalization}) between pairs of vectors.
-Edges that do not represent direct physical connections are ignored.
+The weight of every edge is calculated by applying Euclidean norm (Formula \ref{formula:normalization}) between each pair of feature values of the nodes that are connected by an edge.
 One of these edges in the auxiliary graph will be the edge associated with the origin of motion.
 \\
 
@@ -275,10 +274,14 @@ Considering, for example, a graph $G$ with 3 clusters (see Figure \ref{fig:graph
 To identify the edge involved in the OoM, we use the WDC, as explained in Section \ref{subsec:weighted_degree}.
 The calculation of the WDG is done on nodes, not on edges.
 However, we will show how from a WDG calculated on nodes, we can derive the perceived movement origin on an edge.
-For each frame, we keep track of the two nodes with the highest WDC.
-Among the collected nodes, the two most frequent ones are selected across all frames.
-At this stage, we will examine in the $G^{aux}$ to which edges belonging to $E^{aux}$ these two winning nodes are connected, and these two edges will be considered as the predicted OoM.
-To achieve classification, finally, these two edges will be compared with the ground truth. 
+Starting from $G^{aux}$, each edge belonging to $E^{aux}$ will have a new weight assigned to it. 
+This weight will be divided equally between the two nodes as a fair contribution from both.
+
+These edges will be ranked in descending order based on their weights. The top two nodes will be chosen as the origins of the movement.
+
+For each frame, we track the two nodes with the highest WDC. Among the collected nodes, the two most frequent ones are selected across all frames.
+
+When compared to the ground truth, it will be considered correct if one of the two nodes is at one of the two ends of the edge identified as OoM.
 
 \clearpage
 
