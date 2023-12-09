@@ -106,8 +106,9 @@ In (c) instead, the subsequent time instant with clusters stabilized.
 A further extension of this concept for visualization purposes can be applied by analyzing a movement evolving in realtime, by recording a small segment of video, which is able to provide a better view of the stabilization outcomes.
 The transition smoothing algorithm explained in Section \ref{subsec:clusters_smoothing} is here visualized in the videos whose link has been embedded in the QR code in Figure \ref{fig:qr_movements}. \\
 
-These 3 QR codes lead to a video that represents the same movement in the 20 joints skeleton, where the dancer begins from a stance with slightly spread legs and the left arm raised upwards.
+These 3 QR codes lead to a GIF that represents the same movement in the 20 joints skeleton, where the dancer begins from a stance with slightly spread legs and the left arm raised upwards.
 Throughout the movement, the left arm descends while moving backward, the torso leans forward, taking the right arm along with it, and the left foot lifts off the ground, walking back to follow the left arm.\\
+The movement is also rolled back for better view of changes.
 
 The first QR (Figure \ref{fig:qr_movement_pure}) leads to the original clustering method without the application of any stabilization method, visually it can be clearly seen how the instability of the simple clustering creates a flickering effect, resulting in a poor visualization capability.
 Instead the second (Figure \ref{fig:qr_movement_stabilized}), which is the stabilized version the flickering has been removed by swapping the clusters colors on subsequent frames based on the proposed approach mentioned in Section \ref{subsec:clustering_stabilization}.

@@ -5,11 +5,10 @@ docs/thesis/*
 !docs/thesis/*.bib
 !docs/thesis/*.sty
 
-docs/presentation/*
-
 # Include graphics
 !docs/thesis/graphics/
 
+docs/presentation/*
 
 # Exclude temporary files
 code/src/_*
