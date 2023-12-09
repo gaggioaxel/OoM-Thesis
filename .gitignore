@@ -1,10 +1,15 @@
 # Exclude temp files and presentation files
-docs/thesis/*
+docs/thesis/* 
+
 !docs/thesis/*.tex
 !docs/thesis/*.bib
 !docs/thesis/*.sty
 
 docs/presentation/*
+
+# Include graphics
+!docs/thesis/graphics/
+
 
 # Exclude temporary files
 code/src/_*
