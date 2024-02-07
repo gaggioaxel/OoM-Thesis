@@ -10,8 +10,8 @@ docs/thesis/*
 
 docs/presentation/*
 
-# Exclude temporary files
-code/src/_*
+# Exclude temporary / private files
+code/src/**/_*
 
 # Exclude Mocap trajectories
 code/src/data/**/*.tsv

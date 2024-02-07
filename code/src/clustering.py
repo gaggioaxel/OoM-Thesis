@@ -127,7 +127,7 @@ def compute_derivatives(x:pd.DataFrame,dt:float,smooth=True) -> pd.DataFrame:
     return smoothing(v) if smooth else v
 ###################
 
-def calculate_weight_matrix(featuresTable: pd.DataFrame, adjacencyMatrix: np.ndarray,tol:float=None,use_cosine=True) -> np.ndarray:
+def calculate_weight_matrix(featuresTable: pd.DataFrame, adjacencyMatrix: np.ndarray,tol:float=None,use_cosine=True,include_non_physical=False,as_similarity=True) -> np.ndarray:
     """
     Calculate the weight matrix for a given set of features and adjacency matrix.
 
@@ -135,7 +135,8 @@ def calculate_weight_matrix(featuresTable: pd.DataFrame, adjacencyMatrix: np.nda
         - featuresTable (pd.DataFrame): A DataFrame containing the features as rows.
         - adjacencyMatrix (np.ndarray): An adjacency matrix indicating connections between data points.
         - tol (float, optional): A tolerance value used for scalar features. Default is None.
-        - use_cosine (bool, optional): Use cosine similarity for non-scalar features. Default is True.
+        - use_cosine (bool, optional): Use cosine similarity for non-scalar features. Default is True. (better in every case)
+        - as_similarity (bool, optional): Choose either similarity measure or distance measure (1 - similarity)
 
     Returns:
         - weight_matrix (np.ndarray): A matrix of weights reflecting the pairwise relationships between data points.
@@ -152,6 +153,8 @@ def calculate_weight_matrix(featuresTable: pd.DataFrame, adjacencyMatrix: np.nda
         # Calculate the weight matrix for scalar features with a tolerance value
         weight_matrix = calculate_weight_matrix(featuresTable, adjacencyMatrix, tol=0.01, use_cosine=False)
     """
+    if include_non_physical:
+        adjacencyMatrix = np.ones(adjacencyMatrix.shape,bool)
     if isinstance(featuresTable.iloc[0],np.ndarray):
         values = np.stack(featuresTable.values)
         if not use_cosine:
@@ -161,7 +164,8 @@ def calculate_weight_matrix(featuresTable: pd.DataFrame, adjacencyMatrix: np.nda
             #                           where                       True                                                False
             weight_matrix = np.where(adjacencyMatrix, dot_crossed_matrix / norm_crossed_matrix + 1, dot_crossed_matrix / (norm_crossed_matrix + 1) * 1/5)
         else:
-            weight_matrix = np.where(adjacencyMatrix, cosine_similarity(values)+1, 0)
+            weight_matrix = np.where(adjacencyMatrix, (cosine_similarity(values)+1)/2, 0)
+            if not as_similarity: weight_matrix = 1 - weight_matrix
     else:
         if tol is None:
             raise Exception('must provide tol value with scalar feature')
@@ -171,11 +175,11 @@ def calculate_weight_matrix(featuresTable: pd.DataFrame, adjacencyMatrix: np.nda
         if not use_cosine:
             #                           where                   True                    False
             weight_matrix = np.where(adjacencyMatrix, 1 / (norm_matrix + tol)+5, 1 / (5 * norm_matrix + tol+2))
+            if not as_similarity: weight_matrix = 1/weight_matrix
         else:
-            weight_matrix = np.where(adjacencyMatrix, cosine_similarity(norm_matrix)+1,0)
+            weight_matrix = np.where(adjacencyMatrix, (cosine_similarity(norm_matrix)+1)/2, 0)
+            if not as_similarity: weight_matrix = 1 - weight_matrix
     np.fill_diagonal(weight_matrix,0)
-    #if normalize:
-    #    weight_matrix = 2*(weight_matrix - np.min(weight_matrix,axis=None)) / (np.max(weight_matrix,axis=None) - np.min(weight_matrix,axis=None))
     return weight_matrix
 
 # Spectral clustering using Shi and Malik algorithm
@@ -344,7 +348,7 @@ from networkx.algorithms.bipartite import minimum_weight_full_matching as min_we
 import networkx as nx
 from matplotlib import pyplot as plt
 
-def compute_cost(fromLabels:list,toLabels:list,labels_kind:Literal['full','cluster']='full'):
+def compute_cost(fromLabels:list or dict,toLabels:list or dict):
     """
     Computes the cost based on label differences between two label lists.
 
@@ -359,16 +363,16 @@ def compute_cost(fromLabels:list,toLabels:list,labels_kind:Literal['full','clust
     Raises:
     Exception: If the provided method is not implemented.
     """
-    if labels_kind == 'full':
+    if isinstance(fromLabels,list) or isinstance(fromLabels,np.ndarray) :
         assert len(fromLabels) == len(toLabels)
         return sum(array(fromLabels) != array(toLabels))
-    elif labels_kind =='cluster':
+    elif isinstance(fromLabels,dict):
         return len(set(toLabels).difference(set(fromLabels)))
     raise Exception("method not implemented")
 
 
 
-def clusterize_labels(labels:list):
+def clusterize_labels(labels:list) -> dict:
     """
     Groups labels into clusters based on integer values ranging from 0 to n.
 
@@ -404,7 +408,7 @@ def labelize_clusters(clusters:dict):
     return clusterLabels
 
 
-def compute_minimum_weight_cluster(fromLabels:list,toLabels:list,method:Literal['BF','MWPM']="BF",visualize=False,return_relabeling=False) -> tuple :
+def compute_minimum_weight_cluster(fromLabels:list,toLabels:list,method:Literal['BF','MWPM']="BF",visualize=False,return_relabeling=False,return_cost=False) -> tuple :
     """
     Computes the minimum weight cluster based on different methods.
 
@@ -424,6 +428,24 @@ def compute_minimum_weight_cluster(fromLabels:list,toLabels:list,method:Literal[
 
     # Reassign labels 
     out_elements = []
+
+    # start by bruteforce if different number of clusters
+    if len(set(fromLabels)) != len(set(toLabels)):
+        toClusters = clusterize_labels(toLabels)
+        clusterLabelPermutations = list(permutations(list(toClusters.keys())))
+        toClustersValues = list(toClusters.values())
+        optimalLabelingIndex = -1
+        minCost = 10**5
+        # finds optimal permutation
+        for indexPermutation,clusterLabelPermutation in enumerate(clusterLabelPermutations):
+            permCost = compute_cost(fromLabels,labelize_clusters(dict(zip(clusterLabelPermutation,toClustersValues))))
+            if permCost < minCost:
+                optimalLabelingIndex = indexPermutation
+                minCost = permCost
+        return labelize_clusters(dict(zip(clusterLabelPermutations[optimalLabelingIndex],toClustersValues)))
+
+
+    # apply Bruteforce
     if method.upper() == "BF":
         toClusters = clusterize_labels(toLabels)
         clusterLabelPermutations = list(permutations(list(toClusters.keys())))
@@ -446,7 +468,8 @@ def compute_minimum_weight_cluster(fromLabels:list,toLabels:list,method:Literal[
                 x = x_center + distance * np.cos(angle)
                 y = y_center + distance * np.sin(angle)
                 pos[node] = (x, y)
-            
+        
+        # finds optimal permutation
         for indexPermutation,clusterLabelPermutation in enumerate(clusterLabelPermutations):
             permCost = compute_cost(fromLabels,labelize_clusters(dict(zip(clusterLabelPermutation,toClustersValues))))
             if visualize:
@@ -454,6 +477,7 @@ def compute_minimum_weight_cluster(fromLabels:list,toLabels:list,method:Literal[
             if permCost < minCost:
                 optimalLabelingIndex = indexPermutation
                 minCost = permCost
+
         if visualize:
             edgeColors = ['b' if i == optimalLabelingIndex else '#C4C2C6' for i in range(len(rightNodes))]
             edgeWidths = [3 if i == optimalLabelingIndex else 1 for i in range(len(rightNodes))]
@@ -462,16 +486,18 @@ def compute_minimum_weight_cluster(fromLabels:list,toLabels:list,method:Literal[
         out_elements.append(labelize_clusters(dict(zip(clusterLabelPermutations[optimalLabelingIndex],toClustersValues))))
         if return_relabeling:
             out_elements.append(clusterLabelPermutations[optimalLabelingIndex])
+        if return_cost:
+            out_elements.append(compute_cost(fromLabels,labelize_clusters(dict(zip(clusterLabelPermutations[optimalLabelingIndex],toClustersValues)))))
     elif method.upper() == 'MWPM':
         fromClustersMap = clusterize_labels(fromLabels)
         clusters = list(fromClustersMap.keys())
         toClustersUnlabelized = list(clusterize_labels(toLabels).values())
         rightNodes = (np.array(clusters) + max(clusters)+1).tolist()
-        print(rightNodes)
+        #print(rightNodes)
 
         edgeWeights = {fromLabel : 
                             {toLabelAssigned+max(clusters)+1 : 
-                                {'weight': compute_cost(fromClustersMap[fromLabel],toClustersUnlabelized[toLabelAssigned],labels_kind='cluster')}
+                                {'weight': compute_cost(fromClustersMap[fromLabel],toClustersUnlabelized[toLabelAssigned])}
                              for toLabelAssigned in clusters } 
                          for fromLabel in clusters }
         
@@ -517,6 +543,8 @@ def compute_minimum_weight_cluster(fromLabels:list,toLabels:list,method:Literal[
         out_elements.append(labelize_clusters({fromNode: toClustersUnlabelized[minWeightsEdges[fromNode]-max(clusters)-1] for fromNode in minWeightsEdges.keys()}))
         if return_relabeling:
             out_elements.append({fromNode: minWeightsEdges[fromNode]-max(clusters)-1 for fromNode in minWeightsEdges.keys()})
+        if return_cost:
+            out_elements.append(compute_cost(fromLabels,labelize_clusters({fromNode: toClustersUnlabelized[minWeightsEdges[fromNode]-max(clusters)-1] for fromNode in minWeightsEdges.keys()})))
     return out_elements if len(out_elements) > 1 else out_elements[0]
 
 
