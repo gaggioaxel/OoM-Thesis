@@ -8,7 +8,6 @@ docs/thesis/*
 # Include graphics
 !docs/thesis/graphics/
 
-docs/presentation/*
 
 # Exclude temporary / private files
 code/src/**/_*
