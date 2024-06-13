@@ -28,11 +28,10 @@ pip install -r code/src/requirements.txt
 
 ## docs
 
-The docs folder contains the LaTeX documents related to the thesis. This includes the main thesis document, as well as any supplementary documents, figures, and tables. The LaTeX format is used to structure and format the content, making it easier to create a professional thesis document.
+The docs folder contains the LaTeX documents related to the thesis. This includes the main thesis document, as well as any supplementary documents, like the final presentation, figures, and tables. The LaTeX format is used to structure and format the content, making it easier to collaborate on the thesis document.
 
-## literature
-
-The literature folder holds all the literature and references used for the thesis. It includes academic papers, books, research articles, and any other sources that have been referenced or consulted during the research.
+## presentation
+<iframe src='https://view.officeapps.live.com/op/embed.aspx?src=[https://github.com/gaggioaxel/OoM-Thesis/raw/cc02c1867afa3c3f5141d6dd55761c3b3b7af5d5/docs/presentation/Fausto-Romano.pptx]' width='100%' height='600px' frameborder='0'>
 
 # Co-Authors
 
