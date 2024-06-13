@@ -31,7 +31,7 @@ pip install -r code/src/requirements.txt
 The docs folder contains the LaTeX documents related to the thesis. This includes the main thesis document, as well as any supplementary documents, like the final presentation, figures, and tables. The LaTeX format is used to structure and format the content, making it easier to collaborate on the thesis document.
 
 ## presentation
-<iframe src='https://view.officeapps.live.com/op/embed.aspx?src=[https://github.com/gaggioaxel/OoM-Thesis/raw/cc02c1867afa3c3f5141d6dd55761c3b3b7af5d5/docs/presentation/Fausto-Romano.pptx]' width='100%' height='600px' frameborder='0'>
+A summary of the methods and results presentation is available to view live at [this link](https://1drv.ms/p/s!Ai0mRBoFe8CZhKkLAE4JESWNeqshyg?e=gT7fX1) or in this repo in [presentation folder](/docs/presentation)
 
 # Co-Authors
 
